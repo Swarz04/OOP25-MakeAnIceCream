@@ -43,4 +43,12 @@ public class GameImpl implements Game {
         return this.state == GameState.GAME_OVER;
     }
 
+    private void updateGameState() {
+        if (this.currentLevel.hasNextCustomer() && this.currentLevel.getLives() <= 0) {
+            this.state = GameState.GAME_OVER;
+        } else if (!this.currentLevel.hasNextCustomer()) {
+            this.state = GameState.LEVEL_COMPLETED;
+        }
+    }
+
 }
