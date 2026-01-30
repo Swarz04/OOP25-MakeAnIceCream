@@ -3,21 +3,25 @@ package it.unibo.makeanicecream.model;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.Level;
+import it.unibo.makeanicecream.model.level.LevelFactory;
 
+/**
+ * Implementation of the {@limk Game} interface.
+ */
 public class GameImpl implements Game {
 
-    //private Level currentLevel;
+    private Level currentLevel;
     private GameState state;
     
     @Override
     public void start(final int levelNumber) {
-        //this.currentLevel = new LevelImpl();
+        this.currentLevel = LevelFactory.createLevel(levelNumber, null);
         this.state = GameState.PLAYING;
     }
 
     @Override
     public Level getLevel() {
-        return this.getLevel();
+        return this.currentLevel;
     }
 
     @Override
