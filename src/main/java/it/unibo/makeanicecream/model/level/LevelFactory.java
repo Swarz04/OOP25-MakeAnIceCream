@@ -19,7 +19,8 @@ public final class LevelFactory {
     private static final int STEP_CUSTOMERS = 2;
 
     private static final int LIVES = 3;
-
+    private static final Queue<Customer> customers = new java.util.ArrayDeque<>();
+    
     private LevelFactory() {
     }
 
@@ -31,22 +32,16 @@ public final class LevelFactory {
      *
      * @return a new Level instance
      */
-    public static Level createLevel(final int difficulty, final Queue<Customer> customers) {
+    public static Level createLevel(final int difficulty) {
 
         final int limitedDifficulty = Math.min(Math.max(difficulty, MIN_DIFFICULTY),MAX_DIFFICULTY);
 
         final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
 
-        if (customers.size() != numberOfCustomers) {
-         throw new IllegalArgumentException(
-                "Expected " + numberOfCustomers
-                    + " customers, got " + customers.size()
-            );
-        }
-        return new StandardLevel(
-            limitedDifficulty,
-            LIVES,
-            customers
-        );
+        for (int i = 0; i < numberOfCustomers; i++) {
+        final Customer c = createCustomer(limitedDifficulty); // da sostituire (Customer studente 1)
+        customers.add(c);
+    }
+        return new StandardLevel(limitedDifficulty, LIVES, customers);
     }
  }
