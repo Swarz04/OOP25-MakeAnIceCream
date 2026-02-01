@@ -15,7 +15,7 @@ public class GameImpl implements Game {
     
     @Override
     public void start(final int levelNumber) {
-        this.currentLevel = LevelFactory.createLevel(levelNumber, null);
+        this.currentLevel = LevelFactory.createLevel(levelNumber);
         this.state = GameState.PLAYING;
     }
 
