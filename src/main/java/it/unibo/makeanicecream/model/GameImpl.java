@@ -20,8 +20,13 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Level getLevel() {
+    public Level getCurrentLevel() {
         return this.currentLevel;
+    }
+
+    @Override
+    public GameState getState() {
+        return this.state;
     }
 
     @Override

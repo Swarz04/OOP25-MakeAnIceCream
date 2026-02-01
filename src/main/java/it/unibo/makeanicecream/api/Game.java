@@ -17,7 +17,14 @@ public interface Game {
      * 
      * @return the current level
      */
-    Level getLevel();
+    Level getCurrentLevel();
+
+    /**
+     * Returns the current state of the game.
+     * 
+     * @return the current state
+     */
+    GameState getState();
 
     /**
      * Pauses the game if it is currently in PLAYING state.
