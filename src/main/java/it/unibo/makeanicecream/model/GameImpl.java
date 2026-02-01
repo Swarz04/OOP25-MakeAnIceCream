@@ -33,6 +33,10 @@ public class GameImpl implements Game {
     public void pause() {
         if (this.state == GameState.PLAYING) {
             this.state = GameState.PAUSED;
+            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
+            /*Level level = getLevel();
+            Customer c = level.getCurrentCustomer();
+            if(c != null) c.getTimer().pause();*/
         }
     }
 
@@ -40,6 +44,10 @@ public class GameImpl implements Game {
     public void resume() {
         if (this.state == GameState.PAUSED) {
             this.state = GameState.PLAYING;
+            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
+            /*Level level = getLevel();
+            Customer c = level.getCurrentCustomer();
+            if(c != null) c.getTimer().resume();*/
         }
     }
 
@@ -55,5 +63,23 @@ public class GameImpl implements Game {
             this.state = GameState.LEVEL_COMPLETED;
         }
     }
+
+    /**
+     * Metodo che aggiorna lo stato del gioco. 
+     * Questo metodo deve essere chiamato ad ogni tick del game loop, con
+     * il tempo trascorso dall'ultimo aggiornamento passato come parametro. 
+     * Delega poi l'aggiornamento al livello corrente, che si occupa di gestire 
+     * correttamente clienti e timer.
+     * NOTA: Level e Customer dovrebbero avere a loro volta un metodo update(deltaTime)
+     * che si occupa di decrementare il timer del cliente e gestire eventuali
+     * perdite di vita o passaggi al cliente successivo.
+     */
+    /*public void update(final double deltaTime) {
+        if (this.currentLevel.hasNextCustomer()) {
+            this.currentLevel.update(deltaTime);
+        }
+
+        updateGameState();
+    }*/
 
 }
