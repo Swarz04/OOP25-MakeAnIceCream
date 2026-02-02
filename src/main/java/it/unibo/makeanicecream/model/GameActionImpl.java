@@ -5,7 +5,7 @@ import it.unibo.makeanicecream.api.GameAction;
 /**
  * Implementation of the GameAction interface.
  */
-public class GameActionImpl implements GameAction<GameActionImpl.Type>{
+public class GameActionImpl implements GameAction<GameActionImpl.Type> {
 
     /**
      * The possible types of actions the user can perform.
