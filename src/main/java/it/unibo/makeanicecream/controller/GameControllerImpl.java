@@ -46,8 +46,7 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void updateGame(double deltaTime) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
+        //this.game.update(deltaTime);
     }
 
 }
