@@ -1,29 +1,21 @@
 package it.unibo.makeanicecream.model;
 
 import it.unibo.makeanicecream.api.GameAction;
+import it.unibo.makeanicecream.api.GameActionType;
 
 /**
  * Implementation of the GameAction interface.
  */
-public class GameActionImpl implements GameAction<GameActionImpl.Type> {
+public class GameActionImpl implements GameAction {
 
-    /**
-     * The possible types of actions the user can perform.
-     */
-    public enum Type {
-        ADD_INGREDIENT,
-        DELIVER,
-        CANCEL
-    }
+    private final GameActionType type;
 
-    private Type type;
-
-    public GameActionImpl(final Type type) {
+    public GameActionImpl(final GameActionType type) {
         this.type = type;
     }
 
     @Override
-    public Type getType() {
+    public GameActionType getType() {
         return this.type;
     }
     

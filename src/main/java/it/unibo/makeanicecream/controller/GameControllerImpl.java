@@ -4,7 +4,6 @@ import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameAction;
 import it.unibo.makeanicecream.api.GameController;
-import it.unibo.makeanicecream.model.GameActionImpl;
 
 public class GameControllerImpl implements GameController {
 
@@ -20,14 +19,14 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void startGame(int levelNumber) {
+    public void startGame(final int levelNumber) {
         this.game.start(levelNumber);
     }
 
     @Override
-    public void handleInput(GameAction<?> action) {
+    public void handleInput(final GameAction action) {
         Command command;
-        switch ((GameActionImpl.Type) action.getType()) {
+        switch (action.getType()) {
             case ADD_INGREDIENT:
                 command = new AddIngredientCommand(this.game);
                 break;
@@ -45,7 +44,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void updateGame(double deltaTime) {
+    public void updateGame(final double deltaTime) {
         //this.game.update(deltaTime);
     }
 
