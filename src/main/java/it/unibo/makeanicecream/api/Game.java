@@ -44,6 +44,11 @@ public interface Game {
     void resume();
 
     /**
+     * Interrupts the current game level and returns the game to the main menu state.
+     */
+    void returnToMenu();
+
+    /**
      * Checks whether the game is over.
      * 
      * @return true if the game is over, false otherwise

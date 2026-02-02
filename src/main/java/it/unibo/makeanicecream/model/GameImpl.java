@@ -14,6 +14,10 @@ public class GameImpl implements Game {
     private Level currentLevel;
     private GameState state;
     private Player player = new PlayerImpl();
+
+    public GameImpl() {
+        this.state = GameState.MENU;
+    }
     
     @Override
     public void start(final int levelNumber) {
@@ -57,6 +61,13 @@ public class GameImpl implements Game {
             if(c != null) c.getTimer().resume();*/
         }
     }
+
+    @Override
+    public void returnToMenu() {
+        this.state = GameState.MENU;
+        this.currentLevel = null;
+    }
+
 
     @Override
     public boolean isGameOver() {
