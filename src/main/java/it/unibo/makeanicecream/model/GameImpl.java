@@ -3,6 +3,7 @@ package it.unibo.makeanicecream.model;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.Level;
+import it.unibo.makeanicecream.api.Player;
 import it.unibo.makeanicecream.model.level.LevelFactory;
 
 /**
@@ -12,6 +13,7 @@ public class GameImpl implements Game {
 
     private Level currentLevel;
     private GameState state;
+    private Player player = new PlayerImpl();
     
     @Override
     public void start(final int levelNumber) {
@@ -27,6 +29,11 @@ public class GameImpl implements Game {
     @Override
     public GameState getState() {
         return this.state;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return this.player;
     }
 
     @Override

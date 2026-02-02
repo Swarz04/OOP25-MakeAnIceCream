@@ -27,6 +27,13 @@ public interface Game {
     GameState getState();
 
     /**
+     * Returns the player of the game.
+     * 
+     * @return the player
+     */
+    Player getPlayer();
+
+    /**
      * Pauses the game if it is currently in PLAYING state.
      */
     void pause();
