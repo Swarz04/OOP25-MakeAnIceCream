@@ -36,6 +36,12 @@ public class GameControllerImpl implements GameController {
             case CANCEL:
                 command = new CancelCommand(this.game);
                 break;
+            case PAUSE:
+                command = new PauseCommand(this.game);
+                break;
+            case RESUME:
+                command = new ResumeCommand(this.game);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown action type: " + action.getType());
         }

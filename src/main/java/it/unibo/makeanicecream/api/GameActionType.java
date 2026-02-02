@@ -6,5 +6,8 @@ package it.unibo.makeanicecream.api;
 public enum GameActionType {
     ADD_INGREDIENT,
     DELIVER,
-    CANCEL
+    CANCEL,
+    PAUSE,
+    RESUME,
+    GO_TO_MENU
 }
