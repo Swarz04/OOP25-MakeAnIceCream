@@ -42,6 +42,9 @@ public class GameControllerImpl implements GameController {
             case RESUME:
                 command = new ResumeCommand(this.game);
                 break;
+            case GO_TO_MENU:
+                command = new GoToMenuCommand(this.game);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown action type: " + action.getType());
         }
