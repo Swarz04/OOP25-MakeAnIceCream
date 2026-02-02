@@ -7,11 +7,11 @@ import it.unibo.makeanicecream.api.GameView;
  * A {@link DrawNumberView} implementation .
  */
 public class GameViewImpl implements GameView {
+    private GameController controller;
 
     @Override
     public void setController(GameController controller) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setController'");
+        this.controller = controller;
     }
 
     @Override
