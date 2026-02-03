@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.api;
+package it.unibo.makeanicecream.api.Order;
 
 /**
  *
