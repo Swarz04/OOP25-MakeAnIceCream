@@ -61,5 +61,18 @@ public final class StandardLevel implements Level {
     public void serveCurrentCustomer() {
         this.customers.poll();
     }
+    @Override
+    public void update(final double deltaTime) {
+        if (this.getCurrentCustomer() != null && this.getCurrentCustomer().isExpired()) {
+            this.loseLife();
+            this.serveCurrentCustomer();
+        }
+    }
 
+    void notifyCustomers(final boolean success) {
+        if (!success) {
+            this.loseLife(); // o no dipende da come vogliamo gestire i clienti
+        }
+        this.serveCurrentCustomer();
+    }
 }

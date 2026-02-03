@@ -17,13 +17,15 @@ public class PlayerImpl implements Player {
 
     /**
      *
-     * @param ingredients the ingredients to compose the ice-cream from
+     * @param da aspettare come si compongono i gelati IceCram.java
      *
      * @return the composed {@link Icecream}
      */
     @Override
-    public Icecream composeIceCream(final List<Ingredient> ingredients) {
+    public Icecream composeIceCream(final Ingredient ingredients) {
         Objects.requireNonNull(ingredients, "ingredients must not be null");
+        /* TODO:aggiungere 1 ingrediente tramite vie-> controller e creare un IceCream o qualcosa del genere da Icecrea.java
+        */
         this.currentIcecream = Icecream.compose(ingredients);
         return this.currentIcecream;
     }
@@ -38,7 +40,9 @@ public class PlayerImpl implements Player {
         if (Objects.isNull(this.currentIcecream) || Objects.isNull(customer)) {
             return false;
         }
-        // TODO: implement order validation in the controller (non ho capito se serve altro qui)
+        /* TODO: implement order validation in the controller (non ho capito se serve altro qui)
+        * getCustomer.getOrder().equals(this.currentIcecream) o qualcosa del genere da Customer.java
+        */
         this.currentIcecream = null;
         return true;
     }

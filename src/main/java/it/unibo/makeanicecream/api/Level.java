@@ -44,4 +44,10 @@ public interface Level {
      * Removes the current customer from the queue.
      */
     void serveCurrentCustomer();
+
+    /**
+     *
+     * @param deltatime the time to give to the clustomers to update themselves
+     */
+    void update (double deltatime);
 }
