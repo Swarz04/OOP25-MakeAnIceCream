@@ -62,4 +62,10 @@ public class GameViewImpl implements GameView {
         throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
 
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
 }

@@ -51,4 +51,9 @@ public interface GameView {
      * Stops the view and the game loop.
      */
     void stop();
+
+    /**
+     * Updates the view.
+     */
+    void update();
 }
