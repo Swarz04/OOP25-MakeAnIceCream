@@ -92,12 +92,12 @@ public class GameImpl implements Game {
      * che si occupa di decrementare il timer del cliente e gestire eventuali
      * perdite di vita o passaggi al cliente successivo.
      */
-    /*public void update(final double deltaTime) {
+    public void update(final double deltaTime) {
         if (this.currentLevel.hasNextCustomer()) {
             this.currentLevel.update(deltaTime);
         }
 
         updateGameState();
-    }*/
+    }
 
 }

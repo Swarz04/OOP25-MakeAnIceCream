@@ -54,4 +54,11 @@ public interface Game {
      * @return true if the game is over, false otherwise
      */
     boolean isGameOver();
+
+    /**
+     * Updates the game state.
+     * 
+     * @param deltaTime the time in seconds since tha last update
+     */
+    void update(double deltaTime);
 }
