@@ -4,10 +4,12 @@ import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameAction;
 import it.unibo.makeanicecream.api.GameController;
+import it.unibo.makeanicecream.api.GameView;
 
 public class GameControllerImpl implements GameController {
 
     private Game game;
+    //private GameView view;
 
     /**
      * Builds a new game controller provided a game model.
@@ -16,6 +18,12 @@ public class GameControllerImpl implements GameController {
      */
     public GameControllerImpl(final Game game) {
         this.game = game;
+    }
+
+    @Override
+    public void setView(GameView view) {
+        //this.view = view;
+        //this.view.setController(this);
     }
 
     @Override
@@ -56,5 +64,4 @@ public class GameControllerImpl implements GameController {
     public void updateGame(final double deltaTime) {
         //this.game.update(deltaTime);
     }
-
 }
