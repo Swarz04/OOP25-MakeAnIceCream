@@ -63,5 +63,9 @@ public class GameControllerImpl implements GameController {
     @Override
     public void updateGame(final double deltaTime) {
         this.game.update(deltaTime);
+
+        /*if (this.view != null) {
+            this.view.update();
+        }*/
     }
 }
