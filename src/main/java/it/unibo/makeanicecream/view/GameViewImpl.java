@@ -4,7 +4,7 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 
 /**
- * A {@link DrawNumberView} implementation .
+ * A {@link GameView} implementation .
  */
 public class GameViewImpl implements GameView {
     private GameController controller;
