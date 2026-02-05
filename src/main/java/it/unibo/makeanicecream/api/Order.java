@@ -1,6 +1,4 @@
-package it.unibo.makeanicecream.api.Order;
-
-import it.unibo.makeanicecream.api.Icecream;
+package it.unibo.makeanicecream.api;
 
 /**
  *
