@@ -15,7 +15,7 @@ public class ChooseConeCommand implements Command{
 
     @Override
     public void execute() {
-        
+        //game.getPlayer().chooseCone(this.cone);
     }
     
 }
