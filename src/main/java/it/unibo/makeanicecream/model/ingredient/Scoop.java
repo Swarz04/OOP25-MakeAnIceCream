@@ -36,4 +36,33 @@ public class Scoop implements Ingredient {
     public IngredientType getType() {
         return IngredientType.SCOOP;
     }
+
+    /**
+     * Compares this Scoop with another object for equality.
+     * Two Scoop objects are considered equal if they have the same flavor.
+     * 
+     * @param obj the object to compare with
+     * @return true if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if(!(obj instanceof Scoop otherScoop)) {
+            return false;
+        }
+        return this.flavor == otherScoop.flavor;
+    }
+
+    /**
+     * Returns the hash code value for this Scoop.
+     * The hash code is based on the flavor of the scoop.
+     * 
+     * @return the hash code value for this Scoop
+     */
+    @Override
+    public int hashCode() {
+        return flavor.hashCode();
+    }
 }
