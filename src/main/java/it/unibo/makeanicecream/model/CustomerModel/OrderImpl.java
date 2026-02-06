@@ -9,6 +9,7 @@ import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.model.IngredientImpl;
 import it.unibo.makeanicecream.model.ingredient.Conetype;
+import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
 /**
  * Implementation of the Order Interface representing a customer's ice cream order
@@ -20,7 +21,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
 public class OrderImpl implements Order {
     
     private final List<Ingredient> requiredFlavors;
-    private final Ingredient requiredCone;
+    private final Conetype requiredCone;
     private final List<Ingredient> requiredToppings;
     
     /**
@@ -30,19 +31,35 @@ public class OrderImpl implements Order {
      * @param cone the cone required (can't be null)
      * @param toppings the list of toppings required (can be empty)
      */
-    public OrderImpl(List<Ingredient> flavors, Ingredient cone, List<Ingredient>toppings){
+    public OrderImpl(List<Ingredient> flavors, Conetype cone, List<Ingredient>toppings){
+        validateConstructorArguments(flavors, cone, toppings);
+        this.requiredFlavors = new ArrayList<>(flavors);
+        this.requiredCone = cone;
+    }
+    /**
+     * Validares constructor arguments
+     */
+    private void validateConstructorArguments(List<Ingredient> flavors, Conetype cone, List<Ingredient> toppings){
         if(flavors == null || flavors.isEmpty()){
             throw new IllegalArgumentException("L'ordine deve contenere almeno un gusto");
         }
+
+        for(Ingredient flavor : flavors){
+            if(flavor.getType() != IngredientType.SCOOP){
+                throw new IllegalArgumentException("I flavor devono essere di tipo scoop");
+            }
+        }
+
         if(cone == null){
             throw new IllegalArgumentException("L'ordine deve specificare un cono");
         }
-        this.requiredFlavors = new ArrayList<>(flavors);
-        this.requiredCone = cone;
+
         if(toppings !=null){
-            this.requiredToppings = new ArrayList<>(toppings);
-        }else{
-            this.requiredToppings=new ArrayList<>();
+            for(Ingredient topping: toppings)
+                if(topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING){
+                    throw new IllegalArgumentException("i toppings devono essere LIQUID o SOLID");
+                }
+            }
         }
     }
 
@@ -63,7 +80,7 @@ public class OrderImpl implements Order {
      * @return the requiredCone 
      */
     @Override
-    public Ingredient getCone() {
+    public Conetype getConeType() {
         return requiredCone;
     }
 
@@ -90,12 +107,7 @@ public class OrderImpl implements Order {
 
         List<Ingredient> iceCreamIngredients=icecream.getIngredients();
 
-        for(Ingredient required : getAllRequiredIngredients()){
-            if(!containsIngredient(iceCreamIngredients, required)){
-                return false;    
-            }
-        }
-        return true;
+        
     }
     
     /**
@@ -120,13 +132,6 @@ public class OrderImpl implements Order {
             }
         }
 
-    @Override
-    public Conetype getConeType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getConeType'");
-    }
-        return false;
-    }
 
     /**
      * Helper: compare two ingredients
