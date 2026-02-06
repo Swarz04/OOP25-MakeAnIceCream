@@ -8,6 +8,7 @@ import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.model.IngredientImpl;
+import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 /**
  * Implementation of the Order Interface representing a customer's ice cream order
@@ -118,6 +119,12 @@ public class OrderImpl implements Order {
                 return true;
             }
         }
+
+    @Override
+    public Conetype getConeType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getConeType'");
+    }
         return false;
     }
 
