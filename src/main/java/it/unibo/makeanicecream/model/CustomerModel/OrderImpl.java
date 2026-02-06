@@ -2,7 +2,9 @@ package it.unibo.makeanicecream.model.customermodel;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
@@ -35,6 +37,7 @@ public class OrderImpl implements Order {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
+        this.requiredToppings = new ArrayList<>(toppings);
     }
     /**
      * Validares constructor arguments
@@ -55,14 +58,13 @@ public class OrderImpl implements Order {
         }
 
         if(toppings !=null){
-            for(Ingredient topping: toppings)
+            for(Ingredient topping: toppings){
                 if(topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING){
                     throw new IllegalArgumentException("i toppings devono essere LIQUID o SOLID");
                 }
             }
         }
     }
-
     /**
      * Gets the list of flavor scoops required by this order
      *
@@ -95,48 +97,100 @@ public class OrderImpl implements Order {
     }
 
     /**
-     * Verifies if the provided ice cream satisfies this order.
+     * Verifies if the provided ice cream satisfies the order by an exact match.
      * The ice cream must contain all required flavors, the cone, and all toppings
      * 
      * @param iceCream the ice cream to check against this order
      * @return true if the ice cream satisfies all the order requirements, false otherwise
      */
     @Override
-    public boolean isSatisfiedBy(Icecream icecream) {
-        Objects.requireNonNull(icecream, "L'ice cream non puo essere null");
+    public boolean isSatisfiedBy(Icecream iceCream) {
+        Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
-        List<Ingredient> iceCreamIngredients=icecream.getIngredients();
+        if(iceCream.getConetype() != requiredCone){
+            return false;
+        }
+        List<Ingredient> iceCreamIngredients=iceCream.getIngredients();
 
-        
+        return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
     }
-    
+        
     /**
-     * Helper: gets all required ingredients (flavors + cone + toppings)
+     * Checks if two list contain exactly the same ingredients (same elements, same counts).
+     * 
+     * @param list1 first list of ingredients
+     * @param list2 second list of ingredients
+     * @return true if lists contain exactly the same ingredients, false otherwise
+     */
+    private boolean haveSameIngredients(List<Ingredient> list1, List<Ingredient> list2){
+        if(list1.size() != list2.size()){
+            return false;
+        }
+
+        Map<Ingredient, Integer> counts1 = countIngredients(list1);
+        Map<Ingredient, Integer> counts2 = countIngredients(list2);
+
+        return counts1.equals(counts2);
+    }
+
+    /**
+     * Counts occurrences of each unique ingredient in a list
+     * 
+     * @param ingredients list to count
+     * @return map from ingredient to its count in the list
+     */
+    private Map<Ingredient, Integer> countIngredients(List<Ingredient> ingredients){
+        Map<Ingredient, Integer> counts = new HashMap<>();
+        for (Ingredient ingredient : ingredients){
+            counts.put(ingredient, counts.getOrDefault(ingredient, 0)+1);
+        }
+        return counts;
+    }   
+    /**
+     * Helper: gets all required ingredient requirements
      */
     private List<Ingredient>getAllRequiredIngredients(){
         List<Ingredient> all = new ArrayList<>();
         all.addAll(requiredFlavors);
-        all.add(requiredCone);
         all.addAll(requiredToppings);
 
         return all;
     }
 
     /**
-     * Helper: check if list contains an equal ingredient
+     * Returns an actual readable description of this order.
+     * 
+     * @return a descriptive string of the order
      */
-    private boolean containsIngredient(List<Ingredient> ingredients, Ingredient toFind){
-        for(Ingredient ingredient: ingredients){
-            //if(ingredientsEqual(ingredient, toFind)){
-                return true;
-            }
+    public String getDescription(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ordine: ").append(requiredCone).append(" con ");
+
+        for(int i = 0; i < requiredFlavors.size(); i++){
+            if(i > 0) sb.append(" e ");
+            sb.append(requiredFlavors.get(i).getName());
         }
 
+        if(!requiredToppings.isEmpty()){
+            sb.append(", topping: ");
+            for (int i = 0; i < requiredToppings.size(); i++){
+                if(i>0){ 
+                sb.append (" e ");
+                }
+                sb.append(requiredToppings.get(i).getName());
+            }
+        }
+        return sb.toString();
+    }
 
     /**
-     * Helper: compare two ingredients
+     * Returns a string representation of this order
+     * 
+     * @return string containing order details
      */
-    /*private boolean ingredientsEqual(Ingredient a, Ingredient b){
-        return a.getName().equals(b.getName()) && a.getType() == b.getType();
-    }*/
+    @Override
+    public String toString(){
+        return String.format("OrderImpl[flavors=%s, cone=%s, toppings=%s]",
+        requiredFlavors, requiredCone, requiredToppings);
+    }
 }
