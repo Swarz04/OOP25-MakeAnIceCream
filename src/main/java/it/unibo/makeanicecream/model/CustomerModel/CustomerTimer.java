@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.model.CustomerModel;
+package it.unibo.makeanicecream.model.customermodel;
 
 import it.unibo.makeanicecream.api.Timer;
 

@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.model.CustomerModel;
+package it.unibo.makeanicecream.model.customermodel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -114,7 +114,7 @@ public class OrderImpl implements Order {
      */
     private boolean containsIngredient(List<Ingredient> ingredients, Ingredient toFind){
         for(Ingredient ingredient: ingredients){
-            if(ingredientsEqual(ingredient, toFind)){
+            //if(ingredientsEqual(ingredient, toFind)){
                 return true;
             }
         }
@@ -124,7 +124,7 @@ public class OrderImpl implements Order {
     /**
      * Helper: compare two ingredients
      */
-    private boolean ingredientsEqual(Ingredient a, Ingredient b){
+    /*private boolean ingredientsEqual(Ingredient a, Ingredient b){
         return a.getName().equals(b.getName()) && a.getType() == b.getType();
-    }
+    }*/
 }
