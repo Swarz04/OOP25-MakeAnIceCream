@@ -7,5 +7,5 @@ import it.unibo.makeanicecream.api.Timer;
 public class CustomerImpl //implements Customer {
   
     /*
-    CREAZIONE CUSTOMER IMPL    
+    CREAZIONE CUSTOMER IMPL   */ 
 }
