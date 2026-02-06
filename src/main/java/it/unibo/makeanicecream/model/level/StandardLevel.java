@@ -1,7 +1,7 @@
 package it.unibo.makeanicecream.model.level;
 
+import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
-import it.unibo.makeanicecream.api.Customer.Customer;
 
 import java.util.ArrayDeque;
 import java.util.Objects;

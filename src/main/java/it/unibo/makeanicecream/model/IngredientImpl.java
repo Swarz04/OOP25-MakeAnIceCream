@@ -7,7 +7,7 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
  * IngredientImpl class implementing the Ingredient interface.
  * This class models an ingredient with a name and type.
  */
-public class IngredientImpl implements Ingredient {
+    public class IngredientImpl implements Ingredient {
     private final String name;
     private final IngredientType type;
 
@@ -25,7 +25,7 @@ public class IngredientImpl implements Ingredient {
      * Get the type of the ingredient.
      * @return the ingredient type
      */
-    @Override
+     @Override
     public IngredientType getType(){
         return this.type;
     }

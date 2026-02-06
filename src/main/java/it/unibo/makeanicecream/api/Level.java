@@ -1,7 +1,5 @@
 package it.unibo.makeanicecream.api;
 
-import it.unibo.makeanicecream.api.Customer.Customer;
-
 /**
  * Represents a game level.
  * A level manages the available lives and the sequence of customers

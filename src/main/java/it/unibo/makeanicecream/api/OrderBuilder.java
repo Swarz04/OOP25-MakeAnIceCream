@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.api.Order;
+package it.unibo.makeanicecream.api;
 
 public class OrderBuilder {
     

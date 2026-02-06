@@ -11,6 +11,7 @@ public interface Customer {
     Order getOrder();
     Timer getTimer();
     int getDifficulty();
+    
     boolean checkIceCream(Icecream icecream);
     void setOrderResultCallback(Consumer<Boolean> callback);
 }
