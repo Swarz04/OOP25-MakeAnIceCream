@@ -10,7 +10,7 @@ import java.util.Random;
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
-import it.unibo.makeanicecream.api.OrderBuilder;
+import it.unibo.makeanicecream.model.OrderBuilder;
 import it.unibo.makeanicecream.model.ingredient.Conetype;
 import it.unibo.makeanicecream.model.ingredient.FlavorType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
@@ -150,5 +150,10 @@ public class CustomerFactory {
      * 
      * @return String.format("CustomerFactory[flavors=%d, cones=")
      */
+    @Override
+    public String toString(){
+        return String.format("CustomerFactory[flavors=%d, cones=%d, toppings=%d]",
+            availableFlavors.size(), availableCones.size(), availableToppings.size());
+    }
 }
 
