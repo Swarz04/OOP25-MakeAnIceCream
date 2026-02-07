@@ -5,10 +5,10 @@ import it.unibo.makeanicecream.api.Timer;
 /**
  * Implementation of the Timer interface for costumer orders.
  * This class manages a countdown timer that can be started, paused, resumed,
- * and notifies when expired via a callback
+ * and notifies when expired via a callback.
  * 
  */
-public class CustomerTimer implements Timer{
+public final class CustomerTimer implements Timer{
 
     private double secondsLeft;
     private boolean expired = false;
@@ -16,14 +16,13 @@ public class CustomerTimer implements Timer{
     private Runnable onExpiredCallback;
 
     /**
-     * Constructor with the specified duration of the timer
+     * Constructor with the specified duration of the timer.
      * The timer starts in paused state.
      * 
-     * @param seconds the initial time must be in positive seconds
+     * @param seconds the initial time must be in positive seconds.
      */
     public CustomerTimer(double seconds){
-       if(seconds <= 0)
-        {
+       if (seconds <= 0) {
             throw new IllegalArgumentException("Il tempo deve essere positivo");
         }
         this.secondsLeft = seconds;
@@ -42,7 +41,7 @@ public class CustomerTimer implements Timer{
      */
     @Override
     public void pause() {
-        this.paused=true;
+        this.paused = true;
     }
 
     /**
@@ -50,24 +49,27 @@ public class CustomerTimer implements Timer{
      */
     @Override
     public void resume() {
-        this.paused=false;
+        this.paused = false;
     }
 
     /**
      * Updates the timer state by the specified delta time.
      * If the timer reaches zero, the expired callback will be invoked.
      * 
-     * @param deltaTime the time passed since the last update (in seconds)     */
+     * @param deltaTime the time passed since the last update (in seconds).
+     */
     @Override
     public void update(double deltaTime) {
-        if(expired || paused) return;
+        if (expired || paused) {
+            return;
+        } 
 
         secondsLeft -= deltaTime;
 
-        if(secondsLeft <= 0){  
+        if (secondsLeft <= 0) {  
             expired = true;
             secondsLeft = 0;
-            if(onExpiredCallback != null){
+            if (onExpiredCallback != null) {
                 onExpiredCallback.run();
             }
         }
@@ -76,7 +78,7 @@ public class CustomerTimer implements Timer{
     /**
      * Check if the timer has expired.
      * 
-     * @return true if the timer has reached zero, false otherwise
+     * @return true if the timer has reached zero, false otherwise.
      */
     @Override
     public boolean isExpired() {
@@ -86,7 +88,7 @@ public class CustomerTimer implements Timer{
     /**
      * Gets the remaining time in seconds.
      * 
-     * @return the remaining time in seconds (not negative)
+     * @return the remaining time in seconds (not negative).
      */
     @Override
     public double getTimeLeft() {
@@ -94,9 +96,9 @@ public class CustomerTimer implements Timer{
     }
 
     /**
-     * Check if the timer is currently paused
+     * Check if the timer is currently paused.
      * 
-     * @return true if the timer is paused, false otherwise
+     * @return true if the timer is paused, false otherwise.
      */
     @Override
     public boolean isPaused() {
@@ -111,8 +113,4 @@ public class CustomerTimer implements Timer{
     public void setOnExpired(Runnable callback) {  
         this.onExpiredCallback= callback;
     }
-    
-
-   
-    
 }

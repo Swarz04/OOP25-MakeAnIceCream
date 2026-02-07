@@ -10,7 +10,7 @@ import it.unibo.makeanicecream.api.Timer;
 
 /**
  * Concrete implementation of the Customer Interface.
- * Represents a customer with an order, waiting timer, and result notification
+ * Represents a customer with an order, waiting timer, and result notification.
  * 
  */
 public class CustomerImpl implements Customer {
@@ -36,11 +36,51 @@ public class CustomerImpl implements Customer {
 
     this.name = name;
     this.order = order;
-    this.timer = timer;
     this.difficulty = difficulty;
-  }
-  
+    this.timer = createProtectedTimer(timer);
+    
+    if (timer.isExpired()) {
+        this.timer.pause();
+    } else {
+        this.timer.start();
+    }
+}
+ /**
+  * Crea una versione protetta del timer.
+  * Se il timer è immutabile (come CustomerTimer) lo usa direttamente.
+  * Altrimenti crea un wrapper/delegato
+  */ 
+ private Timer createProtectedTimer(Timer original) {
+    Objects.requireNonNull(original, "Il timer non puo essere null");
+    
+    if (original instanceof CustomerTimer) {
+        return original;
+    } else {
+        return new TimerDelegate(original);
+    }
+ }
 
+ /**
+  * Delegato per proteggere il timer originale
+  */
+  private static class TimerDelegate implements Timer {
+    private final Timer delegate;
+  
+    TimerDelegate(Timer delegate) {
+        this.delegate = Objects.requireNonNull(delegate);
+    }
+    @Override public void start() { delegate.start(); }
+    @Override public void pause() { delegate.pause(); }
+    @Override public void resume() { delegate.resume(); }
+    @Override public void update(double deltaTime){ delegate.update(deltaTime); }
+    @Override public boolean isExpired() { return delegate.isExpired(); }
+    @Override public double getTimeLeft() { return delegate.getTimeLeft(); }
+    @Override public boolean isPaused() { return delegate.isPaused(); }
+    @Override public void setOnExpired(Runnable callback) { delegate.setOnExpired(callback);}  
+  }
+    
+  }
+  @Override
   public boolean receiveIceCream(Icecream iceCream){
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
