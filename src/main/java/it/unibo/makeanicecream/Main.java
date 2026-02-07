@@ -3,6 +3,9 @@ package it.unibo.makeanicecream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import it.unibo.makeanicecream.api.GameView;
+import it.unibo.makeanicecream.view.GameViewImpl;
+
 /**
  * Entry point for the Make an Ice Cream test application.
  * Prints a simple greeting using the configured logger.
@@ -28,6 +31,8 @@ public final class Main {
      */
     public static void main(final String[] args) {
         // Using the logger to print to console avoids System.out and passes Checkstyle/PMD.
-        LOGGER.info("Hello, World!");
+        //LOGGER.info("Hello, World!");
+        GameView view = new GameViewImpl();
+        view.start();
     }
 }
