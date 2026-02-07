@@ -9,7 +9,6 @@ import java.util.Objects;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
-import it.unibo.makeanicecream.model.IngredientImpl;
 import it.unibo.makeanicecream.model.ingredient.Conetype;
 import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
@@ -157,31 +156,6 @@ public class OrderImpl implements Order {
         return all;
     }
 
-    /**
-     * Returns an actual readable description of this order.
-     * 
-     * @return a descriptive string of the order
-     */
-    public String getDescription(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ordine: ").append(requiredCone).append(" con ");
-
-        for(int i = 0; i < requiredFlavors.size(); i++){
-            if(i > 0) sb.append(" e ");
-            sb.append(requiredFlavors.get(i).getName());
-        }
-
-        if(!requiredToppings.isEmpty()){
-            sb.append(", topping: ");
-            for (int i = 0; i < requiredToppings.size(); i++){
-                if(i>0){ 
-                sb.append (" e ");
-                }
-                sb.append(requiredToppings.get(i).getName());
-            }
-        }
-        return sb.toString();
-    }
 
     /**
      * Returns a string representation of this order
