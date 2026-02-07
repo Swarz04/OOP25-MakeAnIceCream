@@ -35,6 +35,9 @@ public class GameControllerImpl implements GameController {
     public void handleInput(final GameAction action) {
         Command command;
         switch (action.getType()) {
+            case START_LEVEL:
+                command = new StartLevelCommand(this.game);
+                break;
             case CHOOSE_CONE:
                 command = new ChooseConeCommand(this.game);
                 break;
