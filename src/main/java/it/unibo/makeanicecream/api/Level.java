@@ -1,6 +1,6 @@
 package it.unibo.makeanicecream.api;
 
-import it.unibo.makeanicecream.api.Customer.Customer;
+import it.unibo.makeanicecream.api.customer.Customer;
 
 /**
  * Represents a game level.
