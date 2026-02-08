@@ -13,7 +13,9 @@ import it.unibo.makeanicecream.api.Timer;
  * Concrete implementation of the Customer Interface.
  * Represents a customer with an order, waiting timer, and result notification.
  * 
+ * Timer exposure is accepted because is needed for game loop integration.
  */
+@SuppressWarnings("EI_EXPOSURE_REP2")
 public class CustomerImpl implements Customer {
   private final String name;
   private final Order order;
@@ -38,7 +40,7 @@ public class CustomerImpl implements Customer {
     this.name = name;
     this.order = order;
     this.difficulty = difficulty;
-    this.timer = createProtectedTimer(timer);
+    this.timer = Objects.requireNonNull(timer, "Il timer non puo essere null");
     
     if (timer.isExpired()) {
         this.timer.pause();
@@ -47,37 +49,8 @@ public class CustomerImpl implements Customer {
     }
   }
 
- /**
-  * Crea una versione protetta del timer.
-  * Se il timer è immutabile (come CustomerTimer) lo usa direttamente.
-  * Altrimenti crea un wrapper/delegato
-  */ 
- private Timer createProtectedTimer(Timer original) {
-    Objects.requireNonNull(original, "Il timer non puo essere null");
-    return new TimerDelegate(original);
- }
-
- /**
-  * Delegato per proteggere il timer originale
-  */
-  private static class TimerDelegate implements Timer {
-    private final Timer delegate;
-  
-    TimerDelegate(Timer delegate) {
-        this.delegate = Objects.requireNonNull(delegate);
-    }
-    @Override public void start() { delegate.start(); }
-    @Override public void pause() { delegate.pause(); }
-    @Override public void resume() { delegate.resume(); }
-    @Override public void update(double deltaTime){ delegate.update(deltaTime); }
-    @Override public boolean isExpired() { return delegate.isExpired(); }
-    @Override public double getTimeLeft() { return delegate.getTimeLeft(); }
-    @Override public boolean isPaused() { return delegate.isPaused(); }
-    @Override public void setOnExpired(Runnable callback) { delegate.setOnExpired(callback); }  
-  }
-    
   @Override
-  public boolean receiveIceCream(Icecream iceCream){
+  public boolean receiveIceCream(Icecream iceCream) {
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
     boolean isCorect = order.isSatisfiedBy(iceCream);
@@ -89,31 +62,30 @@ public class CustomerImpl implements Customer {
     return isCorect;
   }
 
-  
   @Override
-  public String getName(){
+  public String getName() {
     return name;
   }
-
 
   @Override
   public Order getOrder() {
     return order;
   }
 
-
+  /**
+   * Return the customer's timer.
+   * Exposure necessary for game loop updates and timeout checks.
+   */
   @Override
+  @SuppressWarnings("EI_EXPOSE_REP")
   public Timer getTimer() {
     return timer;
   }
-
 
   @Override
   public int getDifficulty() {
     return difficulty;
   }
-
-
 
   @Override
   public void setOrderResultCallback(Consumer<Boolean> callback) {

@@ -32,7 +32,7 @@ public class OrderImpl implements Order {
      * @param cone the cone required (can't be null).
      * @param toppings the list of toppings required (can be empty).
      */
-    public OrderImpl(List<Ingredient> flavors, Conetype cone, List<Ingredient>toppings){
+    public OrderImpl(List<Ingredient> flavors, Conetype cone, List<Ingredient>toppings) {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
@@ -41,7 +41,7 @@ public class OrderImpl implements Order {
     /**
      * Validates constructor arguments.
      */
-    private void validateConstructorArguments(List<Ingredient> flavors, Conetype cone, List<Ingredient> toppings){
+    private void validateConstructorArguments(List<Ingredient> flavors, Conetype cone, List<Ingredient> toppings) {
         if (flavors == null || flavors.isEmpty()) {
             throw new IllegalArgumentException("L'ordine deve contenere almeno un gusto");
         }
