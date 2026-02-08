@@ -24,11 +24,11 @@ public class OrderBuilder {
      * @param flavor the flavor ingredient to add (must be of type SCOOP)
      * @return this builder for method chaining
      */
-    public OrderBuilder addFlavor(Ingredient flavor){
-        if(flavor == null){
+    public OrderBuilder addFlavor(Ingredient flavor) {
+        if (flavor == null) {
             throw new IllegalArgumentException("Flavor non puo essere null");
         }
-        if(flavor.getType() != IngredientType.SCOOP){
+        if (flavor.getType() != IngredientType.SCOOP) {
             throw new IllegalArgumentException("L'ingrediente deve essere di tipo SCOOP");
         }
         flavors.add(flavor);
@@ -42,19 +42,19 @@ public class OrderBuilder {
      * @return this builder for method chaining
      * 
      */
-    public OrderBuilder setCone(Conetype cone){
-        if(cone == null){
+    public OrderBuilder setCone(Conetype cone) {
+        if (cone == null) {
             throw new IllegalArgumentException("Cone non puo essere null");
         }
         this.cone = cone;
         return this;
     }
 
-    public OrderBuilder addTopping(Ingredient topping){
-        if(topping == null){
+    public OrderBuilder addTopping(Ingredient topping) {
+        if (topping == null) {
             throw new IllegalArgumentException("Topping non puo essere null");
         }
-        if(topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING){
+        if (topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING) {
             throw new IllegalArgumentException("L'ingrediente deve essere un toppin valido");
         }
         toppings.add(topping);
@@ -66,11 +66,11 @@ public class OrderBuilder {
      * 
      * @return a new Order instance 
      */
-    public Order build(){
-        if(cone == null){
+    public Order build() {
+        if (cone == null) {
             throw new IllegalStateException("Deve specificare un cono");
         }
-        if(flavors.isEmpty()){
+        if (flavors.isEmpty()) {
             throw new IllegalStateException("Deve avere almeno un gusto");
         }
         return new OrderImpl(flavors, cone, toppings);
@@ -81,7 +81,7 @@ public class OrderBuilder {
      * 
      * @return this builder for method chaining
      */
-    public OrderBuilder reset(){
+    public OrderBuilder reset() {
         flavors.clear();
         cone = null;
         toppings.clear();
@@ -93,7 +93,7 @@ public class OrderBuilder {
      * @return string containing builder configuration
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("OrderBuilder[flavors=%d, cone=%s, toppings=%d]", 
         flavors.size(), cone, toppings.size());
     }
