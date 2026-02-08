@@ -1,4 +1,5 @@
 package it.unibo.makeanicecream.api;
+import it.unibo.makeanicecream.api.customer.Customer;
 
 /**
  * Represents a game level.
@@ -44,4 +45,17 @@ public interface Level {
      * Removes the current customer from the queue.
      */
     void serveCurrentCustomer();
+
+    /**
+     *
+     * @param deltatime the time to give to the clustomers to update themselves
+     */
+    void update (double deltatime);
+
+    /**
+     * Notifies the level about the result of serving a customer.
+     *
+     * @param success true if the order was satisfied, false otherwise
+     */
+    void notifyCustomerServed(boolean success);
 }
