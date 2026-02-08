@@ -77,7 +77,7 @@ public class CustomerImpl implements Customer {
    * Exposure necessary for game loop updates and timeout checks.
    */
   @Override
-  @SuppressWarnings("EI_EXPOSE_REP")
+  @SuppressWarnings("EI_EXPOSE_REP1")
   public Timer getTimer() {
     return timer;
   }
