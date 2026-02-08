@@ -1,8 +1,9 @@
 package it.unibo.makeanicecream.view;
 
-import javax.swing.event.DocumentEvent.EventType;
+import it.unibo.makeanicecream.api.Event;
+import it.unibo.makeanicecream.api.EventType;
 
-public class EventImpl {
+public class EventImpl implements Event{
     private final EventType type;
     private final String data;
 
@@ -11,10 +12,12 @@ public class EventImpl {
         this.data = name;
     }
 
+    @Override
     public EventType getType(){
         return this.type;
     }
 
+    @Override
     public String getData(){
         return this.data;
     }

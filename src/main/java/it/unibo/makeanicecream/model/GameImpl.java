@@ -110,6 +110,10 @@ public class GameImpl implements Game {
      * perdite di vita o passaggi al cliente successivo.
      */
     public void update(final double deltaTime) {
+        if (this.state != GameState.PLAYING || this.currentLevel == null) {
+            return;
+        }
+
         if (this.currentLevel.hasNextCustomer()) {
         if (this.state == GameState.PLAYING && this.currentLevel != null) {
             this.currentLevel.update(deltaTime);
