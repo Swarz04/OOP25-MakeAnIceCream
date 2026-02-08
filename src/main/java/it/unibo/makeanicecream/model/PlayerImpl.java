@@ -6,7 +6,6 @@ import it.unibo.makeanicecream.api.Player;
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.model.ingredient.Conetype;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -53,16 +52,16 @@ public class PlayerImpl implements Player {
 
     @Override
     public boolean deliverIceCream(final Customer customer) {
-        if (Objects.isNull(this.currentIcecream) || Objects.isNull(customer)) {
+        if (Objects.isNull(customer)) {
             return false;
         }
+
         composeIceCream();
-        /* TODO: Implement order validation when Customer interface provides getOrder() method.
-        * Compare: customer.getOrder() with currentIcecream
-        * (cone type, ingredients, isClosed state)
-        */
+        final boolean success = customer.receiveIceCream(this.currentIcecream);
+
+        this.builder.reset();
         this.currentIcecream = null;
-        return true;
+        return success;
     }
 
     /**

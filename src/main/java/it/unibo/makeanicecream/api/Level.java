@@ -51,4 +51,11 @@ public interface Level {
      * @param deltatime the time to give to the clustomers to update themselves
      */
     void update (double deltatime);
+
+    /**
+     * Notifies the level about the result of serving a customer.
+     *
+     * @param success true if the order was satisfied, false otherwise
+     */
+    void notifyCustomerServed(boolean success);
 }

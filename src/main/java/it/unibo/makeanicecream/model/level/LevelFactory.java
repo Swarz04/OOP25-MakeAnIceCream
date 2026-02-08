@@ -3,10 +3,14 @@ package it.unibo.makeanicecream.model.level;
 
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
+import it.unibo.makeanicecream.api.Order;
+import it.unibo.makeanicecream.api.Timer;
 
 import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.function.Consumer;
+import it.unibo.makeanicecream.model.customermodel.CustomerFactory;
 
 /**
  * Factory class for creating Level instances.
@@ -41,17 +45,20 @@ public final class LevelFactory {
 
         final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
 
-       /*
-        * for (int i = 0; i < numberOfCustomers; i++) {
-        * final Customer c = createCustomer(limitedDifficulty); // da sostituire (Customer studente 1)
-        * customers.add(c)
-        * TODO: integrate Customer creation.
-        * For each customer index in [0, numberOfCustomers),
-        * create a Customer instance configured with the given difficulty
-        * and add it to the queue.
-        */
+        final double levelTime = computeTimeForDifficulty(limitedDifficulty);
+
         final Queue<Customer> customers = new ArrayDeque<>();
+        final CustomerFactory customerFactory = new CustomerFactory();
+
+        for (int i = 0; i < numberOfCustomers; i++) {
+            customers.add(customerFactory.createCustomer(limitedDifficulty, levelTime));
+        }
 
         return new StandardLevel(limitedDifficulty, LIVES, customers);
+    }
+
+    private static double computeTimeForDifficulty(int difficulty) {
+        // Base time 60s, decreases by 5s per difficulty level
+        return Math.max(10.0, 60.0 - (difficulty * 5.0));
     }
  }

@@ -18,7 +18,7 @@ public class GameImpl implements Game {
     public GameImpl() {
         this.state = GameState.MENU;
     }
-    
+
     @Override
     public void start(final int levelNumber) {
         this.currentLevel = LevelFactory.createLevel(levelNumber);
@@ -83,10 +83,10 @@ public class GameImpl implements Game {
     }
 
     /**
-     * Metodo che aggiorna lo stato del gioco. 
+     * Metodo che aggiorna lo stato del gioco.
      * Questo metodo deve essere chiamato ad ogni tick del game loop, con
-     * il tempo trascorso dall'ultimo aggiornamento passato come parametro. 
-     * Delega poi l'aggiornamento al livello corrente, che si occupa di gestire 
+     * il tempo trascorso dall'ultimo aggiornamento passato come parametro.
+     * Delega poi l'aggiornamento al livello corrente, che si occupa di gestire
      * correttamente clienti e timer.
      * NOTA: Level e Customer dovrebbero avere a loro volta un metodo update(deltaTime)
      * che si occupa di decrementare il timer del cliente e gestire eventuali

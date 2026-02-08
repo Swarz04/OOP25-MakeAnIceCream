@@ -2,11 +2,11 @@ package it.unibo.makeanicecream.model.level;
 
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
-import it.unibo.makeanicecream.api.customer.Customer;
+import it.unibo.makeanicecream.model.customermodel.CustomerFactory;
 
 import java.util.ArrayDeque;
-import java.util.Objects;
 import java.util.Queue;
+
 
 /**
  * Represents a standard game level with a queue of customers.
@@ -63,14 +63,20 @@ public final class StandardLevel implements Level {
     public void serveCurrentCustomer() {
         this.customers.poll();
     }
+
     @Override
     public void update(final double deltaTime) {
-       /*
-        *if (this.getCurrentCustomer() != null && this.getCurrentCustomer().isExpired()) {
-        *    this.loseLife();
-        *    this.serveCurrentCustomer();
-        *}
-        */
+         final Customer current = this.getCurrentCustomer();
+        if (current == null) {
+            return;
+        }
+
+        current.getTimer().update(deltaTime);
+
+        if (current.getTimer().isExpired()) {
+            this.loseLife();
+            this.serveCurrentCustomer();
+        }
     }
 
     /**
@@ -79,7 +85,8 @@ public final class StandardLevel implements Level {
      * @param success
      *          true if the order was satisfied, false otherwise
      */
-    void notifyCustomers(final boolean success) {
+    @Override
+    public void notifyCustomerServed(final boolean success) {
         if (!success) {
             this.loseLife();
         }
