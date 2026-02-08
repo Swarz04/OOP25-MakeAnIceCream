@@ -44,10 +44,6 @@ public class GameImpl implements Game {
     public void pause() {
         if (this.state == GameState.PLAYING) {
             this.state = GameState.PAUSED;
-            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
-            /*Level level = getLevel();
-            Customer c = level.getCurrentCustomer();
-            if(c != null) c.getTimer().pause();*/
         }
     }
 
@@ -55,10 +51,6 @@ public class GameImpl implements Game {
     public void resume() {
         if (this.state == GameState.PAUSED) {
             this.state = GameState.PLAYING;
-            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
-            /*Level level = getLevel();
-            Customer c = level.getCurrentCustomer();
-            if(c != null) c.getTimer().resume();*/
         }
     }
 
@@ -75,7 +67,7 @@ public class GameImpl implements Game {
     }
 
     private void updateGameState() {
-        if (this.currentLevel.hasNextCustomer() && this.currentLevel.getLives() <= 0) {
+        if (this.currentLevel.getLives() <= 0) {
             this.state = GameState.GAME_OVER;
         } else if (!this.currentLevel.hasNextCustomer()) {
             this.state = GameState.LEVEL_COMPLETED;
@@ -93,6 +85,10 @@ public class GameImpl implements Game {
      * perdite di vita o passaggi al cliente successivo.
      */
     public void update(final double deltaTime) {
+        if (this.state != GameState.PLAYING || this.currentLevel == null) {
+            return;
+        }
+        
         if (this.currentLevel.hasNextCustomer()) {
             this.currentLevel.update(deltaTime);
         }
