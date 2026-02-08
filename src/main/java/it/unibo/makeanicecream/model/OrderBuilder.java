@@ -36,10 +36,10 @@ public class OrderBuilder {
     }
 
     /**
-     * Sets the cone type for the order being built
+     * Sets the cone type for the order being built.
      * 
-     * @param cone the cone type to use
-     * @return this builder for method chaining
+     * @param cone the cone type to use.
+     * @return this builder for method chaining.
      * 
      */
     public OrderBuilder setCone(Conetype cone) {
@@ -50,6 +50,11 @@ public class OrderBuilder {
         return this;
     }
 
+    /**
+     * Adds a topping to the order
+     * @param topping the topping being add
+     * @return this builder for method chaining
+     */
     public OrderBuilder addTopping(Ingredient topping) {
         if (topping == null) {
             throw new IllegalArgumentException("Topping non puo essere null");
@@ -62,9 +67,9 @@ public class OrderBuilder {
     }
 
     /**
-     * Builds and returns an Order based on the configured components
+     * Builds and returns an Order based on the configured components.
      * 
-     * @return a new Order instance 
+     * @return a new Order instance.
      */
     public Order build() {
         if (cone == null) {
@@ -77,9 +82,9 @@ public class OrderBuilder {
     }
 
     /**
-     * Resets this builder to its initial empty state
+     * Resets this builder to its initial empty state.
      * 
-     * @return this builder for method chaining
+     * @return this builder for method chaining.
      */
     public OrderBuilder reset() {
         flavors.clear();
@@ -90,7 +95,7 @@ public class OrderBuilder {
     /**
      * Returns a string representation of this builder's current state.
      * 
-     * @return string containing builder configuration
+     * @return string containing builder configuration.
      */
     @Override
     public String toString() {
