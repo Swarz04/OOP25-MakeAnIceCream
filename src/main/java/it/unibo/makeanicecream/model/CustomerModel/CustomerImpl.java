@@ -7,7 +7,7 @@ import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.api.Timer;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;;
 
 /**
  * Concrete implementation of the Customer Interface.
@@ -22,7 +22,6 @@ public class CustomerImpl implements Customer {
   private final Timer timer;
   private final int difficulty;
   private Consumer<Boolean> orderResultCallback;
-  
 
   public CustomerImpl(String name, Order order, Timer timer, int difficulty){
     if (name == null || name.trim().isEmpty()) {
@@ -78,7 +77,7 @@ public class CustomerImpl implements Customer {
    * Exposure necessary for game loop updates and timeout checks.
    */
   @Override
-  @SuppressWarnings("EI_EXPOSE_REP")
+  @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Timer is a shared API component")
   public Timer getTimer() {
     return timer;
   }
