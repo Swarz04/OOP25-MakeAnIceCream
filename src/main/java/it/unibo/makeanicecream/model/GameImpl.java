@@ -4,6 +4,7 @@ import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Player;
+import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.model.level.LevelFactory;
 
 /**
@@ -48,6 +49,12 @@ public class GameImpl implements Game {
             /*Level level = getLevel();
             Customer c = level.getCurrentCustomer();
             if(c != null) c.getTimer().pause();*/
+            if (this.currentLevel != null) {
+                final Customer c = this.currentLevel.getCurrentCustomer();
+                if (c != null) {
+                    c.getTimer().pause();
+                }
+            }
         }
     }
 
@@ -59,6 +66,12 @@ public class GameImpl implements Game {
             /*Level level = getLevel();
             Customer c = level.getCurrentCustomer();
             if(c != null) c.getTimer().resume();*/
+            if (this.currentLevel != null) {
+                final Customer c = this.currentLevel.getCurrentCustomer();
+                if (c != null) {
+                    c.getTimer().resume();
+                }
+            }
         }
     }
 
@@ -76,6 +89,10 @@ public class GameImpl implements Game {
 
     private void updateGameState() {
         if (this.currentLevel.hasNextCustomer() && this.currentLevel.getLives() <= 0) {
+        if (this.currentLevel == null) {
+            return;
+        }
+        if (this.currentLevel.getLives() <= 0) {
             this.state = GameState.GAME_OVER;
         } else if (!this.currentLevel.hasNextCustomer()) {
             this.state = GameState.LEVEL_COMPLETED;
@@ -94,7 +111,9 @@ public class GameImpl implements Game {
      */
     public void update(final double deltaTime) {
         if (this.currentLevel.hasNextCustomer()) {
+        if (this.state == GameState.PLAYING && this.currentLevel != null) {
             this.currentLevel.update(deltaTime);
+            updateGameState();
         }
 
         updateGameState();

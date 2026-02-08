@@ -20,19 +20,41 @@ public class PlayerImpl implements Player {
         this.builder = new IceCreamBuilder();
     }
 
+    /**
+     * Selects the cone type.
+     *
+     * @param conetype the cone type
+     * @return true if the cone was selected, false otherwise
+     */
     public boolean chooseCone(final Conetype conetype) {
         return this.builder.chooseCone(conetype);
     }
 
+    /**
+     * Adds an ingredient to the ice cream.
+     *
+     * @param ingredient the ingredient to add
+     * @return true if the ingredient was added, false otherwise
+     */
     public boolean addIngredient(final Ingredient ingredient) {
         Objects.requireNonNull(ingredient, "ingredient must not be null");
         return this.builder.addIngredient(ingredient);
     }
 
+    /**
+     * Checks if the ice cream is closed.
+     *
+     * @return true if the ice cream is closed, false otherwise
+     */
     public boolean isIceCreamClosed() {
         return this.builder.isClosed();
     }
 
+    /**
+     * Enables or disables toppings.
+     *
+     * @param enabled true to enable toppings, false to disable
+     */
     public void setToppingEnabled(final boolean enabled) {
         this.builder.setToppingEnabled(enabled);
     }
