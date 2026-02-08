@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface Player {
 
-	Icecream composeIceCream(List<Ingredient> ingredients);
+	Icecream composeIceCream();
 
 	boolean deliverIceCream(Customer customer);
 

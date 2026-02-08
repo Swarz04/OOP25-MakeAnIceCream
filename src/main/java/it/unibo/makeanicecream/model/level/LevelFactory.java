@@ -1,10 +1,7 @@
 package it.unibo.makeanicecream.model.level;
 
-<<<<<<< HEAD
-import it.unibo.makeanicecream.api.customer.Customer;
-=======
+
 import it.unibo.makeanicecream.api.Customer;
->>>>>>> 303bf0bf8df103d08e73d8626e641f90a4c721ca
 import it.unibo.makeanicecream.api.Level;
 
 import java.util.ArrayDeque;
@@ -26,7 +23,7 @@ public final class LevelFactory {
     private static final int STEP_CUSTOMERS = 2;
 
     private static final int LIVES = 3;
-    
+
     private LevelFactory() {
     }
 
@@ -54,7 +51,7 @@ public final class LevelFactory {
         * and add it to the queue.
         */
         final Queue<Customer> customers = new ArrayDeque<>();
-        
+
         return new StandardLevel(limitedDifficulty, LIVES, customers);
     }
  }

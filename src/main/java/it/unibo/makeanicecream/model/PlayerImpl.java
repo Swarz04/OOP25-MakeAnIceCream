@@ -46,8 +46,7 @@ public class PlayerImpl implements Player {
      * @return the composed {@link Icecream}
      */
     @Override
-    public Icecream composeIceCream(final List<Ingredient> ingredients) {
-        Objects.requireNonNull(ingredients, "ingredients list must not be null");
+    public Icecream composeIceCream() {
         this.currentIcecream = this.builder.submit();
         return this.currentIcecream;
     }
@@ -57,6 +56,7 @@ public class PlayerImpl implements Player {
         if (Objects.isNull(this.currentIcecream) || Objects.isNull(customer)) {
             return false;
         }
+        composeIceCream();
         /* TODO: Implement order validation when Customer interface provides getOrder() method.
         * Compare: customer.getOrder() with currentIcecream
         * (cone type, ingredients, isClosed state)
