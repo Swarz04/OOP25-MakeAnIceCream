@@ -6,7 +6,7 @@ import it.unibo.makeanicecream.api.Timer;
  * Implementation of the Timer interface for costumer orders.
  * This class manages a countdown timer that can be started, paused, resumed,
  * and notifies when expired via a callback.
- * 
+ *
  */
 public final class CustomerTimer implements Timer{
 
@@ -18,7 +18,7 @@ public final class CustomerTimer implements Timer{
     /**
      * Constructor with the specified duration of the timer.
      * The timer starts in paused state.
-     * 
+     *
      * @param seconds the initial time must be in positive seconds.
      */
     public CustomerTimer(double seconds){
@@ -29,7 +29,7 @@ public final class CustomerTimer implements Timer{
     }
 
     /**
-     * Starts the timer. The timer will begin counting down. 
+     * Starts the timer. The timer will begin counting down.
      */
     @Override
     public void start() {
@@ -55,18 +55,18 @@ public final class CustomerTimer implements Timer{
     /**
      * Updates the timer state by the specified delta time.
      * If the timer reaches zero, the expired callback will be invoked.
-     * 
+     *
      * @param deltaTime the time passed since the last update (in seconds).
      */
     @Override
     public void update(double deltaTime) {
         if (expired || paused) {
             return;
-        } 
+        }
 
         secondsLeft -= deltaTime;
 
-        if (secondsLeft <= 0) {  
+        if (secondsLeft <= 0) {
             expired = true;
             secondsLeft = 0;
             if (onExpiredCallback != null) {
@@ -77,7 +77,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Check if the timer has expired.
-     * 
+     *
      * @return true if the timer has reached zero, false otherwise.
      */
     @Override
@@ -87,7 +87,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Gets the remaining time in seconds.
-     * 
+     *
      * @return the remaining time in seconds (not negative).
      */
     @Override
@@ -97,7 +97,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Check if the timer is currently paused.
-     * 
+     *
      * @return true if the timer is paused, false otherwise.
      */
     @Override
@@ -110,7 +110,7 @@ public final class CustomerTimer implements Timer{
      * The callback will be executed once when the timer reaches zero.
      */
     @Override
-    public void setOnExpired(Runnable callback) {  
+    public void setOnExpired(Runnable callback) {
         this.onExpiredCallback= callback;
     }
 }

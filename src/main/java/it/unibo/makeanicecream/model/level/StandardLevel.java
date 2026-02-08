@@ -27,7 +27,6 @@ public final class StandardLevel implements Level {
         this.customers = new ArrayDeque<>(Objects.requireNonNull(customers));
     }
 
-
     @Override
     public int getDifficulty() {
         return this.difficulty;
@@ -57,7 +56,7 @@ public final class StandardLevel implements Level {
 
     @Override
     public void serveCurrentCustomer() {
-        this.customers.poll();
+        final var ignored = this.customers.poll();
     }
 
     @Override

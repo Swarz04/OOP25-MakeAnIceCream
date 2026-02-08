@@ -8,7 +8,7 @@ import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.model.level.LevelFactory;
 
 /**
- * Implementation of the {@limk Game} interface.
+ * Implementation of the {@link Game} interface.
  */
 public class GameImpl implements Game {
 
@@ -88,7 +88,6 @@ public class GameImpl implements Game {
     }
 
     private void updateGameState() {
-        if (this.currentLevel.hasNextCustomer() && this.currentLevel.getLives() <= 0) {
         if (this.currentLevel == null) {
             return;
         }
@@ -99,28 +98,11 @@ public class GameImpl implements Game {
         }
     }
 
-    /**
-     * Metodo che aggiorna lo stato del gioco.
-     * Questo metodo deve essere chiamato ad ogni tick del game loop, con
-     * il tempo trascorso dall'ultimo aggiornamento passato come parametro.
-     * Delega poi l'aggiornamento al livello corrente, che si occupa di gestire
-     * correttamente clienti e timer.
-     * NOTA: Level e Customer dovrebbero avere a loro volta un metodo update(deltaTime)
-     * che si occupa di decrementare il timer del cliente e gestire eventuali
-     * perdite di vita o passaggi al cliente successivo.
-     */
     public void update(final double deltaTime) {
-        if (this.state != GameState.PLAYING || this.currentLevel == null) {
-            return;
-        }
-
-        if (this.currentLevel.hasNextCustomer()) {
         if (this.state == GameState.PLAYING && this.currentLevel != null) {
             this.currentLevel.update(deltaTime);
             updateGameState();
         }
-
-        updateGameState();
     }
 
 }

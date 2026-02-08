@@ -16,6 +16,9 @@ public class PlayerImpl implements Player {
     private Icecream currentIcecream;
     private IceCreamBuilder builder;
 
+    /**
+     * Builds a new Player instance.
+     */
     public PlayerImpl() {
         this.builder = new IceCreamBuilder();
     }
@@ -63,7 +66,6 @@ public class PlayerImpl implements Player {
      * Compose the current ice cream.
      * Submits the builder state to create a final IceCreamImpl instance.
      *
-     * @param ingredients the list of ingredients (managed internally by builder)
      * @return the composed {@link Icecream}
      */
     @Override
@@ -72,6 +74,11 @@ public class PlayerImpl implements Player {
         return this.currentIcecream;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param customer the customer to deliver to
+     */
     @Override
     public boolean deliverIceCream(final Customer customer) {
         if (Objects.isNull(customer)) {
@@ -87,7 +94,7 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * Cancel the current composition.
+     * {@inheritDoc}
      */
     @Override
     public void cancelIceCream() {
