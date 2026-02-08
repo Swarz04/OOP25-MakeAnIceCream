@@ -7,7 +7,7 @@ import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.api.Timer;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Concrete implementation of the Customer Interface.
@@ -23,7 +23,7 @@ public class CustomerImpl implements Customer {
   private final int difficulty;
   private Consumer<Boolean> orderResultCallback;
 
-  public CustomerImpl(String name, Order order, Timer timer, int difficulty){
+  public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty){
     if (name == null || name.trim().isEmpty()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");
     }
@@ -50,7 +50,7 @@ public class CustomerImpl implements Customer {
   }
 
   @Override
-  public boolean receiveIceCream(Icecream iceCream) {
+  public boolean receiveIceCream(final Icecream iceCream) {
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
     boolean isCorect = order.isSatisfiedBy(iceCream);
