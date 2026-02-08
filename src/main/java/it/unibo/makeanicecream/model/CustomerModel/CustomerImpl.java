@@ -15,13 +15,14 @@ import it.unibo.makeanicecream.api.Timer;
  * 
  * Timer exposure is accepted because is needed for game loop integration.
  */
-@SuppressWarnings("EI_EXPOSURE_REP2")
+
 public class CustomerImpl implements Customer {
   private final String name;
   private final Order order;
   private final Timer timer;
   private final int difficulty;
   private Consumer<Boolean> orderResultCallback;
+  
 
   public CustomerImpl(String name, Order order, Timer timer, int difficulty){
     if (name == null || name.trim().isEmpty()) {
@@ -77,7 +78,7 @@ public class CustomerImpl implements Customer {
    * Exposure necessary for game loop updates and timeout checks.
    */
   @Override
-  @SuppressWarnings("EI_EXPOSE_REP2")
+  @SuppressWarnings("EI_EXPOSE_REP")
   public Timer getTimer() {
     return timer;
   }
