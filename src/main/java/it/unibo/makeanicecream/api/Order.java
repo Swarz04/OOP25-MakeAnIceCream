@@ -25,7 +25,7 @@ public interface Order {
      * 
      * @return the required cone type 
      */
-    Conetype getConeType(); 
+    Conetype getRequestedConeType(); 
     
     /**
      * Gets the list of toppings required by this order.
@@ -46,9 +46,9 @@ public interface Order {
     boolean isSatisfiedBy(Icecream icecream);
 
     /**
-     * Returns a string representation of an order
+     * Returns a string representation of an order.
      * 
-     * @return string containing order details
+     * @return string containing order.
      */
     public String toString();
 }
