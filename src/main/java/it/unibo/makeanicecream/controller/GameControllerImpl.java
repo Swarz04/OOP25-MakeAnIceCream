@@ -2,7 +2,7 @@ package it.unibo.makeanicecream.controller;
 
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
-import it.unibo.makeanicecream.api.GameAction;
+import it.unibo.makeanicecream.api.Event;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 
@@ -32,7 +32,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void handleInput(final GameAction action) {
+    public void handleInput(final Event action) {
         Command command;
         switch (action.getType()) {
             case START_LEVEL:
