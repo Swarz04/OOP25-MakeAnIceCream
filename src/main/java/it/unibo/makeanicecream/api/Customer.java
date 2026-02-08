@@ -44,11 +44,11 @@ public interface Customer {
      * @param icecream the ice cream
      * @return true if the ice cream satisfies the order, false otherwise
      */
-    boolean checkIceCream(Icecream icecream);
+    boolean receiveIceCream(Icecream icecream);
     
     /**
      * Sets a callback to be notified when the costumer receives an icecream.
-     * The callback receives a boolean if the order was satisfied.
+     * The callback receives a boolean if the order was satisfied by icecream.
      *
      *  @param callback
      */

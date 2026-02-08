@@ -23,7 +23,7 @@ public interface Order {
     /**
      * Gets the cone required by this order
      * 
-     * @return the required cone ingredient
+     * @return the required cone type 
      */
     Conetype getConeType(); 
     
@@ -44,4 +44,11 @@ public interface Order {
      * @return true if the ice cream satisfies all order requirements, false otherwise
      */
     boolean isSatisfiedBy(Icecream icecream);
+
+    /**
+     * Returns a string representation of an order
+     * 
+     * @return string containing order details
+     */
+    public String toString();
 }
