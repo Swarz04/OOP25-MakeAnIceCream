@@ -13,13 +13,6 @@ package it.unibo.makeanicecream.api;
 public interface GameController {
 
     /**
-     * Starts a new game at the specified level.
-     * 
-     * @param levelNumber the number of the level
-     */
-    void startGame(int levelNumber);
-
-    /**
      * Handles a user action coming from the view.
      * 
      * @param action the user action to be processed
@@ -39,5 +32,14 @@ public interface GameController {
      * @param view the view to be set
      */
     void setView(GameView view);
+
+    /**
+     * Checks if the game is currently in a playing state.
+     * The game is considered playing when a level has been started
+     * and is neither paused nor completed.
+     *
+     * @return true if the game is in the PLAYING state, false otherwise
+     */
+    boolean isGamePlaying();
 
 }

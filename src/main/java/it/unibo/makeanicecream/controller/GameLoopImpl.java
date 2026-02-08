@@ -39,13 +39,17 @@ public class GameLoopImpl implements GameLoop, Runnable{
     public void run() {
         long previousCycleStartTime = System.currentTimeMillis();
 
-		while(this.running){
-			long currentCycleStartTime = System.currentTimeMillis();
-			long elapsed = currentCycleStartTime - previousCycleStartTime;
-            this.controller.updateGame(elapsed / MILLIS_IN_SECONDS);
-			this.waitForNextFrame(currentCycleStartTime);
-			previousCycleStartTime = currentCycleStartTime;
-		}
+        while(this.running) {
+            long currentCycleStartTime = System.currentTimeMillis();
+            long elapsed = currentCycleStartTime - previousCycleStartTime;
+
+            if (this.controller.isGamePlaying()) {
+                this.controller.updateGame(elapsed / MILLIS_IN_SECONDS);
+            }
+            
+            this.waitForNextFrame(currentCycleStartTime);
+            previousCycleStartTime = currentCycleStartTime;
+        }
     }
 
     protected void waitForNextFrame(long cycleStartTime){
