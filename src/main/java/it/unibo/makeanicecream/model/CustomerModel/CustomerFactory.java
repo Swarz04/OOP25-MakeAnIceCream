@@ -21,7 +21,7 @@ import it.unibo.makeanicecream.model.ingredient.SolidToppingType;
 
 /**
  * Factory for generating random customers based on difficulty levels.
- * creates customer with randomly generated orders. Time is determined by game Level
+ * creates customer with randomly generated orders. Time is determined by game Level.
  */
 public class CustomerFactory {
     private final Map<Integer, CustomerTemplate> templates = new HashMap<>();
@@ -31,10 +31,10 @@ public class CustomerFactory {
     private final Random random = new Random();
 
     /**
-     * Constructs a CustomerFacory with all available ingredient from enums
+     * Constructs a CustomerFacory with all the available ingredients from enums.
      * 
      */
-    public CustomerFactory(){
+    public CustomerFactory() {
         this.availableFlavors = Arrays.asList(FlavorType.values());
         this.availableCones = Arrays.asList(Conetype.values());
         this.availableToppings = createAllToppings();
@@ -43,28 +43,28 @@ public class CustomerFactory {
     }
 
     /**
-     * Creates all posible topping ingredients from enum values
+     * Creates all posible topping ingredients from enum values.
      * 
-     * @return list containing all possible topping ingredients
+     * @return list containing all possible topping ingredients.
      */
-    private List<Ingredient> createAllToppings(){
+    private List<Ingredient> createAllToppings() {
         List<Ingredient> toppings = new ArrayList<>();
 
-        for(LiquidToppingType liquidType : LiquidToppingType.values()){
+        for (final LiquidToppingType liquidType : LiquidToppingType.values()) {
             toppings.add(new LiquidTopping(liquidType));
         }
 
-        for(SolidToppingType solidType: SolidToppingType.values()){
+        for (final SolidToppingType solidType: SolidToppingType.values()) {
             toppings.add(new SolidTopping(solidType));
         }
         return toppings;
     }
     
     /**
-     * Inizializes the difficulty templates with predifined configurations
+     * Inizializes the difficulty templates with predifined configurations.
      * 
      */
-    private void initializeTemplates(){
+    private void initializeTemplates() {
         templates.put(1, new CustomerTemplate(new String[]{"Maria","Paolo"}, 1,0));
         templates.put(2, new CustomerTemplate(new String[]{"Giulia"}, 2,0));
         templates.put(3, new CustomerTemplate(new String[]{"Giorgio"}, 3,0));
@@ -73,18 +73,25 @@ public class CustomerFactory {
 
     }
 
-    public Customer createCustomer(int maxDifficulty, double levelTime){
-        if(maxDifficulty < 1 || maxDifficulty > 5){
+    /**
+     * Creates a new random coustumer with the maxdifficulty of the level.
+     * 
+     * @param maxDifficulty the maximum difficulty level (1-5).
+     * @param levelTime the seconds the timer's client have in the specific level.
+     * @return a new Customer with a random generated order.
+     */
+    public Customer createCustomer(int maxDifficulty, double levelTime) {
+        if (maxDifficulty < 1 || maxDifficulty > 5) {
             throw new IllegalArgumentException("La difficoltà deve essere tra 1  e 5");
         }
-        if(levelTime <=0 ){
+        if (levelTime <=0 ) {
             throw new IllegalArgumentException("Il tempo del livello deve essere positivo: " + levelTime);
         }
 
-        int difficulty = random.nextInt(maxDifficulty) + 1;
+        final int difficulty = random.nextInt(maxDifficulty) + 1;
 
-        CustomerTemplate template = templates.get(difficulty);
-        if(template == null){
+        final CustomerTemplate template = templates.get(difficulty);
+        if (template == null) {
             throw new IllegalStateException("Template non trovato per difficolta: " + difficulty);
         }
 
@@ -98,19 +105,19 @@ public class CustomerFactory {
     /**
      * Creates a random order based on template specifications.
      * 
-     * @param template the template defining the order requirements
-     * @return a new Order with random ingredients
+     * @param template the template defining the order requirements.
+     * @return a new Order with random ingredients.
      */
-    private Order createRandomOrder(CustomerTemplate template){
+    private Order createRandomOrder(CustomerTemplate template) {
         OrderBuilder builder = new OrderBuilder();
 
-        for(int i = 0; i < template.getScoopCount(); i++){
+        for (int i = 0; i < template.getScoopCount(); i++) {
             builder.addFlavor(createRandomFlavor());
         }
 
         builder.setCone(getRandomCone());
         
-        for(int i = 0; i < template.getToppingCount(); i++){
+        for (int i = 0; i < template.getToppingCount(); i++) {
             builder.addTopping(getRandomTopping());
         }
 
@@ -118,40 +125,40 @@ public class CustomerFactory {
     }
 
     /**
-     * Creates a random Scoop Ingredient
+     * Creates a random Scoop Ingredient.
      * 
-     * @return a random flavor scoop
+     * @return a random flavor scoop.
      */
-    private Ingredient createRandomFlavor(){
+    private Ingredient createRandomFlavor() {
         FlavorType randomFlavor = availableFlavors.get(random.nextInt(availableFlavors.size()));
         return new Scoop(randomFlavor);
     }
 
     /**
-     * Gets a random cone type
+     * Gets a random cone type.
      * 
-     * @return a random cone type
+     * @return a random cone type.
      */
-    private Conetype getRandomCone(){
+    private Conetype getRandomCone() {
         return availableCones.get(random.nextInt(availableCones.size()));
     }
 
     /**
-     * Gets a random topping ingredient
+     * Gets a random topping ingredient.
      * 
-     * @return a random topping ingredient
+     * @return a random topping ingredient.
      */
-    private Ingredient getRandomTopping(){
+    private Ingredient getRandomTopping() {
         return availableToppings.get(random.nextInt(availableToppings.size()));
     }
 
     /**
      * Returns a string representation of this factory.
      * 
-     * @return String.format("CustomerFactory[flavors=%d, cones=")
+     * @return String.format("CustomerFactory[flavors=%d, cones=%d, toppings=%d").
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("CustomerFactory[flavors=%d, cones=%d, toppings=%d]",
             availableFlavors.size(), availableCones.size(), availableToppings.size());
     }
