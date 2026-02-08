@@ -41,10 +41,10 @@ public interface Customer {
     /**
      * Receives an ice cream and verifies if it matches the customer's order.
      * 
-     * @param icecream the ice cream.
+     * @param iceCream the ice cream.
      * @return true if the ice cream satisfies the order, false otherwise.
      */
-    boolean receiveIceCream(Icecream icecream);
+    boolean receiveIceCream(Icecream iceCream);
     
     /**
      * Sets a callback to be notified when the costumer receives an icecream.

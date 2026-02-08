@@ -49,5 +49,5 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * 
      * @return string containing order.
      */
-    public String toString();
+    @Override String toString();
 }
