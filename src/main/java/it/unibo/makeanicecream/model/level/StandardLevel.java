@@ -1,5 +1,6 @@
 package it.unibo.makeanicecream.model.level;
 
+import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.customer.Customer;
 
@@ -71,7 +72,7 @@ public final class StandardLevel implements Level {
         *}
         */
     }
-    
+
     /**
      * Notifies the level about the result of serving a customer.
      *

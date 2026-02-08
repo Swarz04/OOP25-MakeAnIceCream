@@ -1,6 +1,10 @@
 package it.unibo.makeanicecream.model.level;
 
+<<<<<<< HEAD
 import it.unibo.makeanicecream.api.customer.Customer;
+=======
+import it.unibo.makeanicecream.api.Customer;
+>>>>>>> 303bf0bf8df103d08e73d8626e641f90a4c721ca
 import it.unibo.makeanicecream.api.Level;
 
 import java.util.ArrayDeque;

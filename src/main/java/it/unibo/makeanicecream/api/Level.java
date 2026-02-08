@@ -1,5 +1,4 @@
 package it.unibo.makeanicecream.api;
-
 import it.unibo.makeanicecream.api.customer.Customer;
 
 /**
