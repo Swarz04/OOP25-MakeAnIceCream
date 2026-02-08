@@ -50,7 +50,7 @@ public interface Customer {
      * Sets a callback to be notified when the costumer receives an icecream.
      * The callback receives a boolean if the order was satisfied by icecream.
      *
-     *  @param callback
+     *  @param callback the consumer to notify the verification result.
      */
     void setOrderResultCallback(Consumer<Boolean> callback);
 }

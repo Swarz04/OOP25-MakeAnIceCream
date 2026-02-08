@@ -9,7 +9,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * An order specifies the required flavos, cone and toppings.
      * Implementations should be able to verify if an Icecream satisfies the order.
      */
-public interface Order {
+    public interface Order {
 
 
     /**
@@ -21,19 +21,18 @@ public interface Order {
     List<Ingredient> getFlavors(); 
     
     /**
-     * Gets the cone required by this order
-     * 
-     * @return the required cone type 
+     * Gets the cone required by this order.
+     * @return the required cone type.
      */
     Conetype getRequestedConeType(); 
     
     /**
      * Gets the list of toppings required by this order.
-     * Toppings should be of type IngredientType (LIQUID_TOPPING/ SOLID_TOPPING)
+     * Toppings should be of type IngredientType (LIQUID_TOPPING/ SOLID_TOPPING).
      * 
-     * @return an unmodifiable list of required topping ingredients
+     * @return an unmodifiable list of required topping ingredients.
      */
-    List<Ingredient>getToppings(); //Ingredient con Type=LIQUID_TOPPING O SOLID_TOPPING
+    List<Ingredient>getToppings(); 
     
     /**
      * Verifies if the provided ice cream satisfies the order.
