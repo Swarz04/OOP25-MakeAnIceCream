@@ -22,16 +22,16 @@ public class CustomerImpl implements Customer {
   private Consumer<Boolean> orderResultCallback;
 
   public CustomerImpl(String name, Order order, Timer timer, int difficulty){
-    if(name == null || name.trim().isEmpty()){
+    if (name == null || name.trim().isEmpty()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");
     }
-    if(order == null){
+    if (order == null) {
         throw new IllegalArgumentException("L'ordine non puo essere null");
     }
-    if(timer == null){
+    if (timer == null) {
         throw new IllegalArgumentException("Il timer non puo essere null");
     }
-    if(difficulty < 1 || difficulty > 5){
+    if (difficulty < 1 || difficulty > 5) {
         throw new IllegalArgumentException("La difficolta deve essere tra 1 e 5");
     }
 
@@ -54,7 +54,6 @@ public class CustomerImpl implements Customer {
   */ 
  private Timer createProtectedTimer(Timer original) {
     Objects.requireNonNull(original, "Il timer non puo essere null");
-    
     return new TimerDelegate(original);
  }
 
