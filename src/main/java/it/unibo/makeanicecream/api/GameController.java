@@ -24,7 +24,7 @@ public interface GameController {
      * 
      * @param action the user action to be processed
      */
-    void handleInput(GameAction action);
+    void handleInput(Event action);
 
     /**
      * Updates the game state.
