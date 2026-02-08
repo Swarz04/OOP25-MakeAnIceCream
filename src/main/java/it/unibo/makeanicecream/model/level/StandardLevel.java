@@ -2,6 +2,8 @@ package it.unibo.makeanicecream.model.level;
 
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
+import it.unibo.makeanicecream.api.customer.Customer;
+
 import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
@@ -61,5 +63,26 @@ public final class StandardLevel implements Level {
     public void serveCurrentCustomer() {
         this.customers.poll();
     }
+    @Override
+    public void update(final double deltaTime) {
+       /*
+        *if (this.getCurrentCustomer() != null && this.getCurrentCustomer().isExpired()) {
+        *    this.loseLife();
+        *    this.serveCurrentCustomer();
+        *}
+        */
+    }
 
+    /**
+     * Notifies the level about the result of serving a customer.
+     *
+     * @param success
+     *          true if the order was satisfied, false otherwise
+     */
+    void notifyCustomers(final boolean success) {
+        if (!success) {
+            this.loseLife();
+        }
+        this.serveCurrentCustomer();
+    }
 }

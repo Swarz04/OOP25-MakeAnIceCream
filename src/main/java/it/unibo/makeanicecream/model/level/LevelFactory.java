@@ -1,7 +1,11 @@
 package it.unibo.makeanicecream.model.level;
 
+
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
+
+import java.util.ArrayDeque;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -19,8 +23,7 @@ public final class LevelFactory {
     private static final int STEP_CUSTOMERS = 2;
 
     private static final int LIVES = 3;
-    private static final Queue<Customer> customers = new java.util.ArrayDeque<>();
-    
+
     private LevelFactory() {
     }
 
@@ -38,10 +41,17 @@ public final class LevelFactory {
 
         final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
 
-        for (int i = 0; i < numberOfCustomers; i++) {
-        final Customer c = createCustomer(limitedDifficulty); // da sostituire (Customer studente 1)
-        customers.add(c);
-    }
+       /*
+        * for (int i = 0; i < numberOfCustomers; i++) {
+        * final Customer c = createCustomer(limitedDifficulty); // da sostituire (Customer studente 1)
+        * customers.add(c)
+        * TODO: integrate Customer creation.
+        * For each customer index in [0, numberOfCustomers),
+        * create a Customer instance configured with the given difficulty
+        * and add it to the queue.
+        */
+        final Queue<Customer> customers = new ArrayDeque<>();
+
         return new StandardLevel(limitedDifficulty, LIVES, customers);
     }
  }
