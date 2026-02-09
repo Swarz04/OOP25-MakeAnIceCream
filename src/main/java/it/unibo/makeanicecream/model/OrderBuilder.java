@@ -38,12 +38,12 @@ public class OrderBuilder {
     /**
      * Sets the cone type for the order being built.
      * 
-     * @param cone the cone type to use.
+     * @param coneType the cone type to use.
      * @return this builder for method chaining.
      * 
      */
     public OrderBuilder setCone(final Conetype coneType) {
-        if (cone == null) {
+        if (coneType == null) {
             throw new IllegalArgumentException("Cone non puo essere null");
         }
         this.cone = coneType;
@@ -52,6 +52,7 @@ public class OrderBuilder {
 
     /**
      * Adds a topping to the order.
+     * 
      * @param topping the topping being add.
      * @return this builder for method chaining.
      */
