@@ -1,9 +1,12 @@
 package it.unibo.makeanicecream.model.level;
 
+
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
 
+import java.util.ArrayDeque;
 import java.util.Queue;
+import it.unibo.makeanicecream.model.customermodel.CustomerFactory;
 
 /**
  * Factory class for creating Level instances.
@@ -20,8 +23,7 @@ public final class LevelFactory {
     private static final int STEP_CUSTOMERS = 2;
 
     private static final int LIVES = 3;
-    private static final Queue<Customer> customers = new java.util.ArrayDeque<>();
-    
+
     private LevelFactory() {
     }
 
@@ -39,10 +41,15 @@ public final class LevelFactory {
 
         final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
 
+        final double levelTime = Math.max(10.0, 60.0 - (difficulty * 5.0));
+
+        final Queue<Customer> customers = new ArrayDeque<>();
+        final CustomerFactory customerFactory = new CustomerFactory();
+
         for (int i = 0; i < numberOfCustomers; i++) {
-        final Customer c = createCustomer(limitedDifficulty); // da sostituire (Customer studente 1)
-        customers.add(c);
-    }
+            customers.add(customerFactory.createCustomer(limitedDifficulty, levelTime));
+        }
+
         return new StandardLevel(limitedDifficulty, LIVES, customers);
     }
  }

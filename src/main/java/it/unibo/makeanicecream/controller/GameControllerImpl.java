@@ -1,8 +1,8 @@
 package it.unibo.makeanicecream.controller;
 
 import it.unibo.makeanicecream.api.Command;
-import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.Event;
+import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameState;
@@ -71,7 +71,7 @@ public class GameControllerImpl implements GameController {
 
         /*if (this.view != null) {
             this.view.update();
-        }*/
+        }*/    
     }
 
     @Override
