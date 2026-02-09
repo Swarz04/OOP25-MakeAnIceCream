@@ -12,7 +12,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Concrete implementation of the Customer Interface.
  * Represents a customer with an order, waiting timer, and result notification.
- * 
  * Timer exposure is accepted because is needed for game loop integration.
  */
 
@@ -51,7 +50,7 @@ public class CustomerImpl implements Customer {
     this.order = order;
     this.difficulty = difficulty;
     this.timer = Objects.requireNonNull(timer, "Il timer non puo essere null");
-    
+  
     if (timer.isExpired()) {
         this.timer.pause();
     } else {
@@ -102,7 +101,7 @@ public class CustomerImpl implements Customer {
    * @return timer del cliente.
    */
   @Override
-  @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Timer is a shared API component")
+  @SuppressFBWarnings(value ="EI_EXPOSE_REP", justification = "Timer is a shared API component")
   public Timer getTimer() {
     return timer;
   }

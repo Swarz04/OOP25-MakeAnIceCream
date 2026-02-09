@@ -60,13 +60,13 @@ public class CustomerFactory {
         }
         return toppings;
     }
-    
+
     /**
      * Inizializes the difficulty templates with predifined configurations.
      * 
      */
     private void initializeTemplates() {
-        templates.put(1, new CustomerTemplate(new String[]{"Maria","Paolo"}, 1, 0));
+        templates.put(1, new CustomerTemplate(new String[]{"Maria", "Paolo"}, 1, 0));
         templates.put(2, new CustomerTemplate(new String[]{"Giulia"}, 2, 0));
         templates.put(3, new CustomerTemplate(new String[]{"Giorgio"}, 3, 0));
         templates.put(4, new CustomerTemplate(new String[]{"Lucia"}, 3, 1));
@@ -117,7 +117,7 @@ public class CustomerFactory {
         }
 
         builder.setCone(getRandomCone());
-        
+
         for (int i = 0; i < template.getToppingCount(); i++) {
             builder.addTopping(getRandomTopping());
         }

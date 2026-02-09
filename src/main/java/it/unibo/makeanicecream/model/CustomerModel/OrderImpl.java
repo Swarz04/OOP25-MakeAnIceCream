@@ -14,17 +14,16 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
 /**
  * Implementation of the Order Interface representing a customer's ice cream order.
- * 
  * An order consist of flavors (scoops), a cone, and optional toppings.
  * This class can verify if an IceCream satisfies the order requirements.
  * 
  */
 public class OrderImpl implements Order {
-    
+
     private final List<Ingredient> requiredFlavors;
     private final Conetype requiredCone;
     private final List<Ingredient> requiredToppings;
-    
+
     /**
      * Constructs a new Order with the specified components.
      * 
@@ -81,7 +80,7 @@ public class OrderImpl implements Order {
     public List<Ingredient> getFlavors() {
         return Collections.unmodifiableList(requiredFlavors);
     }
-    
+
     /**
      * Gets the cone required by this order.
      * 
