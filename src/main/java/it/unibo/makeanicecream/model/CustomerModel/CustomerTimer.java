@@ -11,7 +11,7 @@ import it.unibo.makeanicecream.api.Timer;
 public final class CustomerTimer implements Timer {
 
     private double secondsLeft;
-    private boolean expired = false;
+    private boolean expired;
     private boolean paused = true;
     private Runnable onExpiredCallback;
 

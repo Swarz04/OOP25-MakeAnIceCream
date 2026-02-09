@@ -24,6 +24,7 @@ import it.unibo.makeanicecream.model.ingredient.SolidToppingType;
  * creates customer with randomly generated orders. Time is determined by game Level.
  */
 public class CustomerFactory {
+    private static final int MAX_DIFFICULTY=5;
     private final Map<Integer, CustomerTemplate> templates = new HashMap<>();
     private final List<FlavorType> availableFlavors;
     private final List<Conetype> availableCones;
@@ -48,7 +49,7 @@ public class CustomerFactory {
      * @return list containing all possible topping ingredients.
      */
     private List<Ingredient> createAllToppings() {
-        List<Ingredient> toppings = new ArrayList<>();
+        final List<Ingredient> toppings = new ArrayList<>();
 
         for (final LiquidToppingType liquidType : LiquidToppingType.values()) {
             toppings.add(new LiquidTopping(liquidType));
@@ -69,7 +70,7 @@ public class CustomerFactory {
         templates.put(2, new CustomerTemplate(new String[]{"Giulia"}, 2,0));
         templates.put(3, new CustomerTemplate(new String[]{"Giorgio"}, 3,0));
         templates.put(4, new CustomerTemplate(new String[]{"Lucia"}, 3,1));
-        templates.put(5, new CustomerTemplate(new String[]{"Mario"}, 3,2));
+        templates.put(MAX_DIFFICULTY, new CustomerTemplate(new String[]{"Mario"}, 3,2));
 
     }
 
@@ -81,7 +82,7 @@ public class CustomerFactory {
      * @return a new Customer with a random generated order.
      */
     public Customer createCustomer(final int maxDifficulty, final double levelTime) {
-        if (maxDifficulty < 1 || maxDifficulty > 5) {
+        if (maxDifficulty < 1 || maxDifficulty > MAX_DIFFICULTY) {
             throw new IllegalArgumentException("La difficoltà deve essere tra 1  e 5");
         }
         if (levelTime <= 0) {

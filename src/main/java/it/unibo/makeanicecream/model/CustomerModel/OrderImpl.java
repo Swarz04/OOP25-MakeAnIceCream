@@ -28,7 +28,7 @@ public class OrderImpl implements Order {
     /**
      * Constructs a new Order with the specified components.
      * 
-     * @param Flavors the list of flavor scoops required (can't be empty).
+     * @param flavors the list of flavor scoops required (can't be empty).
      * @param cone the cone required (can't be null).
      * @param toppings the list of toppings required (can be empty).
      */
@@ -63,7 +63,7 @@ public class OrderImpl implements Order {
         }
 
         if (toppings != null) {
-            for (Ingredient topping: toppings) {
+            for (final Ingredient topping: toppings) {
                 if (topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType()
                      != IngredientType.SOLID_TOPPING) {
                     throw new IllegalArgumentException("i toppings devono essere LIQUID o SOLID");
@@ -147,7 +147,7 @@ public class OrderImpl implements Order {
      */
     private Map<Ingredient, Integer> countIngredients(final List<Ingredient> ingredients) {
         final Map<Ingredient, Integer> counts = new HashMap<>();
-        for (Ingredient ingredient : ingredients) {
+        for (final Ingredient ingredient : ingredients) {
             counts.put(ingredient, counts.getOrDefault(ingredient, 0) + 1);
         }
         return counts;

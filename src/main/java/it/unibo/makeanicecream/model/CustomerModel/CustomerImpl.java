@@ -32,7 +32,7 @@ public class CustomerImpl implements Customer {
    * @param difficulty the customer's difficulty level (1-5)
    */
   public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty){
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.isBlank()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");
     }
     if (order == null) {

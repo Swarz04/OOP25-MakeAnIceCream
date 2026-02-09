@@ -10,7 +10,7 @@ public class CustomerTemplate {
     private final String[] possibleNames;
     private final int scoopCount;
     private final int toppingCount;
-    private int nameCounter = 0;
+    private int nameCounter;
 
     /**
      * Constructs a CustomerTemplate with the specified configuration.
