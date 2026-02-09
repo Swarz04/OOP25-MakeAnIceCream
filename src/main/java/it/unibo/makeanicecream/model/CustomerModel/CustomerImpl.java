@@ -101,7 +101,7 @@ public class CustomerImpl implements Customer {
    * @return timer del cliente.
    */
   @Override
-  @SuppressFBWarnings(value ="EI_EXPOSE_REP", justification = "Timer is a shared API component")
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Timer is a shared API component")
   public Timer getTimer() {
     return timer;
   }
