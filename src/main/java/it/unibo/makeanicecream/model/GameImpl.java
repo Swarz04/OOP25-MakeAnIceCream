@@ -7,20 +7,24 @@ import it.unibo.makeanicecream.api.Player;
 import it.unibo.makeanicecream.model.level.LevelFactory;
 
 /**
- * Implementation of the {@limk Game} interface.
+ * Implementation of the {@link Game} interface.
  */
 public class GameImpl implements Game {
 
     private Level currentLevel;
     private GameState state;
-    private Player player = new PlayerImpl();
+    private final Player player;
 
     public GameImpl() {
         this.state = GameState.MENU;
+        this.player = new PlayerImpl();
     }
     
     @Override
     public void start(final int levelNumber) {
+        if (levelNumber <= 0) {
+            throw new IllegalArgumentException("Level number must be positive.");
+        }
         this.currentLevel = LevelFactory.createLevel(levelNumber);
         this.state = GameState.PLAYING;
     }
@@ -66,7 +70,22 @@ public class GameImpl implements Game {
         return this.state == GameState.GAME_OVER;
     }
 
-    private void updateGameState() {
+    @Override
+    public boolean isPaused() {
+        return this.state == GameState.PAUSED;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return this.state == GameState.PLAYING;
+    }
+
+    /**
+     * Updates the game state based on the current level progress.
+     * Sets the state to GAME_OVER if lives are exhausted,
+     * or LEVEL_COMPLETED if all customers have been served.
+     */
+    private void checkLevelProgress() {
         if (this.currentLevel.getLives() <= 0) {
             this.state = GameState.GAME_OVER;
         } else if (!this.currentLevel.hasNextCustomer()) {
@@ -74,26 +93,14 @@ public class GameImpl implements Game {
         }
     }
 
-    /**
-     * Metodo che aggiorna lo stato del gioco. 
-     * Questo metodo deve essere chiamato ad ogni tick del game loop, con
-     * il tempo trascorso dall'ultimo aggiornamento passato come parametro. 
-     * Delega poi l'aggiornamento al livello corrente, che si occupa di gestire 
-     * correttamente clienti e timer.
-     * NOTA: Level e Customer dovrebbero avere a loro volta un metodo update(deltaTime)
-     * che si occupa di decrementare il timer del cliente e gestire eventuali
-     * perdite di vita o passaggi al cliente successivo.
-     */
+    @Override
     public void update(final double deltaTime) {
         if (this.state != GameState.PLAYING || this.currentLevel == null) {
             return;
         }
         
-        if (this.currentLevel.hasNextCustomer()) {
-            this.currentLevel.update(deltaTime);
-        }
-
-        updateGameState();
+        this.currentLevel.update(deltaTime);
+        checkLevelProgress();
     }
 
 }

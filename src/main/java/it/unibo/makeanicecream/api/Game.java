@@ -8,7 +8,12 @@ public interface Game {
     /**
      * Starts a new game at the specified level number.
      * 
-     * @param levelNumber the level to start
+     * <p>
+     * Initializes the level, player, and sets the game state to PLAYING.
+     *
+     * @param levelNumber the level to start, must be positive
+     * 
+     * @throws IllegalArgumentException if levelNumber is not positive
      */
     void start(int levelNumber);
 
@@ -56,9 +61,27 @@ public interface Game {
     boolean isGameOver();
 
     /**
+     * Checks whether the game is currently paused.
+     * 
+     * @return true if the game is paused, false otherwise
+     */
+    boolean isPaused();
+
+    /**
+     * Checks whether the game is being played.
+     * 
+     * @return true if the game is being played, false otherwise
+     */
+    boolean isPlaying();
+
+    /**
      * Updates the game state.
      * 
-     * @param deltaTime the time in seconds since tha last update
+     * <p>
+     * Delegates to the current level to update customer timers and manage
+     * lives and progress.
+     * 
+     * @param deltaTime the time in seconds since the last update
      */
     void update(double deltaTime);
 }
