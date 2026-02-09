@@ -25,7 +25,7 @@ public class CustomerTemplate {
             throw new IllegalArgumentException("Deve essere fornito almeno un nome");
         }
         if (scoops <= 0) {
-            throw new IllegalArgumentException("Il numero deve essere positivo");   
+            throw new IllegalArgumentException("Il numero deve essere positivo");
         }
         if (toppings < 0) {
             throw new IllegalArgumentException("Il numero di topping non puo essere negativo");

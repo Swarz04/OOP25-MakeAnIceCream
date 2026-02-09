@@ -42,11 +42,11 @@ public class OrderBuilder {
      * @return this builder for method chaining.
      * 
      */
-    public OrderBuilder setCone(final Conetype cone) {
+    public OrderBuilder setCone(final Conetype coneType) {
         if (cone == null) {
             throw new IllegalArgumentException("Cone non puo essere null");
         }
-        this.cone = cone;
+        this.cone = coneType;
         return this;
     }
 

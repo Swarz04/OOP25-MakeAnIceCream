@@ -17,7 +17,7 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
  * 
  * An order consist of flavors (scoops), a cone, and optional toppings.
  * This class can verify if an IceCream satisfies the order requirements.
- *  
+ * 
  */
 public class OrderImpl implements Order {
     
@@ -32,7 +32,7 @@ public class OrderImpl implements Order {
      * @param cone the cone required (can't be null).
      * @param toppings the list of toppings required (can be empty).
      */
-    public OrderImpl(final List<Ingredient> flavors, final Conetype cone, final List<Ingredient>toppings) {
+    public OrderImpl(final List<Ingredient> flavors, final Conetype cone, final List<Ingredient> toppings) {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
@@ -128,7 +128,7 @@ public class OrderImpl implements Order {
      * @param list2 second list of ingredients.
      * @return true if lists contain exactly the same ingredients, false otherwise.
      */
-    private boolean haveSameIngredients(final List<Ingredient> list1, final List<Ingredient> list2){
+    private boolean haveSameIngredients(final List<Ingredient> list1, final List<Ingredient> list2) {
         if (list1.size() != list2.size()) {
             return false;
         }
@@ -151,7 +151,7 @@ public class OrderImpl implements Order {
             counts.put(ingredient, counts.getOrDefault(ingredient, 0) + 1);
         }
         return counts;
-    }   
+    }
 
     /**
      * Helper: gets all required ingredient requirements.

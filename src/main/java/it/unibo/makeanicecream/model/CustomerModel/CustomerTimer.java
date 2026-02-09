@@ -68,7 +68,7 @@ public final class CustomerTimer implements Timer {
 
         secondsLeft -= deltaTime;
 
-        if (secondsLeft <= 0) {  
+        if (secondsLeft <= 0) {
             expired = true;
             secondsLeft = 0;
             if (onExpiredCallback != null) {
@@ -112,7 +112,7 @@ public final class CustomerTimer implements Timer {
      * The callback will be executed once when the timer reaches zero.
      */
     @Override
-    public void setOnExpired(final Runnable callback) {  
-        this.onExpiredCallback= callback;
+    public void setOnExpired(final Runnable callback) { 
+        this.onExpiredCallback = callback;
     }
 }

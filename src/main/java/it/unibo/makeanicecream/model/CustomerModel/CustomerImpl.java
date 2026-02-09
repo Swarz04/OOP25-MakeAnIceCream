@@ -17,6 +17,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  */
 
 public class CustomerImpl implements Customer {
+  public static final int MAX_DIFFICULTY = 5;
+  public static final int MIN_DIFFICULTY = 1;
   private final String name;
   private final Order order;
   private final Timer timer;
@@ -24,14 +26,14 @@ public class CustomerImpl implements Customer {
   private Consumer<Boolean> orderResultCallback;
 
   /**
-   * Constructs a new Costumer with the attributes
+   * Constructs a new Costumer with the attributes.
    * 
-   * @param name the customer's name
-   * @param order the customer's ice cream order
-   * @param timer the customer's timer for the level
-   * @param difficulty the customer's difficulty level (1-5)
+   * @param name the customer's name.
+   * @param order the customer's ice cream order.
+   * @param timer the customer's timer for the level.
+   * @param difficulty the customer's difficulty level (1-5).
    */
-  public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty){
+  public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty) {
     if (name == null || name.isBlank()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");
     }
@@ -41,7 +43,7 @@ public class CustomerImpl implements Customer {
     if (timer == null) {
         throw new IllegalArgumentException("Il timer non puo essere null");
     }
-    if (difficulty < 1 || difficulty > 5) {
+    if (difficulty < MIN_DIFFICULTY || difficulty > MAX_DIFFICULTY) {
         throw new IllegalArgumentException("La difficolta deve essere tra 1 e 5");
     }
 
@@ -57,24 +59,37 @@ public class CustomerImpl implements Customer {
     }
   }
 
+  /**
+   * Receives an iceCream and checks if it matches the order.
+   * Notifies the result if a Callback was registred.
+   */
   @Override
   public boolean receiveIceCream(final Icecream iceCream) {
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
     final boolean isCorect = order.isSatisfiedBy(iceCream);
 
-    // Notifica il risultato se è stato registrato un callback
-    if(orderResultCallback != null){
+    if (orderResultCallback != null) {
         orderResultCallback.accept(isCorect);
     }
     return isCorect;
   }
 
+  /**
+   * Gets the customer's name.
+   * 
+   * @return costumer's name.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the customers's order.
+   * 
+   * @return Order of the costumer.
+   */
   @Override
   public Order getOrder() {
     return order;
@@ -83,6 +98,8 @@ public class CustomerImpl implements Customer {
   /**
    * Return the customer's timer.
    * Exposure necessary for game loop updates and timeout checks.
+   * 
+   * @return timer del cliente.
    */
   @Override
   @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Timer is a shared API component")
@@ -90,11 +107,22 @@ public class CustomerImpl implements Customer {
     return timer;
   }
 
+  /**
+   * returns the level difficulty of the customer.
+   * 
+   * @return difficulty of the costumer.
+   */
   @Override
   public int getDifficulty() {
     return difficulty;
   }
 
+  /**
+   * Registers a callback to be notified when the specified costumer receives an ice cream.
+   * The callback receives a boolean value that indicates if the order was satisfied.
+   * 
+   * @param callback the consumer to notify the verification result.
+   */
   @Override
   public void setOrderResultCallback(final Consumer<Boolean> callback) {
     this.orderResultCallback = callback;
