@@ -95,9 +95,9 @@ public class CustomerFactory {
             throw new IllegalStateException("Template non trovato per difficolta: " + difficulty);
         }
 
-        String name = template.getNextName();
-        Order order = createRandomOrder(template);
-        CustomerTimer timer = new CustomerTimer(levelTime);
+        final String name = template.getNextName();
+        final Order order = createRandomOrder(template);
+        final CustomerTimer timer = new CustomerTimer(levelTime);
 
         return new CustomerImpl(name, order, timer, difficulty);
     }
@@ -108,8 +108,8 @@ public class CustomerFactory {
      * @param template the template defining the order requirements.
      * @return a new Order with random ingredients.
      */
-    private Order createRandomOrder(CustomerTemplate template) {
-        OrderBuilder builder = new OrderBuilder();
+    private Order createRandomOrder(final CustomerTemplate template) {
+        final OrderBuilder builder = new OrderBuilder();
 
         for (int i = 0; i < template.getScoopCount(); i++) {
             builder.addFlavor(createRandomFlavor());
@@ -130,7 +130,7 @@ public class CustomerFactory {
      * @return a random flavor scoop.
      */
     private Ingredient createRandomFlavor() {
-        FlavorType randomFlavor = availableFlavors.get(random.nextInt(availableFlavors.size()));
+        final FlavorType randomFlavor = availableFlavors.get(random.nextInt(availableFlavors.size()));
         return new Scoop(randomFlavor);
     }
 
