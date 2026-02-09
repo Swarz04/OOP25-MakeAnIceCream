@@ -23,6 +23,14 @@ public class CustomerImpl implements Customer {
   private final int difficulty;
   private Consumer<Boolean> orderResultCallback;
 
+  /**
+   * Constructs a new Costumer with the attributes
+   * 
+   * @param name the customer's name
+   * @param order the customer's ice cream order
+   * @param timer the customer's timer for the level
+   * @param difficulty the customer's difficulty level (1-5)
+   */
   public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty){
     if (name == null || name.trim().isEmpty()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");

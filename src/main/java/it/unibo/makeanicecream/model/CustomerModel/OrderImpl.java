@@ -32,21 +32,27 @@ public class OrderImpl implements Order {
      * @param cone the cone required (can't be null).
      * @param toppings the list of toppings required (can be empty).
      */
-    public OrderImpl(List<Ingredient> flavors, Conetype cone, List<Ingredient>toppings) {
+    public OrderImpl(final List<Ingredient> flavors, final Conetype cone, final List<Ingredient>toppings) {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
         this.requiredToppings = new ArrayList<>(toppings);
     }
+
     /**
-     * Validates constructor arguments.
+     * Validates constructor arguments
+     * 
+     * @param flavors list of flavors to validate
+     * @param cone the cone type to validate
+     * @param toppings the list of toppings to validate
      */
-    private void validateConstructorArguments(List<Ingredient> flavors, Conetype cone, List<Ingredient> toppings) {
+    private void validateConstructorArguments(final List<Ingredient> flavors, final Conetype cone,
+         final List<Ingredient> toppings) {
         if (flavors == null || flavors.isEmpty()) {
             throw new IllegalArgumentException("L'ordine deve contenere almeno un gusto");
         }
 
-        for (Ingredient flavor : flavors) {
+        for (final Ingredient flavor : flavors) {
             if (flavor.getType() != IngredientType.SCOOP) {
                 throw new IllegalArgumentException("I flavor devono essere di tipo scoop");
             }
@@ -56,7 +62,7 @@ public class OrderImpl implements Order {
             throw new IllegalArgumentException("L'ordine deve specificare un cono");
         }
 
-        if (toppings !=null) {
+        if (toppings != null) {
             for (Ingredient topping: toppings) {
                 if (topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType()
                      != IngredientType.SOLID_TOPPING) {
@@ -65,12 +71,12 @@ public class OrderImpl implements Order {
             }
         }
     }
+
     /**
      * Gets the list of flavor scoops required by this order.
      *
      * @return an unmodifiable view of the required flavors.
      */
-    
     @Override
     public List<Ingredient> getFlavors() {
         return Collections.unmodifiableList(requiredFlavors);
@@ -104,17 +110,17 @@ public class OrderImpl implements Order {
      * @return true if the ice cream satisfies all the order requirements, false otherwise.
      */
     @Override
-    public boolean isSatisfiedBy(Icecream iceCream) {
+    public boolean isSatisfiedBy(final Icecream iceCream) {
         Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
-        if(iceCream.getConetype() != requiredCone){
+        if (iceCream.getConetype() != requiredCone) {
             return false;
         }
-        List<Ingredient> iceCreamIngredients=iceCream.getIngredients();
+        List<Ingredient> iceCreamIngredients = iceCream.getIngredients();
 
         return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
     }
-        
+    
     /**
      * Checks if two list contain exactly the same ingredients (same elements, same counts).
      * 
@@ -122,8 +128,8 @@ public class OrderImpl implements Order {
      * @param list2 second list of ingredients.
      * @return true if lists contain exactly the same ingredients, false otherwise.
      */
-    private boolean haveSameIngredients(List<Ingredient> list1, List<Ingredient> list2){
-        if(list1.size() != list2.size()){
+    private boolean haveSameIngredients(final List<Ingredient> list1, final List<Ingredient> list2){
+        if (list1.size() != list2.size()) {
             return false;
         }
 
@@ -142,15 +148,18 @@ public class OrderImpl implements Order {
     private Map<Ingredient, Integer> countIngredients(List<Ingredient> ingredients) {
         Map<Ingredient, Integer> counts = new HashMap<>();
         for (Ingredient ingredient : ingredients) {
-            counts.put(ingredient, counts.getOrDefault(ingredient, 0)+1);
+            counts.put(ingredient, counts.getOrDefault(ingredient, 0) + 1);
         }
         return counts;
     }   
+
     /**
      * Helper: gets all required ingredient requirements.
+     * 
+     * @return the required ingredient requirements
      */
-    private List<Ingredient>getAllRequiredIngredients() {
-        List<Ingredient> all = new ArrayList<>();
+    private List<Ingredient> getAllRequiredIngredients() {
+        final List<Ingredient> all = new ArrayList<>();
         all.addAll(requiredFlavors);
         all.addAll(requiredToppings);
 
