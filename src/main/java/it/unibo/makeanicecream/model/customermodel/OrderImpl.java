@@ -151,7 +151,7 @@ public class OrderImpl implements Order {
         }
         return counts;
     }
-
+    
     /**
      * Helper: gets all required ingredient requirements.
      * 
