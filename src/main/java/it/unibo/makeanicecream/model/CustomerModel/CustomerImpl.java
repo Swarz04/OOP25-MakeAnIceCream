@@ -50,7 +50,7 @@ public class CustomerImpl implements Customer {
     this.order = order;
     this.difficulty = difficulty;
     this.timer = Objects.requireNonNull(timer, "Il timer non puo essere null");
-  
+
     if (timer.isExpired()) {
         this.timer.pause();
     } else {
