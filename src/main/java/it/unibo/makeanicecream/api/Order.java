@@ -17,14 +17,14 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * 
      * @return an unmodifiable list of required flavor ingredients
      */
-    List<Ingredient> getFlavors(); 
-    
+    List<Ingredient> getFlavors();
+
     /**
      * Gets the cone required by this order.
      * 
      * @return the required cone type.
      */
-    Conetype getRequestedConeType(); 
+    Conetype getRequestedConeType();
     
     /**
      * Gets the list of toppings required by this order.
@@ -32,7 +32,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * 
      * @return an unmodifiable list of required topping ingredients.
      */
-    List<Ingredient> getToppings(); 
+    List<Ingredient> getToppings();
     
     /**
      * Verifies if the provided ice cream satisfies the order.

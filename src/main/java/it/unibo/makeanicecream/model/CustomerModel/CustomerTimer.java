@@ -21,7 +21,7 @@ public final class CustomerTimer implements Timer {
      * 
      * @param seconds the initial time must be in positive seconds.
      */
-    public CustomerTimer(double seconds) {
+    public CustomerTimer(final double seconds) {
        if (seconds <= 0) {
             throw new IllegalArgumentException("Il tempo deve essere positivo");
         }

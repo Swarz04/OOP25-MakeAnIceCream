@@ -61,7 +61,7 @@ public class CustomerImpl implements Customer {
   public boolean receiveIceCream(final Icecream iceCream) {
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
-    boolean isCorect = order.isSatisfiedBy(iceCream);
+    final boolean isCorect = order.isSatisfiedBy(iceCream);
 
     // Notifica il risultato se è stato registrato un callback
     if(orderResultCallback != null){
@@ -96,7 +96,7 @@ public class CustomerImpl implements Customer {
   }
 
   @Override
-  public void setOrderResultCallback(Consumer<Boolean> callback) {
+  public void setOrderResultCallback(final Consumer<Boolean> callback) {
     this.orderResultCallback = callback;
   }
 }
