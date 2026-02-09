@@ -80,11 +80,11 @@ public class CustomerFactory {
      * @param levelTime the seconds the timer's client have in the specific level.
      * @return a new Customer with a random generated order.
      */
-    public Customer createCustomer(int maxDifficulty, double levelTime) {
+    public Customer createCustomer(final int maxDifficulty, final double levelTime) {
         if (maxDifficulty < 1 || maxDifficulty > 5) {
             throw new IllegalArgumentException("La difficoltà deve essere tra 1  e 5");
         }
-        if (levelTime <=0 ) {
+        if (levelTime <= 0) {
             throw new IllegalArgumentException("Il tempo del livello deve essere positivo: " + levelTime);
         }
 
@@ -163,4 +163,3 @@ public class CustomerFactory {
             availableFlavors.size(), availableCones.size(), availableToppings.size());
     }
 }
-

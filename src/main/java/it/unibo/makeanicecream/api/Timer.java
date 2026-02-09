@@ -17,7 +17,7 @@ public interface Timer {
     * Pauses the timer countdown.
     * The timer stops decreasing the remaining time until resumed.
     */
-    void pause();
+   void pause();
 
    /**
     * Resumes the timer countdown if it was paused.
@@ -29,14 +29,14 @@ public interface Timer {
     * 
     * @param deltaTime the time that has passed since he last update (in seconds).
     */
-    void update(double deltaTime);
+   void update(double deltaTime);
 
    /**
     * Checks if the timer has expired (if it reaches zero).
     * 
     * @return true if the timer has expired; false otherwise.
     */
-    boolean isExpired();
+   boolean isExpired();
 
    /**
     * Gets the remaining time in seconds.
@@ -58,5 +58,5 @@ public interface Timer {
     * 
     * @param callback the Runnable to execut when timer expires.
     */
-    void setOnExpired(Runnable callback);
+   void setOnExpired(Runnable callback);
 }

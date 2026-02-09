@@ -11,7 +11,6 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      */
     public interface Order {
 
-
     /**
      * Gets the list of flavor scoops required by this order.
      * Flavors should be of type IngredientType (SCOOP)
@@ -22,6 +21,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
     
     /**
      * Gets the cone required by this order.
+     * 
      * @return the required cone type.
      */
     Conetype getRequestedConeType(); 
@@ -32,7 +32,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * 
      * @return an unmodifiable list of required topping ingredients.
      */
-    List<Ingredient>getToppings(); 
+    List<Ingredient> getToppings(); 
     
     /**
      * Verifies if the provided ice cream satisfies the order.
