@@ -8,17 +8,17 @@ public class StartLevelCommand implements Command{
 
     private Game game;
     private GameLoop gameLoop;
-    //private final int levelNumber;
+    private final int levelNumber;
 
-    public StartLevelCommand(final Game game, final GameLoop gameLoop) {
+    public StartLevelCommand(final Game game, final GameLoop gameLoop, final int levelNumber) {
         this.game = game;
         this.gameLoop = gameLoop;
-        //this.levelNumber = levelNumber;
+        this.levelNumber = levelNumber;
     }
 
     @Override
     public void execute() {
-        this.game.start(0);
+        this.game.start(this.levelNumber);
 
         if (!this.gameLoop.isRunning()) {
             this.gameLoop.start();

@@ -2,20 +2,21 @@ package it.unibo.makeanicecream.controller;
 
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
+import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 public class ChooseConeCommand implements Command{
 
     private final Game game;
-    //private final ConeType cone;
+    private final Conetype cone;
 
-    public ChooseConeCommand(final Game game) {
+    public ChooseConeCommand(final Game game, final Conetype cone) {
         this.game = game;
-        //this.cone = cone;
+        this.cone = cone;
     }
 
     @Override
     public void execute() {
-        //game.getPlayer().chooseCone(this.cone);
+        game.getPlayer().chooseCone(this.cone);
     }
     
 }
