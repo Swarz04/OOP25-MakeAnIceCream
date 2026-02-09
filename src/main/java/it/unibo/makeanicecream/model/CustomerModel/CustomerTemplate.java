@@ -13,7 +13,6 @@ public class CustomerTemplate {
     private int nameCounter = 0;
 
     /**
-     * 
      * Constructs a CustomerTemplate with the specified configuration.
      * Note: Time is NOT included here as it's determined by the game level.
      * 
@@ -21,7 +20,7 @@ public class CustomerTemplate {
      * @param scoops number of flavor scoops required.
      * @param toppings number of toppings required.
      */
-    public CustomerTemplate(String[] names, int scoops, int toppings) {
+    public CustomerTemplate(final String[] names, final int scoops, final int toppings) {
         if (names == null || names.length == 0) {
             throw new IllegalArgumentException("Deve essere fornito almeno un nome");
         }

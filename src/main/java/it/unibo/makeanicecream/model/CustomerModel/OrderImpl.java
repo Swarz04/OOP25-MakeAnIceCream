@@ -116,7 +116,7 @@ public class OrderImpl implements Order {
         if (iceCream.getConetype() != requiredCone) {
             return false;
         }
-        List<Ingredient> iceCreamIngredients = iceCream.getIngredients();
+        final List<Ingredient> iceCreamIngredients = iceCream.getIngredients();
 
         return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
     }
@@ -133,8 +133,8 @@ public class OrderImpl implements Order {
             return false;
         }
 
-        Map<Ingredient, Integer> counts1 = countIngredients(list1);
-        Map<Ingredient, Integer> counts2 = countIngredients(list2);
+        final Map<Ingredient, Integer> counts1 = countIngredients(list1);
+        final Map<Ingredient, Integer> counts2 = countIngredients(list2);
 
         return counts1.equals(counts2);
     }
@@ -145,8 +145,8 @@ public class OrderImpl implements Order {
      * @param ingredients list to count.
      * @return map from ingredient to its count in the list.
      */
-    private Map<Ingredient, Integer> countIngredients(List<Ingredient> ingredients) {
-        Map<Ingredient, Integer> counts = new HashMap<>();
+    private Map<Ingredient, Integer> countIngredients(final List<Ingredient> ingredients) {
+        final Map<Ingredient, Integer> counts = new HashMap<>();
         for (Ingredient ingredient : ingredients) {
             counts.put(ingredient, counts.getOrDefault(ingredient, 0) + 1);
         }
@@ -165,7 +165,6 @@ public class OrderImpl implements Order {
 
         return all;
     }
-
 
     /**
      * Returns a string representation of this order.
