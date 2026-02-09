@@ -44,7 +44,7 @@ public class CustomerTemplate {
      */
     public String getNextName() {
         if (possibleNames.length == 2) {
-            String name = possibleNames[nameCounter % 2];
+            final String name = possibleNames[nameCounter % 2];
             nameCounter++;
             return name;
         } else {

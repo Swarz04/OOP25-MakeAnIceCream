@@ -61,7 +61,7 @@ public final class CustomerTimer implements Timer {
      * @param deltaTime the time passed since the last update (in seconds).
      */
     @Override
-    public void update(double deltaTime) {
+    public void update(final double deltaTime) {
         if (expired || paused) {
             return;
         } 
@@ -112,7 +112,7 @@ public final class CustomerTimer implements Timer {
      * The callback will be executed once when the timer reaches zero.
      */
     @Override
-    public void setOnExpired(Runnable callback) {  
+    public void setOnExpired(final Runnable callback) {  
         this.onExpiredCallback= callback;
     }
 }

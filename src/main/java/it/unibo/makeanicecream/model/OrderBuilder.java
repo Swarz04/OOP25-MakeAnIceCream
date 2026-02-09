@@ -19,12 +19,12 @@ public class OrderBuilder {
     private final List<Ingredient> toppings = new ArrayList<>();
 
     /**
-     * Adds a  flavor scoop to the order being built
+     * Adds a  flavor scoop to the order being built.
      * 
-     * @param flavor the flavor ingredient to add (must be of type SCOOP)
-     * @return this builder for method chaining
+     * @param flavor the flavor ingredient to add (must be of type SCOOP).
+     * @return this builder for method chaining.
      */
-    public OrderBuilder addFlavor(Ingredient flavor) {
+    public OrderBuilder addFlavor(final Ingredient flavor) {
         if (flavor == null) {
             throw new IllegalArgumentException("Flavor non puo essere null");
         }
@@ -42,7 +42,7 @@ public class OrderBuilder {
      * @return this builder for method chaining.
      * 
      */
-    public OrderBuilder setCone(Conetype cone) {
+    public OrderBuilder setCone(final Conetype cone) {
         if (cone == null) {
             throw new IllegalArgumentException("Cone non puo essere null");
         }
@@ -51,11 +51,11 @@ public class OrderBuilder {
     }
 
     /**
-     * Adds a topping to the order
-     * @param topping the topping being add
-     * @return this builder for method chaining
+     * Adds a topping to the order.
+     * @param topping the topping being add.
+     * @return this builder for method chaining.
      */
-    public OrderBuilder addTopping(Ingredient topping) {
+    public OrderBuilder addTopping(final Ingredient topping) {
         if (topping == null) {
             throw new IllegalArgumentException("Topping non puo essere null");
         }
@@ -97,6 +97,7 @@ public class OrderBuilder {
      * 
      * @return string containing builder configuration.
      */
+
     @Override
     public String toString() {
         return String.format("OrderBuilder[flavors=%d, cone=%s, toppings=%d]", 
