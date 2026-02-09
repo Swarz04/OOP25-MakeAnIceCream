@@ -25,7 +25,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * @return the required cone type.
      */
     Conetype getRequestedConeType();
-    
+
     /**
      * Gets the list of toppings required by this order.
      * Toppings should be of type IngredientType (LIQUID_TOPPING/ SOLID_TOPPING).
@@ -33,7 +33,7 @@ import it.unibo.makeanicecream.model.ingredient.Conetype;
      * @return an unmodifiable list of required topping ingredients.
      */
     List<Ingredient> getToppings();
-    
+
     /**
      * Verifies if the provided ice cream satisfies the order.
      * The implementations should check if the ice cream contains

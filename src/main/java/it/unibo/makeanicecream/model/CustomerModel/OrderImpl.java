@@ -40,11 +40,11 @@ public class OrderImpl implements Order {
     }
 
     /**
-     * Validates constructor arguments
+     * Validates constructor arguments.
      * 
-     * @param flavors list of flavors to validate
-     * @param cone the cone type to validate
-     * @param toppings the list of toppings to validate
+     * @param flavors list of flavors to validate.
+     * @param cone the cone type to validate.
+     * @param toppings the list of toppings to validate.
      */
     private void validateConstructorArguments(final List<Ingredient> flavors, final Conetype cone,
          final List<Ingredient> toppings) {
@@ -120,7 +120,7 @@ public class OrderImpl implements Order {
 
         return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
     }
-    
+
     /**
      * Checks if two list contain exactly the same ingredients (same elements, same counts).
      * 

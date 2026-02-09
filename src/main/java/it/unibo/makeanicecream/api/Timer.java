@@ -51,7 +51,7 @@ public interface Timer {
     * @return true if the timer is paused, false otherwise.
     */
    boolean isPaused();
-            
+         
    /**
     * Sets a callback to be invoked when the timer expires.
     * The callback will be executed once when the timer reaches zero.

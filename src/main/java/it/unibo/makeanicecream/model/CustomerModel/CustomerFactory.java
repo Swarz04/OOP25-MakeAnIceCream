@@ -28,7 +28,7 @@ public class CustomerFactory {
     private final Map<Integer, CustomerTemplate> templates = new HashMap<>();
     private final List<FlavorType> availableFlavors;
     private final List<Conetype> availableCones;
-    private final List <Ingredient> availableToppings;
+    private final List<Ingredient> availableToppings;
     private final Random random = new Random();
 
     /**
@@ -39,7 +39,7 @@ public class CustomerFactory {
         this.availableFlavors = Arrays.asList(FlavorType.values());
         this.availableCones = Arrays.asList(Conetype.values());
         this.availableToppings = createAllToppings();
-        
+
         initializeTemplates();
     }
 

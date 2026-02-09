@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * Customers can notify a callback when they receive an ice cream.
  */
 public interface Customer {
-    
+
     /**
      * Gets the customer's name.
      * 
@@ -45,7 +45,7 @@ public interface Customer {
      * @return true if the ice cream satisfies the order, false otherwise.
      */
     boolean receiveIceCream(Icecream iceCream);
-    
+
     /**
      * Sets a callback to be notified when the costumer receives an icecream.
      * The callback receives a boolean if the order was satisfied by icecream.
