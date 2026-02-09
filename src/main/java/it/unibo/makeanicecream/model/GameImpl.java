@@ -4,105 +4,66 @@ import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Player;
-import it.unibo.makeanicecream.api.Customer;
-import it.unibo.makeanicecream.model.level.LevelFactory;
 
 /**
  * Implementation of the {@link Game} interface.
  */
 public class GameImpl implements Game {
 
-    private Level currentLevel;
-    private GameState state;
-    private Player player = new PlayerImpl();
-
-    public GameImpl() {
-        this.state = GameState.MENU;
-    }
-
     @Override
-    public void start(final int levelNumber) {
-        this.currentLevel = LevelFactory.createLevel(levelNumber);
-        this.state = GameState.PLAYING;
+    public void start(int levelNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
     }
 
     @Override
     public Level getCurrentLevel() {
-        return this.currentLevel;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCurrentLevel'");
     }
 
     @Override
     public GameState getState() {
-        return this.state;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getState'");
     }
 
     @Override
     public Player getPlayer() {
-        return this.player;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayer'");
     }
 
     @Override
     public void pause() {
-        if (this.state == GameState.PLAYING) {
-            this.state = GameState.PAUSED;
-            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
-            /*Level level = getLevel();
-            Customer c = level.getCurrentCustomer();
-            if(c != null) c.getTimer().pause();*/
-            if (this.currentLevel != null) {
-                final Customer c = this.currentLevel.getCurrentCustomer();
-                if (c != null) {
-                    c.getTimer().pause();
-                }
-            }
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'pause'");
     }
 
     @Override
     public void resume() {
-        if (this.state == GameState.PAUSED) {
-            this.state = GameState.PLAYING;
-            /*Da migliorare una volta pronte le implementazione di Timer e Customer.*/
-            /*Level level = getLevel();
-            Customer c = level.getCurrentCustomer();
-            if(c != null) c.getTimer().resume();*/
-            if (this.currentLevel != null) {
-                final Customer c = this.currentLevel.getCurrentCustomer();
-                if (c != null) {
-                    c.getTimer().resume();
-                }
-            }
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'resume'");
     }
 
     @Override
     public void returnToMenu() {
-        this.state = GameState.MENU;
-        this.currentLevel = null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'returnToMenu'");
     }
-
 
     @Override
     public boolean isGameOver() {
-        return this.state == GameState.GAME_OVER;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isGameOver'");
     }
 
-    private void updateGameState() {
-        if (this.currentLevel == null) {
-            return;
-        }
-        if (this.currentLevel.getLives() <= 0) {
-            this.state = GameState.GAME_OVER;
-        } else if (!this.currentLevel.hasNextCustomer()) {
-            this.state = GameState.LEVEL_COMPLETED;
-        }
+    @Override
+    public void update(double deltaTime) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    public void update(final double deltaTime) {
-        if (this.state == GameState.PLAYING && this.currentLevel != null) {
-            this.currentLevel.update(deltaTime);
-            updateGameState();
-        }
-    }
+    
 
 }
