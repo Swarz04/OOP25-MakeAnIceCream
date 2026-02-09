@@ -12,7 +12,7 @@ public class GameControllerImpl implements GameController {
 
     private Game game;
     private GameLoop gameLoop;
-    //private GameView view;
+    private GameView view;
 
     /**
      * Builds a new game controller provided a game model.
@@ -26,8 +26,8 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void setView(GameView view) {
-        //this.view = view;
-        //this.view.setController(this);
+        this.view = view;
+        this.view.setController(this);
     }
 
     @Override
@@ -69,9 +69,9 @@ public class GameControllerImpl implements GameController {
     public void updateGame(final double deltaTime) {
         this.game.update(deltaTime);
 
-        /*if (this.view != null) {
+        if (this.view != null) {
             this.view.update();
-        }*/    
+        } 
     }
 
     @Override
