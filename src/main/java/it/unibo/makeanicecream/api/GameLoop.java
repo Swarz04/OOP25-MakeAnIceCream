@@ -18,7 +18,7 @@ public interface GameLoop {
     void stop();
 
     /**
-     * Returns true if the loop is currently running.
+     * Checks whether the loop is currently running.
      * 
      * @return true if the loop is running, false otherwise
      */

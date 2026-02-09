@@ -11,7 +11,7 @@ public class GameLoopImpl implements GameLoop, Runnable{
 
     private long period;
     private GameController controller;
-    private boolean running;
+    private volatile boolean running;
 
     public GameLoopImpl(final GameController controller, final long period) {
         this.period = period;
