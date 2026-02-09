@@ -11,7 +11,7 @@ import it.unibo.makeanicecream.api.Player;
 public class GameImpl implements Game {
 
     @Override
-    public void start(int levelNumber) {
+    public void start(final int levelNumber) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'start'");
     }
@@ -59,7 +59,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void update(double deltaTime) {
+    public void update(final double deltaTime) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }

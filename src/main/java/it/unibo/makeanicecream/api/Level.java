@@ -46,10 +46,9 @@ public interface Level {
     void serveCurrentCustomer();
 
     /**
-     *
      * @param deltatime the time to give to the clustomers to update themselves
      */
-    void update (double deltatime);
+    void update(double deltatime);
 
     /**
      * Notifies the level about the result of serving a customer.
