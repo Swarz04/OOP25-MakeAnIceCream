@@ -24,6 +24,7 @@ public final class GameImpl implements Game {
     public GameImpl() {
         this.state = GameState.MENU;
         this.player = new PlayerImpl();
+        this.currentLevel = null;
     }
 
     @Override
