@@ -1,5 +1,6 @@
 package it.unibo.makeanicecream.model.ingredient;
 
+import it.unibo.makeanicecream.api.FlavorType;
 import it.unibo.makeanicecream.api.Ingredient;
 
 /**
