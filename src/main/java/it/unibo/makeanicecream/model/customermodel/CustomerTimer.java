@@ -4,14 +4,14 @@ import it.unibo.makeanicecream.api.Timer;
 
 /**
  * Implementation of the Timer interface for costumer orders.
- * This class manages a countdown timer that can be started, paused, resumed,
+ * This class manages a countdown timer that can be started, paused, resumed
  * and notifies when expired via a callback.
  *
  */
-public final class CustomerTimer implements Timer{
+public final class CustomerTimer implements Timer {
 
     private double secondsLeft;
-    private boolean expired = false;
+    private boolean expired;
     private boolean paused = true;
     private Runnable onExpiredCallback;
 
@@ -21,7 +21,7 @@ public final class CustomerTimer implements Timer{
      *
      * @param seconds the initial time must be in positive seconds.
      */
-    public CustomerTimer(double seconds){
+    public CustomerTimer(final double seconds) {
        if (seconds <= 0) {
             throw new IllegalArgumentException("Il tempo deve essere positivo");
         }
@@ -29,7 +29,8 @@ public final class CustomerTimer implements Timer{
     }
 
     /**
-     * Starts the timer. The timer will begin counting down.
+     * Starts the timer.
+     * The timer will begin counting down. 
      */
     @Override
     public void start() {
@@ -37,7 +38,8 @@ public final class CustomerTimer implements Timer{
     }
 
     /**
-     * Pauses the timer. The timer will stop counting down
+     * Pauses the timer.
+     * The timer will stop counting down.
      */
     @Override
     public void pause() {
@@ -59,7 +61,7 @@ public final class CustomerTimer implements Timer{
      * @param deltaTime the time passed since the last update (in seconds).
      */
     @Override
-    public void update(double deltaTime) {
+    public void update(final double deltaTime) {
         if (expired || paused) {
             return;
         }
@@ -110,7 +112,7 @@ public final class CustomerTimer implements Timer{
      * The callback will be executed once when the timer reaches zero.
      */
     @Override
-    public void setOnExpired(Runnable callback) {
-        this.onExpiredCallback= callback;
+    public void setOnExpired(final Runnable callback) { 
+        this.onExpiredCallback = callback;
     }
 }
