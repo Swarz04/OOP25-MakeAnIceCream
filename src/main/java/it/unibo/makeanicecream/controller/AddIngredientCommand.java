@@ -7,16 +7,17 @@ import it.unibo.makeanicecream.api.Ingredient;
 public class AddIngredientCommand implements Command{
 
     private final Game game;
-    private final Ingredient ingredient;
+    private final String nameIng;
 
-    public AddIngredientCommand(final Game game, final Ingredient ingredient) {
+    public AddIngredientCommand(final Game game, final String nameIng) {
         this.game = game;
-        this.ingredient = ingredient;
+        this.nameIng = nameIng;
     }
 
     @Override
     public void execute() {
-        this.game.getPlayer().addIngredient(this.ingredient);
+        final Ingredient ingredient = null;
+        this.game.getPlayer().addIngredient(ingredient);
     }
     
 }

@@ -54,13 +54,13 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void handleInput(final Event event) {
-        final Function<Event, Command> command = this.commands.get(event.getType());
+        final Function<Event, Command> commandFactory = this.commands.get(event.getType());
 
-        if (command == null) {
+        if (commandFactory == null) {
             throw new IllegalArgumentException("Unknown action type: " + event.getType());
         }
 
-        command.apply(event).execute();
+        commandFactory.apply(event).execute();
     }
 
     @Override
