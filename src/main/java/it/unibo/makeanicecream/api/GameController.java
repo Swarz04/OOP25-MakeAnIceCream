@@ -2,7 +2,6 @@ package it.unibo.makeanicecream.api;
 
 /**
  * Implementation of the game controller.
- * 
  * <p>
  * This class coordinates the game execution by acting as the Control component
  * in the MVC/ECB architecture. It receives user actions from the Boundary
@@ -10,6 +9,7 @@ package it.unibo.makeanicecream.api;
  * boundaries about changes to be displayed.
  * </p>
  */
+
 public interface GameController {
 
     /**

@@ -19,16 +19,16 @@ public class OrderBuilder {
     private final List<Ingredient> toppings = new ArrayList<>();
 
     /**
-     * Adds a  flavor scoop to the order being built.
+     * Adds a  flavor scoop to the order being built
      * 
-     * @param flavor the flavor ingredient to add (must be of type SCOOP).
-     * @return this builder for method chaining.
+     * @param flavor the flavor ingredient to add (must be of type SCOOP)
+     * @return this builder for method chaining
      */
-    public OrderBuilder addFlavor(final Ingredient flavor) {
-        if (flavor == null) {
+    public OrderBuilder addFlavor(Ingredient flavor){
+        if(flavor == null){
             throw new IllegalArgumentException("Flavor non puo essere null");
         }
-        if (flavor.getType() != IngredientType.SCOOP) {
+        if(flavor.getType() != IngredientType.SCOOP){
             throw new IllegalArgumentException("L'ingrediente deve essere di tipo SCOOP");
         }
         flavors.add(flavor);
@@ -36,31 +36,25 @@ public class OrderBuilder {
     }
 
     /**
-     * Sets the cone type for the order being built.
+     * Sets the cone type for the order being built
      * 
-     * @param coneType the cone type to use.
-     * @return this builder for method chaining.
+     * @param cone the cone type to use
+     * @return this builder for method chaining
      * 
      */
-    public OrderBuilder setCone(final Conetype coneType) {
-        if (coneType == null) {
+    public OrderBuilder setCone(Conetype cone){
+        if(cone == null){
             throw new IllegalArgumentException("Cone non puo essere null");
         }
-        this.cone = coneType;
+        this.cone = cone;
         return this;
     }
 
-    /**
-     * Adds a topping to the order.
-     * 
-     * @param topping the topping being add.
-     * @return this builder for method chaining.
-     */
-    public OrderBuilder addTopping(final Ingredient topping) {
-        if (topping == null) {
+    public OrderBuilder addTopping(Ingredient topping){
+        if(topping == null){
             throw new IllegalArgumentException("Topping non puo essere null");
         }
-        if (topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING) {
+        if(topping.getType() != IngredientType.LIQUID_TOPPING && topping.getType() != IngredientType.SOLID_TOPPING){
             throw new IllegalArgumentException("L'ingrediente deve essere un toppin valido");
         }
         toppings.add(topping);
@@ -68,26 +62,26 @@ public class OrderBuilder {
     }
 
     /**
-     * Builds and returns an Order based on the configured components.
+     * Builds and returns an Order based on the configured components
      * 
-     * @return a new Order instance.
+     * @return a new Order instance 
      */
-    public Order build() {
-        if (cone == null) {
+    public Order build(){
+        if(cone == null){
             throw new IllegalStateException("Deve specificare un cono");
         }
-        if (flavors.isEmpty()) {
+        if(flavors.isEmpty()){
             throw new IllegalStateException("Deve avere almeno un gusto");
         }
         return new OrderImpl(flavors, cone, toppings);
     }
 
     /**
-     * Resets this builder to its initial empty state.
+     * Resets this builder to its initial empty state
      * 
-     * @return this builder for method chaining.
+     * @return this builder for method chaining
      */
-    public OrderBuilder reset() {
+    public OrderBuilder reset(){
         flavors.clear();
         cone = null;
         toppings.clear();
@@ -96,11 +90,10 @@ public class OrderBuilder {
     /**
      * Returns a string representation of this builder's current state.
      * 
-     * @return string containing builder configuration.
+     * @return string containing builder configuration
      */
-
     @Override
-    public String toString() {
+    public String toString(){
         return String.format("OrderBuilder[flavors=%d, cone=%s, toppings=%d]", 
         flavors.size(), cone, toppings.size());
     }

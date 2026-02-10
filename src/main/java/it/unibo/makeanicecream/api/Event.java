@@ -12,10 +12,5 @@ public interface Event {
      */
     EventType getType();
 
-    /**
-     * Returns the data of the user action.
-     *
-     * @return the data of this action
-     */
     String getData();
 }
