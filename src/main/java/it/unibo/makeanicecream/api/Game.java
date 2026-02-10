@@ -10,6 +10,7 @@ public interface Game {
      * 
      * <p>
      * Initializes the level, player, and sets the game state to PLAYING.
+     * </p>
      *
      * @param levelNumber the level to start, must be positive
      * 
@@ -80,6 +81,7 @@ public interface Game {
      * <p>
      * Delegates to the current level to update customer timers and manage
      * lives and progress.
+     * </p>
      * 
      * @param deltaTime the time in seconds since the last update
      */
