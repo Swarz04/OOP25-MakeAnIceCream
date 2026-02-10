@@ -3,6 +3,7 @@ package it.unibo.makeanicecream.controller;
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.Ingredient;
+import it.unibo.makeanicecream.model.IngredientFactory;
 
 public class AddIngredientCommand implements Command{
 
@@ -16,7 +17,7 @@ public class AddIngredientCommand implements Command{
 
     @Override
     public void execute() {
-        final Ingredient ingredient = null;
+        final Ingredient ingredient = IngredientFactory.createIngredient(this.nameIng);
         this.game.getPlayer().addIngredient(ingredient);
     }
     
