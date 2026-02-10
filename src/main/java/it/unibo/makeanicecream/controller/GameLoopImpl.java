@@ -13,15 +13,10 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private volatile boolean running;
     private final long period;
 
-    /**
-     * The game controller used to update the game state.
-     * 
-     * <p>
-     * Note: the controller is passed from outside and may be mutable.
-     * Modifications to the controller outside this class will affect the loop.
-     * </p>
-     */
-    @SuppressFBWarnings("EI2")
+     @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Controller reference is safely shared for game loop updates"
+    )
     private final GameController controller;
 
     /**

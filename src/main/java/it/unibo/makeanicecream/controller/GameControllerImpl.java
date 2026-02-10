@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Event;
@@ -18,6 +19,10 @@ import it.unibo.makeanicecream.api.GameView;
  */
 public final class GameControllerImpl implements GameController {
 
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP", 
+        justification = "The game reference is safely shared with commands and is immutable from outside"
+    )
     private final Game game;
     private final GameLoop gameLoop;
     private GameView view;

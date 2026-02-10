@@ -110,7 +110,7 @@ public final class GameImpl implements Game {
         if (this.currentLevel == null) {
             return;
         }
-    
+
         if (this.currentLevel.getLives() <= 0) {
             this.state = GameState.GAME_OVER;
         } else if (!this.currentLevel.hasNextCustomer()) {
