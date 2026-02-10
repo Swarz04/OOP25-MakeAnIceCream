@@ -3,20 +3,23 @@ package it.unibo.makeanicecream.view;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.Event;
+import it.unibo.makeanicecream.view.EventImpl;
 
 /**
  * Panel responsible for action buttons like Submit and Reset.
  * The Submit button is enabled only when the current ice cream is valid and can be submitted, 
  * while the Reset button is always enabled to allow the user to reset their current creation.
+ * When the Submit button is disabled, it is hidden to prevent the user from attempting to submit an invalid ice cream.
  */
 public class ActionsPanel extends JPanel {
     private GameController controller;
 
-    private final JButton submitButton = new JButton("Submit");
-    private final JButton resetButton = new JButton("Reset");
+    private final JButton submitButton;
+    private final JButton resetButton;
 
     /**
      * Builds a new ActionsPanel. 
@@ -25,8 +28,13 @@ public class ActionsPanel extends JPanel {
      */
     public ActionsPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        ImageIcon submitIcon = new ImageIcon(getClass().getResource("/submit.png"));
+        ImageIcon resetIcon = new ImageIcon(getClass().getResource("/reset.png"));
         
-        submitButton.setEnabled(false);
+        submitButton = new JButton(submitIcon);
+        resetButton = new JButton(resetIcon);
+
+        submitButton.setVisible(false);
 
         submitButton.addActionListener(e -> sendEvent(EventType.DELIVER));
         resetButton.addActionListener(e -> sendEvent(EventType.CANCEL));
@@ -45,12 +53,12 @@ public class ActionsPanel extends JPanel {
     }
 
     /**
-     * Enables or disables the Submit button based on whether the current ice cream can be submitted.
+     * Configures the visibility of the Submit button based on whether the current ice cream can be submitted or not.
      * 
      * @param enabled true to enable the Submit button, false to disable it
      */
     public void setSubmitEnabled(final boolean enabled) {
-        submitButton.setEnabled(enabled);
+        submitButton.setVisible(enabled);
     }
 
     /**
