@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.controller;
+package it.unibo.makeanicecream.model;
 
 import it.unibo.makeanicecream.api.Event;
 import it.unibo.makeanicecream.api.GameController;
@@ -7,7 +7,7 @@ import it.unibo.makeanicecream.api.GameView;
 /**
  * Implementation of the {@link GameController} interface.
  */
-public final class GameControllerImpl implements GameController {
+public class GameControllerImpl implements GameController {
 
     @Override
     public void startGame(final int levelNumber) {

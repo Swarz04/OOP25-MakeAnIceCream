@@ -1,5 +1,4 @@
 package it.unibo.makeanicecream.api;
-import it.unibo.makeanicecream.api.customer.Customer;
 
 /**
  * Represents a game level.
@@ -47,10 +46,9 @@ public interface Level {
     void serveCurrentCustomer();
 
     /**
-     *
      * @param deltatime the time to give to the clustomers to update themselves
      */
-    void update (double deltatime);
+    void update(double deltatime);
 
     /**
      * Notifies the level about the result of serving a customer.

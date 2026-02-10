@@ -1,33 +1,20 @@
 package it.unibo.makeanicecream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * Entry point for the Make an Ice Cream test application.
- * Prints a simple greeting using the configured logger.
+ * Main class to start the "Make an Ice Cream" game.
  */
 public final class Main {
 
-    /**
-     * Logger used to output messages instead of System.out.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-
-    /**
-     * Private constructor to prevent instantiation.
-     */
     private Main() {
-        // This constructor is intentionally empty.
+        // This class should not be instantiated.
     }
 
     /**
-     * Launches the application.
-     *
-     * @param args command-line arguments (unused)
+     * The main entry point of the application.
+     * 
+     * @param args The command line arguments.
      */
     public static void main(final String[] args) {
-        // Using the logger to print to console avoids System.out and passes Checkstyle/PMD.
-        LOGGER.info("Hello, World!");
+        
     }
 }

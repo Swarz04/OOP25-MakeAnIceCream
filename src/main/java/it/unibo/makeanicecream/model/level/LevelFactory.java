@@ -3,13 +3,9 @@ package it.unibo.makeanicecream.model.level;
 
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
-import it.unibo.makeanicecream.api.Order;
-import it.unibo.makeanicecream.api.Timer;
 
 import java.util.ArrayDeque;
-import java.util.Objects;
 import java.util.Queue;
-import java.util.function.Consumer;
 import it.unibo.makeanicecream.model.customermodel.CustomerFactory;
 
 /**
@@ -45,7 +41,7 @@ public final class LevelFactory {
 
         final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
 
-        final double levelTime = computeTimeForDifficulty(limitedDifficulty);
+        final double levelTime = Math.max(10.0, 60.0 - (difficulty * 5.0));
 
         final Queue<Customer> customers = new ArrayDeque<>();
         final CustomerFactory customerFactory = new CustomerFactory();
@@ -55,10 +51,5 @@ public final class LevelFactory {
         }
 
         return new StandardLevel(limitedDifficulty, LIVES, customers);
-    }
-
-    private static double computeTimeForDifficulty(int difficulty) {
-        // Base time 60s, decreases by 5s per difficulty level
-        return Math.max(10.0, 60.0 - (difficulty * 5.0));
     }
  }
