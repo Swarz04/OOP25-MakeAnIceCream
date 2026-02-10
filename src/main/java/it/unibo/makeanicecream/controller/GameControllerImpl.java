@@ -1,18 +1,24 @@
 package it.unibo.makeanicecream.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Event;
+import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
-import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.GameView;
+import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 public class GameControllerImpl implements GameController {
 
-    private Game game;
-    private GameLoop gameLoop;
+    private final Game game;
+    private final GameLoop gameLoop;
     private GameView view;
+    private final Map<EventType, Function<Event, Command>> commands = new HashMap<>();
 
     /**
      * Builds a new game controller provided a game model.
@@ -22,6 +28,22 @@ public class GameControllerImpl implements GameController {
     public GameControllerImpl(final Game game, final GameLoop gameLoop) {
         this.game = game;
         this.gameLoop = gameLoop;
+
+        this.commands.put(EventType.START_LEVEL, event -> {
+            final int levelNumber = Integer.parseInt(event.getData());
+            return new StartLevelCommand(this.game, this.gameLoop, levelNumber);
+        });
+        this.commands.put(EventType.CHOOSE_CONE, event -> {
+            final Conetype cone = Conetype.valueOf(event.getData());
+            return new ChooseConeCommand(this.game, cone);
+        });
+        this.commands.put(EventType.ADD_INGREDIENT, event -> new AddIngredientCommand(this.game, event.getData()));
+        this.commands.put(EventType.DELIVER, event -> new DeliverCommand(this.game));
+        this.commands.put(EventType.CANCEL, event -> new CancelCommand(this.game));
+        this.commands.put(EventType.PAUSE, event -> new PauseCommand(this.game, this.gameLoop));
+        this.commands.put(EventType.RESUME, event -> new ResumeCommand(this.game, this.gameLoop));
+        this.commands.put(EventType.GO_TO_MENU, event -> new GoToMenuCommand(this.game, this.gameLoop));
+
     }
 
     @Override
@@ -31,38 +53,14 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void handleInput(final Event action) {
-        Command command;
-        switch (action.getType()) {
-            case START_LEVEL:
-                command = new StartLevelCommand(this.game, this.gameLoop);
-                break;
-            case CHOOSE_CONE:
-                command = new ChooseConeCommand(this.game);
-                break;
-            case ADD_INGREDIENT:
-                command = new AddIngredientCommand(this.game);
-                break;
-            case DELIVER:
-                command = new DeliverCommand(this.game);
-                break;
-            case CANCEL:
-                command = new CancelCommand(this.game);
-                break;
-            case PAUSE:
-                command = new PauseCommand(this.game, this.gameLoop);
-                break;
-            case RESUME:
-                command = new ResumeCommand(this.game, this.gameLoop);
-                break;
-            case GO_TO_MENU:
-                command = new GoToMenuCommand(this.game, this.gameLoop);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown action type: " + action.getType());
+    public void handleInput(final Event event) {
+        final Function<Event, Command> command = this.commands.get(event.getType());
+
+        if (command == null) {
+            throw new IllegalArgumentException("Unknown action type: " + event.getType());
         }
 
-        command.execute();
+        command.apply(event).execute();
     }
 
     @Override
@@ -76,6 +74,6 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public boolean isGamePlaying() {
-        return this.game.getState() == GameState.PLAYING;
+        return this.game.isPlaying();
     }
 }
