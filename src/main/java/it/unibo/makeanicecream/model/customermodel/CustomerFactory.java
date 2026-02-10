@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Customer;
+import it.unibo.makeanicecream.api.FlavorType;
 import it.unibo.makeanicecream.api.Ingredient;
+import it.unibo.makeanicecream.api.LiquidToppingType;
 import it.unibo.makeanicecream.api.Order;
+import it.unibo.makeanicecream.api.SolidToppingType;
 import it.unibo.makeanicecream.model.OrderBuilder;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
-import it.unibo.makeanicecream.model.ingredient.FlavorType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
-import it.unibo.makeanicecream.model.ingredient.LiquidToppingType;
 import it.unibo.makeanicecream.model.ingredient.Scoop;
 import it.unibo.makeanicecream.model.ingredient.SolidTopping;
-import it.unibo.makeanicecream.model.ingredient.SolidToppingType;
 
 /**
  * Factory for generating random customers based on difficulty levels.

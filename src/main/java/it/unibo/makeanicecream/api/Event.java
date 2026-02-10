@@ -4,7 +4,6 @@ package it.unibo.makeanicecream.api;
  * Represents an action performed by the user in the game.
  */
 public interface Event {
-
     /**
      * Returns the type of the user action.
      *
@@ -13,9 +12,9 @@ public interface Event {
     EventType getType();
 
     /**
-     * Returns the data of the user action.
+     * Returns additional data related to the event.
      *
-     * @return the data of this action
+     * @return a string representing the ingredient name or the level number
      */
     String getData();
 }

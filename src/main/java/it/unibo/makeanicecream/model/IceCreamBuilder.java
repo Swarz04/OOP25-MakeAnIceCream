@@ -3,8 +3,8 @@ package it.unibo.makeanicecream.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Ingredient;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
 /**
@@ -154,8 +154,19 @@ public class IceCreamBuilder {
      * Submit the current ice cream and return it.
      * 
      * @return the ice cream instance
+     * 
+     * @throws IllegalStateException if the ice cream is not valid (e.g., no cone, no scoops)
+     * @throws IllegalStateException if the ice cream hasn't been built yet (e.g., no ingredients added)
      */
     public IceCreamImpl submit() {
+        if (this.cone == null || this.lisIngredients.isEmpty()) {
+            throw new IllegalStateException("An ice cream must have a cone and at least one ingredient");
+        }
+
+        if (countScoops() < 1) {
+            throw new IllegalStateException("An ice cream must have at least one scoop");
+        }
+
         return getIceCream();
     }
 
