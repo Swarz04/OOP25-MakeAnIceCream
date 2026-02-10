@@ -3,9 +3,8 @@ package it.unibo.makeanicecream.model;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Player;
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Customer;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
-
 import java.util.Objects;
 
 /**

@@ -1,7 +1,5 @@
 package it.unibo.makeanicecream.api;
 
-import it.unibo.makeanicecream.model.ingredient.Conetype;
-
 /**
  * Player behaviour as in the project UML.
  */

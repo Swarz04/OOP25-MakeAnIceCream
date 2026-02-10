@@ -2,8 +2,6 @@ package it.unibo.makeanicecream.api;
 
 import java.util.List;
 
-import it.unibo.makeanicecream.model.ingredient.Conetype;
-
 /**
  * An ice cream configuration:
  * - the conetype;

@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 import it.unibo.makeanicecream.api.Command;
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Event;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameView;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 public class GameControllerImpl implements GameController {
 

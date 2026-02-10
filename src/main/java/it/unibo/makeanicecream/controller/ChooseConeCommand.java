@@ -1,8 +1,8 @@
 package it.unibo.makeanicecream.controller;
 
 import it.unibo.makeanicecream.api.Command;
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Game;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 public class ChooseConeCommand implements Command{
 
