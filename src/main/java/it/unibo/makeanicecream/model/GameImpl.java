@@ -1,7 +1,10 @@
 package it.unibo.makeanicecream.model;
 
+import it.unibo.makeanicecream.api.Conetype;
+import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
+import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Player;
 import it.unibo.makeanicecream.model.level.LevelFactory;
@@ -9,12 +12,15 @@ import it.unibo.makeanicecream.model.level.LevelFactory;
 /**
  * Implementation of the {@link Game} interface.
  */
-public class GameImpl implements Game {
+public final class GameImpl implements Game {
 
     private Level currentLevel;
     private GameState state;
     private final Player player;
 
+    /**
+     * Constructs a new game in the MENU state with a new player.
+     */
     public GameImpl() {
         this.state = GameState.MENU;
         this.player = new PlayerImpl();
@@ -40,8 +46,23 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Player getPlayer() {
-        return this.player;
+    public boolean chooseCone(final Conetype cone) {
+        return this.player.chooseCone(cone);
+    }
+
+    @Override
+    public boolean addIngredient(final Ingredient ingredient) {
+        return this.player.addIngredient(ingredient);
+    }
+
+    @Override
+    public boolean deliverIceCream(final Customer customer) {
+        return this.player.deliverIceCream(customer);
+    }
+
+    @Override
+    public void cancelIceCream() {
+        this.player.cancelIceCream();
     }
 
     @Override
@@ -85,6 +106,10 @@ public class GameImpl implements Game {
      * or LEVEL_COMPLETED if all customers have been served.
      */
     private void checkLevelProgress() {
+        if (this.currentLevel == null) {
+            return;
+        }
+    
         if (this.currentLevel.getLives() <= 0) {
             this.state = GameState.GAME_OVER;
         } else if (!this.currentLevel.hasNextCustomer()) {

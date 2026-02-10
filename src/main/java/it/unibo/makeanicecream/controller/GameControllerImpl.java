@@ -16,7 +16,7 @@ import it.unibo.makeanicecream.api.GameView;
 /**
  * Implementation of the {@link GameController} interface.
  */
-public class GameControllerImpl implements GameController {
+public final class GameControllerImpl implements GameController {
 
     private final Game game;
     private final GameLoop gameLoop;
@@ -35,18 +35,18 @@ public class GameControllerImpl implements GameController {
 
         this.commands.put(EventType.START_LEVEL, event -> {
             final int levelNumber = Integer.parseInt(event.getData());
-            return new StartLevelCommand(this.game, this.gameLoop, levelNumber);
+            return new StartLevelCommand(this.gameLoop, levelNumber);
         });
         this.commands.put(EventType.CHOOSE_CONE, event -> {
             final Conetype cone = Conetype.valueOf(event.getData());
-            return new ChooseConeCommand(this.game, cone);
+            return new ChooseConeCommand(cone);
         });
-        this.commands.put(EventType.ADD_INGREDIENT, event -> new AddIngredientCommand(this.game, event.getData()));
-        this.commands.put(EventType.DELIVER, event -> new DeliverCommand(this.game));
-        this.commands.put(EventType.CANCEL, event -> new CancelCommand(this.game));
-        this.commands.put(EventType.PAUSE, event -> new PauseCommand(this.game, this.gameLoop));
-        this.commands.put(EventType.RESUME, event -> new ResumeCommand(this.game, this.gameLoop));
-        this.commands.put(EventType.GO_TO_MENU, event -> new GoToMenuCommand(this.game, this.gameLoop));
+        this.commands.put(EventType.ADD_INGREDIENT, event -> new AddIngredientCommand(event.getData()));
+        this.commands.put(EventType.DELIVER, event -> new DeliverCommand());
+        this.commands.put(EventType.CANCEL, event -> new CancelCommand());
+        this.commands.put(EventType.PAUSE, event -> new PauseCommand(this.gameLoop));
+        this.commands.put(EventType.RESUME, event -> new ResumeCommand(this.gameLoop));
+        this.commands.put(EventType.GO_TO_MENU, event -> new GoToMenuCommand(this.gameLoop));
 
     }
 
@@ -64,7 +64,7 @@ public class GameControllerImpl implements GameController {
             throw new IllegalArgumentException("Unknown action type: " + event.getType());
         }
 
-        commandFactory.apply(event).execute();
+        commandFactory.apply(event).execute(this.game);
     }
 
     @Override

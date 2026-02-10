@@ -1,6 +1,5 @@
 package it.unibo.makeanicecream.model.level;
 
-
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Level;
 
@@ -28,18 +27,17 @@ public final class LevelFactory {
     }
 
     /**
-     *
      * Creates a level based on the given difficulty.
+     * 
      * @param difficulty the difficulty level (1-5)
-     * @param customers the customers queue
      *
      * @return a new Level instance
      */
     public static Level createLevel(final int difficulty) {
 
-        final int limitedDifficulty = Math.min(Math.max(difficulty, MIN_DIFFICULTY),MAX_DIFFICULTY);
+        final int limitedDifficulty = Math.min(Math.max(difficulty, MIN_DIFFICULTY), MAX_DIFFICULTY);
 
-        final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS*(limitedDifficulty - 1));
+        final int numberOfCustomers = Math.min(MAX_CUSTOMERS, BASE_CUSTOMERS + STEP_CUSTOMERS * (limitedDifficulty - 1));
 
         final double levelTime = Math.max(10.0, 60.0 - (difficulty * 5.0));
 

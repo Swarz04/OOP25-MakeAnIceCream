@@ -15,27 +15,26 @@ import it.unibo.makeanicecream.model.IngredientFactory;
  */
 public final class AddIngredientCommand implements Command {
 
-    private final Game game;
     private final String nameIng;
 
     /**
      * Constructs a new AddIngredientCommand.
      *
-     * @param game the game instance where the ingredient will be added
      * @param nameIng the name of the ingredient to add
      */
-    public AddIngredientCommand(final Game game, final String nameIng) {
-        this.game = game;
+    public AddIngredientCommand(final String nameIng) {
         this.nameIng = nameIng;
     }
 
     /**
      * Executes the command by creating the ingredient and adding it
      * to the player's ice cream.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
+    public void execute(final Game game) {
         final Ingredient ingredient = IngredientFactory.createIngredient(this.nameIng);
-        this.game.getPlayer().addIngredient(ingredient);
+        game.addIngredient(ingredient);
     }
 }

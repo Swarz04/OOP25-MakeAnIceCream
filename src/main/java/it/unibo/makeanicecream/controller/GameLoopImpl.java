@@ -1,18 +1,35 @@
 package it.unibo.makeanicecream.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 
 /**
  * Implementation of {@link GameLoop} that runs the game in a separate thread.
  */
-public class GameLoopImpl implements GameLoop, Runnable {
+public final class GameLoopImpl implements GameLoop, Runnable {
     private static final double MILLIS_IN_SECONDS = 1000.0;
 
-    private final long period;
-    private final GameController controller;
     private volatile boolean running;
+    private final long period;
 
+    /**
+     * The game controller used to update the game state.
+     * 
+     * <p>
+     * Note: the controller is passed from outside and may be mutable.
+     * Modifications to the controller outside this class will affect the loop.
+     * </p>
+     */
+    @SuppressFBWarnings("EI2")
+    private final GameController controller;
+
+    /**
+     * Constructs a new game loop with the given controller and frame period.
+     *
+     * @param controller the game controller to update each frame
+     * @param period the period of each frame in milliseconds
+     */
     public GameLoopImpl(final GameController controller, final long period) {
         this.period = period;
         this.controller = controller;
@@ -52,12 +69,19 @@ public class GameLoopImpl implements GameLoop, Runnable {
         }
     }
 
-    protected void waitForNextFrame(final long cycleStartTime) {
+    /**
+     * Waits until the next frame, sleeping if necessary.
+     *
+     * @param cycleStartTime the timestamp at the start of the current frame
+     */
+    private void waitForNextFrame(final long cycleStartTime) {
         final long dt = System.currentTimeMillis() - cycleStartTime;
-		if (dt < period) {
-			try {
-				Thread.sleep(period - dt);
-			} catch (final Exception ex) { }
-		}
-	}
+        if (dt < period) {
+            try {
+                Thread.sleep(period - dt);
+            } catch (final InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
 }

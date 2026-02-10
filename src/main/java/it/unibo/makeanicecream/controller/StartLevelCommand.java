@@ -14,19 +14,16 @@ import it.unibo.makeanicecream.api.GameLoop;
  */
 public final class StartLevelCommand implements Command {
 
-    private final Game game;
     private final GameLoop gameLoop;
     private final int levelNumber;
 
     /**
      * Constructs a new StartLevelCommand.
      *
-     * @param game the game instance used to start the level
      * @param gameLoop the game loop to be started if not already running
      * @param levelNumber the number of the level to start
      */
-    public StartLevelCommand(final Game game, final GameLoop gameLoop, final int levelNumber) {
-        this.game = game;
+    public StartLevelCommand(final GameLoop gameLoop, final int levelNumber) {
         this.gameLoop = gameLoop;
         this.levelNumber = levelNumber;
     }
@@ -34,10 +31,12 @@ public final class StartLevelCommand implements Command {
     /**
      * Executes the command by starting the specified level
      * and ensuring that the game loop is running.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.start(this.levelNumber);
+    public void execute(final Game game) {
+        game.start(this.levelNumber);
 
         if (!this.gameLoop.isRunning()) {
             this.gameLoop.start();

@@ -14,27 +14,26 @@ import it.unibo.makeanicecream.api.GameLoop;
  */
 public final class GoToMenuCommand implements Command {
 
-    private final Game game;
     private final GameLoop gameLoop;
 
     /**
      * Constructs a new GoToMenuCommand.
      *
-     * @param game the game instance to return to the menu
      * @param gameLoop the game loop to be stopped
      */
-    public GoToMenuCommand(final Game game, final GameLoop gameLoop) {
-        this.game = game;
+    public GoToMenuCommand(final GameLoop gameLoop) {
         this.gameLoop = gameLoop;
     }
 
     /**
      * Executes the command by stopping the game loop
      * and returning the game to the main menu.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.returnToMenu();
+    public void execute(final Game game) {
+        game.returnToMenu();
         this.gameLoop.stop();
     }
 }

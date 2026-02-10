@@ -12,23 +12,13 @@ import it.unibo.makeanicecream.api.Game;
  * </p>
  */
 public final class CancelCommand implements Command {
-
-    private final Game game;
-
-    /**
-     * Constructs a new CancelCommand.
-     *
-     * @param game the game instance where the current ice cream will be canceled
-     */
-    public CancelCommand(final Game game) {
-        this.game = game;
-    }
-
     /**
      * Executes the command by canceling the current ice cream of the player.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.getPlayer().cancelIceCream();
+    public void execute(final Game game) {
+        game.cancelIceCream();
     }
 }

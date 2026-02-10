@@ -12,25 +12,14 @@ import it.unibo.makeanicecream.api.Game;
  * </p>
  */
 public final class DeliverCommand implements Command {
-
-    private final Game game;
-
-    /**
-     * Constructs a new DeliverCommand.
-     *
-     * @param game the game instance used to deliver the ice cream 
-     *             to the current customer
-     */
-    public DeliverCommand(final Game game) {
-        this.game = game;
-    }
-
     /**
      * Executes the command by delivering the ice cream
      * to the current customer.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.getPlayer().deliverIceCream(this.game.getCurrentLevel().getCurrentCustomer());
+    public void execute(final Game game) {
+        game.deliverIceCream(game.getCurrentLevel().getCurrentCustomer());
     }
 }

@@ -12,6 +12,8 @@ package it.unibo.makeanicecream.api;
 public interface Command {
     /**
      * Executes the command.
+     * 
+     * @param game the game instance on which the command should be executed
      */
-    void execute();
+    void execute(Game game);
 }

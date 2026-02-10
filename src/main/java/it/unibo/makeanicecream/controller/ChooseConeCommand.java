@@ -13,25 +13,24 @@ import it.unibo.makeanicecream.api.Game;
  */
 public final class ChooseConeCommand implements Command {
 
-    private final Game game;
     private final Conetype cone;
 
     /**
      * Constructs a new ChooseConeCommand.
      *
-     * @param game the game instance where the cone will be selected
      * @param cone the type of cone chosen by the player
      */
-    public ChooseConeCommand(final Game game, final Conetype cone) {
-        this.game = game;
+    public ChooseConeCommand(final Conetype cone) {
         this.cone = cone;
     }
 
     /**
      * Executes the command by setting the chosen cone for the player.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        game.getPlayer().chooseCone(this.cone);
+    public void execute(final Game game) {
+        game.chooseCone(this.cone);
     }
 }

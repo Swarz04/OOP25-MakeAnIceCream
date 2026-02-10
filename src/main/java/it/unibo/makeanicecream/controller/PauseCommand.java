@@ -13,27 +13,26 @@ import it.unibo.makeanicecream.api.GameLoop;
  */
 public final class PauseCommand implements Command {
 
-    private final Game game;
     private final GameLoop gameLoop;
 
     /**
      * Constructs a new PauseCommand.
      *
-     * @param game the game instance to be paused
      * @param gameLoop the game loop to be stopped
      */
-    public PauseCommand(final Game game, final GameLoop gameLoop) {
-        this.game = game;
+    public PauseCommand(final GameLoop gameLoop) {
         this.gameLoop = gameLoop;
     }
 
     /**
      * Executes the command by pausing the game
      * and stopping the game loop.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.pause();
+    public void execute(final Game game) {
+        game.pause();
         this.gameLoop.stop();
     }
 }

@@ -2,6 +2,12 @@ package it.unibo.makeanicecream.api;
 
 /**
  * Represents a game session of "Make an Ice Cream".
+ * 
+ * <p>
+ * This interface defines the main operations of a game session, including
+ * starting levels, managing the current ice cream being prepared, updating
+ * the game state, and controlling the game flow (pause, resume, return to menu).
+ * </p>
  */
 public interface Game {
 
@@ -33,11 +39,33 @@ public interface Game {
     GameState getState();
 
     /**
-     * Returns the player of the game.
+     * Selects the cone type for the ice cream being prepared by the player.
      * 
-     * @return the player
+     * @param cone the type of cone
+     * @return true if the cone was successfully chosen, false otherwise
      */
-    Player getPlayer();
+    boolean chooseCone(Conetype cone);
+
+    /**
+     * Adds an ingredient to the current ice cream being prepared by the player.
+     * 
+     * @param ingredient the ingredient to add
+     * @return true if the ingredient was successfully added, false otherwise
+     */
+    boolean addIngredient(Ingredient ingredient);
+
+    /**
+     * Delivers the current ice cream to a customer.
+     * 
+     * @param customer the customer to deliver to
+     * @return true if the delivery was successful, false otherwise
+     */
+    boolean deliverIceCream(Customer customer);
+
+    /**
+     * Cancels the current ice cream preparation.
+     */
+    void cancelIceCream();
 
     /**
      * Pauses the game if it is currently in PLAYING state.

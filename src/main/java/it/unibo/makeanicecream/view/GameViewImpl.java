@@ -4,12 +4,12 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 
 /**
- *
+ * Implementation of the {@link GameView} interface.
  */
-public class GameViewImpl implements GameView {
+public final class GameViewImpl implements GameView {
 
     @Override
-    public void setController(GameController controller) {
+    public void setController(final GameController controller) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setController'");
     }

@@ -5,13 +5,13 @@ package it.unibo.makeanicecream.api;
  */
 public interface Player {
 
-	boolean addIngredient(Ingredient ingredient);
+    boolean addIngredient(Ingredient ingredient);
 
-	boolean chooseCone(Conetype conetype);
-	
-	Icecream composeIceCream();
+    boolean chooseCone(Conetype conetype);
 
-	boolean deliverIceCream(Customer customer);
+    Icecream composeIceCream();
 
-	void cancelIceCream();
+    boolean deliverIceCream(Customer customer);
+
+    void cancelIceCream();
 }

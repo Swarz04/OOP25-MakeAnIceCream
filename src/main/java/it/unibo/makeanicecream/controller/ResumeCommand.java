@@ -13,27 +13,26 @@ import it.unibo.makeanicecream.api.GameLoop;
  */
 public final class ResumeCommand implements Command {
 
-    private final Game game;
     private final GameLoop gameLoop;
 
     /**
      * Constructs a new ResumeCommand.
      *
-     * @param game the game instance to be resumed
      * @param gameLoop the game loop to be restarted
      */
-    public ResumeCommand(final Game game, final GameLoop gameLoop) {
-        this.game = game;
+    public ResumeCommand(final GameLoop gameLoop) {
         this.gameLoop = gameLoop;
     }
 
     /**
      * Executes the command by resuming the game
      * and restarting the game loop.
+     * 
+     * @param game the game instance on which the command should be executed
      */
     @Override
-    public void execute() {
-        this.game.resume();
+    public void execute(final Game game) {
+        game.resume();
         this.gameLoop.start();
     }
 }
