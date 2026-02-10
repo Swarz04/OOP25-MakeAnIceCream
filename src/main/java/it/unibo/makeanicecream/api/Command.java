@@ -8,9 +8,12 @@ package it.unibo.makeanicecream.api;
  * encapsulate user actions and decouple them from the controller logic.
  * </p>
  */
+@FunctionalInterface
 public interface Command {
     /**
      * Executes the command.
+     * 
+     * @param game the game instance on which the command should be executed
      */
-    void execute();
+    void execute(Game game);
 }

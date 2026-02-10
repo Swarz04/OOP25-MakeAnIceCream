@@ -4,10 +4,14 @@ package it.unibo.makeanicecream.api;
  * Player behaviour as in the project UML.
  */
 public interface Player {
-	
-	Icecream composeIceCream();
 
-	boolean deliverIceCream(Customer customer);
+    boolean addIngredient(Ingredient ingredient);
 
-	void cancelIceCream();
+    boolean chooseCone(Conetype conetype);
+
+    Icecream composeIceCream();
+
+    boolean deliverIceCream(Customer customer);
+
+    void cancelIceCream();
 }

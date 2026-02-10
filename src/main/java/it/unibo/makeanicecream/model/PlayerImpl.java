@@ -5,7 +5,6 @@ import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Player;
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Customer;
-
 import java.util.Objects;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class PlayerImpl implements Player {
 
     private Icecream currentIcecream;
-    private IceCreamBuilder builder;
+    private final IceCreamBuilder builder;
 
     /**
      * Builds a new Player instance.
@@ -29,6 +28,7 @@ public class PlayerImpl implements Player {
      * @param conetype the cone type
      * @return true if the cone was selected, false otherwise
      */
+    @Override
     public boolean chooseCone(final Conetype conetype) {
         return this.builder.chooseCone(conetype);
     }
@@ -39,6 +39,7 @@ public class PlayerImpl implements Player {
      * @param ingredient the ingredient to add
      * @return true if the ingredient was added, false otherwise
      */
+    @Override
     public boolean addIngredient(final Ingredient ingredient) {
         Objects.requireNonNull(ingredient, "ingredient must not be null");
         return this.builder.addIngredient(ingredient);

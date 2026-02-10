@@ -50,7 +50,7 @@ public class Scoop implements Ingredient {
         if (this == obj) {
             return true;
         }
-        if(!(obj instanceof Scoop otherScoop)) {
+        if (!(obj instanceof Scoop otherScoop)) {
             return false;
         }
         return this.flavor == otherScoop.flavor;
