@@ -126,5 +126,4 @@ public final class GameImpl implements Game {
         this.currentLevel.update(deltaTime);
         checkLevelProgress();
     }
-
 }

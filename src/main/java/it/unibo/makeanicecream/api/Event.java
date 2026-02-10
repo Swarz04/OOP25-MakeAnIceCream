@@ -6,7 +6,7 @@ package it.unibo.makeanicecream.api;
 public interface Event {
     /**
      * Returns the type of the user action.
-     * 
+     *
      * @return the type of this action
      */
     EventType getType();

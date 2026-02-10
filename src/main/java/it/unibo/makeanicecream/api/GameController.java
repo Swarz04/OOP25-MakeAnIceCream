@@ -10,7 +10,6 @@ package it.unibo.makeanicecream.api;
  * boundaries about changes to be displayed.
  * </p>
  */
-
 public interface GameController {
 
     /**

@@ -1,15 +1,16 @@
 package it.unibo.makeanicecream.view;
 
+import javax.swing.JFrame;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 
 /**
  * Implementation of the {@link GameView} interface.
  */
-public final class GameViewImpl implements GameView {
+public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
-    public void setController(final GameController controller) {
+    public void setController(GameController controller) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setController'");
     }
@@ -68,4 +69,5 @@ public final class GameViewImpl implements GameView {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
+    
 }

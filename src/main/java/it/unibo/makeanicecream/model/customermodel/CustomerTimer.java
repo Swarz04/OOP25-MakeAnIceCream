@@ -5,8 +5,8 @@ import it.unibo.makeanicecream.api.Timer;
 /**
  * Implementation of the Timer interface for costumer orders.
  * This class manages a countdown timer that can be started, paused, resumed
- * and can notifies when expired via a callback.
- * 
+ * and notifies when expired via a callback.
+ *
  */
 public final class CustomerTimer implements Timer {
 
