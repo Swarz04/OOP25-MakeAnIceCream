@@ -22,7 +22,7 @@ public class IngredientFactory {
      * @param name the name of the ingredient to create, which can be a flavor, liquid topping, or solid topping
      * @return the created ingredient instance
      */
-    public Ingredient createIngredient(final String name) {
+    public static Ingredient createIngredient(final String name) {
         if(name == null || name.isBlank()) {
             throw new IllegalArgumentException("Ingredient name cannot be null or blank");
         }
