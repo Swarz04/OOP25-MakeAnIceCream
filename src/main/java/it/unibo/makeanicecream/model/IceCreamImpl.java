@@ -3,9 +3,10 @@ package it.unibo.makeanicecream.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 /**
  * IceCreamImpl class implementing the Icecream interface.

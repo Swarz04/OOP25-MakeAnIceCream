@@ -1,6 +1,7 @@
 package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.Ingredient;
+import it.unibo.makeanicecream.api.LiquidToppingType;
 
 /**
  * LiquidTopping class representing a liquid topping ingredient.

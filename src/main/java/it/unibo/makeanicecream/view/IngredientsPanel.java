@@ -1,8 +1,5 @@
 package it.unibo.makeanicecream.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -12,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import it.unibo.makeanicecream.api.GameController;
-import it.unibo.makeanicecream.model.ingredient.FlavorType;
-import it.unibo.makeanicecream.model.ingredient.LiquidToppingType;
-import it.unibo.makeanicecream.model.ingredient.SolidToppingType;
+import it.unibo.makeanicecream.api.LiquidToppingType;
+import it.unibo.makeanicecream.api.SolidToppingType;
 import it.unibo.makeanicecream.api.EventType;
+import it.unibo.makeanicecream.api.FlavorType;
 
 /**
  * Panel responsible for displaying available ingredients as buttons.

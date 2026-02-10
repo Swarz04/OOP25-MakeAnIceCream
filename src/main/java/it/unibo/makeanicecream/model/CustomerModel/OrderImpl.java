@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
 /**

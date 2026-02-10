@@ -3,17 +3,23 @@ package it.unibo.makeanicecream.controller;
 import it.unibo.makeanicecream.api.Command;
 import it.unibo.makeanicecream.api.Game;
 
-public class DeliverCommand implements Command{
-
-    private Game game;
-
-    public DeliverCommand(final Game game) {
-        this.game = game;
-    }
-
+/**
+ * Command that delivers the prepared ice cream to the current customer.
+ * 
+ * <p>
+ * This command is executed when the player decides to deliver
+ * the ice cream to the customer of the current level.
+ * </p>
+ */
+public final class DeliverCommand implements Command {
+    /**
+     * Executes the command by delivering the ice cream
+     * to the current customer.
+     * 
+     * @param game the game instance on which the command should be executed
+     */
     @Override
-    public void execute() {
-        this.game.getPlayer().deliverIceCream(this.game.getCurrentLevel().getCurrentCustomer());
+    public void execute(final Game game) {
+        game.deliverIceCream(game.getCurrentLevel().getCurrentCustomer());
     }
-    
 }

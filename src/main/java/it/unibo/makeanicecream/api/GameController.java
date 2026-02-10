@@ -1,7 +1,8 @@
 package it.unibo.makeanicecream.api;
 
 /**
- * Implementation of the game controller.
+ * Interface representing the game controller.
+ * 
  * <p>
  * This class coordinates the game execution by acting as the Control component
  * in the MVC/ECB architecture. It receives user actions from the Boundary
@@ -13,31 +14,38 @@ package it.unibo.makeanicecream.api;
 public interface GameController {
 
     /**
-     * Starts a new game at the specified level.
-     * 
-     * @param levelNumber the number of the level
-     */
-    void startGame(int levelNumber);
-
-    /**
      * Handles a user action coming from the view.
      * 
-     * @param action the user action to be processed
+     * @param event the user action to be processed
+     * 
+     * @throws IllegalArgumentException if the event is null or its type is unknown
      */
-    void handleInput(Event action);
+    void handleInput(Event event);
 
     /**
      * Updates the game state.
      * 
-     * @param deltaTime the time in seconds since tha last update
+     * @param deltaTime the time in seconds since the last update
      */
     void updateGame(double deltaTime);
 
     /**
-     * Sets a new view.
+     * Sets a new view to be controlled by this controller.
      *
      * @param view the view to be set
      */
     void setView(GameView view);
+
+    /**
+     * Checks if the game is currently in a playing state.
+     * 
+     * <p>
+     * The game is considered playing when a level has been started
+     * and is neither paused nor completed.
+     * </p>
+     *
+     * @return true if the game is in the PLAYING state, false otherwise
+     */
+    boolean isGamePlaying();
 
 }

@@ -18,7 +18,7 @@ public final class CustomerTimer implements Timer{
     /**
      * Constructor with the specified duration of the timer.
      * The timer starts in paused state.
-     *
+     * 
      * @param seconds the initial time must be in positive seconds.
      */
     public CustomerTimer(double seconds){
@@ -55,14 +55,14 @@ public final class CustomerTimer implements Timer{
     /**
      * Updates the timer state by the specified delta time.
      * If the timer reaches zero, the expired callback will be invoked.
-     *
+     * 
      * @param deltaTime the time passed since the last update (in seconds).
      */
     @Override
     public void update(double deltaTime) {
         if (expired || paused) {
             return;
-        }
+        } 
 
         secondsLeft -= deltaTime;
 
@@ -77,7 +77,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Check if the timer has expired.
-     *
+     * 
      * @return true if the timer has reached zero, false otherwise.
      */
     @Override
@@ -87,7 +87,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Gets the remaining time in seconds.
-     *
+     * 
      * @return the remaining time in seconds (not negative).
      */
     @Override
@@ -97,7 +97,7 @@ public final class CustomerTimer implements Timer{
 
     /**
      * Check if the timer is currently paused.
-     *
+     * 
      * @return true if the timer is paused, false otherwise.
      */
     @Override

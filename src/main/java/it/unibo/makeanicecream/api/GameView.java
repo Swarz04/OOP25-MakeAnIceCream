@@ -4,7 +4,6 @@ package it.unibo.makeanicecream.api;
  * Represents a view (boundary) architectural component of the application.
  */
 public interface GameView {
-    
     /**
      * Sets the controller controlled by this view (if works as input).
      *

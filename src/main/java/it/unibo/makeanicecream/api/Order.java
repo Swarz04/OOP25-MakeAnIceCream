@@ -2,8 +2,6 @@ package it.unibo.makeanicecream.api;
 
 import java.util.List;
 
-import it.unibo.makeanicecream.model.ingredient.Conetype;
-
     /**
      * Interface representing a customer's ice cream order.
      * An order specifies the required flavos, cone and toppings.
