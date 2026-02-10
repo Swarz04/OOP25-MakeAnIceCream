@@ -1,6 +1,6 @@
 package it.unibo.makeanicecream.controller;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -13,17 +13,21 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameView;
 
+/**
+ * Implementation of the {@link GameController} interface.
+ */
 public class GameControllerImpl implements GameController {
 
     private final Game game;
     private final GameLoop gameLoop;
     private GameView view;
-    private final Map<EventType, Function<Event, Command>> commands = new HashMap<>();
+    private final Map<EventType, Function<Event, Command>> commands = new EnumMap<>(EventType.class);
 
     /**
      * Builds a new game controller provided a game model.
      *
      * @param game the implementation of the game model
+     * @param gameLoop the implementation of the game loop
      */
     public GameControllerImpl(final Game game, final GameLoop gameLoop) {
         this.game = game;
@@ -47,7 +51,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void setView(GameView view) {
+    public void setView(final GameView view) {
         this.view = view;
         this.view.setController(this);
     }

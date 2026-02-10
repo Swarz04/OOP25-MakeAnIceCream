@@ -6,7 +6,6 @@ package it.unibo.makeanicecream.api;
  */
 
 public interface GameLoop {
-    
     /**
      * Starts the game loop.
      */

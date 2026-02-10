@@ -153,16 +153,17 @@ public class IceCreamBuilder {
     /**
      * Submit the current ice cream and return it.
      * 
+     * @return the ice cream instance
+     * 
      * @throws IllegalStateException if the ice cream is not valid (e.g., no cone, no scoops)
      * @throws IllegalStateException if the ice cream hasn't been built yet (e.g., no ingredients added)
-     * @return the ice cream instance
      */
     public IceCreamImpl submit() {
         if (this.cone == null || this.lisIngredients.isEmpty()) {
             throw new IllegalStateException("An ice cream must have a cone and at least one ingredient");
         }
 
-        if(countScoops() < 1) {
+        if (countScoops() < 1) {
             throw new IllegalStateException("An ice cream must have at least one scoop");
         }
 

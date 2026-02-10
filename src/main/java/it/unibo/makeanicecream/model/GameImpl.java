@@ -19,7 +19,7 @@ public class GameImpl implements Game {
         this.state = GameState.MENU;
         this.player = new PlayerImpl();
     }
-    
+
     @Override
     public void start(final int levelNumber) {
         if (levelNumber <= 0) {
@@ -64,7 +64,6 @@ public class GameImpl implements Game {
         this.currentLevel = null;
     }
 
-
     @Override
     public boolean isGameOver() {
         return this.state == GameState.GAME_OVER;
@@ -98,7 +97,6 @@ public class GameImpl implements Game {
         if (this.state != GameState.PLAYING || this.currentLevel == null) {
             return;
         }
-        
         this.currentLevel.update(deltaTime);
         checkLevelProgress();
     }

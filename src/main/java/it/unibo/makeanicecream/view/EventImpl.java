@@ -3,7 +3,7 @@ package it.unibo.makeanicecream.view;
 import it.unibo.makeanicecream.api.Event;
 import it.unibo.makeanicecream.api.EventType;
 
-public class EventImpl implements Event{
+public class EventImpl implements Event {
     private final EventType type;
     private final String data;
 
@@ -13,12 +13,12 @@ public class EventImpl implements Event{
     }
 
     @Override
-    public EventType getType(){
+    public EventType getType() {
         return this.type;
     }
 
     @Override
-    public String getData(){
+    public String getData() {
         return this.data;
     }
 }

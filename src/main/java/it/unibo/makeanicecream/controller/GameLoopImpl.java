@@ -6,11 +6,11 @@ import it.unibo.makeanicecream.api.GameLoop;
 /**
  * Implementation of {@link GameLoop} that runs the game in a separate thread.
  */
-public class GameLoopImpl implements GameLoop, Runnable{
+public class GameLoopImpl implements GameLoop, Runnable {
     private static final double MILLIS_IN_SECONDS = 1000.0;
 
-    private long period;
-    private GameController controller;
+    private final long period;
+    private final GameController controller;
     private volatile boolean running;
 
     public GameLoopImpl(final GameController controller, final long period) {
@@ -39,26 +39,25 @@ public class GameLoopImpl implements GameLoop, Runnable{
     public void run() {
         long previousCycleStartTime = System.currentTimeMillis();
 
-        while(this.running) {
-            long currentCycleStartTime = System.currentTimeMillis();
-            long elapsed = currentCycleStartTime - previousCycleStartTime;
+        while (this.running) {
+            final long currentCycleStartTime = System.currentTimeMillis();
+            final long elapsed = currentCycleStartTime - previousCycleStartTime;
 
             if (this.controller.isGamePlaying()) {
                 this.controller.updateGame(elapsed / MILLIS_IN_SECONDS);
             }
-            
+
             this.waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
     }
 
-    protected void waitForNextFrame(long cycleStartTime){
-		long dt = System.currentTimeMillis() - cycleStartTime;
-		if (dt < period){
+    protected void waitForNextFrame(final long cycleStartTime) {
+        final long dt = System.currentTimeMillis() - cycleStartTime;
+		if (dt < period) {
 			try {
 				Thread.sleep(period - dt);
-			} catch (Exception ex){}
+			} catch (final Exception ex) { }
 		}
 	}
-    
 }
