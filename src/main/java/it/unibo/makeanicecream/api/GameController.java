@@ -47,4 +47,10 @@ public interface GameController {
      */
     boolean isGamePlaying();
 
+    /**
+     * Returns the current state of the game.
+     *
+     * @return the current game state
+     */
+    GameState getGameState();
 }
