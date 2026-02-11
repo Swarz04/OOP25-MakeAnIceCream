@@ -18,7 +18,7 @@ import it.unibo.makeanicecream.api.GameLoop;
 class ResumeCommandTest {
 
     @Test
-    void pausesGameAndStopsGameLoop() {
+    void resumesGameAndStartsGameLoop() {
         final Game game = mock(Game.class);
         final GameLoop loop = mock(GameLoop.class);
         final ResumeCommand command = new ResumeCommand(loop);

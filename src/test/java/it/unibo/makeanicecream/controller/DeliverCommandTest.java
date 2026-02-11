@@ -20,7 +20,7 @@ import it.unibo.makeanicecream.api.Customer;
 class DeliverCommandTest {
 
     @Test
-    void shouldDeliverIceCreamToCurrentCustomer() {
+    void deliverIceCreamToCurrentCustomer() {
         final Game game = mock(Game.class);
         final Level level = mock(Level.class);
         final Customer customer = mock(Customer.class);

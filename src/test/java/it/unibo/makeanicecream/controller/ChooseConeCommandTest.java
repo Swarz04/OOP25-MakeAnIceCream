@@ -18,7 +18,7 @@ import it.unibo.makeanicecream.api.Game;
 class ChooseConeCommandTest {
 
     @Test
-    void shouldChooseTheCorrectCone() {
+    void chooseTheCorrectCone() {
         final Game game = mock(Game.class);
         final Conetype selectedCone = Conetype.CLASSIC;
         final ChooseConeCommand command = new ChooseConeCommand(selectedCone);
