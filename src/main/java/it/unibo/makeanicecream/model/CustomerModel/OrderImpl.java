@@ -33,7 +33,7 @@ public class OrderImpl implements Order {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
-        if (toppings == null ){
+        if (toppings == null) {
             this.requiredToppings = new ArrayList<>();
         } else {
             this.requiredToppings = new ArrayList<>(toppings);
@@ -132,14 +132,14 @@ public class OrderImpl implements Order {
         if (expectedIngredients.size() != actualIngredients.size()) {
             return false;
         }
-        for (int i = 0; i < expectedIngredients.size(); i++){
-            if(!expectedIngredients.get(i).equals(actualIngredients.get(i))){
+        for (int i = 0; i < expectedIngredients.size(); i++) {
+            if (!expectedIngredients.get(i).equals(actualIngredients.get(i))) {
                 return false;
             }
         }
         return true;
     }
-    
+
     /**
      * Helper: gets all required ingredient requirements.
      * 
