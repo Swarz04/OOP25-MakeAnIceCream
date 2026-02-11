@@ -23,6 +23,12 @@ public final class Main {
      * @param args The command line arguments.
      */
     public static void main(final String[] args) {
+        /*final Game model = new GameImpl();
+        final GameController controller = new GameControllerImpl(model);
+        final GameView view = new GameViewImpl(model);
+        controller.setView(view);
+        view.start();*/
+
         final GameEngine engine = new GameEngineImpl();
         final GameView view = new GameViewImpl(engine.getController());
         engine.getController().setView(view);
