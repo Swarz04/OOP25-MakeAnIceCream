@@ -13,23 +13,31 @@ public interface GameView {
 
     /**
      * Displays the current customer being served.
+     * 
+     * @param name the name of the current customer
      */
-    void showCustomer();
+    void showCustomer(String name);
 
     /**
      * Displays the order of the current customer.
+     * 
+     * @param order the order of the current customer
      */
-    void showOrder();
+    void showOrder(String order);
 
     /**
      * Displays the remaining time of the current customer.
+     * 
+     * @param timer the timer of the current customer
      */
-    void showTimer();
+    void showTimer(double timer);
 
     /**
      * Displays the remaining lives of the player.
+     * 
+     * @param lives the number of remaining lives
      */
-    void showLives();
+    void showLives(int lives);
 
     /**
      * Displays the avaiable ingredients.
