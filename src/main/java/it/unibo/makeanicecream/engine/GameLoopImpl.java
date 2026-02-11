@@ -1,33 +1,27 @@
-package it.unibo.makeanicecream.controller;
+package it.unibo.makeanicecream.engine;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.makeanicecream.api.GameController;
+import java.util.function.Consumer;
+
 import it.unibo.makeanicecream.api.GameLoop;
 
 /**
  * Implementation of {@link GameLoop} that runs the game in a separate thread.
  */
 public final class GameLoopImpl implements GameLoop, Runnable {
-    private static final double MILLIS_IN_SECONDS = 1000.0;
 
     private volatile boolean running;
     private final long period;
-
-     @SuppressFBWarnings(
-        value = "EI_EXPOSE_REP",
-        justification = "Controller reference is safely shared for game loop updates"
-    )
-    private final GameController controller;
+    private final Consumer<Long> updater;
 
     /**
      * Constructs a new game loop with the given controller and frame period.
      *
-     * @param controller the game controller to update each frame
      * @param period the period of each frame in milliseconds
+     * @param updater the action to be executed at each frame iteration
      */
-    public GameLoopImpl(final GameController controller, final long period) {
+    public GameLoopImpl(final long period, final Consumer<Long> updater) {
         this.period = period;
-        this.controller = controller;
+        this.updater = updater;
         this.running = false;
     }
 
@@ -55,9 +49,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
 
-            if (this.controller.isGamePlaying()) {
-                this.controller.updateGame(elapsed / MILLIS_IN_SECONDS);
-            }
+            this.updater.accept(elapsed);
 
             this.waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
