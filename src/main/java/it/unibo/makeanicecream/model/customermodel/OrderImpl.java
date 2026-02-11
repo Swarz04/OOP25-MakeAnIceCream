@@ -2,9 +2,7 @@ package it.unibo.makeanicecream.model.customermodel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import it.unibo.makeanicecream.api.Conetype;
@@ -36,7 +34,11 @@ public class OrderImpl implements Order {
         validateConstructorArguments(flavors, cone, toppings);
         this.requiredFlavors = new ArrayList<>(flavors);
         this.requiredCone = cone;
-        this.requiredToppings = new ArrayList<>(toppings);
+        if (toppings == null) {
+            this.requiredToppings = new ArrayList<>();
+        } else {
+            this.requiredToppings = new ArrayList<>(toppings);
+        }
     }
 
     /**
@@ -68,6 +70,15 @@ public class OrderImpl implements Order {
                      != IngredientType.SOLID_TOPPING) {
                     throw new IllegalArgumentException("i toppings devono essere LIQUID o SOLID");
                 }
+            }
+            int solidCount = 0;
+            for (final Ingredient topping: toppings) {
+                if (topping.getType() == IngredientType.SOLID_TOPPING) {
+                    solidCount++;
+                }
+            }
+            if (solidCount > 1) {
+                throw new IllegalArgumentException("Al massimo un topping solido alla fine per ordine");
             }
         }
     }
@@ -116,41 +127,18 @@ public class OrderImpl implements Order {
         if (iceCream.getConetype() != requiredCone) {
             return false;
         }
-        final List<Ingredient> iceCreamIngredients = iceCream.getIngredients();
+        final List<Ingredient> actualIngredients = iceCream.getIngredients();
+        final List<Ingredient> expectedIngredients = getAllRequiredIngredients();
 
-        return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
-    }
-
-    /**
-     * Checks if two list contain exactly the same ingredients (same elements, same counts).
-     * 
-     * @param list1 first list of ingredients.
-     * @param list2 second list of ingredients.
-     * @return true if lists contain exactly the same ingredients, false otherwise.
-     */
-    private boolean haveSameIngredients(final List<Ingredient> list1, final List<Ingredient> list2) {
-        if (list1.size() != list2.size()) {
+        if (expectedIngredients.size() != actualIngredients.size()) {
             return false;
         }
-
-        final Map<Ingredient, Integer> counts1 = countIngredients(list1);
-        final Map<Ingredient, Integer> counts2 = countIngredients(list2);
-
-        return counts1.equals(counts2);
-    }
-
-    /**
-     * Counts occurrences of each unique ingredient in a list.
-     * 
-     * @param ingredients list to count.
-     * @return map from ingredient to its count in the list.
-     */
-    private Map<Ingredient, Integer> countIngredients(final List<Ingredient> ingredients) {
-        final Map<Ingredient, Integer> counts = new HashMap<>();
-        for (final Ingredient ingredient : ingredients) {
-            counts.put(ingredient, counts.getOrDefault(ingredient, 0) + 1);
+        for (int i = 0; i < expectedIngredients.size(); i++) {
+            if (!expectedIngredients.get(i).equals(actualIngredients.get(i))) {
+                return false;
+            }
         }
-        return counts;
+        return true;
     }
 
     /**

@@ -47,13 +47,7 @@ public class LiquidTopping implements Ingredient {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof LiquidTopping otherLiquidTopping)) {
-            return false;
-        }
-        return this.topping == otherLiquidTopping.topping;
+        return this == obj || obj instanceof LiquidTopping otherLiquidTopping && this.topping == otherLiquidTopping.topping;
     }
 
     /**

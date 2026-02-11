@@ -28,7 +28,7 @@ public final class LevelFactory {
 
     /**
      * Creates a level based on the given difficulty.
-     * 
+     *
      * @param difficulty the difficulty level (1-5)
      *
      * @return a new Level instance
