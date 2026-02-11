@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.model.ingredient;
+package it.unibo.makeanicecream.api;
 
 /**
  * FlavorType enumeration.
