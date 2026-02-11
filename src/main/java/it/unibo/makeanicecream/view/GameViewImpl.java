@@ -75,12 +75,41 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.actionsPanel.setController(controller);
     }
 
-    @Override public void showCustomer() { }
-    @Override public void showOrder() { }
-    @Override public void showTimer() { }
-    @Override public void showLives() { }
-    @Override public void showIngredients() { }
-    @Override public void showIceCream() { }
+    @Override
+    public void showCustomer(final String name) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showCustomer'");
+    }
+
+    @Override
+    public void showOrder(final String order) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showOrder'");
+    }
+
+    @Override
+    public void showTimer(final double timer) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showTimer'");
+    }
+
+    @Override
+    public void showLives(final int lives) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showLives'");
+    }
+
+    @Override
+    public void showIngredients() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showIngredients'");
+    }
+
+    @Override
+    public void showIceCream() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showIceCream'");
+    }
 
     @Override
     public void start() {
