@@ -146,10 +146,7 @@ public class OrderImpl implements Order {
         }
         return counts;
     }
-<<<<<<< HEAD:src/main/java/it/unibo/makeanicecream/model/CustomerModel/OrderImpl.java
-=======
 
->>>>>>> origin/master:src/main/java/it/unibo/makeanicecream/model/customermodel/OrderImpl.java
     /**
      * Helper: gets all required ingredient requirements
      */
