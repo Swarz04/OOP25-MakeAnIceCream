@@ -12,6 +12,7 @@ import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
+import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.GameView;
 
 public final class GameControllerImpl implements GameController {
@@ -81,5 +82,10 @@ public final class GameControllerImpl implements GameController {
     @Override
     public boolean isGamePlaying() {
         return this.game.isPlaying();
+    }
+
+    @Override
+    public GameState getGameState() {
+        return this.game.getState();
     }
 }
