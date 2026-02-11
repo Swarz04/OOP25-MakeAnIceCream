@@ -96,7 +96,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     @Override
     public void update() {
         SwingUtilities.invokeLater(() -> {
-            final GameState currentState = this.controller.getState();
+            final GameState currentState = this.controller.getGameState();
             if (currentState == GameState.MENU) {
                 this.layout.show(this.mainPanel, MENU_CARD);
             } else {

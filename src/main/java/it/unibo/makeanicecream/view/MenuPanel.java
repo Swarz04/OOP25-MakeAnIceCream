@@ -42,7 +42,7 @@ public final class MenuPanel extends JPanel {
             levelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
             levelButton.addActionListener(e -> {
                 if (this.controller != null) {
-                    this.controller.startGame(levelNumber);
+                    this.controller.startGame(levelNumber); //NOTA: Creare un Event con EventType.START_LEVEL
                 }
             });
             this.add(levelButton);
