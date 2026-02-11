@@ -101,6 +101,15 @@ public final class GameImpl implements Game {
         return this.state == GameState.PLAYING;
     }
 
+    @Override
+    public void update(final double deltaTime) {
+        if (this.state != GameState.PLAYING || this.currentLevel == null) {
+            return;
+        }
+        this.currentLevel.update(deltaTime);
+        checkLevelProgress();
+    }
+
     /**
      * Updates the game state based on the current level progress.
      * Sets the state to GAME_OVER if lives are exhausted,
@@ -116,14 +125,5 @@ public final class GameImpl implements Game {
         } else if (!this.currentLevel.hasNextCustomer()) {
             this.state = GameState.LEVEL_COMPLETED;
         }
-    }
-
-    @Override
-    public void update(final double deltaTime) {
-        if (this.state != GameState.PLAYING || this.currentLevel == null) {
-            return;
-        }
-        this.currentLevel.update(deltaTime);
-        checkLevelProgress();
     }
 }

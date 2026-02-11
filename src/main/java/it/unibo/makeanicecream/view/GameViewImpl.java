@@ -16,25 +16,25 @@ public final class GameViewImpl extends JFrame implements GameView {
     }
 
     @Override
-    public void showCustomer() {
+    public void showCustomer(final String name) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showCustomer'");
     }
 
     @Override
-    public void showOrder() {
+    public void showOrder(final String order) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showOrder'");
     }
 
     @Override
-    public void showTimer() {
+    public void showTimer(final double timer) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showTimer'");
     }
 
     @Override
-    public void showLives() {
+    public void showLives(final int lives) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showLives'");
     }
