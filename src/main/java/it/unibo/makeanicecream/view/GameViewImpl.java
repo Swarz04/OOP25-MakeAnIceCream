@@ -31,15 +31,15 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final IngredientsPanel ingredientsPanel;
     private final ActionsPanel actionsPanel;
 
-    private final Game game;
+    private final GameController controller;
 
     /**
      * Builds a new GameViewImpl.
      *
-     * @param game the game model
+     * @param controller the game model
      */
-    public GameViewImpl(final Game game) {
-        this.game = game;
+    public GameViewImpl(final GameController controller) {
+        this.controller = controller;
         setTitle(FRAME_NAME);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -96,13 +96,13 @@ public final class GameViewImpl extends JFrame implements GameView {
     @Override
     public void update() {
         SwingUtilities.invokeLater(() -> {
-            final GameState currentState = this.game.getState();
+            final GameState currentState = this.controller.getState();
             if (currentState == GameState.MENU) {
                 this.layout.show(this.mainPanel, MENU_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
-                if (this.game.getCurrentLevel() != null) {
-                    final var level = this.game.getCurrentLevel();
+                if (this.controller.getCurrentLevel() != null) {
+                    final var level = this.controller.getCurrentLevel();
                     final var customer = level.getCurrentCustomer();
 
                     this.statusPanel.update(level.getLives(),
