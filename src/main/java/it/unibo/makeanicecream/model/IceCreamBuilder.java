@@ -153,8 +153,7 @@ public class IceCreamBuilder {
     /**
      * Submit the current ice cream and return it.
      * 
-     * @return the ice cream instance
-     * 
+     * @return the ice cream instannce
      * @throws IllegalStateException if the ice cream is not valid (e.g., no cone, no scoops)
      * @throws IllegalStateException if the ice cream hasn't been built yet (e.g., no ingredients added)
      */
