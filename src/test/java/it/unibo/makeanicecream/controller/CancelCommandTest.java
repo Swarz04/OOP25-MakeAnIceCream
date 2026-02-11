@@ -8,11 +8,10 @@ import org.junit.jupiter.api.Test;
 import it.unibo.makeanicecream.api.Game;
 
 /**
- * Unit test for {@link CancelCommand}.
+ * Test class for the {@link CancelCommand} class.
  * 
  * <p>
- * This test verifies that executing the CancelCommand correctly
- * cancels the current ice cream on the provided Game instance.
+ * Verifies that the current ice cream is cancelled in the game.
  * </p>
  */
 class CancelCommandTest {

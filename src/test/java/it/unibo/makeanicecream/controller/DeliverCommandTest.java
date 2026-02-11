@@ -11,11 +11,10 @@ import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Customer;
 
 /**
- * Unit test for {@link DeliverCommand}.
+ * Test class for the {@link DeliverCommand} class.
  * 
  * <p>
- * This test verifies that executing the DeliverCommand correctly
- * delivers the current ice cream to the active customer in the game.
+ * Verifies that the ice cream is delivered to the current customer.
  * </p>
  */
 class DeliverCommandTest {

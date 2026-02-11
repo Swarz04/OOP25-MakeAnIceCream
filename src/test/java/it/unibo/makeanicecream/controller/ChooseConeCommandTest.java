@@ -9,11 +9,10 @@ import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Game;
 
 /**
- * Unit test for {@link ChooseConeCommand}.
+ * Test class for the {@link ChooseConeCommand} class.
  * 
  * <p>
- * This test verifies that executing the ChooseConeCommand correctly
- * selects the specified cone type on the provided Game instance.
+ * Verifies that the selected cone is set in the game.
  * </p>
  */
 class ChooseConeCommandTest {

@@ -11,11 +11,11 @@ import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.model.IngredientFactory;
 
 /**
- * Unit test for {@link AddIngredientCommand}.
+ * Test class for the {@link AddIngredientCommand} class.
  * 
  * <p>
- * This test verifies that the AddIngredientCommand correctly creates
- * an ingredient and adds it to the provided Game instance when executed.
+ * Verifies that an ingredient is created and added to the
+ * provided game instance.
  * Note: This test does not check the internal logic of the {@link IngredientFactory},
  * as the factory is assumed to work correctly. The focus is on the interaction between
  * the command and the game.
