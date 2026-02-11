@@ -24,7 +24,7 @@ import it.unibo.makeanicecream.model.GameImpl;
 import it.unibo.makeanicecream.model.IngredientFactory;
 
 /**
- * Unit tests for {@link GameImpl}.
+ * Test class for the {@link GameImpl} class.
  * This test suite verifies:
  * <ul>
  *     <li>Initial game state</li>
