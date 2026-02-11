@@ -36,9 +36,8 @@ class GameImplTest {
 
     @Test
     void testStartWithInvalidLevelThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            game.start(0);
-        });
+        assertThrows(IllegalArgumentException.class, () -> game.start(0));
+        assertThrows(IllegalArgumentException.class, () -> game.start(-5));
     }
 
     @Test
