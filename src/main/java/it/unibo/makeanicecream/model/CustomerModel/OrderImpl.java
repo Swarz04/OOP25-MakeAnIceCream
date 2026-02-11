@@ -2,9 +2,7 @@ package it.unibo.makeanicecream.model.customermodel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
@@ -79,8 +77,7 @@ public class OrderImpl implements Order {
                 }
             }
             if (solidCount > 1) {
-                throw new IllegalArgumentException("Al massimo un topping solido alla 
-                fine per ordine");
+                throw new IllegalArgumentException("Al massimo un topping solido alla fine per ordine");
             }
         }
     }
@@ -129,9 +126,18 @@ public class OrderImpl implements Order {
         if (iceCream.getConetype() != requiredCone) {
             return false;
         }
-        final List<Ingredient> iceCreamIngredients = iceCream.getIngredients();
+        final List<Ingredient> actualIngredients = iceCream.getIngredients();
+        final List<Ingredient> expectedIngredients = getAllRequiredIngredients();
 
-        return haveSameIngredients(getAllRequiredIngredients(), iceCreamIngredients);
+        if (expectedIngredients.size() != actualIngredients.size()) {
+            return false;
+        }
+        for (int i = 0; i < expectedIngredients.size(); i++){
+            if(!expectedIngredients.get(i).equals(actualIngredients.get(i))){
+                return false;
+            }
+        }
+        return true;
     }
     
     /**
