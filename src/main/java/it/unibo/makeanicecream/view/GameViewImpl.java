@@ -10,7 +10,7 @@ import it.unibo.makeanicecream.api.GameView;
 public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
-    public void setController(GameController controller) {
+    public void setController(final GameController controller) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setController'");
     }
@@ -68,6 +68,4 @@ public final class GameViewImpl extends JFrame implements GameView {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
-
-    
 }
