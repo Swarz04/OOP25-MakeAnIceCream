@@ -77,6 +77,10 @@ public final class GameControllerImpl implements GameController {
     public void updateGame(final double deltaTime) {
         this.game.update(deltaTime);
 
+        if (!isGamePlaying() && this.gameLoop.isRunning()) {
+            this.gameLoop.stop();
+        }
+
         if (this.view != null && this.game.isPlaying()) {
             final CustomerInfo customerInfo = getCurrentCustomerInfo();
             if (customerInfo != null) {
