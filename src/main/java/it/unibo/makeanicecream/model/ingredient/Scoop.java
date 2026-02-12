@@ -47,13 +47,7 @@ public class Scoop implements Ingredient {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Scoop otherScoop)) {
-            return false;
-        }
-        return this.flavor == otherScoop.flavor;
+        return this == obj || obj instanceof Scoop otherScoop && this.flavor == otherScoop.flavor;
     }
 
     /**

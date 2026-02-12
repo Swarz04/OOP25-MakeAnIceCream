@@ -47,13 +47,7 @@ public class SolidTopping implements Ingredient {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof SolidTopping otherSolidTopping)) {
-            return false;
-        }
-        return this.topping == otherSolidTopping.topping;
+        return this == obj || obj instanceof SolidTopping otherSolidTopping && this.topping == otherSolidTopping.topping;
     }
 
     /**

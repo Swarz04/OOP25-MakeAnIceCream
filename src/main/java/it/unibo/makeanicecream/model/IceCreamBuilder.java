@@ -17,7 +17,7 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
 public class IceCreamBuilder {
     private static final int MAX_SCOOPS = 3;
     private Conetype cone;
-    private final List<Ingredient> lisIngredients = new ArrayList<>();
+    private final List<Ingredient> listIngredients = new ArrayList<>();
     private boolean isClosed;
     private boolean toppingEnabled;
 
@@ -78,7 +78,7 @@ public class IceCreamBuilder {
      */
     private int countScoops() {
         int count = 0;
-        for (final Ingredient ingredient : lisIngredients) {
+        for (final Ingredient ingredient : listIngredients) {
             if (ingredient.getType() == IngredientType.SCOOP) {
                 count++;
             }
@@ -137,7 +137,7 @@ public class IceCreamBuilder {
             isClosed = true;
         }
 
-        this.lisIngredients.add(ingredient);
+        this.listIngredients.add(ingredient);
         return true;
     }
 
@@ -147,19 +147,18 @@ public class IceCreamBuilder {
      * @return the ice cream instance
      */
     public IceCreamImpl getIceCream() {
-        return new IceCreamImpl(this.cone, List.copyOf(lisIngredients), this.isClosed);
+        return new IceCreamImpl(this.cone, List.copyOf(listIngredients), this.isClosed);
     }
 
     /**
      * Submit the current ice cream and return it.
      * 
-     * @return the ice cream instance
-     * 
+     * @return the ice cream instannce
      * @throws IllegalStateException if the ice cream is not valid (e.g., no cone, no scoops)
      * @throws IllegalStateException if the ice cream hasn't been built yet (e.g., no ingredients added)
      */
     public IceCreamImpl submit() {
-        if (this.cone == null || this.lisIngredients.isEmpty()) {
+        if (this.cone == null || this.listIngredients.isEmpty()) {
             throw new IllegalStateException("An ice cream must have a cone and at least one ingredient");
         }
 
@@ -175,7 +174,7 @@ public class IceCreamBuilder {
      */
     public void reset() {
         cone = null;
-        lisIngredients.clear();
+        listIngredients.clear();
         isClosed = false;
     }
 }
