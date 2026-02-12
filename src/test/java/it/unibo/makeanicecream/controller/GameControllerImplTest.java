@@ -24,7 +24,7 @@ import it.unibo.makeanicecream.api.Level;
  * 
  * <p>
  * Verifies that the game controller correctly handles setting the view, processing input events,
- * querying game state, and updating the game and view.
+ * checking game state, and updating the game and view.
  * </p>
  */
 class GameControllerImplTest {
@@ -91,7 +91,7 @@ class GameControllerImplTest {
     }
 
     /**
-     * Verifies that GameControllerImpl returns the current game playing state.
+     * Verifies that GameControllerImpl correctly reports whether the game is currently playing.
      */
     @Test
     void testIsGamePlaying() {

@@ -17,7 +17,7 @@ import it.unibo.makeanicecream.api.Game;
 class CancelCommandTest {
 
     @Test
-    void cancelCurrentIceCream() {
+    void testCancelCurrentIceCream() {
         final Game game = mock(Game.class);
         final CancelCommand command = new CancelCommand();
 

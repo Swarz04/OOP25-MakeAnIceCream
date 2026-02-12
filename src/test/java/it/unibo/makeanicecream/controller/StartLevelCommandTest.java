@@ -22,7 +22,7 @@ class StartLevelCommandTest {
     private static final int NUM_LEVEL_2 = 3;
 
     @Test
-    void startsLevelAndGameLoop() {
+    void testStartsLevelAndGameLoop() {
         final Game game = mock(Game.class);
         final GameLoop loop = mock(GameLoop.class);
 
@@ -37,7 +37,7 @@ class StartLevelCommandTest {
     }
 
     @Test
-    void startsLevelWithoutRestartingLoop() {
+    void testStartsLevelWithoutRestartingLoop() {
         final Game game = mock(Game.class);
         final GameLoop loop = mock(GameLoop.class);
 

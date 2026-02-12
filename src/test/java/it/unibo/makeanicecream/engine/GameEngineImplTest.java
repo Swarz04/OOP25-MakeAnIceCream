@@ -25,7 +25,6 @@ class GameEngineImplTest {
         final Game game = mock(Game.class);
         controller = mock(GameController.class);
         loop = mock(GameLoop.class);
-
         engine = new GameEngineImpl(game, controller, loop);
     }
 
@@ -34,9 +33,8 @@ class GameEngineImplTest {
      * the start operation to the GameLoop.
      */
     @Test
-    void startShouldCallLoopStart() {
+    void testStartShouldCallLoopStart() {
         engine.start();
-
         verify(loop).start();
     }
 
@@ -45,9 +43,8 @@ class GameEngineImplTest {
      * the stop operation to the GameLoop.
      */
     @Test
-    void stopShouldCallLoopStop() {
+    void testStopShouldCallLoopStop() {
         engine.stop();
-
         verify(loop).stop();
     }
 
@@ -56,7 +53,7 @@ class GameEngineImplTest {
      * GameController instance that was injected via the constructor.
      */
     @Test
-    void shouldReturnInjectedController() {
+    void testGetController() {
         assertSame(controller, engine.getController());
     }
 }

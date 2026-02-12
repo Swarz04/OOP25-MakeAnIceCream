@@ -25,7 +25,7 @@ class AddIngredientCommandTest {
     private static final String INGREDIENT_NAME = "VANILLA";
 
     @Test
-    void createIngredientAndAddItToGame() {
+    void testCreateIngredientAndAddItToGame() {
         final Game game = mock(Game.class);
         final AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME);
 

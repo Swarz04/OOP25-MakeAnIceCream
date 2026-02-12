@@ -40,7 +40,7 @@ class GameLoopImplTest {
      * Test that start() sets running to true.
      */
     @Test
-    void startShouldSetRunningTrue() {
+    void testStartSetRunningTrue() {
         loop.start();
         assertTrue(loop.isRunning());
         loop.stop();
@@ -50,7 +50,7 @@ class GameLoopImplTest {
      * Test that stop() sets running to false.
      */
     @Test
-    void stopShouldSetRunningFalse() {
+    void testStopSetRunningFalse() {
         loop.start();
         loop.stop();
         assertFalse(loop.isRunning());
@@ -62,7 +62,7 @@ class GameLoopImplTest {
      * and calls the updater at least once.
      */
     @Test
-    void shouldCallUpdaterWhenStarted() throws InterruptedException {
+    void testCallUpdaterWhenStarted() throws InterruptedException {
         runLoopForTest();
         verify(updater, atLeastOnce()).accept(anyLong());
     }
@@ -71,7 +71,7 @@ class GameLoopImplTest {
      * Tests that GameLoopImpl correctly stops the loop.
      */
     @Test
-    void shouldStopLoopWhenStopped() throws InterruptedException {
+    void testStopLoopWhenStopped() throws InterruptedException {
         runLoopForTest();
         assertFalse(loop.isRunning(), "Loop should not be running after stop()");
     }
@@ -80,7 +80,7 @@ class GameLoopImplTest {
      * Tests that the updater receives a non-negative elapsed time.
      */
     @Test
-    void updaterShouldReceiveNonNegativeElapsedTime() throws InterruptedException {
+    void testUpdaterReceiveNonNegativeElapsedTime() throws InterruptedException {
         runLoopForTest();
         verify(updater, atLeastOnce()).accept(argThat(elapsed -> elapsed >= MIN_ELAPSED_MS));
     }
@@ -89,7 +89,7 @@ class GameLoopImplTest {
      * Tests that the updater receives an elapsed time capped at 100 ms.
      */
     @Test
-    void updaterShouldReceiveElapsedTimeNoGreaterThan100() throws InterruptedException {
+    void testUpdaterReceivesCappedElapsedTime() throws InterruptedException {
         runLoopForTest();
         verify(updater, atLeastOnce()).accept(argThat(elapsed -> elapsed <= MAX_ELAPSED_MS));
     }

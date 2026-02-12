@@ -18,7 +18,7 @@ import it.unibo.makeanicecream.api.GameLoop;
 class PauseCommandTest {
 
     @Test
-    void pausesGameAndStopsGameLoop() {
+    void testPausesGameAndStopsGameLoop() {
         final Game game = mock(Game.class);
         final GameLoop loop = mock(GameLoop.class);
         final PauseCommand command = new PauseCommand(loop);

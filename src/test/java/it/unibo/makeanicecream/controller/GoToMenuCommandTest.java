@@ -19,7 +19,7 @@ import it.unibo.makeanicecream.api.GameLoop;
 class GoToMenuCommandTest {
 
     @Test
-    void returnToMenuAndStopGameLoop() {
+    void testReturnToMenuAndStopGameLoop() {
         final Game game = mock(Game.class);
         final GameLoop gameLoop = mock(GameLoop.class);
         final GoToMenuCommand command = new GoToMenuCommand(gameLoop);

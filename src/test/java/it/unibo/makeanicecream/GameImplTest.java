@@ -165,14 +165,11 @@ class GameImplTest {
     @Test
     void testDeliverIceCreamSuccess() {
         when(mockCustomer.receiveIceCream(any())).thenReturn(true);
-
         game.start(NUM_LEVEL);
         game.chooseCone(Conetype.CLASSIC);
         game.addIngredient(IngredientFactory.createIngredient(INGREDIENT_NAME_1));
-
         final boolean delivered = game.deliverIceCream(mockCustomer);
         assertTrue(delivered, "Delivery should succeed if the customer receives the ice cream");
-
         verify(mockCustomer).receiveIceCream(any());
     }
 
@@ -228,7 +225,6 @@ class GameImplTest {
         game.pause();
         final Level level = game.getCurrentLevel();
         final int livesBefore = level.getLives();
-
         game.update(DELTA_TIME);
         assertEquals(GameState.PAUSED, game.getState(),
             "The state should not change if the game is paused");
@@ -241,13 +237,11 @@ class GameImplTest {
      * when there are still customers and lives available.
      */
     @Test
-    void testUpdateRemainsPlayingWithCustomersAndLives() {
+    void testRemainPlayingWhenCustomersAndLivesExist() {
         game.start(NUM_LEVEL);
         final Level level = game.getCurrentLevel();
-
         assertTrue(level.hasNextCustomer(), "The level should have customers");
         assertTrue(level.getLives() > 0, "The level should have lives");
-
         game.update(DELTA_TIME);
         assertEquals(GameState.PLAYING, game.getState(),
             "The game should remain PLAYING if there are customers and lives available");
