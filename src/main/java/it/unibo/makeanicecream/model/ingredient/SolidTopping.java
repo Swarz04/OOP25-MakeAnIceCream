@@ -2,6 +2,7 @@ package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.SolidToppingType;
+import java.util.Objects;
 
 /**
  * SolidTopping class representing a solid topping ingredient.
@@ -16,7 +17,7 @@ public class SolidTopping implements Ingredient {
      * @param topping the solid topping type
      */
     public SolidTopping(final SolidToppingType topping) {
-        this.topping = topping;
+        this.topping = Objects.requireNonNull(topping, "Topping cannot be null");
     }
 
     /**
