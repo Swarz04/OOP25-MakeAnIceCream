@@ -120,7 +120,7 @@ class GameImplTest {
             level.loseLife();
         }
         game.update(DELTA_TIME);
-        assertEquals(GameState.GAME_OVER, game.getState(), "Il gioco dovrebbe andare in GAME_OVER se finiscono le vite");
+        assertEquals(GameState.GAME_OVER, game.getState(), "The game should go to GAME_OVER if lives run out");
     }
 
     /**
@@ -136,7 +136,7 @@ class GameImplTest {
         }
         game.update(DELTA_TIME);
         assertEquals(GameState.LEVEL_COMPLETED, game.getState(),
-        "Il gioco dovrebbe andare in LEVEL_COMPLETED se finiscono i clienti");
+        "The game should go to LEVEL_COMPLETED if all customers are served");
     }
 
     /**
@@ -171,7 +171,7 @@ class GameImplTest {
         game.addIngredient(IngredientFactory.createIngredient(INGREDIENT_NAME_1));
 
         final boolean delivered = game.deliverIceCream(mockCustomer);
-        assertTrue(delivered, "La consegna dovrebbe riuscire se il cliente riceve il gelato");
+        assertTrue(delivered, "Delivery should succeed if the customer receives the ice cream");
 
         verify(mockCustomer).receiveIceCream(any());
     }
@@ -183,7 +183,7 @@ class GameImplTest {
     void testDeliverIceCreamWithNullCustomer() {
         game.start(NUM_LEVEL);
         final boolean delivered = game.deliverIceCream(null);
-        assertFalse(delivered, "La consegna non dovrebbe riuscire se il cliente è null");
+        assertFalse(delivered, "Delivery should fail if the customer is null");
     }
 
     /**
@@ -202,7 +202,7 @@ class GameImplTest {
         game.chooseCone(Conetype.CLASSIC);
         game.addIngredient(IngredientFactory.createIngredient(INGREDIENT_NAME_2));
         final boolean delivered = game.deliverIceCream(mockCustomer);
-        assertTrue(delivered, "La consegna successiva dovrebbe funzionare con un nuovo gelato");
+        assertTrue(delivered, "Next delivery should work with a new ice cream");
         verify(mockCustomer).receiveIceCream(any());
     }
 
@@ -215,7 +215,7 @@ class GameImplTest {
         // currentLevel == null
         game.update(DELTA_TIME);
         assertEquals(GameState.MENU, game.getState(), 
-            "Lo stato non dovrebbe cambiare se non c'è nessun livello");
+            "The state should not change if there is no level");
     }
 
     /**
@@ -231,9 +231,9 @@ class GameImplTest {
 
         game.update(DELTA_TIME);
         assertEquals(GameState.PAUSED, game.getState(),
-            "Lo stato non dovrebbe cambiare se il gioco è in pausa");
+            "The state should not change if the game is paused");
         assertEquals(livesBefore, level.getLives(),
-            "Le vite non dovrebbero cambiare se il gioco è in pausa");
+            "Lives should not change if the game is paused");
     }
 
     /**
@@ -245,11 +245,11 @@ class GameImplTest {
         game.start(NUM_LEVEL);
         final Level level = game.getCurrentLevel();
 
-        assertTrue(level.hasNextCustomer(), "Il livello deve avere clienti");
-        assertTrue(level.getLives() > 0, "Il livello deve avere vite");
+        assertTrue(level.hasNextCustomer(), "The level should have customers");
+        assertTrue(level.getLives() > 0, "The level should have lives");
 
         game.update(DELTA_TIME);
         assertEquals(GameState.PLAYING, game.getState(),
-            "Il gioco dovrebbe rimanere PLAYING se ci sono clienti e vite disponibili");
+            "The game should remain PLAYING if there are customers and lives available");
     }
 }
