@@ -43,7 +43,6 @@ class GameLoopImplTest {
     void startShouldSetRunningTrue() {
         loop.start();
         assertTrue(loop.isRunning());
-
         loop.stop();
     }
 
@@ -64,10 +63,7 @@ class GameLoopImplTest {
      */
     @Test
     void shouldCallUpdaterWhenStarted() throws InterruptedException {
-        loop.start();
-        Thread.sleep(LOOP_RUN_MS); // allow a few frames to run
-        loop.stop();
-
+        runLoopForTest();
         verify(updater, atLeastOnce()).accept(anyLong());
     }
 
@@ -76,10 +72,7 @@ class GameLoopImplTest {
      */
     @Test
     void shouldStopLoopWhenStopped() throws InterruptedException {
-        loop.start();
-        Thread.sleep(LOOP_RUN_MS);
-        loop.stop();
-
+        runLoopForTest();
         assertFalse(loop.isRunning(), "Loop should not be running after stop()");
     }
 
@@ -88,10 +81,7 @@ class GameLoopImplTest {
      */
     @Test
     void updaterShouldReceiveNonNegativeElapsedTime() throws InterruptedException {
-        loop.start();
-        Thread.sleep(LOOP_RUN_MS);
-        loop.stop();
-
+        runLoopForTest();
         verify(updater, atLeastOnce()).accept(argThat(elapsed -> elapsed >= MIN_ELAPSED_MS));
     }
 
@@ -100,10 +90,18 @@ class GameLoopImplTest {
      */
     @Test
     void updaterShouldReceiveElapsedTimeNoGreaterThan100() throws InterruptedException {
-        loop.start();
-        Thread.sleep(LOOP_RUN_MS); // allow a few frames to run
-        loop.stop();
-
+        runLoopForTest();
         verify(updater, atLeastOnce()).accept(argThat(elapsed -> elapsed <= MAX_ELAPSED_MS));
+    }
+
+    /**
+     * Starts the loop, lets it run for a short duration, and then stops it.
+     *
+     * @throws InterruptedException if the sleep is interrupted
+     */
+    private void runLoopForTest() throws InterruptedException {
+        loop.start();
+        Thread.sleep(LOOP_RUN_MS);
+        loop.stop();
     }
 }
