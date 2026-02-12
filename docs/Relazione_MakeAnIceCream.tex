@@ -197,11 +197,10 @@ L’uso del factory consente di centralizzare la logica per poi evitare duplicaz
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 
-Il testing automatizzato è un requisito di qualunque progetto software che si rispetti, e consente di verificare che non vi siano regressioni nelle funzionalità a fronte di aggiornamenti.
-%
-Per quanto riguarda questo progetto è considerato sufficiente un test minimale, a patto che sia completamente automatico.
-%
-Test che richiedono l'intervento da parte dell'utente sono considerati \textit{negativamente} nel computo del punteggio finale.
+\textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
+
+\textbf{Level (StandardLevel)}:è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+% TODO: Inserire qui le informazioni relative ai test per gli altri componenti
 
 \subsection*{Elementi positivi}
 
@@ -311,6 +310,26 @@ e non va in questa sezione.
 	nonché ai vari GitHub, GitLab, e Bitbucket.
 	Conseguentemente, è \emph{molto} conveniente \emph{citare} una fonte ed usarla invece di tentare di spacciare per proprio il lavoro di altri.
 	\item Si elencano design pattern
+\end{itemize}
+
+\begin{itemize}
+
+\item \textbf{Utilizzo di Lambda expressions} \\
+Le lambda expressions sono state utilizzate per registrare dinamicamente le callback tra cliente e livello, permettendo di propagare l’esito dell’ordine in modo compatto e leggibile. L’uso di funzioni come parametro riduce la necessità di classi anonime esplicite e migliora la chiarezza del flusso logico. \\
+\textbf{Link:} \url{[PERMALINK StandardLevel -- registrazione callback]}
+
+\item \textbf{Utilizzo di strutture dati della Collections Framework (Queue / ArrayDeque)} \\
+La gestione dei clienti nel livello avviene tramite \texttt{Queue} e \texttt{ArrayDeque}, garantendo un comportamento FIFO, consente una gestione efficiente dell’avanzamento del gioco e rende il modello più prevedibile nei test. \\
+\textbf{Link:} \url{[PERMALINK StandardLevel -- dichiarazione e utilizzo Queue]}
+
+\item \textbf{Utilizzo di Mockito per il testing} \\
+Nei test automatici è stata utilizzata la libreria Mockito per creare mock di \texttt{Customer} e \texttt{Timer}. Questo ha permesso di isolare il comportamento e verificare effetti collaterali e simulare condizioni specifiche (es. scadenza del tempo). \\
+\textbf{Link:} \url{[PERMALINK PlayerTest / StandardLevelTest -- utilizzo mock e when/verify]}
+
+\item \textbf{Controllo dello stato tramite validazione esplicita} \\
+Sono stati introdotti controlli espliciti su stati non validi (es. consegna senza gelato completo) e su input nulli. Questa scelta migliora la robustezza del modello e previene stati inconsistenti durante l’esecuzione. \\
+\textbf{Link:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
+
 \end{itemize}
 
 
