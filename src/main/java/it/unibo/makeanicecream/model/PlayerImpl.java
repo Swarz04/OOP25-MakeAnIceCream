@@ -1,18 +1,18 @@
 package it.unibo.makeanicecream.model;
 
+import java.util.Objects;
+
+import it.unibo.makeanicecream.api.Conetype;
+import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Player;
-import it.unibo.makeanicecream.api.Conetype;
-import it.unibo.makeanicecream.api.Customer;
-import java.util.Objects;
 
 /**
  * PlayerImpl is the implementation of the Player interface.
  */
-public class PlayerImpl implements Player {
+public final class PlayerImpl implements Player {
 
-    private Icecream currentIcecream;
     private final IceCreamBuilder builder;
 
     /**
@@ -41,44 +41,22 @@ public class PlayerImpl implements Player {
      */
     @Override
     public boolean addIngredient(final Ingredient ingredient) {
-        Objects.requireNonNull(ingredient, "ingredient must not be null");
         return this.builder.addIngredient(ingredient);
     }
 
     /**
-     * Checks if the ice cream is closed.
-     *
-     * @return true if the ice cream is closed, false otherwise
-     */
-    public boolean isIceCreamClosed() {
-        return this.builder.isClosed();
-    }
-
-    /**
-     * Enables or disables toppings.
-     *
-     * @param enabled true to enable toppings, false to disable
-     */
-    public void setToppingEnabled(final boolean enabled) {
-        this.builder.setToppingEnabled(enabled);
-    }
-
-    /**
-     * Compose the current ice cream.
+     * Composes the current ice cream.
      * Submits the builder state to create a final IceCreamImpl instance.
      *
      * @return the composed {@link Icecream}
      */
     @Override
     public Icecream composeIceCream() {
-        this.currentIcecream = this.builder.submit();
-        return this.currentIcecream;
+        return this.builder.submit();
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @param customer the customer to deliver to
      */
     @Override
     public boolean deliverIceCream(final Customer customer) {
@@ -86,11 +64,10 @@ public class PlayerImpl implements Player {
             return false;
         }
 
-        composeIceCream();
-        final boolean success = customer.receiveIceCream(this.currentIcecream);
+        final Icecream iceCream = composeIceCream();
+        final boolean success = customer.receiveIceCream(iceCream);
 
         this.builder.reset();
-        this.currentIcecream = null;
         return success;
     }
 
@@ -100,6 +77,5 @@ public class PlayerImpl implements Player {
     @Override
     public void cancelIceCream() {
         this.builder.reset();
-        this.currentIcecream = null;
     }
 }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  11 FEB 2026 17:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  12 FEB 2026 14:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -378,29 +378,39 @@ Package pdftex.def Info: img/UML_Level.pdf  used on input line 183.
  [11 <./img/UML_Level.pdf>]
 Capitolo 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 216.
+(Font)              <5> on input line 215.
 [12
 
 ] [13]
 
-LaTeX Warning: Citation `mersenne' on page 14 undefined on input line 278.
+LaTeX Warning: Citation `mersenne' on page 14 undefined on input line 277.
 
 [14] [15]
-Capitolo 4.
-[16
+Overfull \hbox (2.45537pt too wide) in paragraph at lines 321--324
+\OT1/cmr/bx/n/12 Link: []$\OT1/cmtt/m/n/12 [PERMALINKStandardLevel-[]-[]dichiarazioneeutilizzoQueue]$[] 
+ []
 
-] [17]
+
+Overfull \hbox (33.33038pt too wide) in paragraph at lines 325--328
+\OT1/cmr/bx/n/12 Link: []$\OT1/cmtt/m/n/12 [PERMALINKPlayerTest / StandardLevelTest-[]-[]utilizzomockewhen /
+ []
+
+[16]
+Capitolo 4.
+[17
+
+] [18]
 Appendice A.
-[18
+[19
 
 ]
 Appendice B.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 379.
+(hyperref)                than one, level fixed on input line 398.
 
 No file Relazione_MakeAnIceCream.bbl.
-[19
+[20
 
 ] (Relazione_MakeAnIceCream.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
@@ -418,17 +428,17 @@ Package rerunfilecheck Info: File `Relazione_MakeAnIceCream.out' has not changed
 (rerunfilecheck)             Checksum: 055A58A97F6E2592C1A6AC0FBA35B8E9;3824.
  ) 
 Here is how much of TeX's memory you used:
- 12469 strings out of 467871
- 209627 string characters out of 5428443
+ 12470 strings out of 467871
+ 209634 string characters out of 5428443
  690619 words of memory out of 5000000
  41163 multiletter control sequences out of 15000+600000
  634516 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,722b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,722b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\schar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relazione_MakeAnIceCream.pdf (20 pages, 1091324 bytes).
+Output written on Relazione_MakeAnIceCream.pdf (21 pages, 1098742 bytes).
 PDF statistics:
- 349 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
+ 358 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
  248 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -19,12 +19,12 @@
 \contentsline {chapter}{\numberline {3}Sviluppo}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Testing automatizzato}{12}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Note di sviluppo}{13}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Commenti finali}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{16}{section.4.2}%
-\contentsline {chapter}{\numberline {A}Guida utente}{18}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{19}{appendix.Alph2}%
-\contentsline {subsection}{\numberline {B.0.1}Studente 1}{19}{subsection.Alph2.0.1}%
-\contentsline {subsection}{\numberline {B.0.2}Studente 2}{19}{subsection.Alph2.0.2}%
-\contentsline {subsection}{\numberline {B.0.3}Studente 3}{19}{subsection.Alph2.0.3}%
-\contentsline {subsection}{\numberline {B.0.4}chiara.emina@studio.unibo.it}{19}{subsection.Alph2.0.4}%
+\contentsline {chapter}{\numberline {4}Commenti finali}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{17}{section.4.2}%
+\contentsline {chapter}{\numberline {A}Guida utente}{19}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{20}{appendix.Alph2}%
+\contentsline {subsection}{\numberline {B.0.1}Studente 1}{20}{subsection.Alph2.0.1}%
+\contentsline {subsection}{\numberline {B.0.2}Studente 2}{20}{subsection.Alph2.0.2}%
+\contentsline {subsection}{\numberline {B.0.3}Studente 3}{20}{subsection.Alph2.0.3}%
+\contentsline {subsection}{\numberline {B.0.4}chiara.emina@studio.unibo.it}{20}{subsection.Alph2.0.4}%

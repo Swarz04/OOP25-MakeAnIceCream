@@ -25,6 +25,11 @@ public final class StandardLevel implements Level {
         this.difficulty = difficulty;
         this.lives = lives;
         this.customers = new ArrayDeque<>(Objects.requireNonNull(customers));
+        this.customers.forEach(c -> c.setOrderResultCallback(success -> {
+            if (c.equals(this.customers.peek())) {
+                this.notifyCustomerServed(success);
+            }
+        }));
     }
 
     @Override
