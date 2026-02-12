@@ -71,6 +71,10 @@ public final class GameControllerImpl implements GameController {
         }
 
         commandFactory.apply(event).execute(this.game);
+
+        if (event.getType() == EventType.START_LEVEL && this.view != null) {
+            this.view.update();
+        }
     }
 
     @Override

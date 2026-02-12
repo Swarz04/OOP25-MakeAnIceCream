@@ -69,21 +69,6 @@ public final class GameViewImpl extends JFrame implements GameView {
         gamePanel.add(bottomPanel, BorderLayout.CENTER);
         mainPanel.add(gamePanel, GAME_CARD);
 
-        //setController(controller);
-        /* la parte precedente era:
-        final JPanel centerContainer = new JPanel();
-        centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
-        centerContainer.add(this.customerPanel);
-        centerContainer.add(this.ingredientsPanel);
-
-        gamePanel.add(centerContainer, BorderLayout.CENTER);
-        mainPanel.add(gamePanel, GAME_CARD);
-
-        setContentPane(mainPanel);
-
-        pack();
-        setLocationByPlatform(true);
-        */
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
@@ -100,28 +85,16 @@ public final class GameViewImpl extends JFrame implements GameView {
     }
 
     @Override
-    public void showCustomer(final String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showCustomer'");
-    }
+    public void showCustomer(final String name) { }
 
     @Override
-    public void showOrder(final String order) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showOrder'");
-    }
+    public void showOrder(final String order) { }
 
     @Override
-    public void showTimer(final double timer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showTimer'");
-    }
+    public void showTimer(final double timer) { }
 
     @Override
-    public void showLives(final int lives) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showLives'");
-    }
+    public void showLives(final int lives) { }
 
     @Override
     public void showIngredients() {
@@ -146,10 +119,6 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void update() {
-        if (this.controller == null) {
-            return;
-        }
-
         SwingUtilities.invokeLater(() -> {
             if (this.controller == null) {
                 return;
