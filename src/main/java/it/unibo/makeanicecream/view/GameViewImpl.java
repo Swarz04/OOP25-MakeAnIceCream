@@ -29,6 +29,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final StatusPanel statusPanel;
     private final CustomerPanel customerPanel;
     private final IngredientsPanel ingredientsPanel;
+    private final AreaPlayerPanel areaPlayerPanel;
     private final ActionsPanel actionsPanel;
 
     private final GameController controller;
@@ -48,14 +49,30 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.statusPanel = new StatusPanel();
         this.customerPanel = new CustomerPanel();
         this.ingredientsPanel = new IngredientsPanel();
+        this.areaPlayerPanel = new AreaPlayerPanel();
         this.actionsPanel = new ActionsPanel();
 
         final JPanel gamePanel = new JPanel(new BorderLayout());
 
         // Layout della schermata di gioco
-        gamePanel.add(this.statusPanel, BorderLayout.NORTH);
-        gamePanel.add(this.actionsPanel, BorderLayout.EAST);
+        final JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(this.statusPanel, BorderLayout.NORTH);
+        topPanel.add(this.customerPanel, BorderLayout.CENTER);
+        gamePanel.add(topPanel, BorderLayout.NORTH);
 
+        final JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(this.ingredientsPanel, BorderLayout.CENTER);
+        
+        final JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.add(this.areaPlayerPanel, BorderLayout.CENTER);
+        rightPanel.add(this.actionsPanel, BorderLayout.SOUTH);
+        
+        bottomPanel.add(rightPanel, BorderLayout.CENTER);
+        gamePanel.add(bottomPanel, BorderLayout.CENTER);
+        mainPanel.add(gamePanel, GAME_CARD);
+
+        setController(controller);
+        /** la parte precedente era:
         final JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.add(this.customerPanel);
@@ -65,14 +82,21 @@ public final class GameViewImpl extends JFrame implements GameView {
         mainPanel.add(gamePanel, GAME_CARD);
 
         setContentPane(mainPanel);
+        
         pack();
         setLocationByPlatform(true);
+        */
+        setContentPane(mainPanel);
+        pack();
+        setLocationRelativeTo(null);
     }
 
     @Override
     public void setController(final GameController controller) {
         this.menuPanel.setController(controller);
         this.actionsPanel.setController(controller);
+        this.ingredientsPanel.setController(controller);
+        this.areaPlayerPanel.setController(controller);
     }
 
     @Override
