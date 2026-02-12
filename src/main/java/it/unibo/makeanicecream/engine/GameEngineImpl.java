@@ -31,6 +31,26 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     /**
+     * Constructs a game engine with the provided components.
+     *
+     * <p>
+     * This constructor allows injecting custom implementations of the
+     * {@link Game}, {@link GameController}, and {@link GameLoop}.
+     * It is mainly intended for testing purposes or advanced configurations
+     * where external control over the engine's dependencies is required.
+     * </p>
+     *
+     * @param game the game model instance
+     * @param controller the controller coordinating game logic and view updates
+     * @param loop the game loop responsible for triggering periodic updates
+     */
+    public GameEngineImpl(Game game, GameController controller, GameLoop loop) {
+        this.game = game;
+        this.controller = controller;
+        this.loop = loop;
+    }
+
+    /**
      * Updates the game state for the current frame.
      * 
      * <p>
