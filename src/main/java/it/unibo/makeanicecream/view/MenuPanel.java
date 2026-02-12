@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
+
+import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.GameController;
 import java.awt.Component;
 
@@ -42,7 +44,7 @@ public final class MenuPanel extends JPanel {
             levelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
             levelButton.addActionListener(e -> {
                 if (this.controller != null) {
-                    this.controller.startGame(levelNumber); //NOTA: Creare un Event con EventType.START_LEVEL
+                    this.controller.handleInput(new EventImpl(EventType.START_LEVEL, String.valueOf(levelNumber)));
                 }
             });
             this.add(levelButton);

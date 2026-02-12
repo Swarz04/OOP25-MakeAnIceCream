@@ -2,11 +2,9 @@ package it.unibo.makeanicecream.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.GameState;
@@ -32,20 +30,20 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final AreaPlayerPanel areaPlayerPanel;
     private final ActionsPanel actionsPanel;
 
-    private final GameController controller;
+    private GameController controller;
 
     /**
      * Builds a new GameViewImpl.
      *
      * @param controller the game model
      */
-    public GameViewImpl(final GameController controller) {
-        this.controller = controller;
+    public GameViewImpl() {
         setTitle(FRAME_NAME);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.menuPanel = new MenuPanel();
         mainPanel.add(menuPanel, MENU_CARD);
+
         this.statusPanel = new StatusPanel();
         this.customerPanel = new CustomerPanel();
         this.ingredientsPanel = new IngredientsPanel();
@@ -71,7 +69,7 @@ public final class GameViewImpl extends JFrame implements GameView {
         gamePanel.add(bottomPanel, BorderLayout.CENTER);
         mainPanel.add(gamePanel, GAME_CARD);
 
-        setController(controller);
+        //setController(controller);
         /** la parte precedente era:
         final JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
@@ -93,6 +91,8 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void setController(final GameController controller) {
+        this.controller = controller;
+
         this.menuPanel.setController(controller);
         this.actionsPanel.setController(controller);
         this.ingredientsPanel.setController(controller);
@@ -125,14 +125,12 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIngredients() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showIngredients'");
+        ingredientsPanel.setToppingButtonsEnabled(true);
     }
 
     @Override
     public void showIceCream() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showIceCream'");
+        areaPlayerPanel.updateIceCreamView("IceCream updated");
     }
 
     @Override
@@ -148,28 +146,20 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void update() {
+        if (this.controller == null) {
+            return;
+        }
+
         SwingUtilities.invokeLater(() -> {
+            if (this.controller == null) {
+                return;
+            }
+
             final GameState currentState = this.controller.getGameState();
             if (currentState == GameState.MENU) {
                 this.layout.show(this.mainPanel, MENU_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
-                if (this.controller.getCurrentLevel() != null) {
-                    final var level = this.controller.getCurrentLevel();
-                    final var customer = level.getCurrentCustomer();
-
-                    this.statusPanel.update(level.getLives(),
-                        (customer != null && customer.getTimer() != null) ? customer.getTimer().getTimeLeft() : 0);
-
-                    if (customer != null) {
-                        this.customerPanel.update(customer.getName(), customer.getOrder().toString());
-                    } else {
-                        this.customerPanel.update("LEVEL COMPLETE!", "");
-                    }
-                }
-                if (currentState == GameState.GAME_OVER) {
-                    this.customerPanel.update("GAME OVER", "You lost all your lives.");
-                }
             }
         });
     }

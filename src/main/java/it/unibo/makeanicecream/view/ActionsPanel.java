@@ -6,8 +6,6 @@ import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
-import it.unibo.makeanicecream.api.Event;
-import it.unibo.makeanicecream.view.EventImpl;
 
 /**
  * Panel responsible for action buttons like Submit and Reset.
