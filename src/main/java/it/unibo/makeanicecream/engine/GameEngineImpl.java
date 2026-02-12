@@ -44,7 +44,7 @@ public final class GameEngineImpl implements GameEngine {
      * @param controller the controller coordinating game logic and view updates
      * @param loop the game loop responsible for triggering periodic updates
      */
-    public GameEngineImpl(Game game, GameController controller, GameLoop loop) {
+    GameEngineImpl(final Game game, final GameController controller, final GameLoop loop) {
         this.game = game;
         this.controller = controller;
         this.loop = loop;
