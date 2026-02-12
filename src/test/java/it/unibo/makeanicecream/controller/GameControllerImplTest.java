@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.makeanicecream.api.Event;
@@ -32,18 +33,25 @@ class GameControllerImplTest {
     private static final String INGREDIENT_NAME = "VANILLA";
     private static final String CONE_TYPE = "CLASSIC";
 
+    private Game game;
+    private GameLoop loop;
+    private GameControllerImpl controller;
+    private GameView view;
+
+    @BeforeEach
+    void setUp() {
+        game = mock(Game.class);
+        loop = mock(GameLoop.class);
+        controller = new GameControllerImpl(game, loop);
+        view = mock(GameView.class);
+        controller.setView(view);
+    }
+
     /**
      * Verifies that GameControllerImpl sets the controller in the view.
      */
     @Test
     void testSetView() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-        final GameView view = mock(GameView.class);
-
-        controller.setView(view);
-
         verify(view).setController(controller);
     }
 
@@ -53,15 +61,8 @@ class GameControllerImplTest {
      */
     @Test
     void testHandleInputAddIngredient() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-        final Event event = mock(Event.class);
-        when(event.getType()).thenReturn(EventType.ADD_INGREDIENT);
-        when(event.getData()).thenReturn(INGREDIENT_NAME);
-
+        final Event event = createEvent(EventType.ADD_INGREDIENT, INGREDIENT_NAME);
         controller.handleInput(event);
-
         verify(game).addIngredient(any());
     }
 
@@ -71,15 +72,8 @@ class GameControllerImplTest {
      */
     @Test
     void testHandleInputChooseCone() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-        final Event event = mock(Event.class);
-        when(event.getType()).thenReturn(EventType.CHOOSE_CONE);
-        when(event.getData()).thenReturn(CONE_TYPE);
-
+        final Event event = createEvent(EventType.CHOOSE_CONE, CONE_TYPE);
         controller.handleInput(event);
-
         verify(game).chooseCone(any());
     }
 
@@ -89,17 +83,9 @@ class GameControllerImplTest {
      */
     @Test
     void testHandleInputStartLevel() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-        final Event event = mock(Event.class);
-
+        final Event event = createEvent(EventType.START_LEVEL, "1");
         when(loop.isRunning()).thenReturn(false);
-        when(event.getType()).thenReturn(EventType.START_LEVEL);
-        when(event.getData()).thenReturn("1");
-
         controller.handleInput(event);
-
         verify(game).start(NUM_LEVEL);
         verify(loop).start();
     }
@@ -109,11 +95,7 @@ class GameControllerImplTest {
      */
     @Test
     void testIsGamePlaying() {
-        final Game game = mock(Game.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, mock(GameLoop.class));
-
         when(game.isPlaying()).thenReturn(true);
-
         assertTrue(controller.isGamePlaying());
     }
 
@@ -122,12 +104,8 @@ class GameControllerImplTest {
      */
     @Test
     void testGetGameState() {
-        final Game game = mock(Game.class);
         final GameState state = GameState.PLAYING;
-        final GameControllerImpl controller = new GameControllerImpl(game, mock(GameLoop.class));
-
         when(game.getState()).thenReturn(state);
-
         assertEquals(state, controller.getGameState());
     }
 
@@ -137,15 +115,9 @@ class GameControllerImplTest {
      */
     @Test
     void testUpdateGameStopsLoopIfNotPlaying() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-
         when(game.isPlaying()).thenReturn(false);
         when(loop.isRunning()).thenReturn(true);
-
         controller.updateGame(DELTA_TIME);
-
         verify(game).update(DELTA_TIME);
         verify(loop).stop();
     }
@@ -156,19 +128,25 @@ class GameControllerImplTest {
      */
     @Test
     void testUpdateGameUpdatesViewWhenPlaying() {
-        final Game game = mock(Game.class);
-        final GameLoop loop = mock(GameLoop.class);
-        final GameControllerImpl controller = new GameControllerImpl(game, loop);
-        final GameView view = mock(GameView.class);
-
-        controller.setView(view);
-
         when(game.isPlaying()).thenReturn(true);
         when(game.getCurrentLevel()).thenReturn(mock(Level.class));
-
         controller.updateGame(DELTA_TIME);
-
         verify(game).update(DELTA_TIME);
         verify(view).showLives(anyInt());
+    }
+
+    /**
+     * Creates a mocked {@link Event} with the given type and data.
+     * 
+     * @param type the type of the event
+     * @param data the data associated with the event
+     * 
+     * @return a mocked {@link Event} with the specified type and data
+     */
+    private Event createEvent(final EventType type, final String data) {
+        final Event event = mock(Event.class);
+        when(event.getType()).thenReturn(type);
+        when(event.getData()).thenReturn(data);
+        return event;
     }
 }
