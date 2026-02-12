@@ -7,22 +7,33 @@ import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.api.Timer;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Concrete implementation of the Customer Interface.
  * Represents a customer with an order, waiting timer, and result notification.
- * 
+ * Timer exposure is accepted because is needed for game loop integration.
  */
+
 public class CustomerImpl implements Customer {
+  public static final int MAX_DIFFICULTY = 5;
+  public static final int MIN_DIFFICULTY = 1;
   private final String name;
   private final Order order;
   private final Timer timer;
   private final int difficulty;
   private Consumer<Boolean> orderResultCallback;
 
-  public CustomerImpl(String name, Order order, Timer timer, int difficulty){
-    if (name == null || name.trim().isEmpty()) {
+  /**
+   * Constructs a new Costumer with the attributes.
+   * 
+   * @param name the customer's name.
+   * @param order the customer's ice cream order.
+   * @param timer the customer's timer for the level.
+   * @param difficulty the customer's difficulty level (1-5).
+   */
+  public CustomerImpl(final String name, final Order order, final Timer timer, final int difficulty) {
+    if (name == null || name.isBlank()) {
         throw new IllegalArgumentException("Il nome del cliente non puo essere vuoto");
     }
     if (order == null) {
@@ -31,15 +42,15 @@ public class CustomerImpl implements Customer {
     if (timer == null) {
         throw new IllegalArgumentException("Il timer non puo essere null");
     }
-    if (difficulty < 1 || difficulty > 5) {
+    if (difficulty < MIN_DIFFICULTY || difficulty > MAX_DIFFICULTY) {
         throw new IllegalArgumentException("La difficolta deve essere tra 1 e 5");
     }
 
     this.name = name;
     this.order = order;
     this.difficulty = difficulty;
-    this.timer = createProtectedTimer(timer);
-    
+    this.timer = Objects.requireNonNull(timer, "Il timer non puo essere null");
+
     if (timer.isExpired()) {
         this.timer.pause();
     } else {
@@ -47,76 +58,72 @@ public class CustomerImpl implements Customer {
     }
   }
 
- /**
-  * Crea una versione protetta del timer.
-  * Se il timer è immutabile (come CustomerTimer) lo usa direttamente.
-  * Altrimenti crea un wrapper/delegato
-  */ 
- private Timer createProtectedTimer(Timer original) {
-    Objects.requireNonNull(original, "Il timer non puo essere null");
-    return new TimerDelegate(original);
- }
-
- /**
-  * Delegato per proteggere il timer originale
-  */
-  private static class TimerDelegate implements Timer {
-    private final Timer delegate;
-  
-    TimerDelegate(Timer delegate) {
-        this.delegate = Objects.requireNonNull(delegate);
-    }
-    @Override public void start() { delegate.start(); }
-    @Override public void pause() { delegate.pause(); }
-    @Override public void resume() { delegate.resume(); }
-    @Override public void update(double deltaTime){ delegate.update(deltaTime); }
-    @Override public boolean isExpired() { return delegate.isExpired(); }
-    @Override public double getTimeLeft() { return delegate.getTimeLeft(); }
-    @Override public boolean isPaused() { return delegate.isPaused(); }
-    @Override public void setOnExpired(Runnable callback) { delegate.setOnExpired(callback); }  
-  }
-    
+  /**
+   * Receives an iceCream and checks if it matches the order.
+   * Notifies the result if a Callback was registred.
+   */
   @Override
-  public boolean receiveIceCream(Icecream iceCream){
+  public boolean receiveIceCream(final Icecream iceCream) {
     Objects.requireNonNull(iceCream, "L'ice cream non puo essere null");
 
-    boolean isCorect = order.isSatisfiedBy(iceCream);
+    final boolean isCorect = order.isSatisfiedBy(iceCream);
 
-    // Notifica il risultato se è stato registrato un callback
-    if(orderResultCallback != null){
+    if (orderResultCallback != null) {
         orderResultCallback.accept(isCorect);
     }
     return isCorect;
   }
 
-  
+  /**
+   * Gets the customer's name.
+   * 
+   * @return costumer's name.
+   */
   @Override
-  public String getName(){
+  public String getName() {
     return name;
   }
 
-
+  /**
+   * Gets the customers's order.
+   * 
+   * @return Order of the costumer.
+   */
   @Override
   public Order getOrder() {
     return order;
   }
 
-
+  /**
+   * Return the customer's timer.
+   * Exposure necessary for game loop updates and timeout checks.
+   * 
+   * @return timer del cliente.
+   */
   @Override
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Timer is a shared API component")
   public Timer getTimer() {
     return timer;
   }
 
-
+  /**
+   * returns the level difficulty of the customer.
+   * 
+   * @return difficulty of the costumer.
+   */
   @Override
   public int getDifficulty() {
     return difficulty;
   }
 
-
-
+  /**
+   * Registers a callback to be notified when the specified costumer receives an ice cream.
+   * The callback receives a boolean value that indicates if the order was satisfied.
+   * 
+   * @param callback the consumer to notify the verification result.
+   */
   @Override
-  public void setOrderResultCallback(Consumer<Boolean> callback) {
+  public void setOrderResultCallback(final Consumer<Boolean> callback) {
     this.orderResultCallback = callback;
   }
 }

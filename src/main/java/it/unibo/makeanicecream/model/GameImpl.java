@@ -86,7 +86,6 @@ public final class GameImpl implements Game {
         this.currentLevel = null;
     }
 
-
     @Override
     public boolean isGameOver() {
         return this.state == GameState.GAME_OVER;

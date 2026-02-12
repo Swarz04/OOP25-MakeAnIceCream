@@ -16,6 +16,7 @@ public final class Main {
 
     /**
      * The main entry point of the application.
+     * 
      * @param args The command line arguments.
      */
     public static void main(final String[] args) {

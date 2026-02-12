@@ -60,17 +60,17 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         final JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(this.ingredientsPanel, BorderLayout.CENTER);
-        
+
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(this.areaPlayerPanel, BorderLayout.CENTER);
         rightPanel.add(this.actionsPanel, BorderLayout.SOUTH);
-        
+
         bottomPanel.add(rightPanel, BorderLayout.CENTER);
         gamePanel.add(bottomPanel, BorderLayout.CENTER);
         mainPanel.add(gamePanel, GAME_CARD);
 
         //setController(controller);
-        /** la parte precedente era:
+        /* la parte precedente era:
         final JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.add(this.customerPanel);
@@ -80,7 +80,7 @@ public final class GameViewImpl extends JFrame implements GameView {
         mainPanel.add(gamePanel, GAME_CARD);
 
         setContentPane(mainPanel);
-        
+
         pack();
         setLocationByPlatform(true);
         */

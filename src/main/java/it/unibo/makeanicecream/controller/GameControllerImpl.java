@@ -15,6 +15,9 @@ import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.GameView;
 
+/**
+ * Implementation of the {@link GameController} interface.
+ */
 public final class GameControllerImpl implements GameController {
 
     @SuppressFBWarnings(
