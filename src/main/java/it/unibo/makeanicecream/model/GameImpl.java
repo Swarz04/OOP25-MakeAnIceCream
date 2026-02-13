@@ -15,6 +15,8 @@ import it.unibo.makeanicecream.model.level.LevelFactory;
  */
 public final class GameImpl implements Game {
 
+    private static final int TOPPING_UNLOCK_DIFFICULTY = 4;
+
     private Level currentLevel;
     private GameState state;
     private final Player player;
@@ -35,6 +37,9 @@ public final class GameImpl implements Game {
         }
         this.currentLevel = LevelFactory.createLevel(levelNumber);
         this.state = GameState.PLAYING;
+        this.player.setToppingEnabled(
+            this.currentLevel.getDifficulty() >= TOPPING_UNLOCK_DIFFICULTY
+        );
     }
 
     @Override
