@@ -165,6 +165,6 @@ public class OrderImpl implements Order {
 
         final String ingredientString = allIngredients.isEmpty() ? "(empty)" : allIngredients.stream().map(Ingredient::toString).reduce((a, b) -> a + ", " + b).orElse("");
         
-        return "Cone: " + requiredCone + " Ingredients: " + ingredientString;
+        return "<html>" + "<b>Cone:</b> " + requiredCone + "<br><b>Ingredients:</b> " + ingredientString + "</html>";
     }
 }
