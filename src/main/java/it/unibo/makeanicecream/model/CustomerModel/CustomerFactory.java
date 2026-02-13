@@ -10,7 +10,6 @@ import java.util.Random;
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Order;
-import it.unibo.makeanicecream.model.OrderBuilder;
 import it.unibo.makeanicecream.model.ingredient.Conetype;
 import it.unibo.makeanicecream.model.ingredient.FlavorType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
@@ -121,7 +120,24 @@ public class CustomerFactory {
         for (int i = 0; i < template.getToppingCount(); i++) {
             builder.addTopping(getRandomTopping());
         }
+        if (toppings.size() == 2) {
+            Ingredient solid = null;
+            Ingredient liquid = null;
 
+            for (Ingredient topping: toppings) {
+                if (toppings.getType() == IngredientType.SOLID_TOPPING) {
+                    solid = topping;
+                } else {
+                    liquid = topping;
+                }
+            }
+            builder.addTopping(liquid);
+            builder.addTopping(solid)
+        } else {
+            for (Ingredient topping : toppings) {
+                builder.addTopping(topping);
+            }
+        }
         return builder.build();
     }
 
