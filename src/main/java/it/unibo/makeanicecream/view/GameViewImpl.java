@@ -106,6 +106,7 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.ingredientsPanel.setController(controller);
         this.areaPlayerPanel.setController(controller);
         this.pausePanel.setController(controller);
+        this.statusPanel.setController(controller);
     }
 
     @Override
