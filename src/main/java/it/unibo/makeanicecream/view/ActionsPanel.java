@@ -77,6 +77,8 @@ public class ActionsPanel extends JPanel {
      */
     public void setSubmitEnabled(final boolean enabled) {
         submitButton.setVisible(enabled);
+        revalidate();
+        repaint();
     }
 
     /**

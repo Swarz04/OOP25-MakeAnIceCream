@@ -138,9 +138,17 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
-        final Icecream iceCream = controller.getGameIceCream();
+        final Icecream iceCream = this.controller.getGameIceCream();
+        if(iceCream == null || iceCream.getConetype() == null) {
+            areaPlayerPanel.showConePanel();
+            actionsPanel.setSubmitEnabled(false);
+            return;
+        } 
+
         areaPlayerPanel.showBuilderPanel();
-        areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
+        areaPlayerPanel.updateIceCreamView(iceCream.toString());
+        final boolean canSubmit = iceCream.getConetype() != null && !iceCream.getIngredients().isEmpty();
+        actionsPanel.setSubmitEnabled(canSubmit);
     }
 
     @Override
@@ -172,13 +180,7 @@ public final class GameViewImpl extends JFrame implements GameView {
 
             this.layout.show(this.mainPanel, GAME_CARD);
 
-            final Icecream iceCream = this.controller.getGameIceCream();
-            if(iceCream == null || iceCream.getConetype() == null) {
-                areaPlayerPanel.showConePanel();
-            } else {
-                areaPlayerPanel.showBuilderPanel();
-                areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
-            }
+            showIceCream();
                 
             
         });
