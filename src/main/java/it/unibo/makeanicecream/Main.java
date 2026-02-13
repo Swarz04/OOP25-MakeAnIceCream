@@ -24,5 +24,10 @@ public final class Main {
         final GameView view = new GameViewImpl();
         engine.getController().setView(view);
         view.start();
+
+        view.showCustomer("Mario");
+        view.showOrder("Cioccolato\nCono\nCookies");
+        view.showTimer(45);
+        view.showLives(3);
     }
 }
