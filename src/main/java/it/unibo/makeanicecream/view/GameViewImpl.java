@@ -148,6 +148,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     @Override
     public void showIngredients() {
         ingredientsPanel.setToppingButtonsEnabled(true);
+        
     }
 
     @Override

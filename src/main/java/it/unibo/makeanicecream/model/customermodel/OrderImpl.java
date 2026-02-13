@@ -161,22 +161,10 @@ public class OrderImpl implements Order {
      */
     @Override
     public String toString() {
-        final StringBuilder stringBuilder = new StringBuilder("<html>");
-        stringBuilder.append("<b>Cone:</b> ").append(requiredCone.name()).append("<br>");
-        stringBuilder.append("<b>Scoops:</b> <br>");
-        for (int i = 0; i < requiredFlavors.size(); i++) {
-            stringBuilder.append("&nbsp;&nbsp;").append(i+1).append(". ").append(requiredFlavors.get(i)).append("<br>");
-        }
+        final List<Ingredient> allIngredients = getAllRequiredIngredients();
 
-        if(requiredToppings.isEmpty()) {
-            stringBuilder.append("<b>Toppings:</b> None");
-        } else {
-            stringBuilder.append("<b>Toppings:</b><br>");
-            for (int i = 0; i < requiredToppings.size(); i++) {
-                stringBuilder.append("&nbsp;&nbsp;").append(i+1).append(". ").append(requiredToppings.get(i)).append("<br>");
-            }
-        }
-        stringBuilder.append("</html>");
-        return stringBuilder.toString();
+        final String ingredientString = allIngredients.isEmpty() ? "(empty)" : allIngredients.stream().map(Ingredient::toString).reduce((a, b) -> a + ", " + b).orElse("");
+        
+        return "Cone: " + requiredCone + " Ingredients: " + ingredientString;
     }
 }
