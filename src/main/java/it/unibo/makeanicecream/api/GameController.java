@@ -54,4 +54,11 @@ public interface GameController {
      * @return the current game state
      */
     GameState getGameState();
+
+    /**
+     * Returns the current ice cream being built in the game.
+     *
+     * @return the current ice cream of the game
+     */
+    Icecream getGameIceCream();
 }

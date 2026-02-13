@@ -4,6 +4,7 @@ import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
+import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Player;
@@ -44,6 +45,11 @@ public final class GameImpl implements Game {
     @Override
     public GameState getState() {
         return this.state;
+    }
+
+    @Override
+    public Icecream getIceCream() {
+        return this.player.getCurrentIceCream();
     }
 
     @Override
