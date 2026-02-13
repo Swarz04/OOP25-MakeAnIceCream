@@ -5,12 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.CardLayout;
 
-
-
 import javax.swing.BorderFactory;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.GameController;
@@ -66,14 +65,15 @@ public class AreaPlayerPanel extends JPanel {
 
         for(final Conetype cone : Conetype.values()) {
             final JButton button = new JButton(cone.name());
-
-
-
-
-
-
-
-
+            final java.net.URL resource = getClass().getResource("/" + cone.name().toLowerCase() + ".png");
+            if(resource != null) {
+                final ImageIcon icon = new ImageIcon(resource);
+                final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                button.setIcon(new ImageIcon(scaledImage));
+                button.setToolTipText(cone.name());
+            } else {
+                button.setText(cone.name());
+            }
 
             button.addActionListener(e -> {
                 sendEvent(EventType.CHOOSE_CONE, cone.name());
