@@ -27,7 +27,6 @@ public class StatusPanel extends JPanel {
         add(timerLabel, BorderLayout.EAST);
     }
 
-
     /**
      * Updates the status display.
      *
@@ -35,6 +34,7 @@ public class StatusPanel extends JPanel {
      * @param timeLeft the remaining time
      */
     public void update(final int lives, final double timeLeft) {
-        // Implementation for updating labels
+        livesLabel.setText("Lives: " + lives);
+        timerLabel.setText(String.format("%.0fs", timeLeft));
     }
 }
