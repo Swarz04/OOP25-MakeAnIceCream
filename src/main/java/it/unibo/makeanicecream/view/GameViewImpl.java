@@ -164,12 +164,23 @@ public final class GameViewImpl extends JFrame implements GameView {
             final GameState currentState = this.controller.getGameState();
             if (currentState == GameState.MENU) {
                 this.layout.show(this.mainPanel, MENU_CARD);
+                return;
             } else if (currentState == GameState.PAUSED) {
                 this.layout.show(this.mainPanel, PAUSE_CARD);
+                return;
+            } 
+
+            this.layout.show(this.mainPanel, GAME_CARD);
+
+            final Icecream iceCream = this.controller.getGameIceCream();
+            if(iceCream == null || iceCream.getConetype() == null) {
+                areaPlayerPanel.showConePanel();
             } else {
-                this.layout.show(this.mainPanel, GAME_CARD);
-                
+                areaPlayerPanel.showBuilderPanel();
+                areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
             }
+                
+            
         });
     }
 }
