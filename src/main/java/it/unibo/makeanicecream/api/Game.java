@@ -39,6 +39,13 @@ public interface Game {
     GameState getState();
 
     /**
+     * Returns the current ice cream being built by the player.
+     * 
+     * @return the current ice cream
+     */
+    Icecream getCurrentIceCream();
+
+    /**
      * Selects the cone type for the ice cream being prepared by the player.
      * 
      * @param cone the type of cone

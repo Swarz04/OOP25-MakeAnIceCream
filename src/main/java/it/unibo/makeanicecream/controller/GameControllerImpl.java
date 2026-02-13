@@ -14,6 +14,7 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.GameView;
+import it.unibo.makeanicecream.api.Icecream;
 
 /**
  * Implementation of the {@link GameController} interface.
@@ -101,6 +102,11 @@ public final class GameControllerImpl implements GameController {
     @Override
     public GameState getGameState() {
         return this.game.getState();
+    }
+
+    @Override
+    public Icecream getGameIceCream() {
+        return this.game.getCurrentIceCream();
     }
 
     /**
