@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
+import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.GameState;
-import it.unibo.makeanicecream.model.IceCreamImpl;
 
 /**
  * Implementation of the {@link GameView} interface.
@@ -126,13 +126,9 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
-<<<<<<< HEAD
-        areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream());
-=======
-        final IceCreamImpl iceCream = controller.getCurrentIceCream();
+        final Icecream iceCream = controller.getGameIceCream();
         areaPlayerPanel.showBuilderPanel();
         areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
->>>>>>> c3743bc88a7a20e331911ae3d52a0e0eee44b385
     }
 
     @Override
