@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
 
@@ -16,8 +17,8 @@ import it.unibo.makeanicecream.api.EventType;
 public class ActionsPanel extends JPanel {
     private GameController controller;
 
-    private final JButton submitButton;
-    private final JButton resetButton;
+    private final JButton submitButton = new JButton();
+    private final JButton resetButton = new JButton();
 
     private Runnable submitAction = () -> {};
     private Runnable resetAction = () -> {};
@@ -29,11 +30,21 @@ public class ActionsPanel extends JPanel {
      */
     public ActionsPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        ImageIcon submitIcon = new ImageIcon(getClass().getResource("/submit.png"));
-        ImageIcon resetIcon = new ImageIcon(getClass().getResource("/reset.png"));
+        final java.net.URL submitIcon = getClass().getResource("/submit.png");
+        final java.net.URL resetIcon = getClass().getResource("/reset.png");
         
-        submitButton = new JButton(submitIcon);
-        resetButton = new JButton(resetIcon);
+        if(submitIcon == null || resetIcon == null) {
+            throw new IllegalStateException("Submit and Reset button icons not found in resources.");
+        } else {
+            final ImageIcon submitImageIcon = new ImageIcon(submitIcon);
+            final Image submitImage = submitImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final ImageIcon resetImageIcon = new ImageIcon(resetIcon);
+            final Image resetImage = resetImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            submitButton.setIcon(new ImageIcon(submitImage));
+            resetButton.setIcon(new ImageIcon(resetImage));
+            submitButton.setToolTipText("Submit");
+            resetButton.setToolTipText("Reset");
+        }
 
         submitButton.setVisible(false);
 

@@ -126,9 +126,8 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
-        final Icecream iceCream = controller.getGameIceCream();
         areaPlayerPanel.showBuilderPanel();
-        areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
+        areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream().toString());
     }
 
     @Override
