@@ -53,20 +53,23 @@ public final class GameViewImpl extends JFrame implements GameView {
         final JPanel gamePanel = new JPanel(new BorderLayout());
 
         // Layout della schermata di gioco
+        //TOP:status e customer
         final JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(this.statusPanel, BorderLayout.NORTH);
         topPanel.add(this.customerPanel, BorderLayout.CENTER);
         gamePanel.add(topPanel, BorderLayout.NORTH);
-
+        //BOTTOM: left: ingredients, right: area player e actions
         final JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(this.ingredientsPanel, BorderLayout.CENTER);
+        bottomPanel.add(this.ingredientsPanel, BorderLayout.WEST);
 
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(this.areaPlayerPanel, BorderLayout.CENTER);
         rightPanel.add(this.actionsPanel, BorderLayout.SOUTH);
 
         bottomPanel.add(rightPanel, BorderLayout.CENTER);
+
         gamePanel.add(bottomPanel, BorderLayout.CENTER);
+        
         mainPanel.add(gamePanel, GAME_CARD);
 
         setContentPane(mainPanel);
