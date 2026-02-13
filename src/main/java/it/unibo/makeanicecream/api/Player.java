@@ -47,4 +47,13 @@ public interface Player {
      * @return the current ice cream
      */
     Icecream getCurrentIceCream();
+
+    /**
+     * Enables or disables the possibility of adding toppings
+     * while composing an ice cream.
+     * 
+     * @param enabled true to allow toppings to be added,
+     *                false to prevent adding toppings
+     */
+    void setToppingEnabled(boolean enabled);
 }
