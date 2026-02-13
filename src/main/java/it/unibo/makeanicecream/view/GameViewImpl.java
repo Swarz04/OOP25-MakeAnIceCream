@@ -88,6 +88,7 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         setContentPane(mainPanel);
         pack();
+        setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
