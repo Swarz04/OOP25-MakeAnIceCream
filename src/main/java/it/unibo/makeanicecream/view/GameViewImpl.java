@@ -167,9 +167,7 @@ public final class GameViewImpl extends JFrame implements GameView {
                 this.layout.show(this.mainPanel, PAUSE_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
-
-                areaPlayerPanel.showBuilderPanel();
-                areaPlayerPanel.updateIceCreamView("Game updated");
+                showIceCream();
             }
         });
     }
