@@ -10,7 +10,6 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import java.util.Map;
-import it.unibo.makeanicecream.api.GameController;
 
 /**
  * Panel responsible for displaying the current customer and their order.

@@ -2,6 +2,7 @@ package it.unibo.makeanicecream.view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 
@@ -9,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
@@ -56,13 +58,19 @@ public class IngredientsPanel extends JPanel {
         toppingBox.add(liquidsBox);
         toppingBox.add(solidsBox);
 
-        add(flavorsBox, BorderLayout.CENTER);
-        add(toppingBox, BorderLayout.EAST);
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, flavorsBox, toppingBox);
+        split.setResizeWeight(0.6);
+        split.setDividerSize(8);
+        split.setContinuousLayout(true);
+
+        add(split, BorderLayout.CENTER);
 
         buildFlavorButtons();
         buildToppingButtons();
 
         setToppingButtonsEnabled(false);
+
+        setPreferredSize(new Dimension(800,450));
     }
 
     /**
