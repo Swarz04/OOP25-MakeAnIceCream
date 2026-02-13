@@ -1,16 +1,17 @@
 package it.unibo.makeanicecream.view;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
+import it.unibo.makeanicecream.api.GameController;
 
 import it.unibo.makeanicecream.api.EventType;
-import it.unibo.makeanicecream.api.GameController;
-import java.awt.Component;
 
 /**
  * Panel for the main menu, allowing level selection.
@@ -30,26 +31,29 @@ public final class MenuPanel extends JPanel {
      */
     public MenuPanel() {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout(0, TITLE_SPACING));
         this.setBorder(BorderFactory.createEmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
 
+        this.setBackground(new Color(250, 218, 221));
+
         final JLabel titleLabel = new JLabel("Choose a level", SwingConstants.CENTER);
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(titleLabel);
-        this.add(Box.createVerticalStrut(TITLE_SPACING));
+        this.add(titleLabel, BorderLayout.NORTH);
+
+        final JPanel buttonsPanel = new JPanel(new GridLayout(MAX_LEVELS, 1, 0, BUTTON_SPACING));
+        buttonsPanel.setOpaque(false);
 
         for (int i = 1; i <= MAX_LEVELS; i++) {
             final int levelNumber = i;
             final JButton levelButton = new JButton("Level " + i);
-            levelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
             levelButton.addActionListener(e -> {
                 if (this.controller != null) {
                     this.controller.handleInput(new EventImpl(EventType.START_LEVEL, String.valueOf(levelNumber)));
                 }
             });
-            this.add(levelButton);
-            this.add(Box.createVerticalStrut(BUTTON_SPACING));
+            buttonsPanel.add(levelButton);
         }
+
+        this.add(buttonsPanel, BorderLayout.CENTER);
     }
 
     /**

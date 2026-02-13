@@ -40,4 +40,11 @@ public interface Player {
      * Cancels the current ice cream preparation and clears all selected ingredients.
      */
     void cancelIceCream();
+
+    /**
+     * Gets the current ice cream being prepared.
+     *
+     * @return the current ice cream
+     */
+    Icecream getCurrentIceCream();
 }

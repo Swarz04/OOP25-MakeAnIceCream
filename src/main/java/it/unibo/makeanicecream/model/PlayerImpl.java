@@ -78,4 +78,12 @@ public final class PlayerImpl implements Player {
     public void cancelIceCream() {
         this.builder.reset();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Icecream getCurrentIceCream() {
+        return this.builder.getIceCream();
+    }
 }
