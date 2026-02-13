@@ -3,6 +3,7 @@ package it.unibo.makeanicecream.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Icecream;
@@ -28,7 +29,11 @@ public class IceCreamImpl implements Icecream {
      * @return new IceCreamImpl instance
      */
     public IceCreamImpl(final Conetype conetype, final List<Ingredient> ingredients, final boolean isClosed) {
-        this.conetype = conetype;
+        this.conetype = Objects.requireNonNull(conetype, "Cone type cannot be null");
+        Objects.requireNonNull(ingredients, "Ingredients cannot be null");
+        for(Ingredient ingredient : ingredients) {
+            Objects.requireNonNull(ingredient, "Ingredient in the list cannot be null");
+        }
         this.ingredients = new ArrayList<>(ingredients);
         this.isClosed = isClosed;
     }
