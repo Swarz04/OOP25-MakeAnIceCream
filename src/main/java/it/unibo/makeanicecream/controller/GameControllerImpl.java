@@ -100,6 +100,11 @@ public final class GameControllerImpl implements GameController {
     }
 
     @Override
+    public boolean areToppingsEnabled() {
+        return this.game.areToppingsEnabled();
+    }
+
+    @Override
     public GameState getGameState() {
         return this.game.getState();
     }

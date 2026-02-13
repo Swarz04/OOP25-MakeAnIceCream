@@ -56,4 +56,11 @@ public interface Player {
      *                false to prevent adding toppings
      */
     void setToppingEnabled(boolean enabled);
+
+    /**
+     * Returns whether toppings are currently enabled.
+     *
+     * @return true if toppings are enabled, false otherwise
+     */
+    boolean isToppingEnabled();
 }
