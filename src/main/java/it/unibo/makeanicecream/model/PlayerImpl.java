@@ -91,7 +91,7 @@ public final class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void setToppingEnabled(boolean enabled) {
+    public void setToppingEnabled(final boolean enabled) {
         this.builder.setToppingEnabled(enabled);
     }
 

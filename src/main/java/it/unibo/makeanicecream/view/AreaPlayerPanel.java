@@ -21,8 +21,8 @@ public class AreaPlayerPanel extends JPanel {
     private GameController controller;
     private final CardLayout cardLayout = new CardLayout();
 
-    private final JPanel conePanel = new JPanel(new BorderLayout(0,10));
-    private final JPanel coneButtons = new JPanel(new GridLayout(1,3,12,0));
+    private final JPanel conePanel = new JPanel(new BorderLayout(0, 10));
+    private final JPanel coneButtons = new JPanel(new GridLayout(1, 3, 12, 0));
     private final JPanel builderPanel = new JPanel(new BorderLayout());
     private final JLabel builderStatus = new JLabel("Builder Status", JLabel.CENTER);
 
@@ -32,7 +32,7 @@ public class AreaPlayerPanel extends JPanel {
 
         buildConePanel();
         buildBuilderPanel();
-        
+
         add(conePanel, CONE_PANEL);
         add(builderPanel, BUILDER_PANEL);
 
@@ -60,13 +60,13 @@ public class AreaPlayerPanel extends JPanel {
     }
 
     private void buildConePanel() {
-        conePanel.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
+        conePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         conePanel.add(new JLabel("Choose your cone"), BorderLayout.NORTH);
 
-        for(final Conetype cone : Conetype.values()) {
+        for (final Conetype cone : Conetype.values()) {
             final JButton button = new JButton(cone.name());
             final java.net.URL resource = getClass().getResource("/" + cone.name().toLowerCase() + ".png");
-            if(resource != null) {
+            if (resource != null) {
                 final ImageIcon icon = new ImageIcon(resource);
                 final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 button.setIcon(new ImageIcon(scaledImage));
@@ -86,13 +86,13 @@ public class AreaPlayerPanel extends JPanel {
     }
 
     private void buildBuilderPanel() {
-        builderPanel.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
+        builderPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         builderPanel.add(new JLabel("Builder Panel"), BorderLayout.NORTH);
         builderPanel.add(builderStatus, BorderLayout.CENTER);
     }
 
     private void sendEvent(final EventType type, final String data) {
-        if(controller == null) {
+        if (controller == null) {
             return;
         }
         controller.handleInput(new EventImpl(type, data));

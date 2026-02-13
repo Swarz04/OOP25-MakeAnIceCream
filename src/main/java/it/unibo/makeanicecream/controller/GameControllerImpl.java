@@ -91,7 +91,6 @@ public final class GameControllerImpl implements GameController {
                 view.showLives(getRemainingLives());
             }
         }
-        
     }
 
     @Override

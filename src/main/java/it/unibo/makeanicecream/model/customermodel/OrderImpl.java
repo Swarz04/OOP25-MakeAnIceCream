@@ -163,8 +163,13 @@ public class OrderImpl implements Order {
     public String toString() {
         final List<Ingredient> allIngredients = getAllRequiredIngredients();
 
-        final String ingredientString = allIngredients.isEmpty() ? "(empty)" : allIngredients.stream().map(Ingredient::toString).reduce((a, b) -> a + ", " + b).orElse("");
-        
+        final String ingredientString = allIngredients.isEmpty()
+            ? "(empty)"
+            : allIngredients.stream()
+                .map(Ingredient::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("");
+
         return "Cone: " + requiredCone + " Ingredients: " + ingredientString;
     }
 }

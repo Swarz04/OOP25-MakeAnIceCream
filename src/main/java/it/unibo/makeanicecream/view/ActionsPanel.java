@@ -15,13 +15,16 @@ import it.unibo.makeanicecream.api.EventType;
  * When the Submit button is disabled, it is hidden to prevent the user from attempting to submit an invalid ice cream.
  */
 public class ActionsPanel extends JPanel {
+    private static final int HORIZONTAL_GAP = 20;
+    private static final int VERTICAL_GAP = 10;
+
     private GameController controller;
 
     private final JButton submitButton = new JButton();
     private final JButton resetButton = new JButton();
 
-    private Runnable submitAction = () -> {};
-    private Runnable resetAction = () -> {};
+    private Runnable submitAction = () -> { };
+    private Runnable resetAction = () -> { };
 
     /**
      * Builds a new ActionsPanel.
@@ -29,11 +32,11 @@ public class ActionsPanel extends JPanel {
      * while the Reset button is always enabled.
      */
     public ActionsPanel() {
-        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        setLayout(new FlowLayout(FlowLayout.CENTER, HORIZONTAL_GAP, VERTICAL_GAP));
         final java.net.URL submitIcon = getClass().getResource("/submit.png");
         final java.net.URL resetIcon = getClass().getResource("/reset.png");
 
-        if(submitIcon == null || resetIcon == null) {
+        if (submitIcon == null || resetIcon == null) {
             throw new IllegalStateException("Submit or Reset button icons not found in resources.");
         } else {
             final ImageIcon submitImageIcon = new ImageIcon(submitIcon);
@@ -98,7 +101,7 @@ public class ActionsPanel extends JPanel {
      * @param action the action to set for the Submit button
      */
     public void setSubmitAction(final Runnable action) {
-        this.submitAction = (action == null) ? () -> {} : action;
+        this.submitAction = (action == null) ? () -> { } : action;
     }
 
     /**
@@ -107,6 +110,6 @@ public class ActionsPanel extends JPanel {
      * @param action the action to set for the Reset button
      */
     public void setResetAction(final Runnable action) {
-        this.resetAction = (action == null) ? () -> {} : action;
+        this.resetAction = (action == null) ? () -> { } : action;
     }
 }
