@@ -1,10 +1,11 @@
 package it.unibo.makeanicecream.view;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import java.awt.Color;
 /**
  * Panel responsible for displaying the current customer and their order.
  */
@@ -14,7 +15,7 @@ public class CustomerPanel extends JPanel {
 
     private final JLabel customerImage;
     private final JLabel customerLabel;
-    private final JTextArea orderArea;
+    private final JLabel orderLabel;
     /**
      * Builds a new CustomerPanel.
      */
@@ -23,7 +24,7 @@ public class CustomerPanel extends JPanel {
         
         this.customerImage = new JLabel();
         this.customerLabel = new JLabel();
-        this.orderArea = new JTextArea();
+        this.orderLabel = new JLabel();
 
         initLayout();
     }
@@ -36,14 +37,12 @@ public class CustomerPanel extends JPanel {
         final JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(customerImage, BorderLayout.CENTER);
         leftPanel.add(customerLabel, BorderLayout.SOUTH);
-        orderArea.setEditable(false);
-        orderArea.setOpaque(true);
-        orderArea.setWrapStyleWord(true);
-        orderArea.setBackground(Color.WHITE);
-        orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
+        orderLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        orderLabel.setVerticalAlignment(JLabel.TOP);
+        final JScrollPane scrollPane = new JScrollPane(orderLabel);
+        scrollPane.setBorder(null);
         this.add(leftPanel, BorderLayout.WEST);
-        this.add(orderArea, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
     
     /**
@@ -53,7 +52,8 @@ public class CustomerPanel extends JPanel {
      * @param order the string representation of the order
      */
     public void update(final String name, final String order) {
-        orderArea.setText(order);
-        customerLabel.setText(name);
+        customerLabel.setText(name == null ? "" : name);
+        orderLabel.setText(order == null ? "" : order);
+        
     }
 }

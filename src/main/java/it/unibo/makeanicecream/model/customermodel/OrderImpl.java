@@ -161,7 +161,22 @@ public class OrderImpl implements Order {
      */
     @Override
     public String toString() {
-        return String.format("OrderImpl[flavors=%s, cone=%s, toppings=%s]",
-        requiredFlavors, requiredCone, requiredToppings);
+        final StringBuilder stringBuilder = new StringBuilder("<html>");
+        stringBuilder.append("<b>Cone:</b> ").append(requiredCone.name()).append("<br>");
+        stringBuilder.append("<b>Scoops:</b> <br>");
+        for (int i = 0; i < requiredFlavors.size(); i++) {
+            stringBuilder.append("&nbsp;&nbsp;").append(i+1).append(". ").append(requiredFlavors.get(i)).append("<br>");
+        }
+
+        if(requiredToppings.isEmpty()) {
+            stringBuilder.append("<b>Toppings:</b> None");
+        } else {
+            stringBuilder.append("<b>Toppings:</b><br>");
+            for (int i = 0; i < requiredToppings.size(); i++) {
+                stringBuilder.append("&nbsp;&nbsp;").append(i+1).append(". ").append(requiredToppings.get(i)).append("<br>");
+            }
+        }
+        stringBuilder.append("</html>");
+        return stringBuilder.toString();
     }
 }
