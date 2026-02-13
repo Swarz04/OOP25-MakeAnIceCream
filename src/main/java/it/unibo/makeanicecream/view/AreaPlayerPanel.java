@@ -15,7 +15,13 @@ import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
 
+/**
+ * Panel representing the player area in the game.
+ * It contains a cone selection panel and an ice cream builder panel.
+ * Players can choose a cone type and then add ingredients to it.
+ */
 public class AreaPlayerPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
     private static final String CONE_PANEL = "cone";
     private static final String BUILDER_PANEL = "builder";
     private GameController controller;
@@ -26,6 +32,10 @@ public class AreaPlayerPanel extends JPanel {
     private final JPanel builderPanel = new JPanel(new BorderLayout());
     private final JLabel builderStatus = new JLabel("Builder Status", JLabel.CENTER);
 
+    /**
+     * Constructs a new AreaPlayerPanel.
+     * Initializes the cone selection and ice cream builder panels.
+     */
     public AreaPlayerPanel() {
         setLayout(cardLayout);
         setBorder(BorderFactory.createTitledBorder("Player Area"));
@@ -39,26 +49,45 @@ public class AreaPlayerPanel extends JPanel {
         showConePanel();
     }
 
+    /**
+     * Sets the controller to which events will be sent.
+     * 
+     * @param controller the game controller
+     */
     public void setController(final GameController controller) {
         this.controller = controller;
     }
 
+    /**
+     * Shows the cone selection panel, allowing the player to choose a cone type.
+     */
     public void showConePanel() {
         cardLayout.show(this, CONE_PANEL);
         revalidate();
         repaint();
     }
 
+    /**
+     * Shows the ice cream builder panel, allowing the player to see and update the current ice cream.
+     */
     public void showBuilderPanel() {
         cardLayout.show(this, BUILDER_PANEL);
         revalidate();
         repaint();
     }
 
+    /**
+     * Updates the ice cream view with a textual status.
+     * 
+     * @param status a textual representation of the current ice cream
+     */
     public void updateIceCreamView(final String status) {
         builderStatus.setText(status);
     }
 
+    /**
+     * Builds the cone selection panel with buttons for each cone type.
+     */
     private void buildConePanel() {
         conePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         conePanel.add(new JLabel("Choose your cone"), BorderLayout.NORTH);
@@ -85,12 +114,21 @@ public class AreaPlayerPanel extends JPanel {
         conePanel.add(coneButtons, BorderLayout.CENTER);
     }
 
+    /**
+     * Builds the ice cream builder panel where the current ice cream status is displayed.
+     */
     private void buildBuilderPanel() {
         builderPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         builderPanel.add(new JLabel("Builder Panel"), BorderLayout.NORTH);
         builderPanel.add(builderStatus, BorderLayout.CENTER);
     }
 
+    /**
+     * Sends an event to the game controller.
+     * 
+     * @param type the type of event
+     * @param data associated data, for example cone name
+     */
     private void sendEvent(final EventType type, final String data) {
         if (controller == null) {
             return;
