@@ -24,8 +24,5 @@ public final class Main {
         final GameView view = new GameViewImpl();
         engine.getController().setView(view);
         view.start();
-
-        view.showCustomer("Mario");
-        view.showOrder("Cioccolato\nCono\nCookies");
     }
 }

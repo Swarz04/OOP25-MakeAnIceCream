@@ -9,6 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.LiquidToppingType;
@@ -87,7 +89,7 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildFlavorButtons() {
         for (final FlavorType f : FlavorType.values()) {
-            final JButton button = new JButton(f.name());
+            final JButton button = createIngredieButton(f.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, f.name()));
             flavorPanel.add(button);
         }
@@ -98,13 +100,13 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildToppingButtons() {
         for (final LiquidToppingType liquid : LiquidToppingType.values()) {
-            final JButton button = new JButton(liquid.name());
+            final JButton button = createIngredieButton(liquid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, liquid.name()));
             liquidPanel.add(button);
         }
 
         for (final SolidToppingType solid : SolidToppingType.values()) {
-            final JButton button = new JButton(solid.name());
+            final JButton button = createIngredieButton(solid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, solid.name()));
             solidPanel.add(button);
         }
@@ -134,5 +136,24 @@ public class IngredientsPanel extends JPanel {
         for (final Component c : panel.getComponents()) {
             c.setEnabled(enabled);
         }
+    }
+
+    /**
+     * Creates a JButton with the specified name and an associated icon if available.
+     * 
+     * @param name the name of the ingredient for which to create the button
+     * @return a JButton with the ingredient name and icon if the icon resource is found, otherwise a JButton with just the name
+     */
+    private JButton createIngredieButton(final String name) {
+        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase() + ".png");
+        if(resource != null) {
+            final ImageIcon icon = new ImageIcon(resource);
+            final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final JButton button = new JButton(name, new ImageIcon(scaledImage));
+            button.setVerticalTextPosition(JButton.BOTTOM);
+            button.setHorizontalTextPosition(JButton.CENTER);
+            return button;
+        }
+        return new JButton(name);
     }
 }

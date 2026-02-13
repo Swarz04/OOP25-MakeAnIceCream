@@ -8,7 +8,6 @@ import javax.swing.SwingUtilities;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.GameState;
-import it.unibo.makeanicecream.model.IceCreamImpl;
 
 /**
  * Implementation of the {@link GameView} interface.
@@ -90,6 +89,7 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         setContentPane(mainPanel);
         pack();
+        setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
