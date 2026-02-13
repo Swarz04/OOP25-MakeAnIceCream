@@ -19,12 +19,8 @@ public class CustomerPanel extends JPanel {
      */
     public CustomerPanel() {
         setLayout(new BorderLayout(20, 0));
-<<<<<<< HEAD
         
-        Jpanel leftPanel = new Panel();
-=======
-
->>>>>>> c3743bc88a7a20e331911ae3d52a0e0eee44b385
+        JPanel leftPanel = new JPanel(new BorderLayout());
         orderArea.setEditable(false);
         orderArea.setOpaque(true);
         orderArea.setWrapStyleWord(true);
