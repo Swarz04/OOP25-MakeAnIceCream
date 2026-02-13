@@ -1,5 +1,7 @@
 package it.unibo.makeanicecream.view;
 
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -7,12 +9,24 @@ import javax.swing.JPanel;
  */
 public class StatusPanel extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
+    private final JLabel livesLabel;
+    private final JLabel timerLabel;
+
     /**
      * Builds a new StatusPanel.
      */
     public StatusPanel() {
-        super();
+        super(new BorderLayout());
+        
+        this.livesLabel = new JLabel();
+        this.timerLabel = new JLabel();
+
+        add(livesLabel, BorderLayout.WEST);
+        add(timerLabel, BorderLayout.EAST);
     }
+
 
     /**
      * Updates the status display.
