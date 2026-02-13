@@ -9,7 +9,6 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.GameState;
-import it.unibo.makeanicecream.api.Icecream;
 
 /**
  * Implementation of the {@link GameView} interface.
