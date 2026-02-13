@@ -43,7 +43,7 @@ public interface Game {
      * 
      * @return the current ice cream
      */
-    Icecream getIceCream();
+    Icecream getCurrentIceCream();
 
     /**
      * Selects the cone type for the ice cream being prepared by the player.

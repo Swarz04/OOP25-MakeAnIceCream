@@ -106,7 +106,7 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public Icecream getGameIceCream() {
-        return this.game.getIceCream();
+        return this.game.getCurrentIceCream();
     }
 
     /**

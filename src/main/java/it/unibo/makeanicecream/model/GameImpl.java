@@ -48,7 +48,7 @@ public final class GameImpl implements Game {
     }
 
     @Override
-    public Icecream getIceCream() {
+    public Icecream getCurrentIceCream() {
         return this.player.getCurrentIceCream();
     }
 

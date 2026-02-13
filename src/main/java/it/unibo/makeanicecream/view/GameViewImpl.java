@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.GameState;
+import it.unibo.makeanicecream.model.IceCreamImpl;
 
 /**
  * Implementation of the {@link GameView} interface.
@@ -53,6 +54,16 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.areaPlayerPanel = new AreaPlayerPanel();
         this.actionsPanel = new ActionsPanel();
 
+        this.actionsPanel.setResetAction(() -> {
+            this.areaPlayerPanel.showConePanel();
+            this.areaPlayerPanel.updateIceCreamView("IceCream reset");
+        });
+
+        this.actionsPanel.setSubmitAction(() -> {
+            this.areaPlayerPanel.showConePanel();
+            this.areaPlayerPanel.updateIceCreamView("IceCream submitted");
+        });
+
         final JPanel gamePanel = new JPanel(new BorderLayout());
 
         // Layout della schermata di gioco
@@ -72,7 +83,7 @@ public final class GameViewImpl extends JFrame implements GameView {
         bottomPanel.add(rightPanel, BorderLayout.CENTER);
 
         gamePanel.add(bottomPanel, BorderLayout.CENTER);
-        
+
         mainPanel.add(gamePanel, GAME_CARD);
 
         setContentPane(mainPanel);
@@ -115,7 +126,13 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
+<<<<<<< HEAD
         areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream());
+=======
+        final IceCreamImpl iceCream = controller.getCurrentIceCream();
+        areaPlayerPanel.showBuilderPanel();
+        areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
+>>>>>>> c3743bc88a7a20e331911ae3d52a0e0eee44b385
     }
 
     @Override
@@ -141,6 +158,9 @@ public final class GameViewImpl extends JFrame implements GameView {
                 this.layout.show(this.mainPanel, MENU_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
+
+                areaPlayerPanel.showBuilderPanel();
+                areaPlayerPanel.updateIceCreamView("Game updated");
             }
         });
     }

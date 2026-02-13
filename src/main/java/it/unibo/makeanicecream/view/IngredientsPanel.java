@@ -3,11 +3,11 @@ package it.unibo.makeanicecream.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.Image;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
+
 import javax.swing.JPanel;
 
 import it.unibo.makeanicecream.api.GameController;
@@ -87,7 +87,7 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildFlavorButtons() {
         for (final FlavorType f : FlavorType.values()) {
-            final JButton button = createButton(f.name());
+            final JButton button = new JButton(f.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, f.name()));
             flavorPanel.add(button);
         }
@@ -98,13 +98,13 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildToppingButtons() {
         for (final LiquidToppingType liquid : LiquidToppingType.values()) {
-            final JButton button = createButton(liquid.name());
+            final JButton button = new JButton(liquid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, liquid.name()));
             liquidPanel.add(button);
         }
 
         for (final SolidToppingType solid : SolidToppingType.values()) {
-            final JButton button = createButton(solid.name());
+            final JButton button = new JButton(solid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, solid.name()));
             solidPanel.add(button);
         }
@@ -134,18 +134,5 @@ public class IngredientsPanel extends JPanel {
         for (final Component c : panel.getComponents()) {
             c.setEnabled(enabled);
         }
-    }
-
-    private JButton createButton(final String name) {
-        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase() + ".png");
-        if (resource != null) {
-            final ImageIcon originalIcon = new ImageIcon(resource);
-            final Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            final JButton button = new JButton(name, new ImageIcon(scaledImage));
-            button.setVerticalTextPosition(JButton.BOTTOM);
-            button.setHorizontalTextPosition(JButton.CENTER);
-            return button;
-        }
-        return new JButton(name);
     }
 }
