@@ -41,5 +41,7 @@ public final class StartLevelCommand implements Command {
         if (!this.gameLoop.isRunning()) {
             this.gameLoop.start();
         }
+
+        game.cancelIceCream();
     }
 }
