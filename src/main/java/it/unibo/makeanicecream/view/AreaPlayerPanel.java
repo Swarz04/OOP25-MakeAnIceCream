@@ -4,19 +4,21 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.CardLayout;
-import java.awt.Image;
+
 
 
 import javax.swing.BorderFactory;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import javax.swing.ImageIcon;
+
 
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
 
 public class AreaPlayerPanel extends JPanel {
+    private static final String CONE_PANEL = "cone";
+    private static final String BUILDER_PANEL = "builder";
     private GameController controller;
     private final CardLayout cardLayout = new CardLayout();
 
@@ -31,9 +33,9 @@ public class AreaPlayerPanel extends JPanel {
 
         buildConePanel();
         buildBuilderPanel();
-
-        add(conePanel, "cone");
-        add(builderPanel, "builder");
+        
+        add(conePanel, CONE_PANEL);
+        add(builderPanel, BUILDER_PANEL);
 
         showConePanel();
     }
@@ -43,11 +45,15 @@ public class AreaPlayerPanel extends JPanel {
     }
 
     public void showConePanel() {
-        cardLayout.show(this, "cone");
+        cardLayout.show(this, CONE_PANEL);
+        revalidate();
+        repaint();
     }
 
     public void showBuilderPanel() {
-        cardLayout.show(this, "builder");
+        cardLayout.show(this, BUILDER_PANEL);
+        revalidate();
+        repaint();
     }
 
     public void updateIceCreamView(final String status) {
@@ -59,19 +65,20 @@ public class AreaPlayerPanel extends JPanel {
         conePanel.add(new JLabel("Choose your cone"), BorderLayout.NORTH);
 
         for(final Conetype cone : Conetype.values()) {
-            final JButton button = new JButton();
-            final java.net.URL resource = getClass().getResource("/" + cone.name().toLowerCase() + ".png");
-            if (resource != null) {
-                final ImageIcon originalIcon = new ImageIcon(resource);
-                final Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                button.setIcon(new ImageIcon(scaledImage));
-                button.setToolTipText(cone.name());
-            } else {
-                button.setText(cone.name());
-            }
+            final JButton button = new JButton(cone.name());
+
+
+
+
+
+
+
+
+
             button.addActionListener(e -> {
                 sendEvent(EventType.CHOOSE_CONE, cone.name());
                 showBuilderPanel();
+                updateIceCreamView("Cone selected: " + cone.name() + " | Ingredients: [] | Open");
             });
             coneButtons.add(button);
         }
