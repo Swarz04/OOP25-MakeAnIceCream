@@ -7,24 +7,58 @@
 \contentsline {section}{\numberline {2.1}Architettura}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Design dettagliato}{6}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Gestione Customer, Ordini e Timer (Studente 1)}{6}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Costruzione del Gelato (Studente 2)}{7}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Gestione del Giocatore e Livelli (Studente 3)}{9}{subsection.2.2.3}%
-\contentsline {subsubsection}{Gestione del giocatore e della consegna degli ordini}{9}{section*.4}%
-\contentsline {paragraph}{Problema}{9}{section*.5}%
-\contentsline {paragraph}{Soluzione}{9}{section*.6}%
-\contentsline {subsubsection}{Gestione dei livelli e progressione della difficoltà}{10}{section*.7}%
-\contentsline {paragraph}{Problema}{10}{section*.8}%
-\contentsline {paragraph}{Soluzione}{11}{section*.9}%
-\contentsline {subsection}{\numberline {2.2.4}Gestione Comandi e Stato (Studente 4)}{11}{subsection.2.2.4}%
-\contentsline {chapter}{\numberline {3}Sviluppo}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Testing automatizzato}{12}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Note di sviluppo}{13}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Commenti finali}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{17}{section.4.2}%
-\contentsline {chapter}{\numberline {A}Guida utente}{19}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{20}{appendix.Alph2}%
-\contentsline {subsection}{\numberline {B.0.1}Studente 1}{20}{subsection.Alph2.0.1}%
-\contentsline {subsection}{\numberline {B.0.2}Studente 2}{20}{subsection.Alph2.0.2}%
-\contentsline {subsection}{\numberline {B.0.3}Studente 3}{20}{subsection.Alph2.0.3}%
-\contentsline {subsection}{\numberline {B.0.4}chiara.emina@studio.unibo.it}{20}{subsection.Alph2.0.4}%
+\contentsline {subsubsection}{Creazione dei clienti che possiedono un ordine}{6}{section*.4}%
+\contentsline {paragraph}{Problema}{6}{section*.5}%
+\contentsline {paragraph}{Responsabilità da rispettare riguardanti il cliente}{6}{section*.6}%
+\contentsline {paragraph}{Approccio per la soluzione}{6}{section*.7}%
+\contentsline {subsubsection}{Gestione degli ordini e validazione del gelato}{7}{section*.8}%
+\contentsline {paragraph}{Problema}{7}{section*.9}%
+\contentsline {paragraph}{Responsabilità da rispettare}{8}{section*.10}%
+\contentsline {paragraph}{Approccio per la soluzione}{8}{section*.11}%
+\contentsline {subsubsection}{Gestione del timer}{8}{section*.12}%
+\contentsline {paragraph}{Problema Generale}{8}{section*.13}%
+\contentsline {paragraph}{Problema organizzativo}{9}{section*.14}%
+\contentsline {paragraph}{Approccio per la soluzione}{9}{section*.15}%
+\contentsline {paragraph}{Approccio per la soluzione al problema generale}{9}{section*.16}%
+\contentsline {subsection}{\numberline {2.2.2}Costruzione del Gelato (Studente 2)}{10}{subsection.2.2.2}%
+\contentsline {subsubsection}{Costruzione del gelato}{10}{section*.17}%
+\contentsline {paragraph}{Problema}{10}{section*.18}%
+\contentsline {paragraph}{Soluzione}{10}{section*.19}%
+\contentsline {subsubsection}{Modellazione degli ingredienti del gelato}{11}{section*.20}%
+\contentsline {paragraph}{Problema}{11}{section*.21}%
+\contentsline {paragraph}{Soluzione}{11}{section*.22}%
+\contentsline {subsubsection}{Costruzione progressiva}{11}{section*.23}%
+\contentsline {paragraph}{Problema}{11}{section*.24}%
+\contentsline {paragraph}{Soluzione}{11}{section*.25}%
+\contentsline {subsection}{\numberline {2.2.3}Gestione del Giocatore e Livelli (Studente 3)}{12}{subsection.2.2.3}%
+\contentsline {subsubsection}{Gestione del giocatore e della consegna degli ordini}{12}{section*.26}%
+\contentsline {paragraph}{Problema}{12}{section*.27}%
+\contentsline {paragraph}{Soluzione}{13}{section*.28}%
+\contentsline {subsubsection}{Gestione dei livelli e progressione della difficoltà}{13}{section*.29}%
+\contentsline {paragraph}{Problema}{13}{section*.30}%
+\contentsline {paragraph}{Soluzione}{14}{section*.31}%
+\contentsline {subsection}{\numberline {2.2.4}Gestione Comandi e Stato (Studente 4)}{14}{subsection.2.2.4}%
+\contentsline {subsubsection}{Gestione dei comandi utente}{14}{section*.32}%
+\contentsline {paragraph}{Problema}{14}{section*.33}%
+\contentsline {paragraph}{Soluzione}{14}{section*.34}%
+\contentsline {subsubsection}{Gestione degli eventi utente}{14}{section*.35}%
+\contentsline {paragraph}{Problema}{14}{section*.36}%
+\contentsline {paragraph}{Soluzione}{14}{section*.37}%
+\contentsline {subsubsection}{Gestione dello stato del gioco}{15}{section*.38}%
+\contentsline {paragraph}{Problema}{15}{section*.39}%
+\contentsline {paragraph}{Soluzione}{15}{section*.40}%
+\contentsline {subsubsection}{Motore di gioco}{15}{section*.41}%
+\contentsline {paragraph}{Problema}{15}{section*.42}%
+\contentsline {paragraph}{Soluzione}{15}{section*.43}%
+\contentsline {chapter}{\numberline {3}Sviluppo}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Testing automatizzato}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Note di sviluppo}{17}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Commenti finali}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{21}{section.4.2}%
+\contentsline {chapter}{\numberline {A}Guida utente}{23}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{24}{appendix.Alph2}%
+\contentsline {subsection}{\numberline {B.0.1}Studente 1}{24}{subsection.Alph2.0.1}%
+\contentsline {subsection}{\numberline {B.0.2}Studente 2}{24}{subsection.Alph2.0.2}%
+\contentsline {subsection}{\numberline {B.0.3}Studente 3}{24}{subsection.Alph2.0.3}%
+\contentsline {subsection}{\numberline {B.0.4}chiara.emina@studio.unibo.it}{24}{subsection.Alph2.0.4}%

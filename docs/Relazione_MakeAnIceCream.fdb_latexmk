@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex Relazione_MakeAnIceCream"] 0 "Relazione_MakeAnIceCream.aux" "Relazione_MakeAnIceCream.bbl" "Relazione_MakeAnIceCream" 1770904349.09454 0
+["bibtex Relazione_MakeAnIceCream"] 0 "Relazione_MakeAnIceCream.aux" "Relazione_MakeAnIceCream.bbl" "Relazione_MakeAnIceCream" 1770994653.56998 0
   "13-template.bib" 0 -1 0 ""
   "C:/Program Files/MiKTeX/bibtex/bst/bibtex/alpha.bst" 1291864736 23907 a5f93555796fb564b924339521f10a7c ""
   "Relazione_MakeAnIceCream.aux" 0 -1 0 "pdflatex"
@@ -7,7 +7,7 @@
   "Relazione_MakeAnIceCream.bbl"
   "Relazione_MakeAnIceCream.blg"
   (rewritten before read)
-["pdflatex"] 1770904347.92122 "c:/Users/schar/Music/OOP25-MakeAnIceCream/OOP25-MakeAnIceCream/docs/Relazione_MakeAnIceCream.tex" "Relazione_MakeAnIceCream.pdf" "Relazione_MakeAnIceCream" 1770904349.09532 0
+["pdflatex"] 1770994652.22794 "c:/Users/schar/Music/OOP25-MakeAnIceCream/OOP25-MakeAnIceCream/docs/Relazione_MakeAnIceCream.tex" "Relazione_MakeAnIceCream.pdf" "Relazione_MakeAnIceCream" 1770994653.57092 0
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/tcrm1200.tfm" 993062508 1444 95ffe0f19b974d50849790c8225c7ef7 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmmi12.tfm" 1136765053 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -86,19 +86,12 @@
   "C:/Users/schar/AppData/Roaming/MiKTeX/tex/latex/kvsetkeys/kvsetkeys.sty" 1665066333 13815 760b0c02f691ea230f5359c4e1de23a7 ""
   "C:/Users/schar/AppData/Roaming/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/schar/AppData/Roaming/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
-  "Relazione_MakeAnIceCream.aux" 1770904348 7146 23e918b06146c3a62791b435e53e8d83 "pdflatex"
+  "Relazione_MakeAnIceCream.aux" 1770994652 7945 c33cd38e8593bd533007dc833173fb0d "pdflatex"
   "Relazione_MakeAnIceCream.bbl" 0 -1 0 "bibtex Relazione_MakeAnIceCream"
-  "Relazione_MakeAnIceCream.out" 1770904348 3824 055a58a97f6e2592c1a6ac0fba35b8e9 "pdflatex"
-  "Relazione_MakeAnIceCream.tex" 1770904347 25711 cbe69b6a837bc8a3f2c6ef44872f3588 ""
-  "Relazione_MakeAnIceCream.toc" 1770904348 2373 b77332e875553b44518b04567a4ecc2d "pdflatex"
-  "c:/Users/schar/Music/OOP25-MakeAnIceCream/OOP25-MakeAnIceCream/docs/Relazione_MakeAnIceCream.tex" 1770904347 25711 cbe69b6a837bc8a3f2c6ef44872f3588 ""
-  "img/UML_Architecture.pdf" 1770894770 53254 e3d461ddf95bcc7287c666a93d00e761 ""
-  "img/UML_Customer.pdf" 1770894770 90547 7bbdfc18da8b396affb3496ba89def90 ""
-  "img/UML_Generale.pdf" 1769094745 200073 b1075a114dfb1a9637b9c3fc709ccc04 ""
-  "img/UML_IceCreamBuilder.pdf" 1770894770 56943 5e4453e250106e3f33c83b7ea200000c ""
-  "img/UML_Ingredients.pdf" 1770894770 80085 db10b6b044119d1be6d421b58b9c9778 ""
-  "img/UML_Level.pdf" 1770894770 200383 9be6794b1e57b5c386f9e7987a9b13ea ""
-  "img/UML_Player.pdf" 1770894770 232336 1692f87986db1e8a603450f43d0d7478 ""
+  "Relazione_MakeAnIceCream.out" 1770994653 3824 055a58a97f6e2592c1a6ac0fba35b8e9 "pdflatex"
+  "Relazione_MakeAnIceCream.tex" 1770994651 46168 8c8ba0862774121dc8a42652bbd8fc62 ""
+  "Relazione_MakeAnIceCream.toc" 1770994653 4645 b032bb47b6f92b67c0a7ac57c2c19a51 "pdflatex"
+  "c:/Users/schar/Music/OOP25-MakeAnIceCream/OOP25-MakeAnIceCream/docs/Relazione_MakeAnIceCream.tex" 1770994651 46168 8c8ba0862774121dc8a42652bbd8fc62 ""
   (generated)
   "Relazione_MakeAnIceCream.aux"
   "Relazione_MakeAnIceCream.log"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  12 FEB 2026 14:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  13 FEB 2026 15:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -327,90 +327,96 @@ Capitolo 1.
 [2
 
 ] [3]
-<img/UML_Generale.pdf, id=137, 598.15468pt x 846.0408pt>
-File: img/UML_Generale.pdf Graphic file (type pdf)
-<use img/UML_Generale.pdf>
-Package pdftex.def Info: img/UML_Generale.pdf  used on input line 66.
-(pdftex.def)             Requested size: 292.9797pt x 414.3958pt.
- [4 <./img/UML_Generale.pdf>]
+
+LaTeX Warning: Reference `img:UML_Generale' on page 1 undefined on input line 62.
+
+[4]
 Capitolo 2.
-<img/UML_Architecture.pdf, id=148, 597.50786pt x 845.04686pt>
-File: img/UML_Architecture.pdf Graphic file (type pdf)
-<use img/UML_Architecture.pdf>
-Package pdftex.def Info: img/UML_Architecture.pdf  used on input line 88.
-(pdftex.def)             Requested size: 390.0pt x 180.14212pt.
+
+LaTeX Warning: Reference `img:Architecture' on page 1 undefined on input line 86.
+
 [5
 
-]
-<img/UML_Customer.pdf, id=157, 597.50786pt x 845.04686pt>
-File: img/UML_Customer.pdf Graphic file (type pdf)
-<use img/UML_Customer.pdf>
-Package pdftex.def Info: img/UML_Customer.pdf  used on input line 106.
-(pdftex.def)             Requested size: 390.0pt x 328.71294pt.
- [6 <./img/UML_Architecture.pdf>]
-<img/UML_IceCreamBuilder.pdf, id=172, 597.50786pt x 845.04686pt>
-File: img/UML_IceCreamBuilder.pdf Graphic file (type pdf)
-<use img/UML_IceCreamBuilder.pdf>
-Package pdftex.def Info: img/UML_IceCreamBuilder.pdf  used on input line 121.
-(pdftex.def)             Requested size: 390.0pt x 514.42647pt.
- [7 <./img/UML_Customer.pdf>]
-<img/UML_Ingredients.pdf, id=185, 597.50786pt x 845.04686pt>
-File: img/UML_Ingredients.pdf Graphic file (type pdf)
-<use img/UML_Ingredients.pdf>
-Package pdftex.def Info: img/UML_Ingredients.pdf  used on input line 128.
-(pdftex.def)             Requested size: 390.0pt x 180.14212pt.
- [8 <./img/UML_IceCreamBuilder.pdf>]
-Overfull \hbox (82.94597pt too wide) in paragraph at lines 147--150
+] [6] [7] [8] [9]
+
+LaTeX Warning: Reference `img:UML_IceCreamBuilder' on page 1 undefined on input line 236.
+
+
+Overfull \hbox (9.17522pt too wide) in paragraph at lines 236--238
+ []\OT1/cmr/bx/n/12 Soluzione[] \OT1/cmr/m/n/12 La co-stru-zio-ne del ge-la-to vie-ne cen-tra-liz-za-ta in \OT1/cmtt/m/n/12 IceCreamBuilder\OT1/cmr/m/n/12 ,
+ []
+
+[10] [11] [12]
+Overfull \hbox (82.94597pt too wide) in paragraph at lines 300--303
 \OT1/cmr/m/n/12 azio-ni prin-ci-pa-li di-spo-ni-bi-li du-ran-te il gio-co. In par-ti-co-la-re, il me-to-do \OT1/cmtt/m/n/12 deliverIceCream(...)
  []
 
-<img/UML_Player.pdf, id=196, 597.50786pt x 845.04686pt>
-File: img/UML_Player.pdf Graphic file (type pdf)
-<use img/UML_Player.pdf>
-Package pdftex.def Info: img/UML_Player.pdf  used on input line 160.
-(pdftex.def)             Requested size: 390.0pt x 365.85564pt.
-[9 <./img/UML_Ingredients.pdf>] [10 <./img/UML_Player.pdf>]
-<img/UML_Level.pdf, id=222, 597.50786pt x 845.04686pt>
-File: img/UML_Level.pdf Graphic file (type pdf)
-<use img/UML_Level.pdf>
-Package pdftex.def Info: img/UML_Level.pdf  used on input line 183.
-(pdftex.def)             Requested size: 390.0pt x 180.14212pt.
- [11 <./img/UML_Level.pdf>]
+
+LaTeX Warning: Reference `img:UML_Level' on page 1 undefined on input line 309.
+
+
+LaTeX Warning: Reference `img:UML_Level' on page 1 undefined on input line 332.
+
+[13]
+
+LaTeX Warning: Reference `img:UML_Command' on page 1 undefined on input line 347.
+
+
+LaTeX Warning: Reference `img:UML_Command' on page 1 undefined on input line 347.
+
+
+LaTeX Warning: Reference `img:UML_Event' on page 1 undefined on input line 369.
+
+[14]
+
+LaTeX Warning: Reference `img:UML_GameState' on page 1 undefined on input line 384.
+
+
+Overfull \hbox (15.11847pt too wide) in paragraph at lines 384--385
+ []\OT1/cmr/bx/n/12 Soluzione[] \OT1/cmr/m/n/12 Co-me mo-stra-to in [], \OT1/cmtt/m/n/12 GameImpl \OT1/cmr/m/n/12 uti-liz-za l'e-nu-me-ra-zio-ne \OT1/cmtt/m/n/12 GameState
+ []
+
+
+Overfull \hbox (6.14636pt too wide) in paragraph at lines 384--385
+\OT1/cmr/m/n/12 per rap-pre-sen-ta-re lo sta-to cor-ren-te del gio-co. Ogni me-to-do (\OT1/cmtt/m/n/12 start()\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 pause()\OT1/cmr/m/n/12 ,
+ []
+
+[15]
 Capitolo 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 215.
-[12
+(Font)              <5> on input line 420.
+[16
 
-] [13]
+] [17]
 
-LaTeX Warning: Citation `mersenne' on page 14 undefined on input line 277.
+LaTeX Warning: Citation `mersenne' on page 18 undefined on input line 482.
 
-[14] [15]
-Overfull \hbox (2.45537pt too wide) in paragraph at lines 321--324
+[18] [19]
+Overfull \hbox (2.45537pt too wide) in paragraph at lines 526--529
 \OT1/cmr/bx/n/12 Link: []$\OT1/cmtt/m/n/12 [PERMALINKStandardLevel-[]-[]dichiarazioneeutilizzoQueue]$[] 
  []
 
 
-Overfull \hbox (33.33038pt too wide) in paragraph at lines 325--328
+Overfull \hbox (33.33038pt too wide) in paragraph at lines 530--533
 \OT1/cmr/bx/n/12 Link: []$\OT1/cmtt/m/n/12 [PERMALINKPlayerTest / StandardLevelTest-[]-[]utilizzomockewhen /
  []
 
-[16]
+[20]
 Capitolo 4.
-[17
+[21
 
-] [18]
+] [22]
 Appendice A.
-[19
+[23
 
 ]
 Appendice B.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 398.
+(hyperref)                than one, level fixed on input line 603.
 
 No file Relazione_MakeAnIceCream.bbl.
-[20
+[24
 
 ] (Relazione_MakeAnIceCream.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
@@ -428,17 +434,17 @@ Package rerunfilecheck Info: File `Relazione_MakeAnIceCream.out' has not changed
 (rerunfilecheck)             Checksum: 055A58A97F6E2592C1A6AC0FBA35B8E9;3824.
  ) 
 Here is how much of TeX's memory you used:
- 12470 strings out of 467871
- 209634 string characters out of 5428443
+ 12446 strings out of 467871
+ 208291 string characters out of 5428443
  690619 words of memory out of 5000000
- 41163 multiletter control sequences out of 15000+600000
+ 41105 multiletter control sequences out of 15000+600000
  634516 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,722b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,975b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\schar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relazione_MakeAnIceCream.pdf (21 pages, 1098742 bytes).
+Output written on Relazione_MakeAnIceCream.pdf (25 pages, 206634 bytes).
 PDF statistics:
- 358 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 248 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 362 PDF objects out of 1000 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
 
