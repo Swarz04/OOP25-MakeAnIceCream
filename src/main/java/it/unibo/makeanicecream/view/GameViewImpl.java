@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.Icecream;
@@ -86,21 +89,22 @@ public final class GameViewImpl extends JFrame implements GameView {
         topPanel.add(this.customerPanel, BorderLayout.CENTER);
         gamePanel.add(topPanel, BorderLayout.NORTH);
         //BOTTOM: left: ingredients, right: area player e actions
-        final JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(this.ingredientsPanel, BorderLayout.WEST);
-
         final JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(this.areaPlayerPanel, BorderLayout.CENTER);
         rightPanel.add(this.actionsPanel, BorderLayout.SOUTH);
 
-        bottomPanel.add(rightPanel, BorderLayout.CENTER);
+        final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.ingredientsPanel, rightPanel);
+        splitPane.setResizeWeight(0.70);
+        splitPane.setDividerSize(8);
+        splitPane.setContinuousLayout(true);
 
-        gamePanel.add(bottomPanel, BorderLayout.CENTER);
+        gamePanel.add(splitPane, BorderLayout.CENTER);
 
         mainPanel.add(gamePanel, GAME_CARD);
 
         setContentPane(mainPanel);
         pack();
+        SwingUtilities.invokeLater(() -> splitPane.setDividerLocation(0.65));
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }

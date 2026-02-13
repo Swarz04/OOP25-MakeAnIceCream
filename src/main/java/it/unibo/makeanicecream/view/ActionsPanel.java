@@ -41,9 +41,9 @@ public class ActionsPanel extends JPanel {
             throw new IllegalStateException("Submit or Reset button icons not found in resources.");
         } else {
             final ImageIcon submitImageIcon = new ImageIcon(submitIcon);
-            final Image submitImage = submitImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final Image submitImage = submitImageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
             final ImageIcon resetImageIcon = new ImageIcon(resetIcon);
-            final Image resetImage = resetImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final Image resetImage = resetImageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
             submitButton.setIcon(new ImageIcon(submitImage));
             resetButton.setIcon(new ImageIcon(resetImage));
             submitButton.setToolTipText("Submit");
