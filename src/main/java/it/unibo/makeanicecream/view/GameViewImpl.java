@@ -21,6 +21,8 @@ public final class GameViewImpl extends JFrame implements GameView {
     private static final String MENU_CARD = "MENU";
     private static final String GAME_CARD = "GAME";
     private static final String PAUSE_CARD = "PAUSE";
+    private static final String GAME_OVER_CARD = "GAME OVER";
+    private static final String LEVEL_COMPLETED_CARD = "LEVEL_COMPLETED";
 
     private final CardLayout layout = new CardLayout();
     private final JPanel mainPanel = new JPanel(layout);
@@ -32,6 +34,9 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final AreaPlayerPanel areaPlayerPanel;
     private final ActionsPanel actionsPanel;
     private final PausePanel pausePanel;
+    private final GameOverPanel gameOverPanel;
+    private final LevelCompletedPanel levelCompletedPanel;
+
 
     private GameController controller;
 
@@ -53,11 +58,18 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.pausePanel = new PausePanel();
         mainPanel.add(pausePanel, PAUSE_CARD);
 
+        this.gameOverPanel = new GameOverPanel();
+        mainPanel.add(gameOverPanel, GAME_OVER_CARD);
+
+        this.levelCompletedPanel = new LevelCompletedPanel();
+        mainPanel.add(levelCompletedPanel, LEVEL_COMPLETED_CARD);
+
         this.statusPanel = new StatusPanel();
         this.customerPanel = new CustomerPanel();
         this.ingredientsPanel = new IngredientsPanel();
         this.areaPlayerPanel = new AreaPlayerPanel();
         this.actionsPanel = new ActionsPanel();
+        
 
         this.actionsPanel.setResetAction(() -> {
             this.areaPlayerPanel.showConePanel();
@@ -107,6 +119,8 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.areaPlayerPanel.setController(controller);
         this.pausePanel.setController(controller);
         this.statusPanel.setController(controller);
+        this.gameOverPanel.setController(controller);
+        this.levelCompletedPanel.setController(controller);
     }
 
     @Override
@@ -177,7 +191,13 @@ public final class GameViewImpl extends JFrame implements GameView {
             } else if (currentState == GameState.PAUSED) {
                 this.layout.show(this.mainPanel, PAUSE_CARD);
                 return;
-            } 
+            } else if (currentState == GameState.GAME_OVER) {
+                this.layout.show(this.mainPanel, GAME_OVER_CARD);
+                return;
+            } else if (currentState == GameState.LEVEL_COMPLETED) {
+                this.layout.show(this.mainPanel, LEVEL_COMPLETED_CARD);
+                return;
+            }
 
             this.layout.show(this.mainPanel, GAME_CARD);
 
