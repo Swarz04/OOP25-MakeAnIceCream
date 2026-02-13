@@ -27,7 +27,5 @@ public final class Main {
 
         view.showCustomer("Mario");
         view.showOrder("Cioccolato\nCono\nCookies");
-        view.showTimer(45);
-        view.showLives(3);
     }
 }
