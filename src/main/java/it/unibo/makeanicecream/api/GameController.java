@@ -61,4 +61,13 @@ public interface GameController {
      * @return the current ice cream of the game
      */
     Icecream getGameIceCream();
+
+    /**
+     * Returns the difficulty of the current level.
+     *
+     * @return the difficulty of the active level
+     * 
+     * @throws IllegalStateException if no level has been started yet
+     */
+    int getLevelDifficulty();
 }
