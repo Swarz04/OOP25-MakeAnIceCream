@@ -19,6 +19,9 @@ public class ActionsPanel extends JPanel {
     private final JButton submitButton;
     private final JButton resetButton;
 
+    private Runnable submitAction = () -> {};
+    private Runnable resetAction = () -> {};
+
     /**
      * Builds a new ActionsPanel. 
      * The Submit button is disabled by default and will be enabled when the current ice cream is valid and can be submitted, 
@@ -34,8 +37,14 @@ public class ActionsPanel extends JPanel {
 
         submitButton.setVisible(false);
 
-        submitButton.addActionListener(e -> sendEvent(EventType.DELIVER));
-        resetButton.addActionListener(e -> sendEvent(EventType.CANCEL));
+        submitButton.addActionListener(e -> {
+            sendEvent(EventType.DELIVER);
+            submitAction.run();
+        });
+        resetButton.addActionListener(e -> {
+            sendEvent(EventType.CANCEL);
+            resetAction.run();
+        });
 
         add(submitButton);
         add(resetButton);
@@ -68,5 +77,23 @@ public class ActionsPanel extends JPanel {
         if (controller != null) {
             controller.handleInput(new EventImpl(event, null));
         }
+    }
+
+    /**
+     * Sets the action to be performed when the Submit button is pressed.
+     * 
+     * @param action the action to set for the Submit button
+     */
+    public void setSubmitAction(final Runnable action) {
+        this.submitAction = (action == null) ? () -> {} : action;
+    }
+
+    /**
+     * Sets the action to be performed when the Reset button is pressed.
+     * 
+     * @param action the action to set for the Reset button
+     */
+    public void setResetAction(final Runnable action) {
+        this.resetAction = (action == null) ? () -> {} : action;
     }
 }

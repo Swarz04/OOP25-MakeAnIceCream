@@ -17,6 +17,8 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
 
 public class AreaPlayerPanel extends JPanel {
+    private static final String CONE_PANEL = "cone";
+    private static final String BUILDER_PANEL = "builder";
     private GameController controller;
     private final CardLayout cardLayout = new CardLayout();
 
@@ -31,9 +33,9 @@ public class AreaPlayerPanel extends JPanel {
 
         buildConePanel();
         buildBuilderPanel();
-
-        add(conePanel, "cone");
-        add(builderPanel, "builder");
+        
+        add(conePanel, CONE_PANEL);
+        add(builderPanel, BUILDER_PANEL);
 
         showConePanel();
     }
@@ -43,11 +45,15 @@ public class AreaPlayerPanel extends JPanel {
     }
 
     public void showConePanel() {
-        cardLayout.show(this, "cone");
+        cardLayout.show(this, CONE_PANEL);
+        revalidate();
+        repaint();
     }
 
     public void showBuilderPanel() {
-        cardLayout.show(this, "builder");
+        cardLayout.show(this, BUILDER_PANEL);
+        revalidate();
+        repaint();
     }
 
     public void updateIceCreamView(final String status) {
@@ -72,6 +78,7 @@ public class AreaPlayerPanel extends JPanel {
             button.addActionListener(e -> {
                 sendEvent(EventType.CHOOSE_CONE, cone.name());
                 showBuilderPanel();
+                updateIceCreamView("Cone selected: " + cone.name() + " | Ingredients: [] | Open");
             });
             coneButtons.add(button);
         }
