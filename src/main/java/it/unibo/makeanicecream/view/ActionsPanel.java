@@ -19,7 +19,6 @@ public class ActionsPanel extends JPanel {
 
     private final JButton submitButton = new JButton();
     private final JButton resetButton = new JButton();
-    private final JButton pauseButton = new JButton();
 
     private Runnable submitAction = () -> {};
     private Runnable resetAction = () -> {};
@@ -33,23 +32,18 @@ public class ActionsPanel extends JPanel {
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
         final java.net.URL submitIcon = getClass().getResource("/submit.png");
         final java.net.URL resetIcon = getClass().getResource("/reset.png");
-        final java.net.URL pauseIcon = getClass().getResource("/pause.png");
 
-        if(submitIcon == null || resetIcon == null || pauseIcon == null) {
-            throw new IllegalStateException("Submit, Reset or Pause button icons not found in resources.");
+        if(submitIcon == null || resetIcon == null) {
+            throw new IllegalStateException("Submit or Reset button icons not found in resources.");
         } else {
             final ImageIcon submitImageIcon = new ImageIcon(submitIcon);
             final Image submitImage = submitImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             final ImageIcon resetImageIcon = new ImageIcon(resetIcon);
             final Image resetImage = resetImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            final ImageIcon pauseImageIcon = new ImageIcon(pauseIcon);
-            final Image pauseImage = pauseImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             submitButton.setIcon(new ImageIcon(submitImage));
             resetButton.setIcon(new ImageIcon(resetImage));
-            pauseButton.setIcon(new ImageIcon(pauseImage));
             submitButton.setToolTipText("Submit");
             resetButton.setToolTipText("Reset");
-            pauseButton.setToolTipText("Pause");
         }
 
         submitButton.setVisible(false);
@@ -63,11 +57,8 @@ public class ActionsPanel extends JPanel {
             resetAction.run();
         });
 
-        pauseButton.addActionListener(e -> sendEvent(EventType.PAUSE));
-
         add(submitButton);
         add(resetButton);
-        add(pauseButton);
     }
 
     /**
