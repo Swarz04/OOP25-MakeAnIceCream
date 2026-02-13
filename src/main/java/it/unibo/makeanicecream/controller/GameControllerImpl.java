@@ -73,12 +73,7 @@ public final class GameControllerImpl implements GameController {
 
         commandFactory.apply(event).execute(this.game);
 
-        if ((event.getType() == EventType.START_LEVEL ||
-             event.getType() == EventType.PAUSE ||
-             event.getType() == EventType.RESUME ||
-             event.getType() == EventType.GO_TO_MENU) && this.view != null) {
-            this.view.update();
-        }
+        this.view.update();
     }
 
     @Override
