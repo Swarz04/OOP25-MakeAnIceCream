@@ -37,8 +37,6 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     private String currentCustomer;
     private String currentOrder;
-    private int currentLives;
-    private double currentTimer;
 
     /**
      * Builds a new GameViewImpl.
@@ -124,14 +122,12 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showTimer(final double timer) {
-        this.currentTimer = timer;
-        this.statusPanel.update(currentLives, currentTimer);
+        this.statusPanel.updateTimer(timer);
     }
 
     @Override
     public void showLives(final int lives) {
-        this.currentLives = lives;
-        this.statusPanel.update(currentLives, currentTimer);
+        this.statusPanel.updateLives(lives);
     }
 
     @Override
@@ -171,7 +167,7 @@ public final class GameViewImpl extends JFrame implements GameView {
                 this.layout.show(this.mainPanel, PAUSE_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
-                showIceCream();
+                
             }
         });
     }
