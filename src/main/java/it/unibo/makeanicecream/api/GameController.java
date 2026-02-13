@@ -49,6 +49,13 @@ public interface GameController {
     boolean isGamePlaying();
 
     /**
+     * Returns whether toppings are currently enabled in the game.
+     *
+     * @return true if toppings are enabled, false otherwise
+     */
+    boolean areToppingsEnabled();
+
+    /**
      * Returns the current state of the game.
      *
      * @return the current game state

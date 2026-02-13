@@ -87,8 +87,19 @@ public final class PlayerImpl implements Player {
         return this.builder.getIceCream();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setToppingEnabled(boolean enabled) {
         this.builder.setToppingEnabled(enabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isToppingEnabled() {
+        return this.builder.isToppingEnabled();
     }
 }

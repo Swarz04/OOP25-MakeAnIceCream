@@ -113,6 +113,11 @@ public final class GameImpl implements Game {
     }
 
     @Override
+    public boolean areToppingsEnabled() {
+        return this.player.isToppingEnabled();
+    }
+
+    @Override
     public void update(final double deltaTime) {
         if (this.state != GameState.PLAYING || this.currentLevel == null) {
             return;

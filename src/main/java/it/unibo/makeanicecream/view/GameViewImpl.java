@@ -200,7 +200,7 @@ public final class GameViewImpl extends JFrame implements GameView {
             }
 
             this.layout.show(this.mainPanel, GAME_CARD);
-
+            ingredientsPanel.setToppingButtonsEnabled(this.controller.areToppingsEnabled());
             showIceCream();
                 
             
