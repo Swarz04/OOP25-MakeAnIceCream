@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
@@ -24,32 +23,34 @@ import it.unibo.makeanicecream.api.FlavorType;
  * Topping button are enabled only after level >=4.
  */
 public class IngredientsPanel extends JPanel {
+    private static final int HORIZONTAL_GAP = 12;
+    private static final int VERTICAL_GAP = 0;
 
     private GameController controller;
-    private final JPanel flavorPanel = new JPanel(new GridLayout(2,3,6,6));
-    private final JPanel liquidPanel = new JPanel(new GridLayout(0,1,8,8));
-    private final JPanel solidPanel = new JPanel(new GridLayout(0,1,8,8));
+    private final JPanel flavorPanel = new JPanel(new GridLayout(2, 3, 6, 6));
+    private final JPanel liquidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
+    private final JPanel solidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
 
     /**
      * Builds a new IngredientsPanel.
      * Flavors are always enabled, while toppings are disabled by default.
      */
     public IngredientsPanel() {
-        setLayout(new BorderLayout(12,0));
+        setLayout(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
         setBorder(BorderFactory.createTitledBorder("Ingredients"));
 
-        JPanel flavorsBox = new JPanel(new BorderLayout());
+        final JPanel flavorsBox = new JPanel(new BorderLayout());
         flavorsBox.setBorder(BorderFactory.createTitledBorder("Flavors"));
         flavorsBox.add(flavorPanel, BorderLayout.CENTER);
 
-        JPanel toppingBox = new JPanel(new GridLayout(1,2,12,0));
+        final JPanel toppingBox = new JPanel(new GridLayout(1, 2, HORIZONTAL_GAP, VERTICAL_GAP));
         toppingBox.setBorder(BorderFactory.createTitledBorder("Toppings"));
 
-        JPanel liquidsBox = new JPanel(new BorderLayout());
+        final JPanel liquidsBox = new JPanel(new BorderLayout());
         liquidsBox.setBorder(BorderFactory.createTitledBorder("Liquids"));
         liquidsBox.add(liquidPanel, BorderLayout.CENTER);
 
-        JPanel solidsBox = new JPanel(new BorderLayout());
+        final JPanel solidsBox = new JPanel(new BorderLayout());
         solidsBox.setBorder(BorderFactory.createTitledBorder("Solids"));
         solidsBox.add(solidPanel, BorderLayout.CENTER);
 
@@ -119,7 +120,7 @@ public class IngredientsPanel extends JPanel {
      * @param data the data associated with the event
      */
     private void sendEvent(final EventType type, final String data) {
-        if(controller == null) {
+        if (controller == null) {
            return;
         }
 
@@ -146,7 +147,7 @@ public class IngredientsPanel extends JPanel {
      */
     private JButton createIngredieButton(final String name) {
         final java.net.URL resource = getClass().getResource("/" + name.toLowerCase() + ".png");
-        if(resource != null) {
+        if (resource != null) {
             final ImageIcon icon = new ImageIcon(resource);
             final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             final JButton button = new JButton(name, new ImageIcon(scaledImage));

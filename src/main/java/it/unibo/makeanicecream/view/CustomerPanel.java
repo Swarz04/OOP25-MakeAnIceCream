@@ -10,16 +10,14 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import java.util.Map;
-import it.unibo.makeanicecream.api.GameController;
 
 /**
  * Panel responsible for displaying the current customer and their order.
  */
 public class CustomerPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
-
-    private static final long serialVersionUID = 1L;
 
     private final JLabel customerImageLabel;
     private final JLabel customerLabel;
@@ -43,7 +41,7 @@ public class CustomerPanel extends JPanel {
      */
     public CustomerPanel() {
         super(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
-        
+
         this.customerImageLabel = new JLabel();
         this.customerLabel = new JLabel();
         this.orderLabel = new JLabel();
@@ -99,7 +97,7 @@ public class CustomerPanel extends JPanel {
     private ImageIcon loadCustomerIcon(final String name) {
         final String imagePath = nameToImage.getOrDefault(name, "cliente1.png");
         final java.net.URL imgURL = getClass().getResource("/" + imagePath);
-        
+
         if (imgURL == null) {
             System.err.println("Couldn't find file: " + imagePath);
         }

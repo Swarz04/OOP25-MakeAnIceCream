@@ -37,7 +37,6 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final GameOverPanel gameOverPanel;
     private final LevelCompletedPanel levelCompletedPanel;
 
-
     private GameController controller;
 
     private String currentCustomer;
@@ -45,8 +44,6 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     /**
      * Builds a new GameViewImpl.
-     *
-     * @param controller the game model
      */
     public GameViewImpl() {
         setTitle(FRAME_NAME);
@@ -69,7 +66,6 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.ingredientsPanel = new IngredientsPanel();
         this.areaPlayerPanel = new AreaPlayerPanel();
         this.actionsPanel = new ActionsPanel();
-        
 
         this.actionsPanel.setResetAction(() -> {
             this.areaPlayerPanel.showConePanel();
@@ -130,7 +126,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     }
 
     @Override
-    public void showOrder(final String order){
+    public void showOrder(final String order) {
         this.currentOrder = order;
         this.customerPanel.update(currentCustomer, currentOrder);
     }
@@ -146,15 +142,9 @@ public final class GameViewImpl extends JFrame implements GameView {
     }
 
     @Override
-    public void showIngredients() {
-        ingredientsPanel.setToppingButtonsEnabled(true);
-        
-    }
-
-    @Override
     public void showIceCream() {
         final Icecream iceCream = this.controller.getGameIceCream();
-        if(iceCream == null || iceCream.getConetype() == null) {
+        if (iceCream == null || iceCream.getConetype() == null) {
             areaPlayerPanel.showConePanel();
             actionsPanel.setSubmitEnabled(false);
             return;
@@ -202,8 +192,6 @@ public final class GameViewImpl extends JFrame implements GameView {
             this.layout.show(this.mainPanel, GAME_CARD);
             ingredientsPanel.setToppingButtonsEnabled(this.controller.areToppingsEnabled());
             showIceCream();
-                
-            
         });
     }
 }

@@ -17,7 +17,7 @@ import it.unibo.makeanicecream.api.EventType;
  * Panel for the main menu, allowing level selection.
  */
 public final class MenuPanel extends JPanel {
-
+    private static final Color MENU_BACKGROUND = new Color(250, 218, 221);
     private static final long serialVersionUID = 1L;
     private static final int BORDER_SIZE = 50;
     private static final int TITLE_SPACING = 20;
@@ -34,7 +34,7 @@ public final class MenuPanel extends JPanel {
         this.setLayout(new BorderLayout(0, TITLE_SPACING));
         this.setBorder(BorderFactory.createEmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
 
-        this.setBackground(new Color(250, 218, 221));
+        this.setBackground(MENU_BACKGROUND);
 
         final JLabel titleLabel = new JLabel("Choose a level", SwingConstants.CENTER);
         this.add(titleLabel, BorderLayout.NORTH);

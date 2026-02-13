@@ -16,7 +16,8 @@ import it.unibo.makeanicecream.api.GameController;
  * Panel representing the pause menu.
  */
 public class PausePanel extends JPanel {
-
+    private static final Color PAUSE_BACKGROUND = new Color(250, 218, 221);
+    private static final float TITLE_FONT_SIZE = 24f;
     private static final long serialVersionUID = 1L;
     private GameController controller;
 
@@ -25,7 +26,7 @@ public class PausePanel extends JPanel {
      */
     public PausePanel() {
         setLayout(new GridBagLayout());
-        setBackground(new Color(250, 218, 221)); // Consistent with MenuPanel
+        setBackground(PAUSE_BACKGROUND); // Consistent with MenuPanel
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -34,7 +35,7 @@ public class PausePanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         final JLabel title = new JLabel("GAME PAUSED", JLabel.CENTER);
-        title.setFont(title.getFont().deriveFont(24f));
+        title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
         add(title, gbc);
 
         gbc.gridy++;

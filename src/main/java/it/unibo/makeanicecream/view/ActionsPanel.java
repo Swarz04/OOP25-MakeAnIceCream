@@ -15,6 +15,7 @@ import it.unibo.makeanicecream.api.EventType;
  * When the Submit button is disabled, it is hidden to prevent the user from attempting to submit an invalid ice cream.
  */
 public class ActionsPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
 

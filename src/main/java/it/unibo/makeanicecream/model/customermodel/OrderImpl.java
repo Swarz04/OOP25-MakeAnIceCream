@@ -169,7 +169,7 @@ public class OrderImpl implements Order {
             .map(Ingredient::toString)
             .reduce((a, b) -> a + ", " + b)
             .orElse("");
-        
+
         return "<html>" + "<b>Cone:</b> " + requiredCone + "<br><b>Ingredients:</b> " + ingredientString + "</html>";
     }
 }
