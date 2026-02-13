@@ -243,12 +243,12 @@ L’Order non costituisce direttamente oggetti complessi, che delega al builder 
 Questa scelta riduce duplicazione, garantisce uniformità delle regole e semplifica l’introduzione di nuovi vincoli o ingredienti.
 Abbiamo usato in questo caso il pattern Builder, per centralizzare la logica di costruzione e rendere riusabile lo stesso processo sia nella generazione della preview dell’ordine sia nella costruzione incrementale guidata dall’utente.
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 2cm 0 0, clip]{img/UML_IceCreamBuilder.pdf}
-%    \caption{Schema UML relativo al Builder}
-%    \label{img:UML_IceCreamBuilder}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, trim=0 2cm 0 0, clip]{img/UML_IceCreamBuilder.pdf}
+    \caption{Schema UML relativo al Builder}
+    \label{img:UML_IceCreamBuilder}
+\end{figure}
 
 \subsubsection{Modellazione degli ingredienti del gelato}
 \paragraph{Problema}
@@ -259,12 +259,12 @@ Gli ingredienti condividono l’astrazione \texttt{Ingredient}, con implementazi
 Il gelato e il builder interagiscono esclusivamente con l’astrazione \texttt{Ingredient}, permettendo di gestire in modo polimorfico tutti i componenti del gelato e di aggiungere nuove tipologie senza modificare la struttura esistente.
 Questa scelta migliora l’estendibilità del modello e riduce l’accoppiamento tra le componenti.
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Ingredients.pdf}
-%    \caption{Schema UML relativo agli Ingredienti}
-%    \label{img:UML_Ingredients}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Ingredients.pdf}
+    \caption{Schema UML relativo agli Ingredienti}
+    \label{img:UML_Ingredients}
+\end{figure}
 
 \subsubsection{Costruzione progressiva}
 \paragraph{Problema}
@@ -308,12 +308,12 @@ Il \texttt{Player} non gestisce direttamente le regole di gioco (vite, progressi
 Il livello utilizza tale esito per aggiornare il proprio stato, consentendo una separazione netta tra l'azione del giocatore (\texttt{Player}) e le regole del gioco (\texttt{Level}).
 Questa scelta mantiene il modello modulare e favorisce il riuso del codice, evitando che la logica della consegna venga duplicata o sparsa in componenti non appropriati.\Cref{img:UML_Level}.
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 5cm 0 5cm, clip]{img/UML_Player.pdf}
-%    \caption{Schema UML del giocatore, con rappresentate le entità principali ed i rapporti fra loro}
-%    \label{img:UML_Player}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, trim=0 5cm 0 5cm, clip]{img/UML_Player.pdf}
+    \caption{Schema UML del giocatore, con rappresentate le entità principali ed i rapporti fra loro}
+    \label{img:UML_Player}
+\end{figure}
 \subsubsection{Gestione dei livelli e progressione della difficoltà}
 
 \paragraph{Problema}
@@ -331,12 +331,12 @@ Per la gestione dei livelli è stato utilizzato il pattern \textit{Simple Factor
 Il livello creato gestisce le vite disponibili e la sequenza di clienti, a cui è stato propagato il parametro di difficoltà che influenza la complessità degli ordini e i tempi di attesa dei clienti, garantendo una progressione graduale di difficoltà.
 L’uso del factory consente di centralizzare la logica per poi evitare duplicazioni necessarie future per estendere il gioco introducendo nuove tipologie di livelli.\Cref{img:UML_Level}.
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Level.pdf}
-%    \caption{Schema UML del livello, con rappresentate le entità principali ed i rapporti fra loro}
-%    \label{img:UML_Level}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Level.pdf}
+    \caption{Schema UML del livello, con rappresentate le entità principali ed i rapporti fra loro}
+    \label{img:UML_Level}
+\end{figure}
 
 \subsection{Gestione Comandi e Stato (Studente 4)}
 \subsubsection{Gestione dei comandi utente}
