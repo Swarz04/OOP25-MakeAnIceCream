@@ -60,4 +60,14 @@ public class LiquidTopping implements Ingredient {
     public int hashCode() {
         return topping.hashCode();
     }
+
+    /**
+     * Returns a string representation of the LiquidTopping.
+     * 
+     * @return a string representation of the LiquidTopping
+     */
+    @Override
+    public String toString() {
+        return "[" + topping + "]";
+    }
 }

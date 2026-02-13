@@ -62,4 +62,11 @@ public class IceCreamImpl implements Icecream {
         return isClosed;
     }
 
+    @Override
+    public String toString() {
+        final String coneString = (conetype == null) ? "No cone" : conetype.name();
+        final String ingredientsString = ingredients.isEmpty() ? "No ingredients" : ingredients.toString();
+        final String closedString = isClosed ? "Closed" : "Open";
+        return "IceCream [Cone: " +coneString +" | Ingredients: " + ingredientsString + " | Closed: " + closedString + "]";
+    }
 }
