@@ -6,19 +6,37 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import java.util.Map;
+import it.unibo.makeanicecream.api.GameController;
 
 /**
  * Panel responsible for displaying the current customer and their order.
  */
 public class CustomerPanel extends JPanel {
     private static final int HORIZONTAL_GAP = 20;
-    private static final int VERTICAL_GAP = 0;
+    private static final int VERTICAL_GAP = 10;
 
     private static final long serialVersionUID = 1L;
 
-    private final JLabel customerImage;
+    private final JLabel customerImageLabel;
     private final JLabel customerLabel;
     private final JLabel orderLabel;
+
+    /**
+     * Mapping of customer names to their corresponding image file names in the resources folder.
+     * If a customer's name is not found in this map, a default image will be used.
+     */
+    private static final Map<String, String> nameToImage = Map.of(
+        "Maria", "cliente1.png",
+        "Paolo", "cliente2.png",
+        "Giulia", "cliente3.png",
+        "Giorgio", "cliente4.png",
+        "Lucia", "cliente5.png",
+        "Mario", "cliente1.png"
+    );
 
     /**
      * Builds a new CustomerPanel.
@@ -26,7 +44,7 @@ public class CustomerPanel extends JPanel {
     public CustomerPanel() {
         super(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
         
-        this.customerImage = new JLabel();
+        this.customerImageLabel = new JLabel();
         this.customerLabel = new JLabel();
         this.orderLabel = new JLabel();
 
@@ -39,7 +57,7 @@ public class CustomerPanel extends JPanel {
     private void initLayout() {
 
         final JPanel leftPanel = new JPanel(new BorderLayout());
-        leftPanel.add(customerImage, BorderLayout.CENTER);
+        leftPanel.add(customerImageLabel, BorderLayout.CENTER);
         leftPanel.add(customerLabel, BorderLayout.SOUTH);
         orderLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         orderLabel.setVerticalAlignment(JLabel.TOP);
@@ -47,6 +65,7 @@ public class CustomerPanel extends JPanel {
         scrollPane.setBorder(null);
         this.add(leftPanel, BorderLayout.WEST);
         this.add(scrollPane, BorderLayout.CENTER);
+        setVisible(false);
     }
 
     /**
@@ -57,7 +76,38 @@ public class CustomerPanel extends JPanel {
      */
     public void update(final String name, final String order) {
         customerLabel.setText(name == null ? "" : name);
+        customerImageLabel.setIcon(loadCustomerIcon(name));
         orderLabel.setText(order == null ? "" : order);
+        setVisible(true);
+    }
+
+    /**
+     * Clears the customer display, resetting the name, order, and image to their default states, and hides the panel.
+     */
+    public void clear() {
+        customerLabel.setText("");
+        orderLabel.setText("");
+        setVisible(false);
+    }
+
+    /**
+     * Loads the customer's image based on their name. If the name is not found in the mapping, a default image is returned.
+     * 
+     * @param name the customer's name
+     * @return the ImageIcon corresponding to the customer's image, or null if the image file is not found
+     */
+    private ImageIcon loadCustomerIcon(final String name) {
+        final String imagePath = nameToImage.getOrDefault(name, "cliente1.png");
+        final java.net.URL imgURL = getClass().getResource("/" + imagePath);
         
+        if (imgURL == null) {
+            System.err.println("Couldn't find file: " + imagePath);
+        }
+
+        final ImageIcon icon = imgURL != null ? new ImageIcon(imgURL) : null;
+
+        final Image scaledImage = icon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+
+        return new ImageIcon(scaledImage);
     }
 }
