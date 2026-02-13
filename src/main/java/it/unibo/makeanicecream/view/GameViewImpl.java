@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.GameState;
+import it.unibo.makeanicecream.api.Icecream;
 
 /**
  * Implementation of the {@link GameView} interface.
@@ -19,6 +20,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     private static final String FRAME_NAME = "Make an Ice Cream";
     private static final String MENU_CARD = "MENU";
     private static final String GAME_CARD = "GAME";
+    private static final String PAUSE_CARD = "PAUSE";
 
     private final CardLayout layout = new CardLayout();
     private final JPanel mainPanel = new JPanel(layout);
@@ -29,6 +31,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final IngredientsPanel ingredientsPanel;
     private final AreaPlayerPanel areaPlayerPanel;
     private final ActionsPanel actionsPanel;
+    private final PausePanel pausePanel;
 
     private GameController controller;
 
@@ -46,6 +49,9 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         this.menuPanel = new MenuPanel();
         mainPanel.add(menuPanel, MENU_CARD);
+
+        this.pausePanel = new PausePanel();
+        mainPanel.add(pausePanel, PAUSE_CARD);
 
         this.statusPanel = new StatusPanel();
         this.customerPanel = new CustomerPanel();
@@ -99,6 +105,7 @@ public final class GameViewImpl extends JFrame implements GameView {
         this.actionsPanel.setController(controller);
         this.ingredientsPanel.setController(controller);
         this.areaPlayerPanel.setController(controller);
+        this.pausePanel.setController(controller);
     }
 
     @Override
@@ -126,13 +133,9 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
-<<<<<<< HEAD
-        areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream());
-=======
-        final IceCreamImpl iceCream = controller.getCurrentIceCream();
+        final Icecream iceCream = controller.getGameIceCream();
         areaPlayerPanel.showBuilderPanel();
         areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
->>>>>>> c3743bc88a7a20e331911ae3d52a0e0eee44b385
     }
 
     @Override
@@ -156,6 +159,8 @@ public final class GameViewImpl extends JFrame implements GameView {
             final GameState currentState = this.controller.getGameState();
             if (currentState == GameState.MENU) {
                 this.layout.show(this.mainPanel, MENU_CARD);
+            } else if (currentState == GameState.PAUSED) {
+                this.layout.show(this.mainPanel, PAUSE_CARD);
             } else {
                 this.layout.show(this.mainPanel, GAME_CARD);
 

@@ -10,7 +10,7 @@ import it.unibo.makeanicecream.api.EventType;
 
 /**
  * Panel responsible for action buttons like Submit and Reset.
- * The Submit button is enabled only when the current ice cream is valid and can be submitted, 
+ * The Submit button is enabled only when the current ice cream is valid and can be submitted,
  * while the Reset button is always enabled to allow the user to reset their current creation.
  * When the Submit button is disabled, it is hidden to prevent the user from attempting to submit an invalid ice cream.
  */
@@ -19,31 +19,37 @@ public class ActionsPanel extends JPanel {
 
     private final JButton submitButton = new JButton();
     private final JButton resetButton = new JButton();
+    private final JButton pauseButton = new JButton();
 
     private Runnable submitAction = () -> {};
     private Runnable resetAction = () -> {};
 
     /**
-     * Builds a new ActionsPanel. 
-     * The Submit button is disabled by default and will be enabled when the current ice cream is valid and can be submitted, 
+     * Builds a new ActionsPanel.
+     * The Submit button is disabled by default and will be enabled when the current ice cream is valid and can be submitted,
      * while the Reset button is always enabled.
      */
     public ActionsPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
         final java.net.URL submitIcon = getClass().getResource("/submit.png");
         final java.net.URL resetIcon = getClass().getResource("/reset.png");
-        
-        if(submitIcon == null || resetIcon == null) {
-            throw new IllegalStateException("Submit and Reset button icons not found in resources.");
+        final java.net.URL pauseIcon = getClass().getResource("/pause.png");
+
+        if(submitIcon == null || resetIcon == null || pauseIcon == null) {
+            throw new IllegalStateException("Submit, Reset or Pause button icons not found in resources.");
         } else {
             final ImageIcon submitImageIcon = new ImageIcon(submitIcon);
             final Image submitImage = submitImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             final ImageIcon resetImageIcon = new ImageIcon(resetIcon);
             final Image resetImage = resetImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final ImageIcon pauseImageIcon = new ImageIcon(pauseIcon);
+            final Image pauseImage = pauseImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             submitButton.setIcon(new ImageIcon(submitImage));
             resetButton.setIcon(new ImageIcon(resetImage));
+            pauseButton.setIcon(new ImageIcon(pauseImage));
             submitButton.setToolTipText("Submit");
             resetButton.setToolTipText("Reset");
+            pauseButton.setToolTipText("Pause");
         }
 
         submitButton.setVisible(false);
@@ -57,8 +63,11 @@ public class ActionsPanel extends JPanel {
             resetAction.run();
         });
 
+        pauseButton.addActionListener(e -> sendEvent(EventType.PAUSE));
+
         add(submitButton);
         add(resetButton);
+        add(pauseButton);
     }
 
     /**
@@ -72,7 +81,7 @@ public class ActionsPanel extends JPanel {
 
     /**
      * Configures the visibility of the Submit button based on whether the current ice cream can be submitted or not.
-     * 
+     *
      * @param enabled true to enable the Submit button, false to disable it
      */
     public void setSubmitEnabled(final boolean enabled) {
@@ -81,7 +90,7 @@ public class ActionsPanel extends JPanel {
 
     /**
      * Sends an event to the controller when a button is pressed.
-     * 
+     *
      * @param event the type of event to send
      */
     private void sendEvent(final EventType event) {
@@ -92,7 +101,7 @@ public class ActionsPanel extends JPanel {
 
     /**
      * Sets the action to be performed when the Submit button is pressed.
-     * 
+     *
      * @param action the action to set for the Submit button
      */
     public void setSubmitAction(final Runnable action) {
@@ -101,7 +110,7 @@ public class ActionsPanel extends JPanel {
 
     /**
      * Sets the action to be performed when the Reset button is pressed.
-     * 
+     *
      * @param action the action to set for the Reset button
      */
     public void setResetAction(final Runnable action) {
