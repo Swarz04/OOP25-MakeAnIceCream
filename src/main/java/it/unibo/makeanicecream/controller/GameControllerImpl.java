@@ -107,6 +107,14 @@ public final class GameControllerImpl implements GameController {
         return this.game.getCurrentIceCream();
     }
 
+    @Override
+    public int getLevelDifficulty() {
+        if (this.game.getCurrentLevel() == null) {
+            throw new IllegalStateException("No level started yet.");
+        }
+        return this.game.getCurrentLevel().getDifficulty();
+    }
+
     /**
      * Returns an object containing the current customer's information.
      * Returns null if there is no active customer or the level is not active.
