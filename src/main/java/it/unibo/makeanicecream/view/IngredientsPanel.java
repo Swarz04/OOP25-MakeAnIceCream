@@ -3,9 +3,11 @@ package it.unibo.makeanicecream.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import it.unibo.makeanicecream.api.GameController;
@@ -33,7 +35,7 @@ public class IngredientsPanel extends JPanel {
     public IngredientsPanel() {
         setLayout(new BorderLayout(12,0));
         setBorder(BorderFactory.createTitledBorder("Ingredients"));
-        
+
         JPanel flavorsBox = new JPanel(new BorderLayout());
         flavorsBox.setBorder(BorderFactory.createTitledBorder("Flavors"));
         flavorsBox.add(flavorPanel, BorderLayout.CENTER);
@@ -63,7 +65,7 @@ public class IngredientsPanel extends JPanel {
 
     /**
      * Sets the controller to which this panel will send events when buttons are pressed.
-     * 
+     *
      * @param controller the controller to set
      */
     public void setController(final GameController controller) {
@@ -72,7 +74,7 @@ public class IngredientsPanel extends JPanel {
 
     /**
      * Enables or disables all topping buttons.
-     * 
+     *
      * @param enabled true to enable the buttons, false to disable them
      */
     public void setToppingButtonsEnabled(final boolean enabled) {
@@ -85,7 +87,7 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildFlavorButtons() {
         for (final FlavorType f : FlavorType.values()) {
-            final JButton button = new JButton(f.name());
+            final JButton button = createButton(f.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, f.name()));
             flavorPanel.add(button);
         }
@@ -96,13 +98,13 @@ public class IngredientsPanel extends JPanel {
      */
     private void buildToppingButtons() {
         for (final LiquidToppingType liquid : LiquidToppingType.values()) {
-            final JButton button = new JButton(liquid.name());
+            final JButton button = createButton(liquid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, liquid.name()));
             liquidPanel.add(button);
         }
 
         for (final SolidToppingType solid : SolidToppingType.values()) {
-            final JButton button = new JButton(solid.name());
+            final JButton button = createButton(solid.name());
             button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, solid.name()));
             solidPanel.add(button);
         }
@@ -110,7 +112,7 @@ public class IngredientsPanel extends JPanel {
 
     /**
      * Sends an event to the controller with the specified type and data.
-     * 
+     *
      * @param type the type of the event to send
      * @param data the data associated with the event
      */
@@ -118,13 +120,13 @@ public class IngredientsPanel extends JPanel {
         if(controller == null) {
            return;
         }
-        
+
         controller.handleInput(new EventImpl(type, data));
     }
 
     /**
      * Enables or disables all buttons in the specified panel.
-     * 
+     *
      * @param panel the panel whose buttons to enable or disable
      * @param enabled true to enable the buttons, false to disable them
      */
@@ -132,5 +134,18 @@ public class IngredientsPanel extends JPanel {
         for (final Component c : panel.getComponents()) {
             c.setEnabled(enabled);
         }
+    }
+
+    private JButton createButton(final String name) {
+        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase() + ".png");
+        if (resource != null) {
+            final ImageIcon originalIcon = new ImageIcon(resource);
+            final Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final JButton button = new JButton(name, new ImageIcon(scaledImage));
+            button.setVerticalTextPosition(JButton.BOTTOM);
+            button.setHorizontalTextPosition(JButton.CENTER);
+            return button;
+        }
+        return new JButton(name);
     }
 }
