@@ -35,6 +35,8 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     private String currentCustomer;
     private String currentOrder;
+    private int currentLives;
+    private double currentTimer;
 
     /**
      * Builds a new GameViewImpl.
@@ -88,6 +90,7 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         setContentPane(mainPanel);
         pack();
+        setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
@@ -114,10 +117,16 @@ public final class GameViewImpl extends JFrame implements GameView {
     }
 
     @Override
-    public void showTimer(final double timer) { }
+    public void showTimer(final double timer) {
+        this.currentTimer = timer;
+        this.statusPanel.update(currentLives, currentTimer);
+    }
 
     @Override
-    public void showLives(final int lives) { }
+    public void showLives(final int lives) {
+        this.currentLives = lives;
+        this.statusPanel.update(currentLives, currentTimer);
+    }
 
     @Override
     public void showIngredients() {
@@ -126,8 +135,13 @@ public final class GameViewImpl extends JFrame implements GameView {
 
     @Override
     public void showIceCream() {
+<<<<<<< HEAD
+        areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream());
+=======
+        final IceCreamImpl iceCream = controller.getCurrentIceCream();
         areaPlayerPanel.showBuilderPanel();
-        areaPlayerPanel.updateIceCreamView(this.controller.getGameIceCream().toString());
+        areaPlayerPanel.updateIceCreamView("IceCream updated: " + iceCream.toString());
+>>>>>>> c3743bc88a7a20e331911ae3d52a0e0eee44b385
     }
 
     @Override
