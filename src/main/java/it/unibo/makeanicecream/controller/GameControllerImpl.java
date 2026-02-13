@@ -65,31 +65,33 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void handleInput(final Event event) {
-        final Function<Event, Command> commandFactory = this.commands.get(event.getType());
+        this.view.update();
 
+        final Function<Event, Command> commandFactory = this.commands.get(event.getType());
         if (commandFactory == null) {
             throw new IllegalArgumentException("Unknown action type: " + event.getType());
         }
 
         commandFactory.apply(event).execute(this.game);
-
-        this.view.update();
     }
 
     @Override
     public void updateGame(final double deltaTime) {
         this.game.update(deltaTime);
+        if (this.view != null) {
+            this.view.update();
+            if (this.game.isPlaying()) {
+                final CustomerInfo customerInfo = getCurrentCustomerInfo();
+                if (customerInfo != null) {
+                    view.showCustomer(customerInfo.name());
+                    view.showOrder(customerInfo.order());
+                    view.showTimer(customerInfo.timer());
+                }
 
-        if (this.view != null && this.game.isPlaying()) {
-            final CustomerInfo customerInfo = getCurrentCustomerInfo();
-            if (customerInfo != null) {
-                view.showCustomer(customerInfo.name());
-                view.showOrder(customerInfo.order());
-                view.showTimer(customerInfo.timer());
+                view.showLives(getRemainingLives());
             }
-
-            view.showLives(getRemainingLives());
         }
+        
     }
 
     @Override
