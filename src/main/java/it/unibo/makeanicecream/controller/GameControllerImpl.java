@@ -22,7 +22,7 @@ import it.unibo.makeanicecream.api.Icecream;
 public final class GameControllerImpl implements GameController {
 
     @SuppressFBWarnings(
-        value = "EI_EXPOSE_REP", 
+        value = "EI_EXPOSE_REP",
         justification = "The game reference is safely shared with commands and is immutable from outside"
     )
     private final Game game;
@@ -73,7 +73,10 @@ public final class GameControllerImpl implements GameController {
 
         commandFactory.apply(event).execute(this.game);
 
-        if (event.getType() == EventType.START_LEVEL && this.view != null) {
+        if ((event.getType() == EventType.START_LEVEL ||
+             event.getType() == EventType.PAUSE ||
+             event.getType() == EventType.RESUME ||
+             event.getType() == EventType.GO_TO_MENU) && this.view != null) {
             this.view.update();
         }
     }
@@ -91,7 +94,7 @@ public final class GameControllerImpl implements GameController {
             }
 
             view.showLives(getRemainingLives());
-        } 
+        }
     }
 
     @Override
@@ -124,7 +127,7 @@ public final class GameControllerImpl implements GameController {
                 final double timer = (customer.getTimer() != null) ? customer.getTimer().getTimeLeft() : 0;
 
                 return new CustomerInfo(name, order, timer);
-            } 
+            }
         }
 
         return null;
