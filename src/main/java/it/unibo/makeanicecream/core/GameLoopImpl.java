@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.engine;
+package it.unibo.makeanicecream.core;
 
 import java.util.function.Consumer;
 
