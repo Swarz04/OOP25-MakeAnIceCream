@@ -16,6 +16,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CustomerTimerTest {
 
+    @Mock
+    private Runnable mockCallback;
+    
     private CustomerTimer timer;
     private static final double INITIAL_TIME = 60.0;
 
@@ -80,7 +83,7 @@ class CustomerTimerTest {
         assertEquals(INITIAL_TIME - 10.0, timer.getTimeLeft(), 0.001);
 
         timer.resume();
-        timer.update(10.0);
+        timer.update(5.0);
         assertEquals(INITIAL_TIME - 15.0, timer.getTimeLeft(), 0.001);
     }
 
