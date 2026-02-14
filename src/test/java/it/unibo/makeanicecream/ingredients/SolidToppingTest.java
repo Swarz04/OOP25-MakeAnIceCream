@@ -86,4 +86,10 @@ class SolidToppingTest {
         assertNotNull(solidTopping);
         assertNotEquals(0, solidTopping.hashCode());
     }
+
+    @Test
+    void testToString() {
+        final SolidTopping solidTopping = new SolidTopping(SolidToppingType.CHERRY);
+        assertEquals("[CHERRY]", solidTopping.toString());
+    }
 }

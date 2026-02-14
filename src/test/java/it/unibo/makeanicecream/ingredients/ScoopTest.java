@@ -89,4 +89,10 @@ class ScoopTest {
         assertEquals(initialHashCode, scoop.hashCode());
         assertEquals(initialHashCode, scoop.hashCode());
     }
+
+    @Test
+    void testToString() {
+        final Scoop scoop = new Scoop(FlavorType.VANILLA);
+        assertEquals("[VANILLA]", scoop.toString());
+    }
 }

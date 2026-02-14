@@ -11,7 +11,7 @@ import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
 import it.unibo.makeanicecream.api.LiquidToppingType;
 
 
-class LIquidToppingTest {
+class LiquidToppingTest {
 
     @Test
     void testConstructorValidName() {
@@ -88,5 +88,11 @@ class LIquidToppingTest {
         final LiquidTopping liquidTopping = new LiquidTopping(LiquidToppingType.CHOCOLATE_SYRUP);
         assertNotNull(liquidTopping);
         assertNotEquals(0, liquidTopping.hashCode());
+    }
+
+    @Test
+    void testToString() {
+        final LiquidTopping liquidTopping = new LiquidTopping(LiquidToppingType.CHOCOLATE_SYRUP);
+        assertEquals("[CHOCOLATE_SYRUP]", liquidTopping.toString());
     }
 }

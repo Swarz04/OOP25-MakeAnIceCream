@@ -105,6 +105,52 @@ class IceCreamBuilderTest {
     }
 
     /**
+     * Test that cannot add more than 2 liquid toppings per scoop
+     */
+    @Test
+    void testMaxLiquidToppingPerScoop() {
+        builder.chooseCone(Conetype.CLASSIC);
+        builder.setToppingEnabled(true);
+
+        final Ingredient scoop = IngredientFactory.createIngredient(CHOCOLATE);
+        assertTrue(builder.addIngredient(scoop));
+
+        final Ingredient liquid1 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        final Ingredient liquid2 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        final Ingredient liquid3 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+
+        assertTrue(builder.addIngredient(liquid1));
+        assertTrue(builder.addIngredient(liquid2));
+        assertFalse(builder.addIngredient(liquid3));
+    }
+
+    /**
+     * Test that can add liquid toppings to different scoops.
+     */
+    @Test
+    void testLiquidToppingOnDifferentScoops() {
+        builder.chooseCone(Conetype.CLASSIC);
+        builder.setToppingEnabled(true);
+
+        final Ingredient scoop1 = IngredientFactory.createIngredient(CHOCOLATE);
+        final Ingredient scoop2 = IngredientFactory.createIngredient(VANILLA);
+
+        assertTrue(builder.addIngredient(scoop1));
+
+        final Ingredient liquid1 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        final Ingredient liquid2 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        assertTrue(builder.addIngredient(liquid1));
+        assertTrue(builder.addIngredient(liquid2));
+
+        assertTrue(builder.addIngredient(scoop2));
+
+        final Ingredient liquid3 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        final Ingredient liquid4 = IngredientFactory.createIngredient(CHOCOLATE_SYRUP);
+        assertTrue(builder.addIngredient(liquid3));
+        assertTrue(builder.addIngredient(liquid4));
+    }
+
+    /**
      * Test that trying to add a topping when toppings are disabled returns false and does not modify the ice cream.
      */
     @Test

@@ -101,4 +101,20 @@ class IceCreamImplTest {
         assertTrue(emptyIngredientsIceCream.getIngredients().isEmpty());
     }
 
+    @Test
+    void testToString() {
+        final String result = iceCream.toString();
+        assertNotNull(result);
+        assertTrue(result.contains("CLASSIC"));
+        assertTrue(result.contains("VANILLA"));
+        assertTrue(result.contains("STRAWBERRY_SYRUP"));
+    }
+
+    @Test
+    void testToStringWithEmptyIngredients() {
+        final IceCreamImpl emptyIceCream = new IceCreamImpl(cone, new ArrayList<>(), false);
+        final String result = emptyIceCream.toString();
+        assertNotNull(result);
+        assertTrue(result.contains("(empty)"));
+    }
 }
