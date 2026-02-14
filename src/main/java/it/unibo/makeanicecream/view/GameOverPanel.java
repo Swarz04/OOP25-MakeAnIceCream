@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,9 +20,11 @@ import it.unibo.makeanicecream.api.GameController;
  * Panel displayed when the game is over.
  */
 public final class GameOverPanel extends JPanel {
+    private static final Logger LOGGER = Logger.getLogger(GameOverPanel.class.getName());
     private static final Color GAME_OVER_BACKGROUND = new Color(173, 216, 230);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 32f;
+    private static final int ICON_TEXT_GAP = 12;
     private transient GameController controller;
 
     /**
@@ -41,15 +44,15 @@ public final class GameOverPanel extends JPanel {
         title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
 
         final java.net.URL smashedIcon = getClass().getResource("/smashed_icecream.png");
-        if(smashedIcon != null) {
+        if (smashedIcon != null) {
             final ImageIcon smashedImageIcon = new ImageIcon(smashedIcon);
             final Image smashedImage = smashedImageIcon.getImage().getScaledInstance(120, 90, Image.SCALE_SMOOTH);
 
             title.setIcon(new ImageIcon(smashedImage));
             title.setHorizontalTextPosition(JLabel.LEFT);
-            title.setIconTextGap(12);
-        }else{
-            System.err.println("Not found image");
+            title.setIconTextGap(ICON_TEXT_GAP);
+        } else {
+            LOGGER.warning("Image not found");
         }
 
         add(title, gbc);
