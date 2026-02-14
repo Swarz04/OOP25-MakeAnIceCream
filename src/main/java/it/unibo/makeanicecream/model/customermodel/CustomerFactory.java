@@ -131,9 +131,9 @@ public class CustomerFactory {
                     builder.addTopping(topping2);
                 }
         } else {
-        for (int i = 0; i < template.getToppingCount(); i++) {
-            builder.addTopping(getRandomTopping());
-        }
+            for (int i = 0; i < template.getToppingCount(); i++) {
+                builder.addTopping(getRandomTopping());
+            }
         }
      return builder.build();
     }

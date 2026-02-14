@@ -8,6 +8,8 @@ import it.unibo.makeanicecream.api.GameLoop;
  * Implementation of {@link GameLoop} that runs the game in a separate thread.
  */
 public final class GameLoopImpl implements GameLoop, Runnable {
+    private static final long MIN_ELAPSED = 0;
+    private static final long MAX_ELAPSED = 100;
 
     private volatile boolean running;
     private final long period;
@@ -47,7 +49,9 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
         while (this.running) {
             final long currentCycleStartTime = System.currentTimeMillis();
-            final long elapsed = currentCycleStartTime - previousCycleStartTime;
+            long elapsed = currentCycleStartTime - previousCycleStartTime;
+            elapsed = Math.max(MIN_ELAPSED, elapsed);
+            elapsed = Math.min(elapsed, MAX_ELAPSED);
 
             this.updater.accept(elapsed);
 
