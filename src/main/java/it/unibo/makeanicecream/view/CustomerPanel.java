@@ -23,7 +23,6 @@ public final class CustomerPanel extends JPanel {
     private static final int VERTICAL_GAP = 10;
     private static final int CUSTOMER_ICON_SIZE = 80;
     private static final String DEFAULT_CUSTOMER_IMAGE = "cliente1.png";
-    private static final float FONT_CONSTANT = 20f;
 
     /**
      * Mapping of customer names to their corresponding image file names in the resources folder.
