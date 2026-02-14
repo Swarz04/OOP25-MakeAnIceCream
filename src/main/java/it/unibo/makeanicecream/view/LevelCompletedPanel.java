@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +39,19 @@ public final class LevelCompletedPanel extends JPanel {
 
         final JLabel title = new JLabel("LEVEL COMPLETED!", JLabel.CENTER);
         title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
+
+        final java.net.URL completedIcon = getClass().getResource("/completed.png");
+        if(completedIcon != null) {
+            final ImageIcon completedImageIcon = new ImageIcon(completedIcon);
+            final Image completedImage = completedImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+            title.setIcon(new ImageIcon(completedImage));
+            title.setHorizontalTextPosition(JLabel.LEFT);
+            title.setIconTextGap(12);
+        }else{
+            System.err.println("Not found image");
+        }
+
         add(title, gbc);
 
         gbc.gridy++;

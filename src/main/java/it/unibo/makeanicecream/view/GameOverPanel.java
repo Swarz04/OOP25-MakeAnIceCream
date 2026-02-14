@@ -43,7 +43,7 @@ public final class GameOverPanel extends JPanel {
         final java.net.URL smashedIcon = getClass().getResource("/smashed_icecream.png");
         if(smashedIcon != null) {
             final ImageIcon smashedImageIcon = new ImageIcon(smashedIcon);
-            final Image smashedImage = smashedImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final Image smashedImage = smashedImageIcon.getImage().getScaledInstance(120, 90, Image.SCALE_SMOOTH);
 
             title.setIcon(new ImageIcon(smashedImage));
             title.setHorizontalTextPosition(JLabel.LEFT);
