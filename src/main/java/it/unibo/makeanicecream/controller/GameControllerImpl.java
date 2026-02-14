@@ -69,7 +69,9 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void handleInput(final Event event) {
-        this.view.update();
+        if (this.view != null) {
+            this.view.update();
+        }
 
         final Function<Event, Command> commandFactory = this.commands.get(event.getType());
         if (commandFactory == null) {
