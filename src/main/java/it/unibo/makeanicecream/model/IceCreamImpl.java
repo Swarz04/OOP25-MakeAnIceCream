@@ -62,6 +62,11 @@ public final class IceCreamImpl implements Icecream {
         return isClosed;
     }
 
+    /**
+     * Return a string representation for this icecream.
+     * 
+     * @return string containing icecream details
+     */
     @Override
     public String toString() {
         final String coneString = (conetype == null) ? "-" : conetype.name();
