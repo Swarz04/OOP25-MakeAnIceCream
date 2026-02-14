@@ -42,7 +42,7 @@ public final class GameViewImpl extends JFrame implements GameView {
     private final GameOverPanel gameOverPanel;
     private final LevelCompletedPanel levelCompletedPanel;
 
-    private GameController controller;
+    private transient GameController controller;
 
     private String currentCustomer;
     private String currentOrder;

@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.GameController;
 
@@ -23,7 +25,7 @@ public final class StatusPanel extends JPanel {
     private final JLabel livesLabel;
     private final JLabel timerLabel;
     private final JButton pauseButton;
-    private GameController controller;
+    private transient GameController controller;
 
     /**
      * Builds a new StatusPanel.
@@ -80,9 +82,11 @@ public final class StatusPanel extends JPanel {
 
     /**
      * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
      *
      * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }

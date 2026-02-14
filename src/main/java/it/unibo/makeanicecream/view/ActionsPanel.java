@@ -1,6 +1,9 @@
 package it.unibo.makeanicecream.view;
 
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
@@ -19,13 +22,13 @@ public final class ActionsPanel extends JPanel {
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
 
-    private GameController controller;
+    private transient GameController controller;
 
     private final JButton submitButton = new JButton();
     private final JButton resetButton = new JButton();
 
-    private Runnable submitAction = () -> { };
-    private Runnable resetAction = () -> { };
+    private transient Runnable submitAction = () -> { };
+    private transient Runnable resetAction = () -> { };
 
     /**
      * Builds a new ActionsPanel.
@@ -67,9 +70,11 @@ public final class ActionsPanel extends JPanel {
 
     /**
      * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
      *
      * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }

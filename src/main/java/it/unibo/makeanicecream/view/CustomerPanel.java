@@ -3,18 +3,20 @@ package it.unibo.makeanicecream.view;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Panel responsible for displaying the current customer and their order.
  */
-public class CustomerPanel extends JPanel {
+public final class CustomerPanel extends JPanel {
+    private static final Logger LOGGER = Logger.getLogger(CustomerPanel.class.getName());
     private static final long serialVersionUID = 1L;
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
@@ -100,7 +102,7 @@ public class CustomerPanel extends JPanel {
         final java.net.URL imgURL = getClass().getResource("/" + imagePath);
 
         if (imgURL == null) {
-            System.err.println("Couldn't find file: " + imagePath);
+            LOGGER.warning("Couldn't find file: " + imagePath);
         }
 
         final ImageIcon icon = imgURL != null ? new ImageIcon(imgURL) : null;

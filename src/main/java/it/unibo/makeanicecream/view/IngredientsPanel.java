@@ -10,6 +10,9 @@ import javax.swing.JButton;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
@@ -33,7 +36,7 @@ public final class IngredientsPanel extends JPanel {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
 
-    private GameController controller;
+    private transient GameController controller;
     private final JPanel flavorPanel = new JPanel(new GridLayout(2, 3, 6, 6));
     private final JPanel liquidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
     private final JPanel solidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
@@ -80,10 +83,12 @@ public final class IngredientsPanel extends JPanel {
     }
 
     /**
-     * Sets the controller to which this panel will send events when buttons are pressed.
+     * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
      *
-     * @param controller the controller to set
+     * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }
@@ -159,7 +164,7 @@ public final class IngredientsPanel extends JPanel {
      * @return a JButton with the ingredient name and icon if the icon resource is found, otherwise a JButton with just the name
      */
     private JButton createIngredieButton(final String name) {
-        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase() + ".png");
+        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase(java.util.Locale.ROOT) + ".png");
         if (resource != null) {
             final ImageIcon icon = new ImageIcon(resource);
             final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);

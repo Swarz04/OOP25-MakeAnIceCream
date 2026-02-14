@@ -1,6 +1,9 @@
 package it.unibo.makeanicecream.view;
 
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.CardLayout;
@@ -24,7 +27,8 @@ public final class AreaPlayerPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String CONE_PANEL = "cone";
     private static final String BUILDER_PANEL = "builder";
-    private GameController controller;
+    private transient GameController controller;
+
     private final CardLayout cardLayout = new CardLayout();
 
     private final JPanel conePanel = new JPanel(new BorderLayout(0, 10));
@@ -50,10 +54,12 @@ public final class AreaPlayerPanel extends JPanel {
     }
 
     /**
-     * Sets the controller to which events will be sent.
-     * 
+     * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
+     *
      * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }
@@ -94,7 +100,7 @@ public final class AreaPlayerPanel extends JPanel {
 
         for (final Conetype cone : Conetype.values()) {
             final JButton button = new JButton(cone.name());
-            final java.net.URL resource = getClass().getResource("/" + cone.name().toLowerCase() + ".png");
+            final java.net.URL resource = getClass().getResource("/" + cone.name().toLowerCase(java.util.Locale.ROOT) + ".png");
             if (resource != null) {
                 final ImageIcon icon = new ImageIcon(resource);
                 final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);

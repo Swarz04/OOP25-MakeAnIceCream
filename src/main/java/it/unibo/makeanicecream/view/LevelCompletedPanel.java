@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.GameController;
 
@@ -19,7 +20,7 @@ public final class LevelCompletedPanel extends JPanel {
     private static final Color LEVEL_COMPLETED_BACKGROUND = new Color(250, 218, 221);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 24f;
-    private GameController controller;
+    private transient GameController controller;
 
     /**
      * Builds a new LevelCompletedPanel.
@@ -50,9 +51,11 @@ public final class LevelCompletedPanel extends JPanel {
 
     /**
      * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
      *
      * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }

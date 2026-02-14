@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.BorderFactory;
 import it.unibo.makeanicecream.api.GameController;
 
@@ -24,7 +27,7 @@ public final class MenuPanel extends JPanel {
     private static final int BUTTON_SPACING = 10;
     private static final int MAX_LEVELS = 5;
 
-    private GameController controller;
+    private transient GameController controller;
 
     /**
      * Builds a new MenuPanel.
@@ -58,9 +61,11 @@ public final class MenuPanel extends JPanel {
 
     /**
      * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
      *
      * @param controller the game controller
      */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
     }
