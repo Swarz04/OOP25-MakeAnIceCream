@@ -6,7 +6,9 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
+import it.unibo.makeanicecream.api.GameLoop;
 
 /**
  * Test class for the {@link GameCoreImpl} class.
@@ -18,8 +20,10 @@ class GameCoreImplTest {
 
     @BeforeEach
     void setUp() {
+        final Game game = mock(Game.class);
         controller = mock(GameController.class);
-        core = new GameCoreImpl();
+        final GameLoop loop = mock(GameLoop.class);
+        core = new GameCoreImpl(game, controller, loop);
     }
 
     /**
