@@ -40,4 +40,27 @@ public interface Player {
      * Cancels the current ice cream preparation and clears all selected ingredients.
      */
     void cancelIceCream();
+
+    /**
+     * Gets the current ice cream being prepared.
+     *
+     * @return the current ice cream
+     */
+    Icecream getCurrentIceCream();
+
+    /**
+     * Enables or disables the possibility of adding toppings
+     * while composing an ice cream.
+     * 
+     * @param enabled true to allow toppings to be added,
+     *                false to prevent adding toppings
+     */
+    void setToppingEnabled(boolean enabled);
+
+    /**
+     * Returns whether toppings are currently enabled.
+     *
+     * @return true if toppings are enabled, false otherwise
+     */
+    boolean isToppingEnabled();
 }

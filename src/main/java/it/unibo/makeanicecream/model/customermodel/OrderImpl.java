@@ -161,7 +161,15 @@ public class OrderImpl implements Order {
      */
     @Override
     public String toString() {
-        return String.format("OrderImpl[flavors=%s, cone=%s, toppings=%s]",
-        requiredFlavors, requiredCone, requiredToppings);
+        final List<Ingredient> allIngredients = getAllRequiredIngredients();
+
+        final String ingredientString = allIngredients.isEmpty()
+        ? "(empty)"
+        : allIngredients.stream()
+            .map(Ingredient::toString)
+            .reduce((a, b) -> a + ", " + b)
+            .orElse("");
+
+        return "<html>" + "<b>Cone:</b> " + requiredCone + "<br><b>Ingredients:</b> " + ingredientString + "</html>";
     }
 }

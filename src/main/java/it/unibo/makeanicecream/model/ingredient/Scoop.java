@@ -62,4 +62,14 @@ public class Scoop implements Ingredient {
     public int hashCode() {
         return flavor.hashCode();
     }
+
+    /**
+     * Returns a string representation of the Scoop.
+     * 
+     * @return a string representation of the Scoop
+     */
+    @Override
+    public String toString() {
+        return "[" + flavor + "]";
+    }
 }
