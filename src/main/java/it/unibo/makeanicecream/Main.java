@@ -1,8 +1,8 @@
 package it.unibo.makeanicecream;
 
-import it.unibo.makeanicecream.api.GameEngine;
+import it.unibo.makeanicecream.api.GameCore;
 import it.unibo.makeanicecream.api.GameView;
-import it.unibo.makeanicecream.engine.GameEngineImpl;
+import it.unibo.makeanicecream.core.GameCoreImpl;
 import it.unibo.makeanicecream.view.GameViewImpl;
 
 /**
@@ -20,7 +20,7 @@ public final class Main {
      * @param args The command line arguments.
      */
     public static void main(final String[] args) {
-        final GameEngine engine = new GameEngineImpl();
+        final GameCore engine = new GameCoreImpl();
         final GameView view = new GameViewImpl();
         engine.getController().setView(view);
         view.start();

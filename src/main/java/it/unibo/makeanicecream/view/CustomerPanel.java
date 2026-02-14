@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public final class CustomerPanel extends JPanel {
     private static final Logger LOGGER = Logger.getLogger(CustomerPanel.class.getName());
     private static final long serialVersionUID = 1L;
+    private static final float FONT_SIZE = 20f;
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
     private static final int CUSTOMER_ICON_SIZE = 80;
@@ -62,7 +63,7 @@ public final class CustomerPanel extends JPanel {
         final JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(customerImageLabel, BorderLayout.CENTER);
         leftPanel.add(customerLabel, BorderLayout.SOUTH);
-        orderLabel.setFont(orderLabel.getFont().deriveFont(FONT_CONSTANT));
+        orderLabel.setFont(orderLabel.getFont().deriveFont(FONT_SIZE));
         orderLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         orderLabel.setVerticalAlignment(JLabel.TOP);
         final JScrollPane scrollPane = new JScrollPane(orderLabel);

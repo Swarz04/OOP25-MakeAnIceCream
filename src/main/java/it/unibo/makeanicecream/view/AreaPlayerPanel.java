@@ -24,7 +24,7 @@ import it.unibo.makeanicecream.api.EventType;
  */
 public final class AreaPlayerPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private static final float FONT_CONSTANT = 20f;
+    private static final float FONT_SIZE = 20f;
     private static final String CONE_PANEL = "cone";
     private static final String BUILDER_PANEL = "builder";
     private transient GameController controller;
@@ -36,7 +36,7 @@ public final class AreaPlayerPanel extends JPanel {
     private final JLabel builderStatus = new JLabel("Builder Status", JLabel.CENTER);
 
     {
-        builderStatus.setFont(builderStatus.getFont().deriveFont(FONT_CONSTANT));
+        builderStatus.setFont(builderStatus.getFont().deriveFont(FONT_SIZE));
     }
 
     /**
