@@ -1,17 +1,17 @@
-package it.unibo.makeanicecream.engine;
+package it.unibo.makeanicecream.core;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameController;
-import it.unibo.makeanicecream.api.GameEngine;
+import it.unibo.makeanicecream.api.GameCore;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.controller.GameControllerImpl;
 import it.unibo.makeanicecream.model.GameImpl;
 
 /**
- * Implementation of {@link GameEngine}.
+ * Implementation of {@link GameCore}.
  */
-public final class GameEngineImpl implements GameEngine {
+public final class GameCoreImpl implements GameCore {
 
     private static final long PERIOD = 16;
     private static final double MILLIS_IN_SECONDS = 1000.0;
@@ -24,14 +24,14 @@ public final class GameEngineImpl implements GameEngine {
      * Constructs a new game engine and initializes
      * all core components of the game.
      */
-    public GameEngineImpl() {
+    public GameCoreImpl() {
         this.game = new GameImpl();
         this.loop = new GameLoopImpl(PERIOD, this::update);
         this.controller = new GameControllerImpl(game, this.loop);
     }
 
     /**
-     * Constructs a game engine with the provided components.
+     * Constructs a game core with the provided components.
      *
      * <p>
      * This constructor allows injecting custom implementations of the
@@ -44,7 +44,7 @@ public final class GameEngineImpl implements GameEngine {
      * @param controller the controller coordinating game logic and view updates
      * @param loop the game loop responsible for triggering periodic updates
      */
-    GameEngineImpl(final Game game, final GameController controller, final GameLoop loop) {
+    GameCoreImpl(final Game game, final GameController controller, final GameLoop loop) {
         this.game = game;
         this.controller = controller;
         this.loop = loop;
@@ -74,15 +74,5 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public GameController getController() {
         return controller;
-    }
-
-    @Override
-    public void start() {
-        loop.start();
-    }
-
-    @Override
-    public void stop() {
-        loop.stop();
     }
 }

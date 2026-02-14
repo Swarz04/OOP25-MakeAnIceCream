@@ -10,6 +10,7 @@ package it.unibo.makeanicecream.api;
  * boundaries about changes to be displayed.
  * </p>
  */
+
 public interface GameController {
 
     /**
@@ -48,9 +49,32 @@ public interface GameController {
     boolean isGamePlaying();
 
     /**
+     * Returns whether toppings are currently enabled in the game.
+     *
+     * @return true if toppings are enabled, false otherwise
+     */
+    boolean areToppingsEnabled();
+
+    /**
      * Returns the current state of the game.
      *
      * @return the current game state
      */
     GameState getGameState();
+
+    /**
+     * Returns the current ice cream being built in the game.
+     *
+     * @return the current ice cream of the game
+     */
+    Icecream getGameIceCream();
+
+    /**
+     * Returns the difficulty of the current level.
+     *
+     * @return the difficulty of the active level
+     * 
+     * @throws IllegalStateException if no level has been started yet
+     */
+    int getLevelDifficulty();
 }

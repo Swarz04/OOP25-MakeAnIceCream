@@ -14,6 +14,7 @@ import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameLoop;
 import it.unibo.makeanicecream.api.GameState;
 import it.unibo.makeanicecream.api.GameView;
+import it.unibo.makeanicecream.api.Icecream;
 
 /**
  * Implementation of the {@link GameController} interface.
@@ -21,7 +22,7 @@ import it.unibo.makeanicecream.api.GameView;
 public final class GameControllerImpl implements GameController {
 
     @SuppressFBWarnings(
-        value = "EI_EXPOSE_REP", 
+        value = "EI_EXPOSE_REP",
         justification = "The game reference is safely shared with commands and is immutable from outside"
     )
     private final Game game;
@@ -56,6 +57,10 @@ public final class GameControllerImpl implements GameController {
 
     }
 
+    @SuppressFBWarnings(
+        value = "EI2",
+        justification = "Controller must store view reference to update it"
+    )
     @Override
     public void setView(final GameView view) {
         this.view = view;
@@ -64,8 +69,11 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void handleInput(final Event event) {
-        final Function<Event, Command> commandFactory = this.commands.get(event.getType());
+        if (this.view != null) {
+            this.view.update();
+        }
 
+        final Function<Event, Command> commandFactory = this.commands.get(event.getType());
         if (commandFactory == null) {
             throw new IllegalArgumentException("Unknown action type: " + event.getType());
         }
@@ -76,21 +84,19 @@ public final class GameControllerImpl implements GameController {
     @Override
     public void updateGame(final double deltaTime) {
         this.game.update(deltaTime);
+        if (this.view != null) {
+            this.view.update();
+            if (this.game.isPlaying()) {
+                final CustomerInfo customerInfo = getCurrentCustomerInfo();
+                if (customerInfo != null) {
+                    view.showCustomer(customerInfo.name());
+                    view.showOrder(customerInfo.order());
+                    view.showTimer(customerInfo.timer());
+                }
 
-        if (!isGamePlaying() && this.gameLoop.isRunning()) {
-            this.gameLoop.stop();
-        }
-
-        if (this.view != null && this.game.isPlaying()) {
-            final CustomerInfo customerInfo = getCurrentCustomerInfo();
-            if (customerInfo != null) {
-                view.showCustomer(customerInfo.name());
-                view.showOrder(customerInfo.order());
-                view.showTimer(customerInfo.timer());
+                view.showLives(getRemainingLives());
             }
-
-            view.showLives(getRemainingLives());
-        } 
+        }
     }
 
     @Override
@@ -99,8 +105,26 @@ public final class GameControllerImpl implements GameController {
     }
 
     @Override
+    public boolean areToppingsEnabled() {
+        return this.game.areToppingsEnabled();
+    }
+
+    @Override
     public GameState getGameState() {
         return this.game.getState();
+    }
+
+    @Override
+    public Icecream getGameIceCream() {
+        return this.game.getCurrentIceCream();
+    }
+
+    @Override
+    public int getLevelDifficulty() {
+        if (this.game.getCurrentLevel() == null) {
+            throw new IllegalStateException("No level started yet.");
+        }
+        return this.game.getCurrentLevel().getDifficulty();
     }
 
     /**
@@ -118,7 +142,7 @@ public final class GameControllerImpl implements GameController {
                 final double timer = (customer.getTimer() != null) ? customer.getTimer().getTimeLeft() : 0;
 
                 return new CustomerInfo(name, order, timer);
-            } 
+            }
         }
 
         return null;

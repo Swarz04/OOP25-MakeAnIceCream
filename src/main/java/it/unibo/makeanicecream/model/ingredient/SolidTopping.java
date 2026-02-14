@@ -2,6 +2,7 @@ package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.SolidToppingType;
+import java.util.Objects;
 
 /**
  * SolidTopping class representing a solid topping ingredient.
@@ -16,7 +17,7 @@ public class SolidTopping implements Ingredient {
      * @param topping the solid topping type
      */
     public SolidTopping(final SolidToppingType topping) {
-        this.topping = topping;
+        this.topping = Objects.requireNonNull(topping, "Topping cannot be null");
     }
 
     /**
@@ -59,5 +60,15 @@ public class SolidTopping implements Ingredient {
     @Override
     public int hashCode() {
         return topping.hashCode();
+    }
+
+    /**
+     * Returns a string representation of the SolidTopping.
+     * 
+     * @return a string representation of the SolidTopping
+     */
+    @Override
+    public String toString() {
+        return "[" + topping + "]";
     }
 }

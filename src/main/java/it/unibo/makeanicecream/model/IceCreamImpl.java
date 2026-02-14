@@ -3,6 +3,7 @@ package it.unibo.makeanicecream.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Icecream;
@@ -14,7 +15,7 @@ import it.unibo.makeanicecream.api.Ingredient;
  * flavors, liquid toppings, and optional solid topping.
  * It contains no construction logic and is updated by the builder.
  */
-public class IceCreamImpl implements Icecream {
+public final class IceCreamImpl implements Icecream {
     private final Conetype conetype;
     private final List<Ingredient> ingredients;
     private final boolean isClosed;
@@ -25,10 +26,13 @@ public class IceCreamImpl implements Icecream {
      * @param conetype the type of cone
      * @param ingredients the list of ingredients
      * @param isClosed whether the ice cream is closed (solid topping present)
-     * @return new IceCreamImpl instance
      */
     public IceCreamImpl(final Conetype conetype, final List<Ingredient> ingredients, final boolean isClosed) {
-        this.conetype = conetype;
+        this.conetype = Objects.requireNonNull(conetype, "Cone type cannot be null");
+        Objects.requireNonNull(ingredients, "Ingredients cannot be null");
+        for (final Ingredient ingredient : ingredients) {
+            Objects.requireNonNull(ingredient, "Ingredient in the list cannot be null");
+        }
         this.ingredients = new ArrayList<>(ingredients);
         this.isClosed = isClosed;
     }
@@ -63,4 +67,24 @@ public class IceCreamImpl implements Icecream {
         return isClosed;
     }
 
+    /**
+     * Return a string representation for this icecream.
+     * 
+     * @return string containing icecream details
+     */
+    @Override
+    public String toString() {
+        final String coneString = (conetype == null) ? "-" : conetype.name();
+        final String ingredientsString = ingredients.isEmpty()
+            ? "(empty)"
+            : ingredients.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("");
+
+        return "<html>"
+            + "<b>Cone:</b> " + coneString
+            + "<br><b>Ingredients:</b> " + ingredientsString
+            + "</html>";
+    }
 }

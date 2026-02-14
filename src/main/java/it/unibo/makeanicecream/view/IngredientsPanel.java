@@ -1,0 +1,178 @@
+package it.unibo.makeanicecream.view;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
+import it.unibo.makeanicecream.api.GameController;
+import it.unibo.makeanicecream.api.LiquidToppingType;
+import it.unibo.makeanicecream.api.SolidToppingType;
+import it.unibo.makeanicecream.api.EventType;
+import it.unibo.makeanicecream.api.FlavorType;
+
+/**
+ * Panel responsible for displaying available ingredients as buttons.
+ * Flavors are placed in the center, while toppings are placed on the right side, divided into liquids and solids.
+ * Topping button are enabled only after level >=4.
+ */
+public final class IngredientsPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private static final double FLAVORS_PANEL_RATIO = 0.6;
+    private static final int DIVIDER_WIDTH = 8;
+    private static final int HORIZONTAL_GAP = 12;
+    private static final int VERTICAL_GAP = 0;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 450;
+
+    private transient GameController controller;
+    private final JPanel flavorPanel = new JPanel(new GridLayout(2, 3, 6, 6));
+    private final JPanel liquidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
+    private final JPanel solidPanel = new JPanel(new GridLayout(0, 1, 8, 8));
+
+    /**
+     * Builds a new IngredientsPanel.
+     * Flavors are always enabled, while toppings are disabled by default.
+     */
+    public IngredientsPanel() {
+        setLayout(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
+        setBorder(BorderFactory.createTitledBorder("Ingredients"));
+
+        final JPanel flavorsBox = new JPanel(new BorderLayout());
+        flavorsBox.setBorder(BorderFactory.createTitledBorder("Flavors"));
+        flavorsBox.add(flavorPanel, BorderLayout.CENTER);
+
+        final JPanel toppingBox = new JPanel(new GridLayout(1, 2, HORIZONTAL_GAP, VERTICAL_GAP));
+        toppingBox.setBorder(BorderFactory.createTitledBorder("Toppings"));
+
+        final JPanel liquidsBox = new JPanel(new BorderLayout());
+        liquidsBox.setBorder(BorderFactory.createTitledBorder("Liquids"));
+        liquidsBox.add(liquidPanel, BorderLayout.CENTER);
+
+        final JPanel solidsBox = new JPanel(new BorderLayout());
+        solidsBox.setBorder(BorderFactory.createTitledBorder("Solids"));
+        solidsBox.add(solidPanel, BorderLayout.CENTER);
+
+        toppingBox.add(liquidsBox);
+        toppingBox.add(solidsBox);
+
+        final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, flavorsBox, toppingBox);
+        split.setResizeWeight(FLAVORS_PANEL_RATIO);
+        split.setDividerSize(DIVIDER_WIDTH);
+        split.setContinuousLayout(true);
+
+        add(split, BorderLayout.CENTER);
+
+        buildFlavorButtons();
+        buildToppingButtons();
+
+        setToppingButtonsEnabled(false);
+
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    }
+
+    /**
+     * Sets the controller for this panel.
+     * This reference is intentionally stored to allow the panel to send events to the controller.
+     *
+     * @param controller the game controller
+     */
+    @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
+    public void setController(final GameController controller) {
+        this.controller = controller;
+    }
+
+    /**
+     * Enables or disables all topping buttons.
+     *
+     * @param enabled true to enable the buttons, false to disable them
+     */
+    public void setToppingButtonsEnabled(final boolean enabled) {
+        setPanelEnabled(liquidPanel, enabled);
+        setPanelEnabled(solidPanel, enabled);
+    }
+
+    /**
+     * Builds the flavor buttons and adds action listeners to send events when they are pressed.
+     */
+    private void buildFlavorButtons() {
+        for (final FlavorType f : FlavorType.values()) {
+            final JButton button = createIngredieButton(f.name());
+            button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, f.name()));
+            flavorPanel.add(button);
+        }
+    }
+
+    /**
+     * Builds the topping buttons and adds action listeners to send events when they are pressed.
+     */
+    private void buildToppingButtons() {
+        for (final LiquidToppingType liquid : LiquidToppingType.values()) {
+            final JButton button = createIngredieButton(liquid.name());
+            button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, liquid.name()));
+            liquidPanel.add(button);
+        }
+
+        for (final SolidToppingType solid : SolidToppingType.values()) {
+            final JButton button = createIngredieButton(solid.name());
+            button.addActionListener(e -> sendEvent(EventType.ADD_INGREDIENT, solid.name()));
+            solidPanel.add(button);
+        }
+    }
+
+    /**
+     * Sends an event to the controller with the specified type and data.
+     *
+     * @param type the type of the event to send
+     * @param data the data associated with the event
+     */
+    private void sendEvent(final EventType type, final String data) {
+        if (controller == null) {
+           return;
+        }
+
+        controller.handleInput(new EventImpl(type, data));
+    }
+
+    /**
+     * Enables or disables all buttons in the specified panel.
+     *
+     * @param panel the panel whose buttons to enable or disable
+     * @param enabled true to enable the buttons, false to disable them
+     */
+    private void setPanelEnabled(final JPanel panel, final boolean enabled) {
+        for (final Component c : panel.getComponents()) {
+            c.setEnabled(enabled);
+        }
+    }
+
+    /**
+     * Creates a JButton with the specified name and an associated icon if available.
+     * 
+     * @param name the name of the ingredient for which to create the button
+     * @return a JButton with the ingredient name and icon if the icon resource is found, otherwise a JButton with just the name
+     */
+    private JButton createIngredieButton(final String name) {
+        final java.net.URL resource = getClass().getResource("/" + name.toLowerCase(java.util.Locale.ROOT) + ".png");
+        if (resource != null) {
+            final ImageIcon icon = new ImageIcon(resource);
+            final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            final JButton button = new JButton(name, new ImageIcon(scaledImage));
+            button.setVerticalTextPosition(JButton.BOTTOM);
+            button.setHorizontalTextPosition(JButton.CENTER);
+            return button;
+        }
+        return new JButton(name);
+    }
+}
