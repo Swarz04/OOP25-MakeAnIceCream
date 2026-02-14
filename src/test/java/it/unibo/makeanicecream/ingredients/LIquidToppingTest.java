@@ -10,7 +10,6 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
 import it.unibo.makeanicecream.api.LiquidToppingType;
 
-
 class LiquidToppingTest {
 
     @Test

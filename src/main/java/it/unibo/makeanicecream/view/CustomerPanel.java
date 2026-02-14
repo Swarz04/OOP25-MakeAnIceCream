@@ -4,8 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -22,6 +22,7 @@ public final class CustomerPanel extends JPanel {
     private static final int VERTICAL_GAP = 10;
     private static final int CUSTOMER_ICON_SIZE = 80;
     private static final String DEFAULT_CUSTOMER_IMAGE = "cliente1.png";
+    private static final float FONT_CONSTANT = 20f;
 
     /**
      * Mapping of customer names to their corresponding image file names in the resources folder.
@@ -61,7 +62,7 @@ public final class CustomerPanel extends JPanel {
         final JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(customerImageLabel, BorderLayout.CENTER);
         leftPanel.add(customerLabel, BorderLayout.SOUTH);
-        orderLabel.setFont(orderLabel.getFont().deriveFont(20f));
+        orderLabel.setFont(orderLabel.getFont().deriveFont(FONT_CONSTANT));
         orderLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         orderLabel.setVerticalAlignment(JLabel.TOP);
         final JScrollPane scrollPane = new JScrollPane(orderLabel);

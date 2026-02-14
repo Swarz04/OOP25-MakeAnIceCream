@@ -2,7 +2,6 @@ package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.FlavorType;
 import it.unibo.makeanicecream.api.Ingredient;
-import it.unibo.makeanicecream.model.ingredient.IngredientType;
 import java.util.Objects;
 
 /**

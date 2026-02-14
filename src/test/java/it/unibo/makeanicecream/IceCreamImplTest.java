@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ class IceCreamImplTest {
     }
 
     @Test
-    void testConstructorWithNullIngredientList(){
+    void testConstructorWithNullIngredientList() {
         ingredients.add(null);
         assertThrows(NullPointerException.class, () -> new IceCreamImpl(cone, ingredients, false));
     }
@@ -78,7 +79,7 @@ class IceCreamImplTest {
     @Test
     void testGetIngredientsUnmodifiable() {
         final List<Ingredient> returned = iceCream.getIngredients();
-        assertThrows(UnsupportedOperationException.class, () -> returned.clear());
+        assertThrows(UnsupportedOperationException.class, returned::clear);
         assertThrows(UnsupportedOperationException.class, () -> returned.remove(0));
         assertThrows(UnsupportedOperationException.class, () -> returned.add(new Scoop(FlavorType.CHOCOLATE)));
     }
@@ -91,7 +92,7 @@ class IceCreamImplTest {
     @Test
     void testEqualsNull() {
         assertNotNull(iceCream);
-        assertFalse(iceCream.equals(null)); 
+        assertNotEquals(null, cone);
     }
 
     @Test

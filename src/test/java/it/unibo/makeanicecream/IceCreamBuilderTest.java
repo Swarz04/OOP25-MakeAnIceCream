@@ -105,7 +105,7 @@ class IceCreamBuilderTest {
     }
 
     /**
-     * Test that cannot add more than 2 liquid toppings per scoop
+     * Test that cannot add more than 2 liquid toppings per scoop.
      */
     @Test
     void testMaxLiquidToppingPerScoop() {

@@ -30,7 +30,7 @@ public final class IceCreamImpl implements Icecream {
     public IceCreamImpl(final Conetype conetype, final List<Ingredient> ingredients, final boolean isClosed) {
         this.conetype = Objects.requireNonNull(conetype, "Cone type cannot be null");
         Objects.requireNonNull(ingredients, "Ingredients cannot be null");
-        for(Ingredient ingredient : ingredients) {
+        for (final Ingredient ingredient : ingredients) {
             Objects.requireNonNull(ingredient, "Ingredient in the list cannot be null");
         }
         this.ingredients = new ArrayList<>(ingredients);

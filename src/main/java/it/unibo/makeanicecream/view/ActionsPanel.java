@@ -1,12 +1,10 @@
 package it.unibo.makeanicecream.view;
 
 import javax.swing.JPanel;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.EventType;
