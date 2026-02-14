@@ -14,7 +14,6 @@ import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.LiquidToppingType;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.api.SolidToppingType;
-import it.unibo.makeanicecream.model.OrderBuilder;
 import it.unibo.makeanicecream.model.ingredient.IngredientType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
 import it.unibo.makeanicecream.model.ingredient.Scoop;
