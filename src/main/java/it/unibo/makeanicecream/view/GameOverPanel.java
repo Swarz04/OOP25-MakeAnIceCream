@@ -46,7 +46,7 @@ public final class GameOverPanel extends JPanel {
             final Image smashedImage = smashedImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
             title.setIcon(new ImageIcon(smashedImage));
-            title.setHorizontalTextPosition(JLabel.RIGHT);
+            title.setHorizontalTextPosition(JLabel.LEFT);
             title.setIconTextGap(12);
         }else{
             System.err.println("Not found image");
