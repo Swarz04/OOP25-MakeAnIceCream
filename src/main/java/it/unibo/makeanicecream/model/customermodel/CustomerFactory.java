@@ -118,6 +118,18 @@ public class CustomerFactory {
 
         builder.setCone(getRandomCone());
 
+        int toppingCount = template.getToppingCount();
+        if (toppingCount == 2) {
+            Ingredient topping1 = getRandomTopping();
+            Ingredient topping2 = getRandomTopping();
+            if (topping1.getType() == IngredientType.SOLID_TOPPING) {
+                    builder.addTopping(topping2);
+                    builder.addTopping(topping1);
+                } else {
+                    builder.addTopping(topping1);
+                    builder.addTopping(topping2);
+                }
+        } else {
         for (int i = 0; i < template.getToppingCount(); i++) {
             builder.addTopping(getRandomTopping());
         }
