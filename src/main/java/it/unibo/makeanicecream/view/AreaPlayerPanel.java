@@ -35,6 +35,9 @@ public final class AreaPlayerPanel extends JPanel {
     private final JPanel coneButtons = new JPanel(new GridLayout(1, 3, 12, 0));
     private final JPanel builderPanel = new JPanel(new BorderLayout());
     private final JLabel builderStatus = new JLabel("Builder Status", JLabel.CENTER);
+    {
+        builderStatus.setFont(builderStatus.getFont().deriveFont(20f));
+    }
 
     /**
      * Constructs a new AreaPlayerPanel.
@@ -105,6 +108,9 @@ public final class AreaPlayerPanel extends JPanel {
                 final ImageIcon icon = new ImageIcon(resource);
                 final Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 button.setIcon(new ImageIcon(scaledImage));
+                button.setVerticalTextPosition(JButton.BOTTOM);
+                button.setHorizontalTextPosition(JButton.CENTER);
+                button.setIconTextGap(3);
                 button.setToolTipText(cone.name());
             } else {
                 button.setText(cone.name());

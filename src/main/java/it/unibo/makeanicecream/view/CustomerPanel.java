@@ -61,6 +61,7 @@ public final class CustomerPanel extends JPanel {
         final JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(customerImageLabel, BorderLayout.CENTER);
         leftPanel.add(customerLabel, BorderLayout.SOUTH);
+        orderLabel.setFont(orderLabel.getFont().deriveFont(20f));
         orderLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         orderLabel.setVerticalAlignment(JLabel.TOP);
         final JScrollPane scrollPane = new JScrollPane(orderLabel);
