@@ -2,6 +2,7 @@ package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.LiquidToppingType;
+import java.util.Objects;
 
 /**
  * LiquidTopping class representing a liquid topping ingredient.
@@ -16,7 +17,7 @@ public class LiquidTopping implements Ingredient {
      * @param topping the liquid topping type
      */
     public LiquidTopping(final LiquidToppingType topping) {
-        this.topping = topping;
+        this.topping = Objects.requireNonNull(topping, "Topping cannot be null");
     }
 
     /**
