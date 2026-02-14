@@ -16,6 +16,7 @@ import it.unibo.makeanicecream.model.ingredient.IngredientType;
 
 public class IceCreamBuilder {
     private static final int MAX_SCOOPS = 3;
+    private static final int MAX_LIQUID_TOPPING_PER_SCOOP = 2;
     private Conetype cone;
     private final List<Ingredient> listIngredients = new ArrayList<>();
     private boolean isClosed;
@@ -96,6 +97,46 @@ public class IceCreamBuilder {
     }
 
     /**
+     * Count the number of liquid toppings per last scoop.
+     * 
+     * @return the number of liquid topping per last scoop
+     */
+    private int countLiquidToppingOnLastScoop() {
+        int count = 0;
+        boolean foundScoop = false;
+
+        for (int i = listIngredients.size() - 1; i >= 0; i--) {
+            Ingredient ingredient = listIngredients.get(i);
+
+            if(ingredient.getType() == IngredientType.SCOOP) {
+                foundScoop = true;
+                break;
+            }
+
+            if(ingredient.getType() == IngredientType.LIQUID_TOPPING) {
+                count++;
+            }
+        }
+        
+        return foundScoop ? count : 0;
+    }
+
+    /**
+     * Check if adding a liquid topping would exceed the maximum allowed per scoop
+     * 
+     * @return true if adding another liquid topping is allowed, false otherwise
+     */
+    private boolean canAddLiquidTopping() {
+        if(!hasScoops()) {
+            return false;
+        }
+
+        int toppingOnLastScoop = countLiquidToppingOnLastScoop();
+
+        return toppingOnLastScoop < MAX_LIQUID_TOPPING_PER_SCOOP;
+    }
+
+    /**
      * Try to add an ingredient to the ice cream.
      * 
      * @param ingredient the ingredient to add
@@ -122,8 +163,13 @@ public class IceCreamBuilder {
             return false;
         }
 
-        //when adding a topping, at least one scoop must be present
+        //when adding a topping, at least one scoop must be present, and also cannot add more than 2 liquid topping per scoop
         if (ingredient.getType() != IngredientType.SCOOP && !hasScoops()) {
+            return false;
+        } 
+            
+        //cannot add more than 2 liquid toppings per scoop
+        if (ingredient.getType() == IngredientType.LIQUID_TOPPING && !canAddLiquidTopping()) {
             return false;
         }
 
