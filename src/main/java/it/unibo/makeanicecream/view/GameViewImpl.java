@@ -18,6 +18,9 @@ import it.unibo.makeanicecream.api.GameState;
 public final class GameViewImpl extends JFrame implements GameView {
 
     private static final long serialVersionUID = 1L;
+    private static final double INGREDIENTS_PANEL_RATIO = 0.70;
+    private static final double DIVIDER_RATIO = 0.65;
+    private static final int DIVIDER_WIDTH = 8;
 
     private static final String FRAME_NAME = "Make an Ice Cream";
     private static final String MENU_CARD = "MENU";
@@ -93,8 +96,8 @@ public final class GameViewImpl extends JFrame implements GameView {
         rightPanel.add(this.actionsPanel, BorderLayout.SOUTH);
 
         final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.ingredientsPanel, rightPanel);
-        splitPane.setResizeWeight(0.70);
-        splitPane.setDividerSize(8);
+        splitPane.setResizeWeight(INGREDIENTS_PANEL_RATIO);
+        splitPane.setDividerSize(DIVIDER_WIDTH);
         splitPane.setContinuousLayout(true);
 
         gamePanel.add(splitPane, BorderLayout.CENTER);
@@ -103,7 +106,7 @@ public final class GameViewImpl extends JFrame implements GameView {
 
         setContentPane(mainPanel);
         pack();
-        SwingUtilities.invokeLater(() -> splitPane.setDividerLocation(0.65));
+        SwingUtilities.invokeLater(() -> splitPane.setDividerLocation(DIVIDER_RATIO));
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }

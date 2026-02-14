@@ -18,23 +18,24 @@ public class CustomerPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final int HORIZONTAL_GAP = 20;
     private static final int VERTICAL_GAP = 10;
-
-    private final JLabel customerImageLabel;
-    private final JLabel customerLabel;
-    private final JLabel orderLabel;
+    private static final String DEFAULT_CUSTOMER_IMAGE = "cliente1.png";
 
     /**
      * Mapping of customer names to their corresponding image file names in the resources folder.
      * If a customer's name is not found in this map, a default image will be used.
      */
-    private static final Map<String, String> nameToImage = Map.of(
+    private static final Map<String, String> NAME_TO_IMAGE = Map.of(
         "Maria", "cliente1.png",
         "Paolo", "cliente2.png",
         "Giulia", "cliente3.png",
         "Giorgio", "cliente4.png",
         "Lucia", "cliente5.png",
-        "Mario", "cliente1.png"
+        "Mario", DEFAULT_CUSTOMER_IMAGE
     );
+
+    private final JLabel customerImageLabel;
+    private final JLabel customerLabel;
+    private final JLabel orderLabel;
 
     /**
      * Builds a new CustomerPanel.
@@ -95,7 +96,7 @@ public class CustomerPanel extends JPanel {
      * @return the ImageIcon corresponding to the customer's image, or null if the image file is not found
      */
     private ImageIcon loadCustomerIcon(final String name) {
-        final String imagePath = nameToImage.getOrDefault(name, "cliente1.png");
+        final String imagePath = NAME_TO_IMAGE.getOrDefault(name, DEFAULT_CUSTOMER_IMAGE);
         final java.net.URL imgURL = getClass().getResource("/" + imagePath);
 
         if (imgURL == null) {

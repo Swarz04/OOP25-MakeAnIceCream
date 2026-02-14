@@ -12,7 +12,10 @@ import javax.swing.JPanel;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.GameController;
 
-public class GameOverPanel extends JPanel {
+/**
+ * Panel displayed when the game is over.
+ */
+public final class GameOverPanel extends JPanel {
     private static final Color GAME_OVER_BACKGROUND = new Color(250, 218, 221);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 24f;
@@ -23,7 +26,7 @@ public class GameOverPanel extends JPanel {
      */
     public GameOverPanel() {
         setLayout(new GridBagLayout());
-        setBackground(GAME_OVER_BACKGROUND); // Consistent with MenuPanel
+        setBackground(GAME_OVER_BACKGROUND);
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

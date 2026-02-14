@@ -20,7 +20,7 @@ import it.unibo.makeanicecream.api.EventType;
  * It contains a cone selection panel and an ice cream builder panel.
  * Players can choose a cone type and then add ingredients to it.
  */
-public class AreaPlayerPanel extends JPanel {
+public final class AreaPlayerPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String CONE_PANEL = "cone";
     private static final String BUILDER_PANEL = "builder";

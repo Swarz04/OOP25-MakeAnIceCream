@@ -24,9 +24,14 @@ import it.unibo.makeanicecream.api.FlavorType;
  * Flavors are placed in the center, while toppings are placed on the right side, divided into liquids and solids.
  * Topping button are enabled only after level >=4.
  */
-public class IngredientsPanel extends JPanel {
+public final class IngredientsPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private static final double FLAVORS_PANEL_RATIO = 0.6;
+    private static final int DIVIDER_WIDTH = 8;
     private static final int HORIZONTAL_GAP = 12;
     private static final int VERTICAL_GAP = 0;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 450;
 
     private GameController controller;
     private final JPanel flavorPanel = new JPanel(new GridLayout(2, 3, 6, 6));
@@ -59,9 +64,9 @@ public class IngredientsPanel extends JPanel {
         toppingBox.add(liquidsBox);
         toppingBox.add(solidsBox);
 
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, flavorsBox, toppingBox);
-        split.setResizeWeight(0.6);
-        split.setDividerSize(8);
+        final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, flavorsBox, toppingBox);
+        split.setResizeWeight(FLAVORS_PANEL_RATIO);
+        split.setDividerSize(DIVIDER_WIDTH);
         split.setContinuousLayout(true);
 
         add(split, BorderLayout.CENTER);
@@ -71,7 +76,7 @@ public class IngredientsPanel extends JPanel {
 
         setToppingButtonsEnabled(false);
 
-        setPreferredSize(new Dimension(800,450));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
     /**

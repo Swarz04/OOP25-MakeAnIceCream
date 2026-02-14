@@ -14,7 +14,7 @@ import it.unibo.makeanicecream.api.GameController;
 /**
  * Panel responsible for displaying game status like lives and time.
  */
-public class StatusPanel extends JPanel {
+public final class StatusPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
 

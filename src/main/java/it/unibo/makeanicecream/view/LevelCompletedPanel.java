@@ -12,18 +12,21 @@ import javax.swing.JPanel;
 import it.unibo.makeanicecream.api.EventType;
 import it.unibo.makeanicecream.api.GameController;
 
-public class LevelCompletedPanel extends JPanel {
+/**
+ * Panel displayed when the a level is completed.
+ */
+public final class LevelCompletedPanel extends JPanel {
     private static final Color LEVEL_COMPLETED_BACKGROUND = new Color(250, 218, 221);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 24f;
     private GameController controller;
 
     /**
-     * Builds a new GameOverPanel.
+     * Builds a new LevelCompletedPanel.
      */
     public LevelCompletedPanel() {
         setLayout(new GridBagLayout());
-        setBackground(LEVEL_COMPLETED_BACKGROUND); // Consistent with MenuPanel
+        setBackground(LEVEL_COMPLETED_BACKGROUND);
 
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
