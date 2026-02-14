@@ -55,14 +55,4 @@ public final class GameEngineImpl implements GameEngine {
     public GameController getController() {
         return controller;
     }
-
-    @Override
-    public void start() {
-        loop.start();
-    }
-
-    @Override
-    public void stop() {
-        loop.stop();
-    }
 }

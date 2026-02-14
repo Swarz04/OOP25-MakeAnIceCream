@@ -17,14 +17,4 @@ public interface GameEngine {
      * @return the game controller instance
      */
     GameController getController();
-
-    /**
-     * Starts the game execution.
-     */
-    void start();
-
-    /**
-     * Stops the game execution.
-     */
-    void stop();
 }
