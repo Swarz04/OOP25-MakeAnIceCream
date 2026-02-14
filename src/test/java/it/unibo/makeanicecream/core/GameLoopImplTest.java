@@ -1,4 +1,4 @@
-package it.unibo.makeanicecream.engine;
+package it.unibo.makeanicecream.core;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -60,4 +60,14 @@ public class SolidTopping implements Ingredient {
     public int hashCode() {
         return topping.hashCode();
     }
+
+    /**
+     * Returns a string representation of the SolidTopping.
+     * 
+     * @return a string representation of the SolidTopping
+     */
+    @Override
+    public String toString() {
+        return "[" + topping + "]";
+    }
 }

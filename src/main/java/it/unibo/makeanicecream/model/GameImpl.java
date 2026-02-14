@@ -4,6 +4,7 @@ import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Customer;
 import it.unibo.makeanicecream.api.Game;
 import it.unibo.makeanicecream.api.GameState;
+import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
 import it.unibo.makeanicecream.api.Level;
 import it.unibo.makeanicecream.api.Player;
@@ -13,6 +14,8 @@ import it.unibo.makeanicecream.model.level.LevelFactory;
  * Implementation of the {@link Game} interface.
  */
 public final class GameImpl implements Game {
+
+    private static final int TOPPING_UNLOCK_DIFFICULTY = 4;
 
     private Level currentLevel;
     private GameState state;
@@ -34,6 +37,9 @@ public final class GameImpl implements Game {
         }
         this.currentLevel = LevelFactory.createLevel(levelNumber);
         this.state = GameState.PLAYING;
+        this.player.setToppingEnabled(
+            this.currentLevel.getDifficulty() >= TOPPING_UNLOCK_DIFFICULTY
+        );
     }
 
     @Override
@@ -44,6 +50,11 @@ public final class GameImpl implements Game {
     @Override
     public GameState getState() {
         return this.state;
+    }
+
+    @Override
+    public Icecream getCurrentIceCream() {
+        return this.player.getCurrentIceCream();
     }
 
     @Override
@@ -99,6 +110,11 @@ public final class GameImpl implements Game {
     @Override
     public boolean isPlaying() {
         return this.state == GameState.PLAYING;
+    }
+
+    @Override
+    public boolean areToppingsEnabled() {
+        return this.player.isToppingEnabled();
     }
 
     @Override

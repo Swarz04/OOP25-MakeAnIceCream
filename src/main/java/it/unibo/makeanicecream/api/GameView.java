@@ -40,11 +40,6 @@ public interface GameView {
     void showLives(int lives);
 
     /**
-     * Displays the avaiable ingredients.
-     */
-    void showIngredients();
-
-    /**
      * Displays the ice cream currently being prepared by the player.
      */
     void showIceCream();

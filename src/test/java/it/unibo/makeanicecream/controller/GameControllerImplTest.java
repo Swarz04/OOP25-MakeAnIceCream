@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -110,17 +111,18 @@ class GameControllerImplTest {
     }
 
     /**
-     * Verifies that GameControllerImpl stops the game loop
-     * if the game is not playing but the loop is running.
+     * Verifies that the view methods are not called when the game is not playing.
      */
     @Test
-    void testUpdateGameStopsLoopIfNotPlaying() {
+    void testUpdateGameSkipsViewMethodsWhenNotPlaying() {
         when(game.isPlaying()).thenReturn(false);
-        when(loop.isRunning()).thenReturn(true);
         controller.updateGame(DELTA_TIME);
         verify(game).update(DELTA_TIME);
-        verify(loop).stop();
+        verify(view, never()).showLives(anyInt());
+        verify(view, never()).showOrder(any());
+        verify(view, never()).showCustomer(any());
     }
+
 
     /**
      * Verifies that GameControllerImpl updates the view

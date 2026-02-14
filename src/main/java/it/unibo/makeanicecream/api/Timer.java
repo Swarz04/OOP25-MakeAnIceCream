@@ -2,8 +2,8 @@ package it.unibo.makeanicecream.api;
 
 /**
  * Interface for a timer with a countdown functionality.
- * Implementations should provide mechanisms to start, pause, resume.
- * also update the timer, as well as check its status.
+ * Implementations should provide mechanisms to start, pause, resume,
+ * and also update the timer, as well as check its status.
  */
 public interface Timer {
    /**
