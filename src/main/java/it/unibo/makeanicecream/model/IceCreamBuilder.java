@@ -106,32 +106,32 @@ public class IceCreamBuilder {
         boolean foundScoop = false;
 
         for (int i = listIngredients.size() - 1; i >= 0; i--) {
-            Ingredient ingredient = listIngredients.get(i);
+            final Ingredient ingredient = listIngredients.get(i);
 
-            if(ingredient.getType() == IngredientType.SCOOP) {
+            if (ingredient.getType() == IngredientType.SCOOP) {
                 foundScoop = true;
                 break;
             }
 
-            if(ingredient.getType() == IngredientType.LIQUID_TOPPING) {
+            if (ingredient.getType() == IngredientType.LIQUID_TOPPING) {
                 count++;
             }
         }
-        
+
         return foundScoop ? count : 0;
     }
 
     /**
-     * Check if adding a liquid topping would exceed the maximum allowed per scoop
+     * Check if adding a liquid topping would exceed the maximum allowed per scoop.
      * 
      * @return true if adding another liquid topping is allowed, false otherwise
      */
     private boolean canAddLiquidTopping() {
-        if(!hasScoops()) {
+        if (!hasScoops()) {
             return false;
         }
 
-        int toppingOnLastScoop = countLiquidToppingOnLastScoop();
+        final int toppingOnLastScoop = countLiquidToppingOnLastScoop();
 
         return toppingOnLastScoop < MAX_LIQUID_TOPPING_PER_SCOOP;
     }
@@ -167,7 +167,7 @@ public class IceCreamBuilder {
         if (ingredient.getType() != IngredientType.SCOOP && !hasScoops()) {
             return false;
         } 
-            
+
         //cannot add more than 2 liquid toppings per scoop
         if (ingredient.getType() == IngredientType.LIQUID_TOPPING && !canAddLiquidTopping()) {
             return false;

@@ -36,7 +36,7 @@ public final class StatusPanel extends JPanel {
         this.pauseButton = new JButton();
 
         timerLabel.setFont(timerLabel.getFont().deriveFont(Font.BOLD, 32f));
-        timerLabel.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
+        timerLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
         final java.net.URL pauseIcon = getClass().getResource("/pause.png");
         if (pauseIcon != null) {
