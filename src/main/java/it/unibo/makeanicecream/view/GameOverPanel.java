@@ -3,8 +3,10 @@ package it.unibo.makeanicecream.view;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,8 +39,20 @@ public final class GameOverPanel extends JPanel {
 
         final JLabel title = new JLabel("GAME OVER", JLabel.CENTER);
         title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
-        add(title, gbc);
 
+        final java.net.URL smashedIcon = getClass().getResource("/smashed_icecream.png");
+        if(smashedIcon != null) {
+            final ImageIcon smashedImageIcon = new ImageIcon(smashedIcon);
+            final Image smashedImage = smashedImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+            title.setIcon(new ImageIcon(smashedImage));
+            title.setHorizontalTextPosition(JLabel.LEFT);
+            title.setIconTextGap(12);
+        }else{
+            System.err.println("Not found image");
+        }
+
+        add(title, gbc);
         gbc.gridy++;
         final JButton menuButton = new JButton("Return to Menu");
         menuButton.addActionListener(e -> {
