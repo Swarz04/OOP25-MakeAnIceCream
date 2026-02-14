@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,13 +20,14 @@ import it.unibo.makeanicecream.api.GameController;
  * Panel responsible for displaying game status like lives and time.
  */
 public final class StatusPanel extends JPanel {
-
+    private static final Logger LOGGER = Logger.getLogger(StatusPanel.class.getName());
     private static final long serialVersionUID = 1L;
     private static final int MAX_LIVES = 3;
+    private static final int SIZE_HEART = 28;
 
     private final JLabel[] heartLabels = new JLabel[MAX_LIVES];
-    private ImageIcon heartFull;
-    private ImageIcon heartEmpty;
+    private final ImageIcon heartFull;
+    private final ImageIcon heartEmpty;
     private final JLabel timerLabel;
     private final JButton pauseButton;
     private transient GameController controller;
@@ -36,12 +38,12 @@ public final class StatusPanel extends JPanel {
     public StatusPanel() {
         super(new BorderLayout());
 
-        heartFull = loadAndScale("/heart_full.png", 28);
-        heartEmpty = loadAndScale("/heart_empty.png", 28);
+        heartFull = loadAndScale("/heart_full.png", SIZE_HEART);
+        heartEmpty = loadAndScale("/heart_empty.png", SIZE_HEART);
 
-        final JPanel heartPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,6,0));
+        final JPanel heartPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         heartPanel.setOpaque(false);
-        for(int i = 0; i < MAX_LIVES; i++) {
+        for (int i = 0; i < MAX_LIVES; i++) {
             heartLabels[i] = new JLabel(heartFull);
             heartPanel.add(heartLabels[i]);
         }
@@ -108,7 +110,7 @@ public final class StatusPanel extends JPanel {
     private ImageIcon loadAndScale(final String path, final int size) {
         final java.net.URL resource = getClass().getResource(path);
         if (resource == null) {
-            System.err.println("Not found :" +path);
+            LOGGER.warning("Icon not found :" + path);
             return null;
         }
         final ImageIcon icon = new ImageIcon(resource);
