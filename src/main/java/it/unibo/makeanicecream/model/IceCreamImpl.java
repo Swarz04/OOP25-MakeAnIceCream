@@ -62,6 +62,11 @@ public final class IceCreamImpl implements Icecream {
         return isClosed;
     }
 
+    /**
+     * Return a string representation for this icecream.
+     * 
+     * @return string containing icecream details
+     */
     @Override
     public String toString() {
         final String coneString = (conetype == null) ? "-" : conetype.name();
@@ -71,11 +76,10 @@ public final class IceCreamImpl implements Icecream {
                 .map(Object::toString)
                 .reduce((a, b) -> a + ", " + b)
                 .orElse("");
-        final String closedString = isClosed ? "Closed" : "Open";
+
         return "<html>"
             + "<b>Cone:</b> " + coneString
             + "<br><b>Ingredients:</b> " + ingredientsString
-            + "<br><b>Closed:</b> " + closedString
             + "</html>";
     }
 }

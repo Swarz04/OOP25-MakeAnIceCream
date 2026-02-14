@@ -2,8 +2,10 @@ package it.unibo.makeanicecream.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,6 +34,9 @@ public final class StatusPanel extends JPanel {
         this.livesLabel = new JLabel();
         this.timerLabel = new JLabel();
         this.pauseButton = new JButton();
+
+        timerLabel.setFont(timerLabel.getFont().deriveFont(Font.BOLD, 32f));
+        timerLabel.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
 
         final java.net.URL pauseIcon = getClass().getResource("/pause.png");
         if (pauseIcon != null) {
