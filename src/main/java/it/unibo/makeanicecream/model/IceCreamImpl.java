@@ -71,11 +71,10 @@ public class IceCreamImpl implements Icecream {
                 .map(Object::toString)
                 .reduce((a, b) -> a + ", " + b)
                 .orElse("");
-        final String closedString = isClosed ? "Closed" : "Open";
+
         return "<html>"
             + "<b>Cone:</b> " + coneString
             + "<br><b>Ingredients:</b> " + ingredientsString
-            + "<br><b>Closed:</b> " + closedString
             + "</html>";
     }
 }
