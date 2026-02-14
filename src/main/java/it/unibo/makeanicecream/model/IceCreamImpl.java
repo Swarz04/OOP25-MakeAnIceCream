@@ -14,7 +14,7 @@ import it.unibo.makeanicecream.api.Ingredient;
  * flavors, liquid toppings, and optional solid topping.
  * It contains no construction logic and is updated by the builder.
  */
-public class IceCreamImpl implements Icecream {
+public final class IceCreamImpl implements Icecream {
     private final Conetype conetype;
     private final List<Ingredient> ingredients;
     private final boolean isClosed;
