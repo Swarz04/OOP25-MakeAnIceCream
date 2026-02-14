@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.logging.Logger;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -19,9 +20,11 @@ import it.unibo.makeanicecream.api.GameController;
  * Panel displayed when the a level is completed.
  */
 public final class LevelCompletedPanel extends JPanel {
+    private static final Logger LOGGER = Logger.getLogger(GameOverPanel.class.getName());
     private static final Color LEVEL_COMPLETED_BACKGROUND = new Color(255, 239, 153);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 32f;
+    private static final int ICON_TEXT_GAP = 12;
     private transient GameController controller;
 
     /**
@@ -41,15 +44,15 @@ public final class LevelCompletedPanel extends JPanel {
         title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
 
         final java.net.URL completedIcon = getClass().getResource("/completed.png");
-        if(completedIcon != null) {
+        if (completedIcon != null) {
             final ImageIcon completedImageIcon = new ImageIcon(completedIcon);
             final Image completedImage = completedImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
             title.setIcon(new ImageIcon(completedImage));
             title.setHorizontalTextPosition(JLabel.LEFT);
-            title.setIconTextGap(12);
-        }else{
-            System.err.println("Not found image");
+            title.setIconTextGap(ICON_TEXT_GAP);
+        } else {
+            LOGGER.warning("Image not found");
         }
 
         add(title, gbc);
