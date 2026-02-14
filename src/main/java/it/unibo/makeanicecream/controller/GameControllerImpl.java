@@ -57,6 +57,10 @@ public final class GameControllerImpl implements GameController {
 
     }
 
+    @SuppressFBWarnings(
+        value = "EI2",
+        justification = "Controller must store view reference to update it"
+    )
     @Override
     public void setView(final GameView view) {
         this.view = view;

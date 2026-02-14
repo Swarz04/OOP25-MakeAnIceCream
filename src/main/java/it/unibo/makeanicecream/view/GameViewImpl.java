@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.makeanicecream.api.GameController;
 import it.unibo.makeanicecream.api.GameView;
 import it.unibo.makeanicecream.api.Icecream;
@@ -111,6 +112,10 @@ public final class GameViewImpl extends JFrame implements GameView {
         setLocationRelativeTo(null);
     }
 
+    @SuppressFBWarnings(
+        value = "EI2",
+        justification = "View needs reference to controller"
+    )
     @Override
     public void setController(final GameController controller) {
         this.controller = controller;
