@@ -22,6 +22,7 @@ import it.unibo.makeanicecream.api.EventType;
 public final class MenuPanel extends JPanel {
     private static final Color MENU_BACKGROUND = new Color(250, 218, 221);
     private static final long serialVersionUID = 1L;
+    private static final float TITLE_FONT_SIZE = 32f;
     private static final int BORDER_SIZE = 50;
     private static final int TITLE_SPACING = 20;
     private static final int BUTTON_SPACING = 10;
@@ -40,6 +41,7 @@ public final class MenuPanel extends JPanel {
         this.setBackground(MENU_BACKGROUND);
 
         final JLabel titleLabel = new JLabel("Choose a level", SwingConstants.CENTER);
+        titleLabel.setFont(titleLabel.getFont().deriveFont(TITLE_FONT_SIZE));
         this.add(titleLabel, BorderLayout.NORTH);
 
         final JPanel buttonsPanel = new JPanel(new GridLayout(MAX_LEVELS, 1, 0, BUTTON_SPACING));

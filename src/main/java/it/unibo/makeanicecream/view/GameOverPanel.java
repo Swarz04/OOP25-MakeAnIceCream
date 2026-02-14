@@ -19,7 +19,7 @@ import it.unibo.makeanicecream.api.GameController;
 public final class GameOverPanel extends JPanel {
     private static final Color GAME_OVER_BACKGROUND = new Color(173, 216, 230);
     private static final long serialVersionUID = 1L;
-    private static final float TITLE_FONT_SIZE = 24f;
+    private static final float TITLE_FONT_SIZE = 32f;
     private transient GameController controller;
 
     /**

@@ -18,7 +18,7 @@ import it.unibo.makeanicecream.api.GameController;
  */
 public final class PausePanel extends JPanel {
     private static final Color PAUSE_BACKGROUND = new Color(250, 218, 221);
-    private static final float TITLE_FONT_SIZE = 24f;
+    private static final float TITLE_FONT_SIZE = 32f;
     private static final long serialVersionUID = 1L;
     private transient GameController controller;
 
