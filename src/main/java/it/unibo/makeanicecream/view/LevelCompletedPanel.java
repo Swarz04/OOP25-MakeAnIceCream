@@ -17,7 +17,7 @@ import it.unibo.makeanicecream.api.GameController;
  * Panel displayed when the a level is completed.
  */
 public final class LevelCompletedPanel extends JPanel {
-    private static final Color LEVEL_COMPLETED_BACKGROUND = new Color(250, 218, 221);
+    private static final Color LEVEL_COMPLETED_BACKGROUND = new Color(255, 239, 153);
     private static final long serialVersionUID = 1L;
     private static final float TITLE_FONT_SIZE = 24f;
     private transient GameController controller;
@@ -35,7 +35,7 @@ public final class LevelCompletedPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        final JLabel title = new JLabel("LEVEL COMPLETED", JLabel.CENTER);
+        final JLabel title = new JLabel("LEVEL COMPLETED!", JLabel.CENTER);
         title.setFont(title.getFont().deriveFont(TITLE_FONT_SIZE));
         add(title, gbc);
 
