@@ -21,8 +21,11 @@ import it.unibo.makeanicecream.api.GameController;
 public final class StatusPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    private static final int MAX_LIVES = 3;
 
-    private final JLabel livesLabel;
+    private final JLabel[] heartLabels = new JLabel[MAX_LIVES];
+    private ImageIcon heartFull;
+    private ImageIcon heartEmpty;
     private final JLabel timerLabel;
     private final JButton pauseButton;
     private transient GameController controller;
@@ -33,7 +36,16 @@ public final class StatusPanel extends JPanel {
     public StatusPanel() {
         super(new BorderLayout());
 
-        this.livesLabel = new JLabel();
+        heartFull = loadAndScale("/heart_full.png", 28);
+        heartEmpty = loadAndScale("/heart_empty.png", 28);
+
+        final JPanel heartPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,6,0));
+        heartPanel.setOpaque(false);
+        for(int i = 0; i < MAX_LIVES; i++) {
+            heartLabels[i] = new JLabel(heartFull);
+            heartPanel.add(heartLabels[i]);
+        }
+
         this.timerLabel = new JLabel();
         this.pauseButton = new JButton();
 
@@ -58,7 +70,7 @@ public final class StatusPanel extends JPanel {
         rightPanel.add(timerLabel);
         rightPanel.add(pauseButton);
 
-        add(livesLabel, BorderLayout.WEST);
+        add(heartPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
     }
 
@@ -68,7 +80,9 @@ public final class StatusPanel extends JPanel {
      * @param lives the current number of lives
      */
     public void updateLives(final int lives) {
-        livesLabel.setText("Lives: " + lives);
+        for (int i = 0; i < MAX_LIVES; i++) {
+            heartLabels[i].setIcon(i < lives ? heartFull : heartEmpty);
+        }
     }
 
     /**
@@ -89,5 +103,16 @@ public final class StatusPanel extends JPanel {
     @SuppressFBWarnings(value = "EI2", justification = "Controller intentionally referenced.")
     public void setController(final GameController controller) {
         this.controller = controller;
+    }
+
+    private ImageIcon loadAndScale(final String path, final int size) {
+        final java.net.URL resource = getClass().getResource(path);
+        if (resource == null) {
+            System.err.println("Not found :" +path);
+            return null;
+        }
+        final ImageIcon icon = new ImageIcon(resource);
+        final Image scaled = icon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaled);
     }
 }
