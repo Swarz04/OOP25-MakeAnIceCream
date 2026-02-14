@@ -3,9 +3,10 @@ package it.unibo.makeanicecream.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.unibo.makeanicecream.api.Conetype;
 import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.api.Ingredient;
-import it.unibo.makeanicecream.model.ingredient.Conetype;
 
 /**
  * IceCreamImpl class implementing the Icecream interface.
@@ -24,7 +25,7 @@ public class IceCreamImpl implements Icecream {
      * @param conetype the type of cone
      * @param ingredients the list of ingredients
      * @param isClosed whether the ice cream is closed (solid topping present)
-     * @returns new IceCreamImpl instance
+     * @return new IceCreamImpl instance
      */
     public IceCreamImpl(final Conetype conetype, final List<Ingredient> ingredients, final boolean isClosed) {
         this.conetype = conetype;

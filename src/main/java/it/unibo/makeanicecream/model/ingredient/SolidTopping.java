@@ -1,6 +1,7 @@
 package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.Ingredient;
+import it.unibo.makeanicecream.api.SolidToppingType;
 
 /**
  * SolidTopping class representing a solid topping ingredient.
@@ -46,13 +47,7 @@ public class SolidTopping implements Ingredient {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof SolidTopping otherSolidTopping)) {
-            return false;
-        }
-        return this.topping == otherSolidTopping.topping;
+        return this == obj || obj instanceof SolidTopping otherSolidTopping && this.topping == otherSolidTopping.topping;
     }
 
     /**

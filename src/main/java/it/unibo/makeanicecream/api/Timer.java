@@ -6,7 +6,6 @@ package it.unibo.makeanicecream.api;
  * also update the timer, as well as check its status.
  */
 public interface Timer {
-
    /**
     * Starts the timer countdown.
     * After this method is called, the timer begins decreasing its time.
@@ -51,7 +50,7 @@ public interface Timer {
     * @return true if the timer is paused, false otherwise.
     */
    boolean isPaused();
-     
+ 
    /**
     * Sets a callback to be invoked when the timer expires.
     * The callback will be executed once when the timer reaches zero.
