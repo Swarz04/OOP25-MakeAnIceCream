@@ -15,6 +15,7 @@ import it.unibo.makeanicecream.api.LiquidToppingType;
 import it.unibo.makeanicecream.api.Order;
 import it.unibo.makeanicecream.api.SolidToppingType;
 import it.unibo.makeanicecream.model.OrderBuilder;
+import it.unibo.makeanicecream.model.ingredient.IngredientType;
 import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
 import it.unibo.makeanicecream.model.ingredient.Scoop;
 import it.unibo.makeanicecream.model.ingredient.SolidTopping;
@@ -133,8 +134,8 @@ public class CustomerFactory {
         for (int i = 0; i < template.getToppingCount(); i++) {
             builder.addTopping(getRandomTopping());
         }
-
-        return builder.build();
+        }
+     return builder.build();
     }
 
     /**
