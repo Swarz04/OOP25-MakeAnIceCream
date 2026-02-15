@@ -63,8 +63,7 @@ In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il
 
 \section{Architettura}
 
-L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura \Cref{img:UML_mvc} è riportato il diagramma UML architetturale.
-
+L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura \Cref{img:UML_mvc} è riportato il diagramma UML architetturale. \\
 L’architettura MVC/ECB del gioco è inoltre supportata da GameCore, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite GameLoop, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
 
 \begin{figure}[H]
@@ -77,130 +76,146 @@ L’architettura MVC/ECB del gioco è inoltre supportata da GameCore, che inizia
 \section{Design dettagliato}
 
 \subsection{Sophy Mercuri}
-Questa sezione descrive il design relativo definendo le principali responsabilità e interazioni riguardanti la gestione dei clienti (customer), degli ordini (order) e del timer che gestisce i tempi di attesa dei clienti (CustomerTimer).
+\subsubsection{Design- Costumer / Ordini / Timer}
+Questa sezione descrive il design relativo definendo le principali responsabilità e interazioni riguardanti la gestione dei clienti(customer), degli ordini (order) e del timer che gestisce i  tempi di attesa dei clienti (CustomerTimer).
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_Customer.pdf}
-%    \caption{Schema UML relativo a Customer}
+%    \caption{Schema UML di design che illustra le interazioni tra le entità Customer, Order e CostumerTimer e la scelta di pattern principali}
 %    \label{img:UML_Customer}
 %\end{figure}
 
 \subsubsection{Creazione dei clienti che possiedono un ordine}
 \paragraph{Problema}
-Nel gioco ci sono diverse tipologie di clienti. Ogni cliente ha:
+Un ordine (Order) è un oggetto la cui complessità è determinata dalla tipologia del cliente che effettua l’ordine, e può essere composto da :
 \begin{itemize}
-    \item Un nome (scelto casualmente da una lista)
-    \item Una difficoltà specifica per la composizione del gelato (mappata al nome)
-    \item Un ordine da richiedere, generato casualmente ma sensato ai parametri stabiliti
-    \item Un callback da attaccare al timer
+    \item Una lista di gusti (1 elemento min -max 3).
+    \item Un cono (obbligatorio).
+    \item Una lista di topping (0-2 elementi).
+\end{itemize}
+Seguendo le regole di dominio imposte:
+\begin{itemize}
+    \item I gusti devono essere di tipo SCOOP.
+    \item I topping devono essere LIQUID o SOLID.
+    \item Massimo un topping SOLID per ordine (non ci possono essere topping solidi tra gli SCOOP).
+    \item Non si possono aggiungere ingriedenti dopo un topping solido.
+\end{itemize}
+Responsabilità da rispettare:
+\begin{itemize}
+    \item Costruire un ordine e memorizzarlo correttamente rispettando i parametri di dominio.
+    \item Verificare se un gelato composto dal giocatore soddisfa la richiesta del cliente.
 \end{itemize}
 
-\paragraph{Responsabilità da rispettare riguardanti il cliente}
+\paragraph{Soluzione}
+Ho applicato il pattern Factory Method, realizzando una classe \textbf{CustomerFactory} che incapsula tutta la logica di creazione dei clienti. La factory utilizza internamente una classe \textbf{CustomerTemplate} per definire le configurazioni base associate a ogni livello di difficoltà (nomi possibili, numero di gusti, numero di topping). \\
+Il metodo \textbf{createCustomer()} riceve la difficoltà massima del livello e il tempo disponibile, sceglie casualmente una difficoltà specifica per il cliente (uguale o inferiore al massimo), recupera il template corrispondente, genera un ordine casuale rispettando i vincoli del template e restituisce il cliente già configurato con il proprio timer. \\
+La classe \textbf{CustomerTemplate} è un semplice contenitore immutabile che memorizza i dati di configurazione. \\
+L’ordine viene costruito tramite l’\textbf{OrderBuilder} (descritto in \Cref{img:UML_Factory}), che aggiunge il numero corretto di gusti e topping scelti casualmente dalle liste degli ingredienti disponibili. \\
+\textbf{Motivazioni e vantaggi}
 \begin{itemize}
-    \item Avere una difficoltà definita e associata al suo nome
-    \item Disponere di un attributo Order la cui composizione non sia di difficoltà maggiore a quella proporzionata dal livello
-    \item Disponere di un attributo Customer Timer
-    \item Callback configurato che notifica la scadenza del timer del cliente
+    \item Incapsulamento: tutta la complessità legata alla creazione dei clienti è nascosta all’interno della factory. Il controller si limita a invocare createCustomer() senza conoscere i dettagli dei template o la generazione casuale degli ordini.
+    \item Separazione delle responsabilità: la factory si occupa di come creare un cliente, il controller decide quando e con quali parametri.
+    \item Estensibilità: per aggiungere una nuova difficoltà (es. livello 6) è sufficiente inserire un nuovo template nella mappa, senza modificare il codice esistente. Questo rispetta il principio Open/Closed.
+    \item Testabilità: posso scrivere test unitari che verificano che, per ogni livello, i clienti generati abbiano le caratteristiche attese (numero di gusti, numero di topping, nomi validi) senza dover simulare l’intero gioco.
 \end{itemize}
-
-\paragraph{Approccio per la soluzione}
-Usare il pattern ``FACTORY''.
-Perchè? Ci permette incapsulare tutta la logica di creazione dei clienti in un unico punto: \texttt{CustomerFactory}. Essa utilizza internamente una classe \texttt{CustomerTemplate} per definire le configurazioni base delle diverse difficoltà di modo che se in futuro voglio andare ad aggiungere un cliente basato su una nuova difficoltà so dove andare. Separazione delle responsabilità, il controller non deve sapere esattamente come si fabbrica un cliente. Deve solo chiedere che gli venga dato un in base alla difficoltà da lui proporzionata. Testabilità, ci permette di testare la factory indipendentemente dal reso del gioco, verificando che i clienti siano stati generati rispettando sempre le regole.
-
-Cosa accade dentro la factory, una volta ricevuta la difficoltà:
-\begin{enumerate}
-    \item Viene scelto un nome casuale (non mappato a una difficoltà minore)
-    \item Gli viene impostato il tempo limite definito dal livello per la difficoltà passata
-    \item Genera un ordine casuale: Sceglie un cono, sceglie da 1 a ... riceve un parametro di difficoltà (dal livello corrente) e restituisce un cliente con una configurazione completa.
-\end{enumerate}
-Ci permette in modo che se domani voglio aggiungere una nuova difficoltà per il profilo di un cliente nuovo, so esattamente dove andare. Separazione delle responsabilità, perchè il controller non deve sapere come si fa un cliente, ma deve solo chiedere un cliente in base alla difficoltà che proporziona modo che in \texttt{CustomerFactory.createCustomer()} in modo che questo riceva un intero (\texttt{maxDifficulty}) che rappresenti la difficoltà del livello in cui si troverà il cliente, in base a questo si crea un cliente di difficoltà equivalente a quella passata o inferiore. Testabilità.
+\textbf{Alternative considerate}
+\begin{itemize}
+    \item Factory Method classico con sottoclassi: avrebbe richiesto una sottoclasse per ogni difficoltà, aumentando inutilmente il numero di classi e rendendo la configurazione meno flessibile. La soluzione con template oggetto (composition) è più leggera e permette di variare la configurazione anche a runtime.
+\end{itemize}
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_CustomerFactory.pdf}
-%    \caption{Schema UML relativo alla Factory}
+%    \caption{Schema UML che indica la struttura delle classi per la creazione del cliente insieme al utilizzo del pattern Factory.}
 %    \label{img:UML_Factory}
 %\end{figure}
 
-\subsubsection{Gestione degli ordini e validazione del gelato}
+\subsubsection{Gestione degli ordini}
 \paragraph{Problema}
-Un ordine (\texttt{Order}) è un oggetto la cui complessità è determinata da tipologia del cliente che effettua l’ordine può essere composto da:
+Un ordine (Order) è un oggetto la cui complessità è determinata dalla tipologia del cliente che effettua l’ordine, e può essere composto da :
 \begin{itemize}
-    \item Una lista di gusti (1 elemento min - max 3)
-    \item Un cono (obbligatorio)
-    \item Una lista di topping (0-2 elementi)
+    \item Una lista di gusti (1 elemento min -max 3).
+    \item Un cono (obbligatorio).
+    \item Una lista di topping (0-2 elementi).
 \end{itemize}
-
 Seguendo le regole di dominio imposte:
 \begin{itemize}
-    \item I gusti devono essere di tipo SCOOP
-    \item I topping devono essere LIQUID o SOLID
-    \item Massimo un topping SOLID per ordine (non ci possono essere topping solidi tra gli SCOOP)
-    \item Non si possono aggiungere ingredienti dopo un topping solido
+    \item I gusti devono essere di tipo SCOOP.
+    \item I topping devono essere di tipo LIQUID o SOLID.
+    \item Massimo un topping SOLID per ordine (non ci possono essere topping solidi tra gli SCOOP).
+    \item Non si possono aggiungere ingriedenti dopo un topping solido.
 \end{itemize}
+L’ordine deve essere costruito rispettando questi vincoli e, successivamente, deve essere in grado di verificare se un gelato preparato dal giocatore (IceCream) corrisponde esattamente a quanto richiesto.
 
-\paragraph{Responsabilità da rispettare}
-Costruire un ordine e memorizzarlo correttamente rispettando i parametri di dominio. Verificare se un gelato composto dal giocatore soddisfa la richiesta del cliente.
-
-\paragraph{Approccio per la soluzione}
-Usare il pattern ``BUILDER''.
-Perchè? Ci favorisce nel controllo. La classe \texttt{OrderBuilder} si occupa di costruire l’ordine ad ogni passo, controllando a sua volta che tutte le regole siano rispettate, che i tipi siano corretti e che non ci siano null, e preserva l’ordine della sequenza con cui è stato costruito il gelato. Il pattern Builder favorisce la comprensione, poiché le operazioni di stanziamento sono eseguite in sequenza. \texttt{OrderImpl} che implementa l'interfaccia \texttt{Order}, proporziona la rappresentazione dell'ordine in modo immutabile, verifica che i SOLID\_TOPPING non siano maggiori a uno.
-
-La verifica dell’ordine all'interno di \texttt{OrderImpl} la preservazione della sequenza esatta degli ingredienti del Order creato ci permette attraverso il metodo \texttt{isSatisfiedBy()} di confrontare l’\texttt{IceCream} creato dal Player (passato come parametro) e l’\texttt{Order} creato in \texttt{OrderBuilder}. L'esito positivo del confronto comprende che:
+\paragraph{Soluzione}
+Per la costruzione ho applicato il pattern Builder tramite la classe \textbf{OrderBuilder}. Essa fornisce un’interfaccia fluida (fluent interface) che permette di aggiungere ingredienti passo dopo passo, validando ogni aggiunta in tempo reale. Al termine, il metodo build() esegue una validazione finale e restituisce un oggetto \textbf{OrderImpl} immutabile. L’OrderImpl così creato preserva l’esatta sequenza con cui gli ingredienti sono stati aggiunti: prima tutti i gusti (nell’ordine di inserimento), poi i topping (nell’ordine di inserimento). Questa caratteristica è fondamentale per la fase di verifica. \\
+La verifica avviene nel metodo isSatisfiedBy(Icecream iceCream). Dopo aver controllato che il cono corrisponda, il metodo confronta posizione per posizione la lista degli ingredienti dell’ordine (ottenuta concatenando gusti e topping) con la lista degli ingredienti del gelato. Il confronto sfrutta i metodi equals() e hashCode() ridefiniti in Ingredient (a cura di Shuyi Zhang), che consentono di determinare l’uguaglianza logica tra ingredienti (stesso tipo e stesso nome). \\
+\textbf{Motivazioni e vantaggi}
 \begin{itemize}
-    \item Abbiano lo stesso cono
-    \item Abbiano gli stessi gusti, nello stesso ordine
-    \item Abbiano gli stessi topping, nello stesso ordine
+    \item Preservazione dell’ordine: la scelta di mantenere la sequenza esatta di aggiunta non è un dettaglio implementativo, bensì una precisa regola di dominio: un gelato con i gusti invertiti rispetto all’ordine non è accettabile. Il Builder, aggiungendo gli ingredienti nell’ordine in cui vengono invocati i metodi, garantisce automaticamente questa proprietà.
+    \item Validazione integrata: il Builder verifica la correttezza di ogni aggiunta (tipo corretto, non null) e il metodo build() effettua i controlli globali (cono presente, almeno un gusto, al massimo un topping solido). Questo impedisce la creazione di ordini malformati.
+    \item Immutabilità: OrderImpl è immutabile: le liste sono copiate nel costruttore e restituite in sola lettura tramite Collections.unmodifiableList(). Questo previene modifiche accidentali dopo la creazione.
+    \item Semplicità del confronto: grazie alla preservazione dell’ordine e alla corretta implementazione di equals() negli ingredienti, il confronto si riduce a un semplice ciclo posizionale. Non è necessario contare occorrenze o costruire mappe di frequenza.
 \end{itemize}
-Per garantire questo, inizialmente si verifica che il gelato passato non sia di tipo null, che sia uguale il tipo di cono (cone), poi si verifica che le lunghezze di entrambe liste sia uguale e la corrispondenza di ogni flavor e topping, posizione per posizione avvantaggiandosi delle liste di tipo \texttt{Ingredient}: con hashcode ed equal ridefinito logicamente per i topping e i flavor (dallo studente 2) in modo di poter verificare facilmente le liste corrispondente al Order e all'Ice Cream.
+\textbf{Alternative considerate}
+\begin{itemize}
+    \item Costruttore telescopico: avrebbe richiesto molteplici costruttori con combinazioni di parametri, rendendo il codice illeggibile e poco manutenibile.
+\end{itemize}
+\textbf{Nota sull'evoluzione}: Durante i test di integrazione con la GUI è emerso un problema: alcuni ordini generati dalla CustomerFactory presentavano il topping solido in una posizione errata (prima dei topping liquidi). La causa era la generazione casuale dell’ordine, non il Builder o la verifica. Ho corretto il metodo createRandomOrder() riordinando i topping in modo che i liquidi precedano sempre i solidi. Questo intervento, limitato alla factory, dimostra l’efficacia della separazione delle responsabilità: la logica di costruzione (OrderBuilder) e la logica di verifica (OrderImpl) sono rimaste invariate e corrette.
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_Order.pdf}
-%    \caption{Schema UML relativo agli Ordini}
+%    \caption{Schema UML del Pattern Builder per la costruzione degli ordini.}
 %    \label{img:UML_Order}
 %\end{figure}
 
 \subsubsection{Gestione del timer}
-\paragraph{Problema Generale}
-Il gioco richiede che ogni cliente abbia un timer il cui tempo rappresenti il limite di “pazienza” per ricevere il gelato. Al verificarsi lo scadere del tempo il giocatore perde una vita e il cliente non è soddisfatto. Il timer deve:
+\paragraph{Problema}
+Nel gioco ogni cliente ha un timer che rappresenta il limite di tempo entro cui deve essere servito. Se il timer scade, il giocatore perde una vita e il cliente se ne va insoddisfatto. Il timer deve:
 \begin{itemize}
-    \item Contare alla rovescia in modo preciso
-    \item Poter essere messo in pausa e ripreso
-    \item Notificare quando il suo tempo è scaduto
+    \item Contare alla rovescia in modo preciso;
+    \item Poter essere messo in pausa e ripreso;
+    \item Notificare in modo appropriato quando il suo tempo è scaduto.
+\end{itemize}
+A ciò si aggiunge una complessità organizzativa: le decisioni su cosa accade alla scadenza dipendono da moduli sviluppati da altri membri del gruppo. In particolare:
+\begin{itemize}
+    \item Chiara Emina (flusso di gioco) si occupa di avviare, fermare e mettere in pausa il timer;
+    \item Antonio Scharmuller (regole di gioco) definisce le conseguenze della scadenza (togliere una vita, terminare la partita, ecc.).
+\end{itemize}
+Al momento della progettazione del timer non era ancora noto come sarebbe stato gestito l’evento di scadenza, né quali azioni precise sarebbero state eseguite. Serviva quindi una soluzione flessibile, che permettesse di definire il comportamento solo successivamente e in modo indipendente.
+
+\paragraph{Soluzione}
+Ho implementato il timer nella classe \textbf{CustomerTimer} seguendo il principio della separazione tra meccanismo e politica: il timer sa come contare il tempo, ma non sa cosa fare quando scade. Per notificare la scadenza ho utilizzato una callback sotto forma di Runnable, iniettata tramite un metodo setter (setOnExpired()) anziché tramite costruttore. Il timer inizia in stato di pausa; per avviarlo è necessario chiamare start() dopo averlo configurato. Il metodo update(double deltaTime) viene invocato dal game loop a ogni frame: se il timer non è scaduto né in pausa, sottrae il tempo trascorso e, quando raggiunge zero, esegue la callback se presente. \\
+\textbf{Motivazioni e vantaggi}
+\begin{itemize}
+    \item Sviluppo parallelo: non conoscendo inizialmente le azioni da eseguire alla scadenza, ho potuto completare il timer in modo autonomo. I compagni hanno poi deciso il comportamento specifico iniettando la callback desiderata.
+    \item Disaccoppiamento: il timer non dipende da alcuna classe concreta del gioco (controller, livello, ecc.). Dipende solo dall’interfaccia funzionale Runnable, riducendo al minimo l’accoppiamento.
+    \item Flessibilità: la stessa istanza di timer può essere riconfigurata con callback diverse, se necessario (ad esempio per clienti con comportamenti speciali).
+    \item Testabilità: posso testare il timer isolatamente, verificando che la callback venga eseguita al momento giusto, senza dover simulare l’intero gioco.
+\end{itemize}
+\textbf{Pattern utilizzato} \\
+La soluzione rappresenta una variante leggera del pattern Observer, in cui:
+\begin{itemize}
+    \item il soggetto (CustomerTimer) mantiene un riferimento a un osservatore (il Runnable);
+    \item l’osservatore viene registrato tramite il metodo setOnExpired();
+    \item alla scadenza, il soggetto notifica l’osservatore chiamando run().
+\end{itemize}
+Rispetto all’Observer classico (con liste di osservatori e interfacce dedicate), questa versione è volutamente semplificata perché nel nostro dominio ogni timer ha un solo osservatore e la notifica avviene una sola volta.
+\textbf{Alternative considerate}
+\begin{itemize}
+    \item Callback nel costruttore: avrebbe richiesto di conoscere il comportamento già al momento della creazione, impedendo lo sviluppo parallelo e rendendo il timer meno riutilizzabile.
+    \item Observer classico con interfacce Observer/Observable: avrebbe introdotto complessità inutile (gestione di liste, rimozione, notifica multipla) per uno scenario che richiede una sola notifica.
+    \item Ereditarietà con classi specializzate: avrebbe moltiplicato il numero di classi (es. TimerConPerdVita, TimerConGameOver) e reso il sistema poco flessibile a cambiamenti futuri.
 \end{itemize}
 
-\paragraph{Problema organizzativo}
-Coordinare l'implementazione timer alla presa di decisione dagli studenti incaricati:
-\begin{itemize}
-    \item Di gestire il flusso di gioco: studente 4 (avviare, fermare, mettere in pausa)
-    \item Dell’Implementazione delle regole di gioco, specificamente decidere cosa fare allo scadere del timer: studente 3 (togliere una vita, finire la partita, ecc)
-\end{itemize}
-Complicando come si sarebbe gestita la scadenza, lasciando un bisogno di modellare un timer che assumesse successivamente comportamenti specifici davanti a certe situazioni senza basarsi in metodi in costruzioni o soggetti a cambi.
-
-\paragraph{Approccio per la soluzione}
-``CALLBACK'' con setter.
-Si è implementato il timer in modo che sapesse semplicemente contare. Il timer è stato creato con l’incertezza di cosa succede esattamente alla sua terminazione. Sa solo che, allo scadere del tempo, questo dovrà eseguire un comportamento che è stato passato dall’esterno, specificamente con un setter, non nel costruttore. Questo col proposito di favorire il lavoro in parallelo, semplificando l’implementazione e dando l’autonomia ai miei compagni di decidere come proseguere o fare cambiamenti.
-
-\paragraph{Approccio per la soluzione al problema generale}
-``Observer'' (minimale):
-Invece dell'implementazione delle interfaccia Observer e Observable, la lista di observer e i conseguenti metodi per aggiungere o rimuovere un observer della lista, o notificare tutti si è implementato uno minimale con:
-\begin{itemize}
-    \item Zero interfacce (si è usato un Runnable di Java)
-    \item Un solo observer per il timer
-    \item Un solo metodo per impostarlo
-    \item Una notifica che va a uno solo e non una lista
-\end{itemize}
-Perchè? Nel nostro gioco, ogni timer ha esattamente un osservatore. Il cliente ha un timer, e quando quel timer scade deve avvisare il cliente (o il livello, o il controller). Non serve una lista, non serve rimuovere dinamicamente, non serve notificare dieci componenti diversi.
-
-Vantaggi concreti di questa soluzione:
-\begin{itemize}
-    \item \textbf{Testabilità}: Posso testare il timer senza dover creare un controller, un livello, un cliente o una finestra Swing. Creo un timer, gli passo un callback finto che si limita a settare una variabile booleana, simulo il passare del tempo e verifico che il callback venga chiamato. Pulito, veloce, isolato.
-    \item \textbf{Flessibilità}: Lo stesso identico timer può essere usato per diverse parti (Clienti normali, Clienti speciali, Tutorial, Modalità allenamento). Cambia solo il callback, il timer è sempre lo stesso.
-\end{itemize}
-
-
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_Timer.pdf}
+%    \caption{Schema UML della gestione del CustomerTimer con callback:}
+%    \label{img:UML_Timer}
+%\end{figure}
 
 \subsection{Shuyi Zhang}
 \subsubsection{Costruzione del gelato}
@@ -227,7 +242,7 @@ Il builder diventa quindi il punto centrale attraverso cui il sistema costruisce
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth, trim=0 2cm 0 0, clip]{img/UML_IceCreamBuilder.pdf}
+    \includegraphics[width=\textwidth]{img/UML_IceCreamBuilder.png}
     \caption{Schema UML relativo al Builder}
     \label{img:UML_IceCreamBuilder}
 \end{figure}
@@ -243,9 +258,9 @@ Questa scelta migliora l’estendibilità del modello e riduce l’accoppiamento
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Ingredients.pdf}
+    \includegraphics[width=\textwidth]{img/UML_Ingredient.png}
     \caption{Schema UML relativo agli Ingredienti}
-    \label{img:UML_Ingredients}
+    \label{img:UML_Ingredient}
 \end{figure}
 
 \subsubsection{Factory Pattern per la creazione degli ingredienti}
@@ -261,6 +276,13 @@ Il sistema deve supportare diversi tipi di ingredienti (scoop, liquid toppings, 
     \item facilità di estensione (basta modificare un solo punto per aggiungere nuovi ingredienti);
     \item incapsulamento della complessità di creazione.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_IngredientFactory.png}
+    \caption{Schema UML relativo a IngredientFactory}
+    \label{img:UML_IngredientFactory}
+\end{figure}
 
 \subsection{Antonio Scharmuller}
 
@@ -318,60 +340,61 @@ L’uso del factory consente di centralizzare la logica per poi evitare duplicaz
 \end{figure}
 
 \subsection{Chiara Emina}
+
 \subsubsection{Gestione dei comandi utente}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_Command.png}
+    \caption{Rappresentazione UML del pattern Command per la gestione delle azioni dell’utente.}
+    \label{img:UML_Command}
+\end{figure}
+
 \paragraph{Problema}
 Il controller del gioco deve gestire tutte le possibili azioni dell’utente, e il sistema deve permettere di aggiungere nuovi comandi in futuro senza modificare il controller esistente.
 
 \paragraph{Soluzione}
-Il sistema per la gestione dei comandi utilizza il pattern Command, come da Figura … : ogni azione del gioco è rappresentata da un oggetto Command che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello Game, che funge da receiver. Il controller, ovvero GameControllerImpl, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in Figura …, AddIngredientCommand e DeliverCommand mostrano come un comando concreto implementa l’interfaccia Command e interagisce con il modello.
-
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Command.pdf}
-%    \caption{Rappresentazione UML del pattern Command per la gestione delle azioni dell’utente.}
-%    \label{img:UML_Command}
-%\end{figure}
+Il sistema per la gestione dei comandi utilizza il pattern Command, come da \Cref{img:UML_Command} : ogni azione del gioco è rappresentata da un oggetto Command che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello Game, che funge da receiver. Il controller, ovvero GameControllerImpl, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in \Cref{img:UML_Command}, AddIngredientCommand e DeliverCommand mostrano come un comando concreto implementa l’interfaccia Command e interagisce con il modello.
 
 \subsubsection{Gestione degli eventi utente}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Event.pdf}
-%    \caption{Rappresentazione UML di GameAction. L’interfaccia GameAction definisce il tipo di azione dell’utente, GameActionImpl ne fornisce l’implementazione concreta, mentre GameActionType elenca tutti i possibili tipi di azione.}
-%    \label{img:UML_Event}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_Event.png}
+    \caption{Rappresentazione UML di Event. L’interfaccia Event definisce l’evento generato da un’azione dell’utente, EventImpl ne fornisce l’implementazione concreta, mentre EventType elenca tutti i possibili tipi di evento.}
+    \label{img:UML_Event}
+\end{figure}
 
 \paragraph{Problema}
 Il sistema deve rappresentare in modo uniforme gli eventi generati dalle azioni dell’utente sull’interfaccia grafica, per permettere al controller di gestirle correttamente senza conoscere i dettagli interni della view.
 
 \paragraph{Soluzione}
-Ogni evento è rappresentato da un oggetto EventImpl, che implementa l’interfaccia Event e associa l’azione a un valore dell’enumerazione Eventype, come mostrato in Figura …. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
+Ogni evento è rappresentato da un oggetto EventImpl, che implementa l’interfaccia Event e associa l’azione a un valore dell’enumerazione Eventype, come mostrato in \Cref{img:UML_Event}. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
 
 
 \subsubsection{Gestione dello stato del gioco}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_GameState.pdf}
-%    \caption{Rappresentazione UML della gestione dello stato in GameImpl. L’enumerazione GameState definisce i possibili stati del gioco, mentre GameImpl li utilizza per gestire transizioni come avvio, pausa, ripresa e ritorno al menu.}
-%    \label{img:UML_GameState}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_GameState.png}
+    \caption{Rappresentazione UML della gestione dello stato in GameImpl. L’enumerazione GameState definisce i possibili stati del gioco, mentre GameImpl li utilizza per gestire transizioni come avvio, pausa, ripresa e ritorno al menu.}
+    \label{img:UML_GameState}
+\end{figure}
 
 \paragraph{Problema}
 Il sistema deve tenere traccia dello stato corrente del gioco e gestire correttamente transizioni come avvio di un livello, pausa e ripresa, fine livello o game over.
 
 \paragraph{Soluzione}
-Come mostrato in Figura …, GameImpl utilizza l’enumerazione GameState per rappresentare lo stato corrente del gioco. Ogni metodo (start(), pause(), resume(), returnToMenu()) modifica lo stato in modo appropriato, mentre update() verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
+Come mostrato in \Cref{img:UML_GameState}, GameImpl utilizza l’enumerazione GameState per rappresentare lo stato corrente del gioco. Ogni metodo (start(), pause(), resume(), returnToMenu()) modifica lo stato in modo appropriato, mentre update() verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
 
 \subsubsection{Core di gioco}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_GameEngine.pdf}
-%    \caption{Schema UML relativo al GameEngine.}
-%    \label{img:UML_GameEngine}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_GameCore.png}
+    \caption{Rappresentazione UML del flusso di esecuzione del gioco, dove GameCore inizializza e coordina GameImpl e GameControllerImpl, mentre GameLoop gestisce il ciclo principale di aggiornamento.}
+    \label{img:UML_GameCore}
+\end{figure}
 
 \paragraph{Problema}
 Il gioco deve aggiornare periodicamente lo stato del modello e notificare la view, senza mescolare logica di esecuzione e gestione degli eventi.
