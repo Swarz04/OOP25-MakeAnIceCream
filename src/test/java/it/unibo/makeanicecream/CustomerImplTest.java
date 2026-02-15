@@ -2,11 +2,18 @@ package it.unibo.makeanicecream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import java.util.function.Consumer;
 
-import it.unibo.makeanicecream.api.*;
+import it.unibo.makeanicecream.api.Order;
+import it.unibo.makeanicecream.api.Timer;
+import it.unibo.makeanicecream.api.Icecream;
 import it.unibo.makeanicecream.model.customermodel.CustomerImpl;
 
 /**
@@ -14,13 +21,13 @@ import it.unibo.makeanicecream.model.customermodel.CustomerImpl;
  * Verifies correct customer behavior.
  * which includes constructor , getters, ice cream reception and callbacks.
  */
-public class CustomerImplTest {
-    
+class CustomerImplTest {
+    private static final String CUSTOMER_NAME = "TestCustomer";
+    private static final int DIFFICULTY = 3;
+    private static final int MAX_DIFFICULTY = 6;
     private CustomerImpl customer;
     private Order mockOrder;
     private Timer mockTimer;
-    private static final String CUSTOMER_NAME = "TestCustomer";
-    private static final int DIFFICULTY = 3;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +54,7 @@ public class CustomerImplTest {
         assertThrows(IllegalArgumentException.class,
             () -> new CustomerImpl(CUSTOMER_NAME, mockOrder, mockTimer, 0));
         assertThrows(IllegalArgumentException.class,
-            () -> new CustomerImpl(CUSTOMER_NAME, mockOrder, mockTimer, 6));
+            () -> new CustomerImpl(CUSTOMER_NAME, mockOrder, mockTimer, MAX_DIFFICULTY));
     }
 
     /**
@@ -78,7 +85,7 @@ public class CustomerImplTest {
      */
     @Test
     void testReceiveIceCream() {
-        Icecream mockIceCream = mock(Icecream.class);
+        final Icecream mockIceCream = mock(Icecream.class);
         when(mockOrder.isSatisfiedBy(mockIceCream)).thenReturn(true);
 
         assertTrue(customer.receiveIceCream(mockIceCream));
@@ -93,10 +100,10 @@ public class CustomerImplTest {
     @Test
     void testOrderResultCallback() {
         @SuppressWarnings("unchecked")
-        Consumer<Boolean> mockCallback = mock(Consumer.class);
+        final Consumer<Boolean> mockCallback = mock(Consumer.class);
         customer.setOrderResultCallback(mockCallback);
 
-        Icecream mockIceCream = mock(Icecream.class);
+        final Icecream mockIceCream = mock(Icecream.class);
         when(mockOrder.isSatisfiedBy(mockIceCream)).thenReturn(true);
 
         customer.receiveIceCream(mockIceCream);

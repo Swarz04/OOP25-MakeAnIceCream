@@ -1,12 +1,19 @@
 package it.unibo.makeanicecream;
+
 import it.unibo.makeanicecream.model.customermodel.CustomerTimer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mock;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test for the CustomerTimer class.
@@ -15,27 +22,34 @@ import static org.mockito.Mockito.*;
  */
 @ExtendWith(MockitoExtension.class)
 class CustomerTimerTest {
+    private static final int NEGATIVE_TIME = -10;
+    private static final double INITIAL_TIME = 60.0;
+    private static final double DELTA = 0.001;
+    private static final double TIME_5 = 5.0;
+    private static final double TIME_15 = 15.0;
+    private static final double TIME_20 = 20.0;
+    private static final double TIME_25 = 25.0;
+    private static final double TIME_30 = 30.0;
+    private static final double TIME_50 = 50.0;
 
     @Mock
     private Runnable mockCallback;
-    
     private CustomerTimer timer;
-    private static final double INITIAL_TIME = 60.0;
 
     @BeforeEach
     void setUp() {
         timer = new CustomerTimer(INITIAL_TIME);
     }
-    
+
     /**
      * Test that the constructor throws exceptions for non positive values.
      */
     @Test
-    void testConstructorValidation(){
+    void testConstructorValidation() {
         assertThrows(IllegalArgumentException.class,
         () -> new CustomerTimer(0));
         assertThrows(IllegalArgumentException.class,
-        () -> new CustomerTimer(-10));
+        () -> new CustomerTimer(NEGATIVE_TIME));
     }
 
     /**
@@ -46,7 +60,7 @@ class CustomerTimerTest {
     void testInitialState() {
         assertTrue(timer.isPaused());
         assertFalse(timer.isExpired());
-        assertEquals(INITIAL_TIME, timer.getTimeLeft(), 0.001);
+        assertEquals(INITIAL_TIME, timer.getTimeLeft(), DELTA);
     }
 
     /**
@@ -66,7 +80,7 @@ class CustomerTimerTest {
     void testUpdateWhenStarted() {
         timer.start();
         timer.update(10.0);
-        assertEquals(INITIAL_TIME -10.0, timer.getTimeLeft(), 0.001);
+        assertEquals(INITIAL_TIME - 10.0, timer.getTimeLeft(), DELTA);
         assertFalse(timer.isExpired());
     }
 
@@ -77,14 +91,14 @@ class CustomerTimerTest {
     void testPauseResume() {
         timer.start();
         timer.update(10.0);
-        
+
         timer.pause();
         timer.update(10.0);
-        assertEquals(INITIAL_TIME - 10.0, timer.getTimeLeft(), 0.001);
+        assertEquals(INITIAL_TIME - 10.0, timer.getTimeLeft(), DELTA);
 
         timer.resume();
-        timer.update(5.0);
-        assertEquals(INITIAL_TIME - 15.0, timer.getTimeLeft(), 0.001);
+        timer.update(TIME_5);
+        assertEquals(INITIAL_TIME - TIME_15, timer.getTimeLeft(), DELTA);
     }
 
     /**
@@ -96,11 +110,11 @@ class CustomerTimerTest {
         timer.update(INITIAL_TIME + 10.0);
 
         assertTrue(timer.isExpired());
-        assertEquals(0, timer.getTimeLeft(), 0.001);
+        assertEquals(0, timer.getTimeLeft(), DELTA);
 
         timer.update(10.0);
         assertTrue(timer.isExpired());
-        assertEquals(0, timer.getTimeLeft(), 0.001);
+        assertEquals(0, timer.getTimeLeft(), DELTA);
     }
 
     /**
@@ -108,18 +122,18 @@ class CustomerTimerTest {
      */
     @Test
     void testExpirationCallback() {
-        Runnable mockCallback = mock(Runnable.class);
-        timer.setOnExpired(mockCallback);
+        final Runnable callbackMock = mock(Runnable.class);
+        timer.setOnExpired(callbackMock);
 
         timer.start();
         timer.update(INITIAL_TIME - 1);
-        verify(mockCallback, never()).run();
+        verify(callbackMock, never()).run();
 
         timer.update(2);
-        verify(mockCallback, times(1)).run();
+        verify(callbackMock, times(1)).run();
 
         timer.update(1);
-        verify(mockCallback, times(1)).run();
+        verify(callbackMock, times(1)).run();
     }
 
     /**
@@ -130,16 +144,16 @@ class CustomerTimerTest {
         timer.start();
 
         timer.update(10.0);
-        assertEquals(50.0, timer.getTimeLeft(), 0.001);
+        assertEquals(TIME_50, timer.getTimeLeft(), DELTA);
 
-        timer.update(20.0);
-        assertEquals(30.0, timer.getTimeLeft(), 0.001);
+        timer.update(TIME_20);
+        assertEquals(TIME_30, timer.getTimeLeft(), DELTA);
 
-        timer.update(25.00);
-        assertEquals(5.0, timer.getTimeLeft(), 0.001);
+        timer.update(TIME_25);
+        assertEquals(TIME_5, timer.getTimeLeft(), DELTA);
 
         timer.update(10.0);
         assertTrue(timer.isExpired());
-        assertEquals(0, timer.getTimeLeft(), 0.001);
+        assertEquals(0, timer.getTimeLeft(), DELTA);
     }
 }

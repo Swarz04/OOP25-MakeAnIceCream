@@ -1,16 +1,26 @@
 package it.unibo.makeanicecream;
 
-
 import it.unibo.makeanicecream.model.customermodel.CustomerTemplate;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test for the CustomerTemplate class.
  * Verifies the correct tempalte creation and name cycling behavior
  */
-public class CustomerTemplateTest {
-    
+class CustomerTemplateTest {
+
+    private static final String TEST1 = "Test1";
+    private static final String TEST2 = "Test2";
+    private static final String MARIO = "Mario";
+    private static final String MARIA = "Maria";
+    private static final String PAOLO = "Paolo";
+
     /**
      * Verifies that the constructor throws exceptions
      * for invalid parameters.
@@ -22,52 +32,52 @@ public class CustomerTemplateTest {
         assertThrows(IllegalArgumentException.class,
             () -> new CustomerTemplate(new String[]{}, 2, 1));
         assertThrows(IllegalArgumentException.class,
-            () -> new CustomerTemplate(new String[]{"Test"}, 0,1));
+            () -> new CustomerTemplate(new String[]{TEST1}, 0, 1));
         assertThrows(IllegalArgumentException.class,
-            () -> new CustomerTemplate(new String[]{"Test"}, -1, 1));
+            () -> new CustomerTemplate(new String[]{TEST1}, -1, 1));
         assertThrows(IllegalArgumentException.class,
-            () -> new CustomerTemplate(new String[]{"Test"}, 2, -1));
+            () -> new CustomerTemplate(new String[]{TEST1}, 2, -1));
     }
-    
+
     /**
      * Verifies that a template with a single name.
      * always returns the same name.
      */
     @Test
     void testSingleNameTemplate() {
-        String[] names = {"Mario"};
-        CustomerTemplate template = new CustomerTemplate(names, 2, 1);
+        final String[] names = {MARIO};
+        final CustomerTemplate template = new CustomerTemplate(names, 2, 1);
 
-        assertEquals("Mario", template.getNextName());
-        assertEquals("Mario", template.getNextName());
+        assertEquals(MARIO, template.getNextName());
+        assertEquals(MARIO, template.getNextName());
         assertEquals(2, template.getScoopCount());
         assertEquals(1, template.getToppingCount());
     }
-    
+
     /**
      * Verifies alternating behavior between two names.
      */
     @Test
-    void testTwoNamesTemplate(){
-        String[] names = {"Maria", "Paolo"};
-        CustomerTemplate template = new CustomerTemplate(names, 1 ,0);
+    void testTwoNamesTemplate() {
+        final String[] names = {MARIA, PAOLO};
+        final CustomerTemplate template = new CustomerTemplate(names, 1, 0);
 
-        assertEquals("Maria", template.getNextName());
-        assertEquals("Paolo", template.getNextName());
-        assertEquals("Maria", template.getNextName());
-        assertEquals("Paolo", template.getNextName());
+        assertEquals(MARIA, template.getNextName());
+        assertEquals(PAOLO, template.getNextName());
+        assertEquals(MARIA, template.getNextName());
+        assertEquals(PAOLO, template.getNextName());
     }
-    
+
     /**
      * Verifies that getPossiblesNames return a copy.
      * Instead of the original.
      */
     @Test
     void testGetPossiblesNames() {
-        String[] original = {"Test1", "Test2"};
-        CustomerTemplate template = new CustomerTemplate(original, 2, 1);
+        final String[] original = {TEST1, TEST2};
+        final CustomerTemplate template = new CustomerTemplate(original, 2, 1);
 
-        String[] copy = template.getPossibleNames();
+        final String[] copy = template.getPossibleNames();
         assertNotSame(original, copy);
         assertArrayEquals(original, copy);
 
@@ -80,13 +90,11 @@ public class CustomerTemplateTest {
      */
     @Test
     void testToString() {
-        CustomerTemplate template = new CustomerTemplate(
-            new String[]{"Test1", "Test2"}, 3, 2);
-        
-        String toString = template.toString();
+        final CustomerTemplate template = new CustomerTemplate(new String[]{TEST1, TEST2}, 3, 2); 
+        final String toString = template.toString();
         assertTrue(toString.contains("scoops=3"));
         assertTrue(toString.contains("toppings=2"));
-        assertTrue(toString.contains("Test1"));
-        assertTrue(toString.contains("Test2"));
+        assertTrue(toString.contains(TEST1));
+        assertTrue(toString.contains(TEST2));
     }
 }

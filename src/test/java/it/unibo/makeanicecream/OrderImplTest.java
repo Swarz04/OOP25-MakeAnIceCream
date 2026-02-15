@@ -21,14 +21,16 @@ import it.unibo.makeanicecream.api.LiquidToppingType;
 import it.unibo.makeanicecream.api.SolidToppingType;
 import it.unibo.makeanicecream.model.IceCreamImpl;
 import it.unibo.makeanicecream.model.customermodel.OrderImpl;
-import it.unibo.makeanicecream.model.ingredient.*;
+import it.unibo.makeanicecream.model.ingredient.Scoop;
+import it.unibo.makeanicecream.model.ingredient.SolidTopping;
+import it.unibo.makeanicecream.model.ingredient.LiquidTopping;
 
 /**
  * Test per la classe OrderImpl.
  * Verifica la corretta costruzione degli ordini.
  * Verifica la validazione degli argomenti e il metodo isSatisfiedBy.
  */
-public class OrderImplTest {
+class OrderImplTest {
     private Ingredient vanillaScoop;
     private Ingredient chocolateScoop;
     private Ingredient liquidChocolate;
@@ -68,29 +70,28 @@ public class OrderImplTest {
         assertThrows(IllegalArgumentException.class,
             () -> new OrderImpl(List.of(vanillaScoop), classicCone, List.of(solidCherry, solidCookies))); 
     }
-    
+
     /**
      * Tests the creation of a minimal order that is valid.
      */
     @Test
     void testValidMinimalOrder() {
-        Order order = new OrderImpl(List.of(vanillaScoop), classicCone, null);
-        
+        final Order order = new OrderImpl(List.of(vanillaScoop), classicCone, null);
         assertEquals(1, order.getFlavors().size());
         assertEquals(vanillaScoop, order.getFlavors().get(0));
         assertEquals(classicCone, order.getRequestedConeType());
         assertTrue(order.getToppings().isEmpty());
     }
-    
+
     /**
      * Tests the creation of a complex order with multiple flavors and toppings.
      */
     @Test
     void testValidComplexOrder() {
-        List <Ingredient> flavors = List.of(vanillaScoop, chocolateScoop);
-        List <Ingredient> toppings = List.of(liquidChocolate, solidCherry);
+        final List<Ingredient> flavors = List.of(vanillaScoop, chocolateScoop);
+        final List<Ingredient> toppings = List.of(liquidChocolate, solidCherry);
 
-        Order order = new OrderImpl(flavors, flowerCone, toppings);
+        final Order order = new OrderImpl(flavors, flowerCone, toppings);
 
         assertEquals(2, order.getFlavors().size());
         assertEquals(vanillaScoop, order.getFlavors().get(0));
@@ -105,12 +106,10 @@ public class OrderImplTest {
      * Test that returned lists are unmodifiable. 
      */
     @Test
-    void testUnmodifiableLists(){
-      Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));  
-      assertThrows(UnsupportedOperationException.class,
-        () -> order.getFlavors().add(chocolateScoop));
-      assertThrows(UnsupportedOperationException.class,
-        () -> order.getToppings().add(solidCherry));
+    void testUnmodifiableLists() {
+        final Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));
+        assertThrows(UnsupportedOperationException.class, () -> order.getFlavors().add(chocolateScoop));
+        assertThrows(UnsupportedOperationException.class, () -> order.getToppings().add(solidCherry));
     }
 
     /**
@@ -118,9 +117,9 @@ public class OrderImplTest {
      */
     @Test
     void testIsSatisfiedByMatchingIceCream() {
-        Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));
-        List<Ingredient> iceCreamIngredients = Arrays.asList(vanillaScoop, liquidChocolate);
-        Icecream matchingIcecream = new IceCreamImpl(classicCone, iceCreamIngredients, false);
+        final Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));
+        final List<Ingredient> iceCreamIngredients = Arrays.asList(vanillaScoop, liquidChocolate);
+        final Icecream matchingIcecream = new IceCreamImpl(classicCone, iceCreamIngredients, false);
 
         assertTrue(order.isSatisfiedBy(matchingIcecream));
     }
@@ -129,11 +128,10 @@ public class OrderImplTest {
      * Test that an ice cream with different cone is rejected.
      */
     @Test
-    void testIsSatisfiedByWrongCone(){
-        Order order = new OrderImpl(List.of(vanillaScoop), classicCone, new ArrayList<>());
-        List<Ingredient> ingredients = List.of(vanillaScoop);
-        Icecream wrongConeIcecream = new IceCreamImpl(flowerCone, ingredients, false);
-        
+    void testIsSatisfiedByWrongCone() {
+        final Order order = new OrderImpl(List.of(vanillaScoop), classicCone, new ArrayList<>());
+        final List<Ingredient> ingredients = List.of(vanillaScoop);
+        final Icecream wrongConeIcecream = new IceCreamImpl(flowerCone, ingredients, false);
         assertFalse(order.isSatisfiedBy(wrongConeIcecream));
     }
 
@@ -142,15 +140,12 @@ public class OrderImplTest {
      */
     @Test
     void testIsSatisfiedByWrongIngredientCount() {
-        Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop),
-        classicCone, List.of(liquidChocolate));
-        
-        List <Ingredient> tooFew = List.of(vanillaScoop, liquidChocolate);
-        Icecream tooFewIceCream = new IceCreamImpl(classicCone, tooFew, false);
+        final Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop), classicCone, List.of(liquidChocolate));
+        final List<Ingredient> tooFew = List.of(vanillaScoop, liquidChocolate);
+        final Icecream tooFewIceCream = new IceCreamImpl(classicCone, tooFew, false);
         assertFalse(order.isSatisfiedBy(tooFewIceCream));
-        
-        List <Ingredient> tooMany = List.of(vanillaScoop, chocolateScoop, liquidChocolate, solidCherry);
-        Icecream tooManyIceCream = new IceCreamImpl(classicCone, tooMany, true);
+        final List<Ingredient> tooMany = List.of(vanillaScoop, chocolateScoop, liquidChocolate, solidCherry);
+        final Icecream tooManyIceCream = new IceCreamImpl(classicCone, tooMany, true);
         assertFalse(order.isSatisfiedBy(tooManyIceCream));
     }
 
@@ -159,24 +154,24 @@ public class OrderImplTest {
      */
     @Test
     void testIsSatisfiedByWrongOrder() {
-        Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop),
-        classicCone, List.of(liquidChocolate));
-        
-        List<Ingredient> wrongOrder = List.of(chocolateScoop, vanillaScoop, liquidChocolate);
-        Icecream wrongOrderIcecream = new IceCreamImpl(classicCone, wrongOrder, false);
+        final Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop), classicCone, List.of(liquidChocolate));
+        final List<Ingredient> wrongOrder = List.of(chocolateScoop, vanillaScoop, liquidChocolate);
+        final Icecream wrongOrderIcecream = new IceCreamImpl(classicCone, wrongOrder, false);
         assertFalse(order.isSatisfiedBy(wrongOrderIcecream));
     }
-    
+
     /**
      * Test that the order of toppings matters.
      */
     @Test
     void testIsSatisfiedByToppingsWrongOrder() {
-        Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop),
-        classicCone, List.of(liquidChocolate, solidCherry));
-        
-        List<Ingredient> wrongOrder = Arrays.asList(vanillaScoop, solidCherry, liquidChocolate);
-        Icecream wrongOrderIcecream = new IceCreamImpl(classicCone, wrongOrder, true);
+        final Order order = new OrderImpl(
+            List.of(vanillaScoop, chocolateScoop), 
+            classicCone, 
+            List.of(liquidChocolate, solidCherry));
+
+        final List<Ingredient> wrongOrder = Arrays.asList(vanillaScoop, solidCherry, liquidChocolate);
+        final Icecream wrongOrderIcecream = new IceCreamImpl(classicCone, wrongOrder, true);
         assertFalse(order.isSatisfiedBy(wrongOrderIcecream));
     }
 
@@ -185,12 +180,13 @@ public class OrderImplTest {
      */
     @Test
     void testAllLiquidToppings() {
-        Order order = new OrderImpl(List.of(vanillaScoop, chocolateScoop),
-        classicCone, List.of(liquidChocolate, liquidStrawberry));
-        
-        List<Ingredient> ingredients = Arrays.asList(vanillaScoop,chocolateScoop, liquidChocolate, liquidStrawberry);
-        Icecream iceCream = new IceCreamImpl(classicCone, ingredients, false);
-        
+        final Order order = new OrderImpl(
+            List.of(vanillaScoop, chocolateScoop), 
+            classicCone, 
+            List.of(liquidChocolate, liquidStrawberry));
+
+        final List<Ingredient> ingredients = Arrays.asList(vanillaScoop, chocolateScoop, liquidChocolate, liquidStrawberry);
+        final Icecream iceCream = new IceCreamImpl(classicCone, ingredients, false);
         assertTrue(order.isSatisfiedBy(iceCream));
     }
 
@@ -200,10 +196,10 @@ public class OrderImplTest {
      */
     @Test
     void testToString() {
-        Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));
-        String toString = order.toString();
+        final Order order = new OrderImpl(List.of(vanillaScoop), classicCone, List.of(liquidChocolate));
+        final String toString = order.toString();
         assertTrue(toString.contains("VANILLA"));
         assertTrue(toString.contains("CLASSIC"));
         assertTrue(toString.contains("CHOCOLATE_SYRUP"));
     }
-}   
+}
