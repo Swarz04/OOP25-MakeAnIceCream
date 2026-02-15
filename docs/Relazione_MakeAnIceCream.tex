@@ -551,8 +551,14 @@ Il mio ruolo è consistito nello sviluppo della logica di costruzione del gelato
     Le principali debolezze riguardano invece la flessibilità del sistema. La presenza di variabili statiche (come MAX\_SCOOPS) rende il codice rigido e poco adattabile a contesti diversi, come livelli di gioco con regole differenti che potremmo avere in lavori futuri. Inoltre, la logica del Builder risulta ancora troppo accoppiata a dettagli specifici del gioco, invece di dipendere da astrazioni che renderebbero il sistema più modulare e facilmente modificabile. Questo significa che, se in futuro venissero richieste nuove funzionalità o variazioni delle regole, dovrei ricontrollare e modificare la logica del Builder per verificare che sia ancora conforme ai requisiti.
 \end{itemize}
 
-
 \subsection{Antonio Scharmuller}
+In questo progetto mi sono occupato della modellazione dell’entità giocatore e della gestione strutturale dei livelli di gioco. In particolare la classe Player che funge da interfaccia logica per le azioni dell’utente.
+\begin{itemize}
+    \item \textbf{Punti di forza}
+    Un punto di forza del mio lavoro è che le responsabilità tra l’azione del giocatore e le regole del livello vengono separate. Il Player agisce come un esecutore, ignorando le conseguenze delle sue azioni (vittoria o sconfitta), che sono invece gestite interamente dal Level in base alla risposta degli esiti di controllo ordine. Un altro aspetto positivo è l’utilizzo del pattern Factory per i livelli, che consente l’aggiunta futura di nuove tipologie di livelli senza dover modificare la logica di inizializzazione nel controller.
+    \item \textbf{Punti di debolezza}
+    Una possibile debolezza risiede nella rigidità della struttura attuale dei livelli (StandardLevel), che prevede sempre la stessa meccanica di base (vite e sequenza di clienti). In futuro, si potrebbe estendere il sistema introducendo modalità di gioco alternative. Inoltre, l’entità Player è attualmente molto sottile e priva di stato persistente; in sviluppi futuri potrebbe essere arricchita con tipo delle statistiche come punteggi aggiuntivi e monete guadagnate.
+\end{itemize}
 
 \subsection{Chiara Emina}
 In questo progetto mi sono occupata della gestione degli stati della partita, del flusso del gioco e dell’integrazione tra i modelli. In particolare, ho sviluppato Game, la classe principale del model che interagisce con il controller e che gestisce la logica principale del gioco. Poi ho implementato il controller garantendo l’integrazione tra model e view e il corretto flusso di esecuzione del gioco attraverso la gestione degli eventi e dei comandi. Ho curato l’aggiornamento della view in base agli eventi del gioco, mostrando informazioni sul cliente corrente, timer, vite e ordini. Inoltre ho implementato il game loop che gestisce il ciclo principale di aggiornamento del gioco.
