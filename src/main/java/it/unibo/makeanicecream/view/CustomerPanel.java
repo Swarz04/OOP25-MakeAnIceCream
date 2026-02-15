@@ -29,12 +29,12 @@ public final class CustomerPanel extends JPanel {
      * If a customer's name is not found in this map, a default image will be used.
      */
     private static final Map<String, String> NAME_TO_IMAGE = Map.of(
-        "Maria", "cliente1.png",
+        "Maria", DEFAULT_CUSTOMER_IMAGE,
         "Paolo", "cliente2.png",
         "Giulia", "cliente3.png",
         "Giorgio", "cliente4.png",
-        "Lucia", "cliente5.png",
-        "Mario", DEFAULT_CUSTOMER_IMAGE
+        "Lucia", "cliente6.png",
+        "Mario", "cliente5.png"
     );
 
     private final JLabel customerImageLabel;
