@@ -28,12 +28,8 @@
 
 \section{Descrizione e requisiti}
 
-Il software oggetto di questo progetto è un videogioco intitolato Make an Ice Cream. L'obiettivo dell’applicazione è quello di offrire un’esperienza di gioco, in cui l’utente assume il ruolo di un gelatiere che deve soddisfare gli ordini di una serie di clienti entro dei vincoli temporali prestabiliti.
+Il software oggetto di questo progetto è un videogioco intitolato 'Make an Ice Cream'. L'obiettivo dell’applicazione è quello di offrire un’esperienza di gioco, in cui l’utente assume il ruolo di un gelatiere che deve soddisfare gli ordini di una serie di clienti entro dei vincoli temporali prestabiliti. Durante lo svolgimento del gioco, all’utente vengono presentati diversi clienti in modo sequenziale, uno alla volta, e ognuno è caratterizzato da un ordine specifico e da un timer. L’ordine di un cliente descrive la composizione del gelato desiderato, e il timer specifica il tempo limite entro il quale l’ordine deve essere completato. Al giocatore vengono inoltre forniti, su un bancone, una serie di ingredienti quali gusti di gelato, tipi di cono e topping. Il compito del giocatore è quello di selezionare gli ingredienti appropriati e comporre il gelato in modo conforme all’ordine, per poi consegnarlo al cliente. Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei livelli aumentano la complessità degli ordini e il numero complessivo di clienti, e diminuisce il tempo limite di ciascun cliente. Inoltre, il sistema prevede un numero limitato di vite pari a tre per ciascun livello. Una vita viene persa nel caso in cui il giocatore consegni un gelato non conforme all’ordine richiesto, oppure quando il tempo a disposizione per un cliente scade senza che la consegna dell’ordine venga completata. Al termine delle vite disponibili, la partita si conclude con uno stato di game over. Se il giocatore riesce a servire tutti i clienti del livello senza perdere tutte le vite, la partita termina con uno stato di livello completato.
 
-Durante lo svolgimento del gioco, all’utente vengono presentati diversi clienti in modo sequenziale, uno alla volta, e ognuno è caratterizzato da un ordine specifico e da un timer. L’ordine di un cliente descrive la composizione del gelato desiderato, e il timer specifica il tempo limite entro il quale l’ordine deve essere completato.
-Al giocatore vengono inoltre forniti, su un bancone, una serie di ingredienti quali gusti di gelato, tipi di cono e topping. Il compito del giocatore è quello di selezionare gli ingredienti appropriati e comporre il gelato in modo conforme all’ordine, per poi consegnarlo al cliente.
-
-Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei livelli aumentano la complessità degli ordini e il numero complessivo di clienti, e diminuisce il tempo limite di ciascun cliente. Inoltre, il sistema prevede un numero limitato di vite pari a tre per ciascun livello. Una vita viene persa nel caso in cui il giocatore consegni un gelato non conforme all’ordine richiesto, oppure quando il tempo a disposizione per un cliente scade senza che la consegna dell’ordine venga completata. Al termine delle vite disponibili, la partita si conclude con uno stato di game over.
 
 \subsection*{Requisiti funzionali}
 \begin{itemize}
@@ -54,12 +50,8 @@ Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei
 \end{itemize}
 
 \section{Modello del Dominio}
-In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna.
-
-Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato.
-
-Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over.
-Gli elementi costitutivi del problema sono sintetizzati in \Cref{img:UML_Generale}.
+In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna. Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato. Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over. Quando tutti i clienti del livello vengono serviti, senza perdere le vite disponibili, il gioco termina con un stato di livello completato. Gli elementi costitutivi del problema sono sintetizzati in Figura 1.1.
+\Cref{img:UML_Generale}.
 
 
 %\begin{figure}[H]
@@ -73,17 +65,10 @@ Gli elementi costitutivi del problema sono sintetizzati in \Cref{img:UML_General
 
 \section{Architettura}
 
-L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione ``ECB''. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity).
+L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura 2.1 è riportato il diagramma UML architetturale.
 
-L'interfaccia \texttt{GameView} rappresenta la view dell’architettura MVC e il ``boundary'' di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi.
+L’architettura MVC/ECB del gioco è inoltre supportata da GameCore, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite GameLoop, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
 
-Il controller è rappresentato dall’interfaccia \texttt{GameController}, che si occupa del coordinamento tra le interfacce \texttt{GameView} e \texttt{Game}, cioè view e model. \texttt{GameController} elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a \texttt{GameView} le modifiche da visualizzare.
-
-Infine, il model è rappresentato dall’interfaccia \texttt{Game}, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema.
-
-L’architettura MVC/ECB del gioco è inoltre supportata dal \texttt{GameEngine}, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite \texttt{GameLoop}, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
-
-Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In \Cref{img:Architecture} è riportato il diagramma UML architetturale.
 
 
 %\begin{figure}[H]
@@ -96,7 +81,7 @@ Con questa architettura, la view risulta disaccoppiata da controller e model, e 
 
 \section{Design dettagliato}
 
-\subsection{Gestione Customer, Ordini e Timer (Studente 1)}
+\subsection{Sophy Mercuri}
 Questa sezione descrive il design relativo definendo le principali responsabilità e interazioni riguardanti la gestione dei clienti (customer), degli ordini (order) e del timer che gestisce i tempi di attesa dei clienti (CustomerTimer).
 
 %\begin{figure}[H]
@@ -222,7 +207,7 @@ Vantaggi concreti di questa soluzione:
 
 
 
-\subsection{Costruzione del Gelato (Studente 2)}
+\subsection{Shuyi Zhang}
 \subsubsection{Costruzione del gelato}
 \paragraph{Problema}
 Il sistema deve creare e gestire istanze di gelato in due situazioni diverse:
@@ -338,13 +323,14 @@ L’uso del factory consente di centralizzare la logica per poi evitare duplicaz
     \label{img:UML_Level}
 \end{figure}
 
-\subsection{Gestione Comandi e Stato (Studente 4)}
+\subsection{Chiara Emina}
 \subsubsection{Gestione dei comandi utente}
 \paragraph{Problema}
 Il controller del gioco deve gestire tutte le possibili azioni dell’utente, e il sistema deve permettere di aggiungere nuovi comandi in futuro senza modificare il controller esistente.
 
 \paragraph{Soluzione}
-Il sistema per la gestione dei comandi utilizza il pattern Command, come da \Cref{img:UML_Command}: ogni azione dell’utente è rappresentata da un oggetto \texttt{Command} che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello \texttt{Game}, che funge da receiver. Il controller, ovvero \texttt{GameControllerImpl}, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in \Cref{img:UML_Command}, \texttt{AddIngredientCommand} e \texttt{DeliverCommand} mostrano come un comando concreto implementa l’interfaccia \texttt{Command} e interagisce con il modello.
+Il sistema per la gestione dei comandi utilizza il pattern Command, come da Figura … : ogni azione del gioco è rappresentata da un oggetto Command che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello Game, che funge da receiver. Il controller, ovvero GameControllerImpl, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in Figura …, AddIngredientCommand e DeliverCommand mostrano come un comando concreto implementa l’interfaccia Command e interagisce con il modello.
+
 
 %\begin{figure}[H]
 %    \centering
@@ -366,7 +352,8 @@ Il sistema per la gestione dei comandi utilizza il pattern Command, come da \Cre
 Il sistema deve rappresentare in modo uniforme gli eventi generati dalle azioni dell’utente sull’interfaccia grafica, per permettere al controller di gestirle correttamente senza conoscere i dettagli interni della view.
 
 \paragraph{Soluzione}
-Ogni evento è rappresentato da un oggetto \texttt{EventImpl}, che implementa l’interfaccia \texttt{Event} e associa l’azione a un valore dell’enumerazione \texttt{EventType}, come mostrato in \Cref{img:UML_Event}. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
+Ogni evento è rappresentato da un oggetto EventImpl, che implementa l’interfaccia Event e associa l’azione a un valore dell’enumerazione Eventype, come mostrato in Figura …. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
+
 
 \subsubsection{Gestione dello stato del gioco}
 
@@ -381,9 +368,9 @@ Ogni evento è rappresentato da un oggetto \texttt{EventImpl}, che implementa l�
 Il sistema deve tenere traccia dello stato corrente del gioco e gestire correttamente transizioni come avvio di un livello, pausa e ripresa, fine livello o game over.
 
 \paragraph{Soluzione}
-Come mostrato in \Cref{img:UML_GameState}, \texttt{GameImpl} utilizza l’enumerazione \texttt{GameState} per rappresentare lo stato corrente del gioco. Ogni metodo (\texttt{start()}, \texttt{pause()}, \texttt{resume()}, \texttt{returnToMenu()}) modifica lo stato in modo appropriato, mentre \texttt{update()} verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
+Come mostrato in Figura …, GameImpl utilizza l’enumerazione GameState per rappresentare lo stato corrente del gioco. Ogni metodo (start(), pause(), resume(), returnToMenu()) modifica lo stato in modo appropriato, mentre update() verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
 
-\subsubsection{Motore di gioco}
+\subsubsection{Core di gioco}
 
 %\begin{figure}[H]
 %    \centering
@@ -396,7 +383,8 @@ Come mostrato in \Cref{img:UML_GameState}, \texttt{GameImpl} utilizza l’enumer
 Il gioco deve aggiornare periodicamente lo stato del modello e notificare la view, senza mescolare logica di esecuzione e gestione degli eventi.
 
 \paragraph{Soluzione}
-Il \texttt{GameEngine} inizializza il modello (\texttt{GameImpl}) e il controller (\texttt{GameControllerImpl}), e coordina il ciclo principale di esecuzione tramite \texttt{GameLoop}. Il loop calcola il tempo trascorso tra un frame e l’altro e chiama il controller per aggiornare il modello solo se il gioco è in esecuzione. In questo modo la logica del modello e del controller rimane separata dalla gestione del tempo, facilitando estensioni future.
+Il GameCore inizializza il modello (GameImpl) e il controller (GameControllerImpl), e coordina il ciclo principale di esecuzione tramite GameLoop. Il loop calcola il tempo trascorso tra un frame e l’altro e chiama il controller per aggiornare il modello solo se il gioco è in esecuzione. In questo modo la logica del modello e del controller rimane separata dalla gestione del tempo, facilitando estensioni future.
+
 
 
 \chapter{Sviluppo}
@@ -404,119 +392,26 @@ Il \texttt{GameEngine} inizializza il modello (\texttt{GameImpl}) e il controlle
 
 \textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
 
-\textbf{Level (StandardLevel)}:è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+\textbf{Level (StandardLevel)}: è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+
+\textbf{GameImpl}: Classe che gestisce lo stato della partita, il livello corrente e il giocatore. Definisce le principali operazioni del gioco come l’inizio di un livello, la preparazione del gelato, l’aggiornamento dello stato di gioco e del livello stesso nel tempo. Per questa classe vengono testati la correttezza dello stato iniziale di gioco, l’avvio del livello, le transizioni di stato, la delegazione di azioni al Player e il corretto funzionamento del metodo update(). Per questa classe di test è stato utilizzato un mock di Customer.
+
+\textbf{GameControllerImpl}: Classe che si occupa di coordinare l’esecuzione del gioco collegando modello e view. Gestisce gli input del giocatore trasformandoli in comandi per il model e aggiorna la view in base allo stato di gioco, tenendo traccia di ordini, clienti e vite. Per questa classe si verificano l’impostazione del controller nella view, la gestione degli eventi ricevuti in input e l'esecuzione dei relativi comandi, i controlli dello stato di gioco e l’aggiornamento della view quando il gioco è in stato di playing. In questa classe di test sono stati utilizzati dei mock di Game, GameLoop, GameView, Level ed Event.
+
+\textbf{Classi Command}: Classi che implementano l’interfaccia Command e che rappresentano i possibili comandi di gioco. Per ogni classe è stato effettuato un test che ne verificasse il corretto funzionamento, facendo uso anche in questo caso di diversi mock.
+
+\textbf{GameLoopImpl}: Classe che si occupa di generare il game loop e aggiornare periodicamente il gioco tramite il controller. Per questa classe si sono testati l’avvio e l’arresto del loop tramite l’impostazione della variabile running a true e false, la chiamata ad updater (per il quale si è utilizzato un mock di Consumer), il rispetto dei valori minimo e massimo della variabile elapsed.
+
+\textbf{GameCoreImpl}: Classe che si occupa dell’inizializzazione delle componenti model, controller, view e dell’aggiornamento dello stato di gioco. Per questa classe si è solo verificato che GameCoreImpl esponga correttamente il controller attraverso il metodo getController(). Per farlo, sono stati usati mock di Game, GameController e GameLoop, iniettati tramite il costruttore.
 % TODO: Inserire qui le informazioni relative ai test per gli altri componenti
-
-\subsection*{Elementi positivi}
-
-\begin{itemize}
- \item Si descrivono molto brevemente i componenti che si è deciso di sottoporre a test automatizzato.
- \item Si utilizzano suite specifiche (e.g. JUnit) per il testing automatico.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
- \item Non si realizza alcun test automatico.
- \item La non presenza di testing viene aggravata dall'adduzione di motivazioni non valide. Ad esempio, si scrive che l'interfaccia grafica non è testata automaticamente perché è \emph{impossibile} farlo\footnote{Testare in modo automatico le interfacce grafiche è possibile (si veda, come esempio, \url{https://github.com/TestFX/TestFX}), semplicemente nel corso non c'è modo e tempo di introdurvi questo livello di complessità. Il fatto che non vi sia stato insegnato come farlo non implica che sia impossibile!}.
- \item Si descrive un testing di tipo manuale in maniera prolissa.
- \item Si descrivono test effettuati manualmente che sarebbero potuti essere automatizzati, ad esempio scrivendo che si è usata l'applicazione manualmente.
- \item Si descrivono test non presenti nei sorgenti del progetto.
- \item I test, quando eseguiti, falliscono.
-\end{itemize}
 
 \section{Note di sviluppo}
 
-Questa sezione, come quella riguardante il design dettagliato va svolta \textbf{singolarmente da ogni membro del gruppo}.
-%
-Nella prima parte, ciascuno dovrà mostrare degli esempi di codice particolarmente ben realizzati,
-che dimostrino proefficienza con funzionalità avanzate del linguaggio e capacità di spingersi oltre le librerie mostrate a lezione.
+\subsection{Sophy Mercuri}
 
-\begin{itemize}
-	\item \textbf{Elencare} (fare un semplice elenco per punti, non un testo!) le feature \textit{avanzate} del linguaggio e dell'ecosistema Java che sono state
-utilizzate. Le feature di interesse sono:
-	\begin{itemize}
-		\item Progettazione con generici, ad esempio costruzione di nuovi tipi generici, e uso di generici bounded.
-		L'uso di classi generiche di libreria non è considerato avanzato.
-		\item Uso di lambda expressions
-		\item Uso di \texttt{Stream}, di \texttt{Optional} o di altri costrutti funzionali
-		\item Uso di reflection
-		\item Definizione ed uso di nuove annotazioni
-		\item Uso del Java Platform Module System
-		\item Uso di parti della libreria JDK non spiegate a lezione (networking, compressione, parsing XML, eccetera...)
-		\item Uso di librerie di terze parti (incluso JavaFX): Google Guava, Apache Commons...
-	\end{itemize}
-	\item Si faccia molta attenzione a non scrivere banalità, elencando qui features di tipo ``core'', come le eccezioni, le enumerazioni, o le inner class: nessuna di queste è considerata avanzata.
-	\item Per ogni feature avanzata, mostrata, includere:
-	\begin{itemize}
-		\item Nome della feature
-		\item Permalink GitHub al punto nel codice in cui è stata utilizzata
-	\end{itemize}
-\end{itemize}
+\subsection{Shuyi Zhang}
 
-In questa sezione, \textit{dopo l'elenco},
-vanno menzionati ed attributi con precisione eventuali pezzi di codice ``riadattati'' (o scopiazzati...) da Internet o da altri progetti,
-pratica che tolleriamo ma che non raccomandiamo.
-%
-Si rammenta agli studenti che non è consentito partire da progetti esistenti e procedere per modifiche successive.
-%
-Si ricorda anche che i docenti hanno in mano strumenti antiplagio piuttosto raffinati e che ``capiscono'' il codice e la storia delle modifiche del progetto,
-per cui tecniche banali come cambiare nomi (di classi, metodi, campi, parametri, o variabili locali),
-aggiungere o togliere commenti,
-oppure riordinare i membri di una classe vengono individuate senza problemi.
-%
-Le regole del progetto spiegano in dettaglio l'approccio dei docenti verso atti gravi come il plagiarismo.
-
-I pattern di design \textbf{non} vanno messi qui.
-%
-L'uso di pattern di design (come suggerisce il nome) è un aspetto avanzato di design, non di implementazione,
-e non va in questa sezione.
-
-\subsection*{Elementi positivi}
-
-\begin{itemize}
-	\item Si elencano gli aspetti avanzati di linguaggio che sono stati impiegati
-	\item Si elencano le librerie che sono state utilizzate
-	\item Per ciascun elemento, si fornisce un permalink
-	\item Ogni permalink fa riferimento ad uno snippet di codice scritto dall'autore della sezione (i docenti verificheranno usando \texttt{git blame})
-	\item Se si è utilizzato un particolare algoritmo, se ne cita la fonte originale.
-	Ad esempio, se si è usato Mersenne Twister per la generazione di numeri pseudo-random, si cita \cite{mersenne}.
-	\item Si identificano parti di codice prese da altri progetti, dal web, o comunque scritte in forma originale da altre persone.
-	In tal senso, si ricorda che agli ingegneri non è richiesto di re-inventare la ruota continuamente:
-	se si cita debitamente la sorgente è tollerato fare uso di di snippet di codice open source per risolvere velocemente problemi non banali.
-	Nel caso in cui si usino snippet di codice di qualità discutibile,
-	oltre a menzionarne l'autore originale si invitano gli studenti ad adeguare tali parti di codice agli standard e allo stile del progetto.
-	Contestualmente, si fa presente che è largamente meglio fare uso di una libreria che copiarsi pezzi di codice:
-	qualora vi sia scelta (e tipicamente c'è), si preferisca la prima via.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
-	\item Si elencano feature core del linguaggio invece di quelle segnalate. Esempi di feature core da non menzionare sono:
-    \begin{itemize}
-        \item eccezioni;
-        \item classi innestate;
-        \item enumerazioni;
-        \item interfacce.
-    \end{itemize}
-	\item Si elencano applicazioni di terze parti (peggio se per usarle occorre licenza, e lo studente ne è sprovvisto) che non c'entrano nulla con lo sviluppo, ad esempio:
-    \begin{itemize}
-        \item Editor di grafica vettoriale come Inkscape o Adobe Illustrator;
-        \item Editor di grafica scalare come GIMP o Adobe Photoshop;
-        \item Editor di audio come Audacity;
-        \item Strumenti di design dell'interfaccia grafica come SceneBuilder: il codice è in ogni caso inteso come sviluppato da voi.
-    \end{itemize}
-	\item Si descrivono aspetti di scarsa rilevanza, o si scende in dettagli inutili.
-	\item Sono presenti parti di codice sviluppate originalmente da altri che non vengono debitamente segnalate.
-	In tal senso, si ricorda agli studenti che i docenti hanno accesso a tutti i progetti degli anni passati,
-	a Stack Overflow,
-	ai principali blog di sviluppatori ed esperti Java,
-	ai blog dedicati allo sviluppo di soluzioni e applicazioni
-	(inclusi blog dedicati ad Android e allo sviluppo di videogame),
-	nonché ai vari GitHub, GitLab, e Bitbucket.
-	Conseguentemente, è \emph{molto} conveniente \emph{citare} una fonte ed usarla invece di tentare di spacciare per proprio il lavoro di altri.
-	\item Si elencano design pattern
-\end{itemize}
-
+\subsection{Antonio Scharmuller}
 \begin{itemize}
 
 \item \textbf{Utilizzo di Lambda expressions} \\
@@ -537,32 +432,57 @@ Sono stati introdotti controlli espliciti su stati non validi (es. consegna senz
 
 \end{itemize}
 
+\subsection{Chiara Emina}
+
+\begin{itemize}
+
+\item \textbf{Uso di Lambda expressions} \\
+Utilizzate soprattutto in GameControllerImpl per la creazione dei vari comandi. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/controller/GameControllerImpl.java#L52}
+\item \textbf{Uso di Method Reference} \\
+Utilizzato in GameCoreImpl per passare direttamente il metodo update a GameLoopImpl. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/core/GameCoreImpl.java#L29}
+\item \textbf{Uso della libreria Mockito} \\
+Utilizzata nelle classi di test, di cui riporto due esempi. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/controller/GameControllerImplTest.java#L44} \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/GameImplTest.java#L167}
+\item \textbf{Utilizzo del codice del professor Ricci} \\
+Per implementare il game loop nella classe GameLoopImpl ho riadattato parti del codice fornito dal professor Alessandro Ricci nel progetto Game-As-A-Lab-Step-00-game-loop. In particolare, ho utilizzato il calcolo del deltaTime (elapsed) e il metodo waitForNextFrame(), riscrivendo e adattando il resto del codice alle esigenze del nostro progetto.
+
+\end{itemize}
 
 \chapter{Commenti finali}
 
-In quest'ultimo capitolo si tirano le somme del lavoro svolto e si delineano eventuali sviluppi
-futuri.
-
-\textit{Nessuna delle informazioni incluse in questo capitolo verrà utilizzata per formulare la valutazione finale}, a meno che non sia assente o manchino delle sezioni obbligatorie.
-%
-Al fine di evitare pregiudizi involontari, l'intero capitolo verrà letto dai docenti solo dopo aver formulato la valutazione.
-
 \section{Autovalutazione e lavori futuri}
 
-\textbf{È richiesta una sezione per ciascun membro del gruppo, obbligatoriamente}.
-%
-Ciascuno dovrà autovalutare il proprio lavoro, elencando i punti di forza e di debolezza in quanto prodotto.
-Si dovrà anche cercare di descrivere \emph{in modo quanto più obiettivo possibile} il proprio ruolo all'interno del gruppo.
-Si ricorda, a tal proposito, che ciascuno studente è responsabile solo della propria sezione: non è un problema se ci sono opinioni contrastanti, a patto che rispecchino effettivamente l'opinione di chi le scrive.
-Nel caso in cui si pensasse di portare avanti il progetto, ad esempio perché effettivamente impiegato, o perché sufficientemente ben riuscito da poter esser usato come dimostrazione di esser capaci progettisti, si descriva brevemente verso che direzione portarlo.
+\subsection{Sophy Mercuri}
+
+\subsection{Shuyi Zhang}
+
+\subsection{Antonio Scharmuller}
+
+\subsection{Chiara Emina}
+In questo progetto mi sono occupata della gestione degli stati della partita, del flusso del gioco e dell’integrazione tra i modelli. In particolare, ho sviluppato Game, la classe principale del model che interagisce con il controller e che gestisce la logica principale del gioco. Poi ho implementato il controller garantendo l’integrazione tra model e view e il corretto flusso di esecuzione del gioco attraverso la gestione degli eventi e dei comandi. Ho curato l’aggiornamento della view in base agli eventi del gioco, mostrando informazioni sul cliente corrente, timer, vite e ordini. Inoltre ho implementato il game loop che gestisce il ciclo principale di aggiornamento del gioco.
+
+\begin{itemize}
+\item \textbf{Punti di forza} \\
+Penso che uno dei principali punti di forza del mio lavoro sia la gestione coerente degli stati della partita e delle loro transizioni, che rende il flusso del gioco chiaro e comprensibile. Ho cercato di curare l’integrazione tra model, controller e view in modo da mantenere una separazione delle responsabilità, favorendo leggibilità e organizzazione del codice. Inoltre, un altro punto di forza penso sia l’utilizzo del pattern Command per la gestione degli eventi, che rende il sistema modulare ed estendibile, permettendo di aggiungere nuove azioni senza modificare in modo invasivo la logica esistente.
+
+\item \textbf{Punti di debolezza} \\
+Una probabile debolezza è forse il fatto che il controller è piuttosto centrale e carico di responsabilità, e questo potrebbe essere un limite in termini di scalabilità e manutenibilità. Anche la parte grafica e l’esperienza utente potrebbero essere arricchite con animazioni e maggiore interattività. Inoltre un altro punto di debolezza riguarda la gestione delle schermate nella GameViewImpl, dove la view decide quale pannello mostrare in base al valore dell’enum GameState. Sebbene lo stato venga richiesto tramite il controller, la view rimane comunque a conoscenza di un elemento del dominio del gioco. In futuro si potrebbe rendere la separazione ancora più netta, delegando al controller la responsabilità di indicare direttamente quale schermata visualizzare.
+\end{itemize}
 
 \section{Difficoltà incontrate e commenti per i docenti}
 
-Questa sezione, \textbf{opzionale}, può essere utilizzata per segnalare ai docenti eventuali problemi o difficoltà incontrate nel corso o nello svolgimento del progetto, può essere vista come una seconda possibilità di valutare il corso (dopo quella offerta dalle rilevazioni della didattica) avendo anche conoscenza delle modalità e delle difficoltà collegate all'esame, cosa impossibile da fare usando le valutazioni in aula per ovvie ragioni.
-%
-È possibile che alcuni dei commenti forniti vengano utilizzati per migliorare il corso in futuro: sebbene non andrà a vostro beneficio, potreste fare un favore ai vostri futuri colleghi.
-%
-Ovviamente \textit{il contenuto della sezione non impatterà il voto finale}.
+\subsection{Sophy Mercuri}
+
+\subsection{Shuyi Zhang}
+
+\subsection{Antonio Scharmuller}
+
+\subsection{Chiara Emina}
+La parte più difficile del corso è stata senza dubbio l’esame pratico in laboratorio. Ho avuto grandi difficoltà nella comprensione dell’esercizio di Junit, sia quando ho svolto le prove passate per esercitarmi, sia all’esame, perché ogni volta vi erano diverse entità e meccaniche da implementare che per me erano molto complicate da capire, soprattutto entro un tempo limite. Tuttavia, anche nello svolgimento del progetto ho avuto qualche problema, soprattutto nell’imparare a usare git e a lavorare in gruppo con una data di consegna fissata da rispettare. Queste cose erano tutte nuove per me, e ho trovato qualche difficoltà a gestire le tempistiche di sviluppo del nostro programma, probabilmente anche a causa della mia insicurezza durante la progettazione. Nonostante ciò, grazie a questo progetto ho acquisito familiarità con l’uso di git e con il lavoro di gruppo, e mi sento molto soddisfatta del lavoro realizzato. Penso che questo progetto sia stato un passo molto importante per il mio percorso di studi e crescita personale, soprattutto per quanto riguarda il relazionarsi con altre persone e lavorare insieme.
+
 
 \appendix
 \chapter{Guida utente}
@@ -590,19 +510,6 @@ spaziatrice, o il tasto ``P'', è necessario che gli studenti lo segnalino.
 \end{itemize}
 
 \chapter{Esercitazioni di laboratorio}
-
-In questo capitolo ciascuno studente elenca gli esercizi di laboratorio che ha svolto
-(se ne ha svolti),
-elencando i permalink dei post sul forum dove è avvenuta la consegna.
-%
-Questa sezione potrebbe essere processata da strumenti automatici,
-per cui link a oggetti diversi dal permalink della consegna,
-errori nell'email o nel nome del laboratorio possono portare ad ignorare alcune consegne,
-si raccomanda la massima precisione.
-
-\subsection{Studente 1}
-\subsection{Studente 2}
-\subsection{Studente 3}
 
 \subsection{chiara.emina@studio.unibo.it}
 \begin{itemize}
