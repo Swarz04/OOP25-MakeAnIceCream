@@ -456,19 +456,19 @@ Il GameCore inizializza il modello (GameImpl) e il controller (GameControllerImp
 \begin{itemize}
 \item \textbf{Utilizzo di Lambda expressions} \\
 Le lambda expressions sono state utilizzate per registrare dinamicamente le callback tra cliente e livello, permettendo di propagare l’esito dell’ordine in modo compatto e leggibile. L’uso di funzioni come parametro riduce la necessità di classi anonime esplicite e migliora la chiarezza del flusso logico. \\
-\textbf{Permalink:} \url{[PERMALINK StandardLevel -- registrazione callback]}
+\textbf{Permalink:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/model/level/StandardLevel.java#L28}
 
 \item \textbf{Utilizzo di strutture dati della Collections Framework (Queue / ArrayDeque)} \\
 La gestione dei clienti nel livello avviene tramite \texttt{Queue} e \texttt{ArrayDeque}, garantendo un comportamento FIFO, consente una gestione efficiente dell’avanzamento del gioco e rende il modello più prevedibile nei test. \\
-\textbf{Permalink:} \url{[PERMALINK StandardLevel -- dichiarazione e utilizzo Queue]}
+\textbf{Permalink:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/model/level/StandardLevel.java#L27}
 
 \item \textbf{Utilizzo di Mockito per il testing} \\
 Nei test automatici è stata utilizzata la libreria Mockito per creare mock di \texttt{Customer} e \texttt{Timer}. Questo ha permesso di isolare il comportamento e verificare effetti collaterali e simulare condizioni specifiche (es. scadenza del tempo). \\
-\textbf{Permalink:} \url{[PERMALINK PlayerTest / StandardLevelTest -- utilizzo mock e when/verify]}
+\textbf{Permalink:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/PlayerTest.java#L57-L60}
 
 \item \textbf{Controllo dello stato tramite validazione esplicita} \\
 Sono stati introdotti controlli espliciti su stati non validi (es. consegna senza gelato completo) e su input nulli. Questa scelta migliora la robustezza del modello e previene stati inconsistenti durante l’esecuzione. \\
-\textbf{Permalink:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
+\textbf{Permalink:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/PlayerTest.java#L76}
 \end{itemize}
 
 \subsection{Chiara Emina}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  15 FEB 2026 20:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.20)  15 FEB 2026 20:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -315,7 +315,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.69 ... {4.2.2}Shuyi Zhang}{34}{subsection.4.2.2}
+l.69 ... {4.2.2}Shuyi Zhang}{35}{subsection.4.2.2}
                                                   % [1
 
 ])
@@ -458,16 +458,46 @@ Overfull \hbox (9.87488pt too wide) in paragraph at lines 450--453
  []
 
 
-Overfull \hbox (36.4276pt too wide) in paragraph at lines 461--464
-\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 [PERMALINKStandardLevel-[]-[]dichiarazioneeutilizzoQueue]$[] 
+Overfull \hbox (5.05258pt too wide) in paragraph at lines 457--460
+\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 https : / / github . com / Swarz04 / OOP25-[]MakeAnIceCream /
  []
 
 
-Overfull \hbox (67.30261pt too wide) in paragraph at lines 465--468
-\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 [PERMALINKPlayerTest / StandardLevelTest-[]-[]utilizzomockewhen /
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 457--460
+\OT1/cmtt/m/n/12 blob / a78242d1f39263c851a41fa57e0b26af1d8ecf8f / src / main / java /
+ []
+
+
+Overfull \hbox (5.05258pt too wide) in paragraph at lines 461--464
+\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 https : / / github . com / Swarz04 / OOP25-[]MakeAnIceCream /
+ []
+
+
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 461--464
+\OT1/cmtt/m/n/12 blob / a78242d1f39263c851a41fa57e0b26af1d8ecf8f / src / main / java /
+ []
+
+
+Overfull \hbox (5.05258pt too wide) in paragraph at lines 465--468
+\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 https : / / github . com / Swarz04 / OOP25-[]MakeAnIceCream /
+ []
+
+
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 465--468
+\OT1/cmtt/m/n/12 blob / a78242d1f39263c851a41fa57e0b26af1d8ecf8f / src / test / java /
  []
 
 [30]
+Overfull \hbox (5.05258pt too wide) in paragraph at lines 469--472
+\OT1/cmr/bx/n/12 Permalink: []$\OT1/cmtt/m/n/12 https : / / github . com / Swarz04 / OOP25-[]MakeAnIceCream /
+ []
+
+
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 469--472
+\OT1/cmtt/m/n/12 blob / a78242d1f39263c851a41fa57e0b26af1d8ecf8f / src / test / java /
+ []
+
+
 Overfull \hbox (25.0651pt too wide) in paragraph at lines 477--480
 \OT1/cmr/bx/n/12 Esempio: []$\OT1/cmtt/m/n/12 https : / / github . com / Swarz04 / OOP25-[]MakeAnIceCream / blob /
  []
@@ -507,13 +537,13 @@ Overfull \hbox (34.57489pt too wide) in paragraph at lines 483--487
 \OT1/cmtt/m/n/12 a78242d1f39263c851a41fa57e0b26af1d8ecf8f / src / test / java / it / unibo /
  []
 
-[31]
+[31] [32]
 Capitolo 4.
-[32
+[33
 
-] [33] [34] [35] [36]
+] [34] [35] [36] [37]
 Appendice A.
-[37
+[38
 
 ]
 Appendice B.
@@ -522,7 +552,7 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 584.
 
 No file Relazione_MakeAnIceCream.bbl.
-[38
+[39
 
 ] (Relazione_MakeAnIceCream.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
@@ -540,17 +570,17 @@ Package rerunfilecheck Info: File `Relazione_MakeAnIceCream.out' has not changed
 (rerunfilecheck)             Checksum: 9CA037BFCE6FC06D663D46411987355E;4965.
  ) 
 Here is how much of TeX's memory you used:
- 12579 strings out of 467871
- 211269 string characters out of 5428443
- 692619 words of memory out of 5000000
+ 12580 strings out of 467871
+ 211276 string characters out of 5428443
+ 693619 words of memory out of 5000000
  41212 multiletter control sequences out of 15000+600000
  634348 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,7n,79p,1813b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\schar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relazione_MakeAnIceCream.pdf (39 pages, 2364594 bytes).
+Output written on Relazione_MakeAnIceCream.pdf (40 pages, 2367121 bytes).
 PDF statistics:
- 534 PDF objects out of 1000 (max. 8388607)
- 127 named destinations out of 1000 (max. 500000)
+ 545 PDF objects out of 1000 (max. 8388607)
+ 128 named destinations out of 1000 (max. 500000)
  348 words of extra memory for PDF output out of 10000 (max. 10000000)
 
