@@ -50,34 +50,29 @@ Il software oggetto di questo progetto è un videogioco intitolato 'Make an Ice 
 \end{itemize}
 
 \section{Modello del Dominio}
-In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna. Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato. Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over. Quando tutti i clienti del livello vengono serviti, senza perdere le vite disponibili, il gioco termina con un stato di livello completato. Gli elementi costitutivi del problema sono sintetizzati in Figura 1.1.
-\Cref{img:UML_Generale}.
+In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna. Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato. Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over. Quando tutti i clienti del livello vengono serviti, senza perdere le vite disponibili, il gioco termina con un stato di livello completato. Gli elementi costitutivi del problema sono sintetizzati in \Cref{img:UML_analysis}.
 
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{img/UML_Generale.pdf}
-%    \caption{Schema UML dell'analisi del dominio, con rappresentate le entità principali ed i rapporti fra loro}
-%    \label{img:UML_Generale}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_analysis.png}
+    \caption{Schema UML dell’analisi del dominio, con rappresentate le entità principali e i rapporti fra loro.}
+    \label{img:UML_analysis}
+\end{figure}
 
 \chapter{Design}
 
 \section{Architettura}
 
-L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura 2.1 è riportato il diagramma UML architetturale.
+L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura \Cref{img:UML_mvc} è riportato il diagramma UML architetturale.
 
 L’architettura MVC/ECB del gioco è inoltre supportata da GameCore, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite GameLoop, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
 
-
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 20cm 0 0, clip]{img/UML_Architecture.pdf} %prime ricerca su google per tagliare immagini, https://guitex.org/home/en/forum/5-tex-e-latex/49574-risolto-tagliare-le-immagini
-%    \caption{Schema UML architetturale di Make an Ice Cream. L’interfaccia \texttt{GameController} è il controller del sistema, e coordina le interazioni tra le interfacce \texttt{GameView} e \texttt{Game}.}
-%    \label{img:Architecture}
-%\end{figure}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_mvc.png} %prime ricerca su google per tagliare immagini, https://guitex.org/home/en/forum/5-tex-e-latex/49574-risolto-tagliare-le-immagini
+    \caption{Schema UML architetturale di Make an Ice Cream. L’interfaccia GameController è il controller del sistema, e coordina le interazioni tra le interfacce GameView, che rappresenta la view, e Game, che rappresenta il model. GameCore è la classe che inizializza e coordina le componenti necessarie per eseguire il gioco, mentre GameLoop gestisce l’aggiornamento periodico del controller.}
+    \label{img:UML_mvc}
+\end{figure}
 
 \section{Design dettagliato}
 
