@@ -54,7 +54,7 @@ In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{img/UML_analysis.png}
+    \includegraphics[width=0.75\textwidth]{img/UML_analysis.png}
     \caption{Schema UML dell’analisi del dominio, con rappresentate le entità principali e i rapporti fra loro.}
     \label{img:UML_analysis}
 \end{figure}
@@ -456,19 +456,19 @@ Il GameCore inizializza il modello (GameImpl) e il controller (GameControllerImp
 \begin{itemize}
 \item \textbf{Utilizzo di Lambda expressions} \\
 Le lambda expressions sono state utilizzate per registrare dinamicamente le callback tra cliente e livello, permettendo di propagare l’esito dell’ordine in modo compatto e leggibile. L’uso di funzioni come parametro riduce la necessità di classi anonime esplicite e migliora la chiarezza del flusso logico. \\
-\textbf{Link:} \url{[PERMALINK StandardLevel -- registrazione callback]}
+\textbf{Permalink:} \url{[PERMALINK StandardLevel -- registrazione callback]}
 
 \item \textbf{Utilizzo di strutture dati della Collections Framework (Queue / ArrayDeque)} \\
 La gestione dei clienti nel livello avviene tramite \texttt{Queue} e \texttt{ArrayDeque}, garantendo un comportamento FIFO, consente una gestione efficiente dell’avanzamento del gioco e rende il modello più prevedibile nei test. \\
-\textbf{Link:} \url{[PERMALINK StandardLevel -- dichiarazione e utilizzo Queue]}
+\textbf{Permalink:} \url{[PERMALINK StandardLevel -- dichiarazione e utilizzo Queue]}
 
 \item \textbf{Utilizzo di Mockito per il testing} \\
 Nei test automatici è stata utilizzata la libreria Mockito per creare mock di \texttt{Customer} e \texttt{Timer}. Questo ha permesso di isolare il comportamento e verificare effetti collaterali e simulare condizioni specifiche (es. scadenza del tempo). \\
-\textbf{Link:} \url{[PERMALINK PlayerTest / StandardLevelTest -- utilizzo mock e when/verify]}
+\textbf{Permalink:} \url{[PERMALINK PlayerTest / StandardLevelTest -- utilizzo mock e when/verify]}
 
 \item \textbf{Controllo dello stato tramite validazione esplicita} \\
 Sono stati introdotti controlli espliciti su stati non validi (es. consegna senza gelato completo) e su input nulli. Questa scelta migliora la robustezza del modello e previene stati inconsistenti durante l’esecuzione. \\
-\textbf{Link:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
+\textbf{Permalink:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
 \end{itemize}
 
 \subsection{Chiara Emina}
@@ -507,6 +507,17 @@ Il mio ruolo è consistito nello sviluppo della logica di costruzione del gelato
 
 \subsection{Antonio Scharmuller}
 
+In questo progetto mi sono occupato della modellazione dell'entità giocatore e della gestione strutturale dei livelli di gioco. In particolare la classe Player che funge da interfaccia logica per le azioni dell'utente
+\begin{itemize}
+
+\item \textbf{Punti di forza} \\
+Un punto di forza del mio lavoro è che le responsabilità tra l'azione del giocatore e le regole del livello vengono separate. Il Player agisce come un esecutore, ignorando le conseguenze delle sue azioni (vittoria o sconfitta), che sono invece gestite interamente dal Level in base alla risposta degli esiti di controllo ordine. Un altro aspetto positivo è l'utilizzo del pattern Factory per i livelli, che l'aggiunta futura di nuove tipologie di livelli senza dover modificare la logica di inizializzazione nel controller.
+
+\item \textbf{Punti di debolezza} \\
+Una possibile debolezza risiede nella rigidità della struttura attuale dei livelli (StandardLevel), che prevede sempre la stessa meccanica di base (vite e sequenza di clienti). In futuro, si potrebbe estendere il sistema introducendo modalità di gioco alternative. Inoltre, l'entità Player è attualmente molto sottile e priva di stato persistente; in sviluppi futuri potrebbe essere arricchita con tipo delle statistiche come punteggi aggiuntivi e monete guadagnate.
+\end{itemize}
+
+
 \subsection{Chiara Emina}
 In questo progetto mi sono occupata della gestione degli stati della partita, del flusso del gioco e dell’integrazione tra i modelli. In particolare, ho sviluppato Game, la classe principale del model che interagisce con il controller e che gestisce la logica principale del gioco. Poi ho implementato il controller garantendo l’integrazione tra model e view e il corretto flusso di esecuzione del gioco attraverso la gestione degli eventi e dei comandi. Ho curato l’aggiornamento della view in base agli eventi del gioco, mostrando informazioni sul cliente corrente, timer, vite e ordini. Inoltre ho implementato il game loop che gestisce il ciclo principale di aggiornamento del gioco.
 
@@ -524,7 +535,7 @@ Una probabile debolezza è forse il fatto che il controller è piuttosto central
 
 \subsection{Shuyi Zhang}
 \textbf{Difficoltà principali} \\
-La sfida più grande è stata gestire le dipendenze tra i componenti sviluppati dai vari membri del team. Spesso abbiamo dovuto modificare codice già completato per allinearlo alle interfacce definite dai colleghi, rendendo lo sviluppo meno lineare del previsto. 
+La sfida più grande è stata gestire le dipendenze tra i componenti sviluppati dai vari membri del team. Spesso abbiamo dovuto modificare codice già completato per allinearlo alle interfacce definite dai colleghi, rendendo lo sviluppo meno lineare del previsto.
 Anche il debugging nelle fasi avanzate è stato complesso: molti bug emergevano solo quando l'interazione tra le parti diventava più intricata. Interpretare gli errori di compilazione, specialmente con Gradle, ha richiesto tempo per essere padroneggiato. Git è stato un'altra difficoltà iniziale: gestire conflitti e coordinarsi su un repository condiviso era completamente nuovo per me.
 La gestione del tempo si è rivelata complessa a causa della sovrapposizione con altri esami. Infine, scrivere la relazione in italiano, non essendo la mia lingua madre, ha richiesto uno sforzo extra per garantire chiarezza espositiva. \\
 \textbf{Cosa ho imparato} \\
@@ -533,6 +544,11 @@ Lavorare in team mi ha insegnato l'importanza di definire chiaramente le interfa
 
 
 \subsection{Antonio Scharmuller}
+\textbf{Difficoltà principali} \\
+Una delle difficoltà maggiori è stata la corretta separazione delle responsabilità tra le entità, in particolare nel definire come il Player dovesse interagire con il Level senza creare dipendenze cicliche. Anche l'adattamento al flusso di lavoro con Git e la gestione dei conflitti sul repository condiviso hanno rappresentato una sfida. Inoltre, la scrittura di test efficaci utilizzando Mockito ha richiesto tempo per pensare alle eventuali casistiche, specialmente nel simulare comportamenti complessi. \\
+\textbf{Cosa ho imparato} \\
+Ho imparato a utilizzare un ambiente di sviluppo avanzato, acquisendo competenze solide su Git, Gradle e JUnit. Il progetto è stato fondamentale per imparare a scrivere codice pulito che rispetti Checkstyle e che abbia Javadoc significativi. Soprattutto, mi sono sviluppato molto dal punto di vista organizzativo: ho imparato a gestire le dinamiche di riunione, a proporre e ascoltare idee per chiarire il prodotto finale ed essere reperibile per rispetto dei collaboratori. Infine, ho compreso l'applicazione pratica dei principi OOP e il concetto di separazione degli oggetti che, seguendo strutture ben progettate, permette di realizzare sistemi complessi.
+
 
 \subsection{Chiara Emina}
 La parte più difficile del corso è stata senza dubbio l’esame pratico in laboratorio. Ho avuto grandi difficoltà nella comprensione dell’esercizio di Junit, sia quando ho svolto le prove passate per esercitarmi, sia all’esame, perché ogni volta vi erano diverse entità e meccaniche da implementare che per me erano molto complicate da capire, soprattutto entro un tempo limite. Tuttavia, anche nello svolgimento del progetto ho avuto qualche problema, soprattutto nell’imparare a usare git e a lavorare in gruppo con una data di consegna fissata da rispettare. Queste cose erano tutte nuove per me, e ho trovato qualche difficoltà a gestire le tempistiche di sviluppo del nostro programma, probabilmente anche a causa della mia insicurezza durante la progettazione. Nonostante ciò, grazie a questo progetto ho acquisito familiarità con l’uso di git e con il lavoro di gruppo, e mi sento molto soddisfatta del lavoro realizzato. Ho aquisito una buona padronanza di Gradle e ho migliorato la mia capacità di applicare concretamente le classi e i concetti fondamentali di Java Penso che questo progetto sia stato un passo molto importante per il mio percorso di studi e crescita personale, soprattutto per quanto riguarda il relazionarsi con altre persone e lavorare insieme.
