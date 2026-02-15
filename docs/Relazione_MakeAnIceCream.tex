@@ -209,24 +209,26 @@ Vantaggi concreti di questa soluzione:
 
 \subsection{Shuyi Zhang}
 \subsubsection{Costruzione del gelato}
+
 \paragraph{Problema}
-Il sistema deve creare e gestire istanze di gelato in due situazioni diverse:
+Nel contesto di gioco, il gelato viene costruito attraverso una sequenza di interazioni utente (es. selezione del cono, aggiunta di gusti, aggiunta di topping). Il sistema deve quindi gestire un oggetto IceCream che evolve nel tempo, aggiornando progressivamente il suo stato in risposta alle azioni del giocatore. \\
+Una costruzione diretta dell’oggetto comporterebbe:
 \begin{itemize}
-    \item Generare una preview del gelato richiesto dal cliente a partire dall’Order;
-    \item Gestire il gelato costruito dal giocatore in modo incrementale (scelta cono + aggiunta ingredienti).
+    \item logica di aggiornamento distribuita tra più componenti;
+    \item maggiore rischio di stati inconsistenti;
+    \item difficoltà nell’applicazione uniforme dei vincoli di dominio (numero massimo di ingredienti, combinazioni valide, ecc.).
 \end{itemize}
-In entrambi i casi è necessario rispettare gli stessi vincoli di dominio e di gioco (ad esempio numero massimo di gusti, disponibilità di ingredienti legata al livello, combinazioni ammissibili). Senza una soluzione dedicata, la logica di costruzione rischia di essere duplicata tra ordine e interazione utente, rendendo più difficile mantenere coerenza ed evolvere le regole.
 
 \paragraph{Soluzione}
-La costruzione del gelato viene centralizzata in \texttt{IceCreamBuilder}, come mostrato in \Cref{img:UML_IceCreamBuilder}.
-Il builder incapsula:
+Per gestire correttamente la costruzione incrementale è stato introdotto IceCreamBuilder, che incapsula:
 \begin{itemize}
-    \item La composizione di un gelato come combinazione di Cone e lista Ingredient;
-    \item L’applicazione dei vincoli durante la creazione (o durante gli aggiornamenti incrementali).
+    \item la logica di composizione del gelato (Cone + lista di Ingredient);
+    \item la gestione delle modifiche successive;
+    \item la validazione dei vincoli ad ogni aggiornamento.
 \end{itemize}
-L’Order non costituisce direttamente oggetti complessi, che delega al builder la creazione del gelato di preview del cliente. In modo analogo, la costruzione interattiva del giocatore utilizza lo stesso builder per aggiornare coerentemente lo stato coerente.
-Questa scelta riduce duplicazione, garantisce uniformità delle regole e semplifica l’introduzione di nuovi vincoli o ingredienti.
-Abbiamo usato in questo caso il pattern Builder, per centralizzare la logica di costruzione e rendere riusabile lo stesso processo sia nella generazione della preview dell’ordine sia nella costruzione incrementale guidata dall’utente.
+Il builder diventa quindi il punto centrale attraverso cui il sistema costruisce e modifica l’istanza di IceCream, garantendo coerenza e semplificando la gestione dello stato durante l’interazione utente. \\
+\textbf{Pattern utilizzato}: \emph{Builder}, per supportare la creazione progressiva di un oggetto complesso e mantenerne la consistenza durante il ciclo di vita.
+
 
 \begin{figure}[H]
     \centering
@@ -240,8 +242,8 @@ Abbiamo usato in questo caso il pattern Builder, per centralizzare la logica di 
 Il gelato può includere ingredienti differenti (palline di gusto, topping liquidi, topping solidi). Il sistema deve rappresentarli in modo uniforme e tipizzato, mantenendo l’estendibilità e prevenendo l’uso di valori non validi (es. stringhe arbitrarie per gusti o topping).
 
 \paragraph{Soluzione}
-Gli ingredienti condividono l’astrazione \texttt{Ingredient}, con implementazioni concrete per le diverse categorie. Inoltre, gusti e tipologie di topping sono rappresentati tramite enumerazioni dedicate, vincolando i valori ammessi dal dominio e mantenendo il modello consistente.
-Il gelato e il builder interagiscono esclusivamente con l’astrazione \texttt{Ingredient}, permettendo di gestire in modo polimorfico tutti i componenti del gelato e di aggiungere nuove tipologie senza modificare la struttura esistente.
+Gli ingredienti condividono l’astrazione Ingredient, con implementazioni concrete per le diverse categorie. Inoltre, gusti e tipologie di topping sono rappresentati tramite enumerazioni dedicate, vincolando i valori ammessi dal dominio e mantenendo il modello consistente.
+Il gelato e il builder interagiscono esclusivamente con l’astrazione Ingredient, permettendo di gestire in modo polimorfico tutti i componenti del gelato e di aggiungere nuove tipologie senza modificare la struttura esistente.
 Questa scelta migliora l’estendibilità del modello e riduce l’accoppiamento tra le componenti.
 
 \begin{figure}[H]
@@ -251,24 +253,21 @@ Questa scelta migliora l’estendibilità del modello e riduce l’accoppiamento
     \label{img:UML_Ingredients}
 \end{figure}
 
-\subsubsection{Costruzione progressiva}
+\subsubsection{Factory Pattern per la creazione degli ingredienti}
 \paragraph{Problema}
-Il gelato è composto da diversi ingredienti variabili (base/cono, gusto, topping). Preparare tutti gli elementi contemporaneamente risulta scomodo e poco flessibile. Un approccio più naturale consiste nel prepararlo in modo progressivo, aggiungendo un ingrediente alla volta, proprio come in una gelateria (tramite click del giocatore). Alcuni ingredienti seguono regole precise: i gusti possono essere aggiunti più volte; i topping liquidi possono essere aggiunti tra due gusti; mentre i topping solidi possono essere aggiunti solo una volta ed esclusivamente sopra, una volta; l’aggiunta di un topping solido rappresenta una stato terminale che chiude il gelato e impedisce ulteriori modifiche; inoltre i topping vengono disabilitati nei primi livelli; una base può contenere al massimo tre palline.
-(Inoltre, per ogni cliente il gioco deve generare un gelato che chiamiamo “target” a partire dall’ordine e confrontarlo con il gelato effettivamente costruito dal giocatore tramite click.)
+Il sistema deve supportare diversi tipi di ingredienti (scoop, liquid toppings, solid toppings) con logiche di creazione differenti. La creazione diretta tramite new avrebbe accoppiato il client alle classi concrete, rendendo il codice meno flessibile e più difficile da estendere con nuovi ingredienti.
 
 \paragraph{Soluzione}
-Per la costruzione del gelato viene utilizzato il Builder Pattern. Il gelato è un oggetto composto da più parti (cono, sequenza di gusti, topping) e viene creato in modo progressivo, un ingrediente alla volta. Il builder centralizza la logica di costruzione e applica in un unico punto i vincoli del gioco, ad esempio: massimo tre palline, disponibilità dei topping in base al livello, e chiusura del gelato dopo l’aggiunta di un topping solido (dopo la quale non è più possibile modificare il gelato).
-Questa scelta rende il modello più chiaro e riduce il rischio di duplicare le regole di controller e view, mantenendo il processo di creazione ordinato e facilmente estendibile.
-Il builder viene utilizzato in due contesti diversi ma con la stessa logica, garantendo coerenza tra ciò che richiede il cliente e ciò che costruisce il giocatore.
+È stato implementato il pattern Simple Factory tramite IngredientFactory, che centralizza la logica di creazione degli ingredienti. Il controller richiede un ingrediente tramite il nome, e la factory si occupa di istanziare la classe concreta appropriata. \\
+\textbf{Vantaggi}
 \begin{itemize}
-    \item \textbf{Gelato target (cliente)}: l’ordine del cliente fornisce una ricetta composta da tipo di cono, lista di gusti e lista di topping. Il builder interpreta questa ricetta e conosce un’istanza di \texttt{IceCream} che rappresenta il gelato target da imitare. In questo modo la figura del cliente è ottenuta applicando la stessa logica e gli stessi vincoli previsti dal gioco.
-    \item \textbf{Gelato del giocatore}: il gelato del giocatore viene costruito progressivamente tramite click sugli ingredienti. Ogni click corrisponde a una richiesta di aggiunta (gusto o topping) gestita dal builder, che verifica i vincoli e aggiorna lo stato del gelato. Se viene aggiunto un topping solido, il gelato entra nello stato terminale di chiusura e non sono più consentite ulteriori aggiunte.
+    \item disaccoppiamento tra logica di interazione (controller/UI) e classi concrete degli ingredienti;
+    \item creazione uniforme e centralizzata;
+    \item facilità di estensione (basta modificare un solo punto per aggiungere nuovi ingredienti);
+    \item incapsulamento della complessità di creazione.
 \end{itemize}
-Al termine, il gelato del giocatore viene confrontato con il gelato target verificando che la configurazione finale coincida, determinando l’esito dell’ordine.
-Una possibile alternativa sarebbe stata gestire la costruzione del gelato come semplice modifica di liste direttamente nel controller o nella view (ad esempio aggiungendo/rimuovendo elementi e controllando manualmente i vincoli). Questa soluzione è più immediata, ma presenta lo svantaggio di distribuire la logica in più punti del codice, rendendo più probabili incoerenze e rendendo più difficile il testing.
-Un’ulteriore alternativa sarebbe stata adottare il Decorator Pattern, modellando ogni ingrediente come uno strato che avvolge lo stato precedente. Sebbene questa soluzione rappresenti bene l’idea di stratificazione, nel contesto del gioco risulta meno pratica per il confronto tra gelato target e gelato del giocatore e per la gestione di regole legate al livello. Inoltre, introduce un numero maggiore di classi e una struttura più complessa.
 
-\subsection{Gestione del Giocatore e Livelli (Studente 3)}
+\subsection{Antonio Scharmuller}
 
 \subsubsection{Gestione del giocatore e della consegna degli ordini}
 
@@ -390,30 +389,53 @@ Il GameCore inizializza il modello (GameImpl) e il controller (GameControllerImp
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 
-\textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
+\subsection{Sophy Mercuri}
 
-\textbf{Level (StandardLevel)}: è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+\subsection{Shuyi Zhang}
+\begin{itemize}
+    \item \textbf{IceCreamBuilder}:  stata testata la corretta costruzione incrementale del gelato, verificando che i vincoli di dominio vengano rispettati in ogni fase del processo. Sono stati testati il limite massimo di palline (3), il limite di topping liquidi per pallina (2) e l'impossibilità di aggiungere ingredienti senza aver prima selezionato un cono. È stato verificato che l'aggiunta di un topping solido chiuda correttamente il gelato, impedendo ulteriori modifiche. Sono stati inoltre testati i casi limite (ingredienti nulli, topping disabilitati) e la corretta validazione in fase di submit, che richiede obbligatoriamente la presenza di un cono e almeno una pallina. Il metodo di reset è stato verificato per garantire che riporti il builder in uno stato iniziale pulito.
+    \item \textbf{Modellazione ingredienti (Scoop, LiquidTopping, SolidTopping)}: è stata testata la corretta implementazione dei contratti di uguaglianza e hash code per tutte le classi concrete, verificando che due ingredienti con lo stesso tipo siano considerati uguali e che ingredienti diversi producano hash code differenti. Sono stati testati i costruttori con parametri nulli per assicurare il corretto sollevamento delle eccezioni. È stata inoltre verificata l'implementazione di toString() per ciascuna classe.
+    \item \textbf{IngredientFactory}: è stato testato il corretto funzionamento della factory per la creazione di tutti i tipi di ingrediente a partire dal nome, verificando che venga restituita l'implementazione concreta appropriata. Sono stati testati i casi di input non validi (nome nullo, nome vuoto, ingrediente sconosciuto) per garantire il sollevamento delle eccezioni previste.
+    \item \textbf{IceCreamImpl}: è stata testata l'immutabilità dell'oggetto gelato, verificando che la lista degli ingredienti restituita non sia modificabile. Sono stati testati i costruttori con parametri nulli (cono nullo, lista ingredienti nulla, ingredienti nulli all'interno della lista) e la corretta restituzione dei valori tramite i getter. È stato infine verificato il corretto funzionamento di toString() in diverse configurazioni (con ingredienti, senza ingredienti).
+\end{itemize}
 
-\textbf{GameImpl}: Classe che gestisce lo stato della partita, il livello corrente e il giocatore. Definisce le principali operazioni del gioco come l’inizio di un livello, la preparazione del gelato, l’aggiornamento dello stato di gioco e del livello stesso nel tempo. Per questa classe vengono testati la correttezza dello stato iniziale di gioco, l’avvio del livello, le transizioni di stato, la delegazione di azioni al Player e il corretto funzionamento del metodo update(). Per questa classe di test è stato utilizzato un mock di Customer.
+\subsection{Antonio Scharmuller}
+\begin{itemize}
+    \item \textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
+    \item \textbf{Level (StandardLevel)}: è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+\end{itemize}
 
-\textbf{GameControllerImpl}: Classe che si occupa di coordinare l’esecuzione del gioco collegando modello e view. Gestisce gli input del giocatore trasformandoli in comandi per il model e aggiorna la view in base allo stato di gioco, tenendo traccia di ordini, clienti e vite. Per questa classe si verificano l’impostazione del controller nella view, la gestione degli eventi ricevuti in input e l'esecuzione dei relativi comandi, i controlli dello stato di gioco e l’aggiornamento della view quando il gioco è in stato di playing. In questa classe di test sono stati utilizzati dei mock di Game, GameLoop, GameView, Level ed Event.
-
-\textbf{Classi Command}: Classi che implementano l’interfaccia Command e che rappresentano i possibili comandi di gioco. Per ogni classe è stato effettuato un test che ne verificasse il corretto funzionamento, facendo uso anche in questo caso di diversi mock.
-
-\textbf{GameLoopImpl}: Classe che si occupa di generare il game loop e aggiornare periodicamente il gioco tramite il controller. Per questa classe si sono testati l’avvio e l’arresto del loop tramite l’impostazione della variabile running a true e false, la chiamata ad updater (per il quale si è utilizzato un mock di Consumer), il rispetto dei valori minimo e massimo della variabile elapsed.
-
-\textbf{GameCoreImpl}: Classe che si occupa dell’inizializzazione delle componenti model, controller, view e dell’aggiornamento dello stato di gioco. Per questa classe si è solo verificato che GameCoreImpl esponga correttamente il controller attraverso il metodo getController(). Per farlo, sono stati usati mock di Game, GameController e GameLoop, iniettati tramite il costruttore.
-% TODO: Inserire qui le informazioni relative ai test per gli altri componenti
+\subsection{Chiara Emina}
+\begin{itemize}
+    \item \textbf{GameImpl}: Classe che gestisce lo stato della partita, il livello corrente e il giocatore. Definisce le principali operazioni del gioco come l’inizio di un livello, la preparazione del gelato, l’aggiornamento dello stato di gioco e del livello stesso nel tempo. Per questa classe vengono testati la correttezza dello stato iniziale di gioco, l’avvio del livello, le transizioni di stato, la delegazione di azioni al Player e il corretto funzionamento del metodo update(). Per questa classe di test è stato utilizzato un mock di Customer.
+    \item \textbf{GameControllerImpl}: Classe che si occupa di coordinare l’esecuzione del gioco collegando modello e view. Gestisce gli input del giocatore trasformandoli in comandi per il model e aggiorna la view in base allo stato di gioco, tenendo traccia di ordini, clienti e vite. Per questa classe si verificano l’impostazione del controller nella view, la gestione degli eventi ricevuti in input e l'esecuzione dei relativi comandi, i controlli dello stato di gioco e l’aggiornamento della view quando il gioco è in stato di playing. In questa classe di test sono stati utilizzati dei mock di Game, GameLoop, GameView, Level ed Event.
+    \item \textbf{Classi Command}: Classi che implementano l’interfaccia Command e che rappresentano i possibili comandi di gioco. Per ogni classe è stato effettuato un test che ne verificasse il corretto funzionamento, facendo uso anche in questo caso di diversi mock.
+    \item \textbf{GameLoopImpl}: Classe che si occupa di generare il game loop e aggiornare periodicamente il gioco tramite il controller. Per questa classe si sono testati l’avvio e l’arresto del loop tramite l’impostazione della variabile running a true e false, la chiamata ad updater (per il quale si è utilizzato un mock di Consumer), il rispetto dei valori minimo e massimo della variabile elapsed.
+    \item\textbf{GameCoreImpl}: Classe che si occupa dell’inizializzazione delle componenti model, controller, view e dell’aggiornamento dello stato di gioco. Per questa classe si è solo verificato che GameCoreImpl esponga correttamente il controller attraverso il metodo getController(). Per farlo, sono stati usati mock di Game, GameController e GameLoop, iniettati tramite il costruttore.
+\end{itemize}
 
 \section{Note di sviluppo}
 
 \subsection{Sophy Mercuri}
 
 \subsection{Shuyi Zhang}
+\begin{itemize}
+    \item \textbf{Utilizzo di lambda expressions} \\
+    Utilizzate nei test per verificare il lancio di eccezioni con assertThrows. Un esempio è l'uso di builder::submit per testare i casi di submit non valido. \\
+    \textbf{Permalink}: \url {https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/test/java/it/unibo/makeanicecream/IceCreamBuilderTest.java#L232}
+    \item \textbf{Utilizzo di Stream} \\
+    Utilizzati in IceCreamImpl.toString() per concatenare la rappresentazione testuale degli ingredienti. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/IceCreamImpl.java#L80-L83}
+    \item \textbf{Utilizzo di Optional in IceCreamImpl} \\
+   Utilizzato tramite orElse() nella gestione degli stream per il caso di lista vuota. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/IceCreamImpl.java#L83}
+    \item \textbf{Utilizzo di Method Reference nei test} \\
+    Utilizzato per verificare l'immutabilità della lista degli ingredienti. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/test/java/it/unibo/makeanicecream/IceCreamImplTest.java#L82}
+\end{itemize}
 
 \subsection{Antonio Scharmuller}
 \begin{itemize}
-
 \item \textbf{Utilizzo di Lambda expressions} \\
 Le lambda expressions sono state utilizzate per registrare dinamicamente le callback tra cliente e livello, permettendo di propagare l’esito dell’ordine in modo compatto e leggibile. L’uso di funzioni come parametro riduce la necessità di classi anonime esplicite e migliora la chiarezza del flusso logico. \\
 \textbf{Link:} \url{[PERMALINK StandardLevel -- registrazione callback]}
@@ -429,13 +451,11 @@ Nei test automatici è stata utilizzata la libreria Mockito per creare mock di \
 \item \textbf{Controllo dello stato tramite validazione esplicita} \\
 Sono stati introdotti controlli espliciti su stati non validi (es. consegna senza gelato completo) e su input nulli. Questa scelta migliora la robustezza del modello e previene stati inconsistenti durante l’esecuzione. \\
 \textbf{Link:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
-
 \end{itemize}
 
 \subsection{Chiara Emina}
 
 \begin{itemize}
-
 \item \textbf{Uso di Lambda expressions} \\
 Utilizzate soprattutto in GameControllerImpl per la creazione dei vari comandi. \\
 \textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/controller/GameControllerImpl.java#L52}
@@ -458,6 +478,14 @@ Per implementare il game loop nella classe GameLoopImpl ho riadattato parti del 
 \subsection{Sophy Mercuri}
 
 \subsection{Shuyi Zhang}
+Il mio ruolo è consistito nello sviluppo della logica di costruzione del gelato, occupandomi della modellazione delle entità di dominio (cono, ingredienti) e della gestione incrementale della creazione per l'interazione del giocatore.
+\begin{itemize}
+    \item \textbf{Punti di forza} \\
+    I punti di forza del mio lavoro sono principalmente due. Innanzitutto, la modellazione degli ingredienti tramite enumerazioni, che rende il sistema facilmente estendibile: quando vogliamo aggiungere nuovi gusti o topping, è sufficiente inserirli nell'enum senza modificare la logica esistente. In secondo luogo, l'utilizzo del pattern Builder con logica centralizzata: tutto il codice che gestisce i vincoli di costruzione del gelato (come il numero massimo di scoop o la quantità di topping consentita) è raccolto in un unico punto, garantendo uniformità e manutenibilità.
+    \item \textbf{Punti di debolezza} \\
+    Le principali debolezze riguardano invece la flessibilità del sistema. La presenza di variabili statiche (come MAX\_SCOOPS) rende il codice rigido e poco adattabile a contesti diversi, come livelli di gioco con regole differenti che potremmo avere in lavori futuri. Inoltre, la logica del Builder risulta ancora troppo accoppiata a dettagli specifici del gioco, invece di dipendere da astrazioni che renderebbero il sistema più modulare e facilmente modificabile. Questo significa che, se in futuro venissero richieste nuove funzionalità o variazioni delle regole, dovrei ricontrollare e modificare la logica del Builder per verificare che sia ancora conforme ai requisiti.
+\end{itemize}
+
 
 \subsection{Antonio Scharmuller}
 
@@ -477,11 +505,19 @@ Una probabile debolezza è forse il fatto che il controller è piuttosto central
 \subsection{Sophy Mercuri}
 
 \subsection{Shuyi Zhang}
+\textbf{Difficoltà principali} \\
+La sfida più grande è stata gestire le dipendenze tra i componenti sviluppati dai vari membri del team. Spesso abbiamo dovuto modificare codice già completato per allinearlo alle interfacce definite dai colleghi, rendendo lo sviluppo meno lineare del previsto. 
+Anche il debugging nelle fasi avanzate è stato complesso: molti bug emergevano solo quando l'interazione tra le parti diventava più intricata. Interpretare gli errori di compilazione, specialmente con Gradle, ha richiesto tempo per essere padroneggiato. Git è stato un'altra difficoltà iniziale: gestire conflitti e coordinarsi su un repository condiviso era completamente nuovo per me.
+La gestione del tempo si è rivelata complessa a causa della sovrapposizione con altri esami. Infine, scrivere la relazione in italiano, non essendo la mia lingua madre, ha richiesto uno sforzo extra per garantire chiarezza espositiva. \\
+\textbf{Cosa ho imparato} \\
+Nonostante le difficoltà, il progetto è stato estremamente formativo. Ho consolidato le mie conoscenze di programmazione ad oggetti, inizialmente carenti. Ho acquisito padronanza di Git e Gradle, strumenti che all'inizio del corso mi sembravano ostici.
+Lavorare in team mi ha insegnato l'importanza di definire chiaramente le interfacce fin dall'inizio per ridurre il lavoro di integrazione. Soprattutto,ho imparato a collaborare, gestire le scadenze e superare le insicurezze iniziali. Il risultato finale è soddisfacente e l'esperienza mi ha fornito strumenti preziosi per i progetti futuri, sia universitari che professionali.
+
 
 \subsection{Antonio Scharmuller}
 
 \subsection{Chiara Emina}
-La parte più difficile del corso è stata senza dubbio l’esame pratico in laboratorio. Ho avuto grandi difficoltà nella comprensione dell’esercizio di Junit, sia quando ho svolto le prove passate per esercitarmi, sia all’esame, perché ogni volta vi erano diverse entità e meccaniche da implementare che per me erano molto complicate da capire, soprattutto entro un tempo limite. Tuttavia, anche nello svolgimento del progetto ho avuto qualche problema, soprattutto nell’imparare a usare git e a lavorare in gruppo con una data di consegna fissata da rispettare. Queste cose erano tutte nuove per me, e ho trovato qualche difficoltà a gestire le tempistiche di sviluppo del nostro programma, probabilmente anche a causa della mia insicurezza durante la progettazione. Nonostante ciò, grazie a questo progetto ho acquisito familiarità con l’uso di git e con il lavoro di gruppo, e mi sento molto soddisfatta del lavoro realizzato. Penso che questo progetto sia stato un passo molto importante per il mio percorso di studi e crescita personale, soprattutto per quanto riguarda il relazionarsi con altre persone e lavorare insieme.
+La parte più difficile del corso è stata senza dubbio l’esame pratico in laboratorio. Ho avuto grandi difficoltà nella comprensione dell’esercizio di Junit, sia quando ho svolto le prove passate per esercitarmi, sia all’esame, perché ogni volta vi erano diverse entità e meccaniche da implementare che per me erano molto complicate da capire, soprattutto entro un tempo limite. Tuttavia, anche nello svolgimento del progetto ho avuto qualche problema, soprattutto nell’imparare a usare git e a lavorare in gruppo con una data di consegna fissata da rispettare. Queste cose erano tutte nuove per me, e ho trovato qualche difficoltà a gestire le tempistiche di sviluppo del nostro programma, probabilmente anche a causa della mia insicurezza durante la progettazione. Nonostante ciò, grazie a questo progetto ho acquisito familiarità con l’uso di git e con il lavoro di gruppo, e mi sento molto soddisfatta del lavoro realizzato. Ho aquisito una buona padronanza di Gradle e ho migliorato la mia capacità di applicare concretamente le classi e i concetti fondamentali di Java Penso che questo progetto sia stato un passo molto importante per il mio percorso di studi e crescita personale, soprattutto per quanto riguarda il relazionarsi con altre persone e lavorare insieme.
 
 
 \appendix
