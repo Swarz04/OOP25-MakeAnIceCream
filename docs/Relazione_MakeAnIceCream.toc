@@ -1,64 +1,74 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{\numberline {1}Analisi}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Descrizione e requisiti}{2}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Modello del Dominio}{3}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Design}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Architettura}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Design dettagliato}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Gestione Customer, Ordini e Timer (Studente 1)}{6}{subsection.2.2.1}%
-\contentsline {subsubsection}{Creazione dei clienti che possiedono un ordine}{6}{section*.4}%
-\contentsline {paragraph}{Problema}{6}{section*.5}%
-\contentsline {paragraph}{Responsabilità da rispettare riguardanti il cliente}{6}{section*.6}%
-\contentsline {paragraph}{Approccio per la soluzione}{6}{section*.7}%
-\contentsline {subsubsection}{Gestione degli ordini e validazione del gelato}{7}{section*.8}%
-\contentsline {paragraph}{Problema}{7}{section*.9}%
-\contentsline {paragraph}{Responsabilità da rispettare}{8}{section*.10}%
-\contentsline {paragraph}{Approccio per la soluzione}{8}{section*.11}%
-\contentsline {subsubsection}{Gestione del timer}{8}{section*.12}%
-\contentsline {paragraph}{Problema Generale}{8}{section*.13}%
-\contentsline {paragraph}{Problema organizzativo}{9}{section*.14}%
-\contentsline {paragraph}{Approccio per la soluzione}{9}{section*.15}%
-\contentsline {paragraph}{Approccio per la soluzione al problema generale}{9}{section*.16}%
-\contentsline {subsection}{\numberline {2.2.2}Costruzione del Gelato (Studente 2)}{10}{subsection.2.2.2}%
-\contentsline {subsubsection}{Costruzione del gelato}{10}{section*.17}%
-\contentsline {paragraph}{Problema}{10}{section*.18}%
-\contentsline {paragraph}{Soluzione}{10}{section*.19}%
-\contentsline {subsubsection}{Modellazione degli ingredienti del gelato}{12}{section*.20}%
-\contentsline {paragraph}{Problema}{12}{section*.21}%
-\contentsline {paragraph}{Soluzione}{12}{section*.22}%
-\contentsline {subsubsection}{Costruzione progressiva}{12}{section*.23}%
-\contentsline {paragraph}{Problema}{12}{section*.24}%
-\contentsline {paragraph}{Soluzione}{13}{section*.25}%
-\contentsline {subsection}{\numberline {2.2.3}Gestione del Giocatore e Livelli (Studente 3)}{14}{subsection.2.2.3}%
-\contentsline {subsubsection}{Gestione del giocatore e della consegna degli ordini}{14}{section*.26}%
-\contentsline {paragraph}{Problema}{14}{section*.27}%
-\contentsline {paragraph}{Soluzione}{14}{section*.28}%
-\contentsline {subsubsection}{Gestione dei livelli e progressione della difficoltà}{15}{section*.29}%
-\contentsline {paragraph}{Problema}{15}{section*.30}%
-\contentsline {paragraph}{Soluzione}{16}{section*.31}%
-\contentsline {subsection}{\numberline {2.2.4}Gestione Comandi e Stato (Studente 4)}{16}{subsection.2.2.4}%
-\contentsline {subsubsection}{Gestione dei comandi utente}{16}{section*.32}%
-\contentsline {paragraph}{Problema}{16}{section*.33}%
-\contentsline {paragraph}{Soluzione}{16}{section*.34}%
-\contentsline {subsubsection}{Gestione degli eventi utente}{17}{section*.35}%
-\contentsline {paragraph}{Problema}{17}{section*.36}%
-\contentsline {paragraph}{Soluzione}{17}{section*.37}%
-\contentsline {subsubsection}{Gestione dello stato del gioco}{17}{section*.38}%
-\contentsline {paragraph}{Problema}{17}{section*.39}%
-\contentsline {paragraph}{Soluzione}{17}{section*.40}%
-\contentsline {subsubsection}{Motore di gioco}{17}{section*.41}%
-\contentsline {paragraph}{Problema}{17}{section*.42}%
-\contentsline {paragraph}{Soluzione}{18}{section*.43}%
-\contentsline {chapter}{\numberline {3}Sviluppo}{19}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Testing automatizzato}{19}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Note di sviluppo}{20}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Commenti finali}{24}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{24}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{24}{section.4.2}%
-\contentsline {chapter}{\numberline {A}Guida utente}{26}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{27}{appendix.Alph2}%
-\contentsline {subsection}{\numberline {B.0.1}Studente 1}{27}{subsection.Alph2.0.1}%
-\contentsline {subsection}{\numberline {B.0.2}Studente 2}{27}{subsection.Alph2.0.2}%
-\contentsline {subsection}{\numberline {B.0.3}Studente 3}{27}{subsection.Alph2.0.3}%
-\contentsline {subsection}{\numberline {B.0.4}chiara.emina@studio.unibo.it}{27}{subsection.Alph2.0.4}%
+\contentsline {chapter}{\numberline {1}Analisi}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Descrizione e requisiti}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Modello del Dominio}{4}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Design}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Architettura}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Design dettagliato}{7}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Sophy Mercuri}{7}{subsection.2.2.1}%
+\contentsline {subsubsection}{Design- Costumer / Ordini / Timer}{7}{section*.4}%
+\contentsline {subsubsection}{Creazione dei clienti che possiedono un ordine}{7}{section*.5}%
+\contentsline {paragraph}{Problema}{7}{section*.6}%
+\contentsline {paragraph}{Soluzione}{8}{section*.7}%
+\contentsline {subsubsection}{Gestione degli ordini}{9}{section*.8}%
+\contentsline {paragraph}{Problema}{9}{section*.9}%
+\contentsline {paragraph}{Soluzione}{9}{section*.10}%
+\contentsline {subsubsection}{Gestione del timer}{11}{section*.11}%
+\contentsline {paragraph}{Problema}{11}{section*.12}%
+\contentsline {paragraph}{Soluzione}{11}{section*.13}%
+\contentsline {subsection}{\numberline {2.2.2}Shuyi Zhang}{12}{subsection.2.2.2}%
+\contentsline {subsubsection}{Costruzione del gelato}{12}{section*.14}%
+\contentsline {paragraph}{Problema}{12}{section*.15}%
+\contentsline {paragraph}{Soluzione}{13}{section*.16}%
+\contentsline {subsubsection}{Modellazione degli ingredienti del gelato}{14}{section*.17}%
+\contentsline {paragraph}{Problema}{14}{section*.18}%
+\contentsline {paragraph}{Soluzione}{15}{section*.19}%
+\contentsline {subsubsection}{Factory Pattern per la creazione degli ingredienti}{15}{section*.20}%
+\contentsline {paragraph}{Problema}{15}{section*.21}%
+\contentsline {paragraph}{Soluzione}{15}{section*.22}%
+\contentsline {subsection}{\numberline {2.2.3}Antonio Scharmuller}{16}{subsection.2.2.3}%
+\contentsline {subsubsection}{Gestione del giocatore e della consegna degli ordini}{16}{section*.23}%
+\contentsline {paragraph}{Problema}{16}{section*.24}%
+\contentsline {paragraph}{Soluzione}{17}{section*.25}%
+\contentsline {subsubsection}{Gestione dei livelli e progressione della difficoltà}{18}{section*.26}%
+\contentsline {paragraph}{Problema}{18}{section*.27}%
+\contentsline {paragraph}{Soluzione}{19}{section*.28}%
+\contentsline {subsection}{\numberline {2.2.4}Chiara Emina}{20}{subsection.2.2.4}%
+\contentsline {subsubsection}{Gestione dei comandi utente}{20}{section*.29}%
+\contentsline {paragraph}{Problema}{20}{section*.30}%
+\contentsline {paragraph}{Soluzione}{20}{section*.31}%
+\contentsline {subsubsection}{Gestione degli eventi utente}{21}{section*.32}%
+\contentsline {paragraph}{Problema}{22}{section*.33}%
+\contentsline {paragraph}{Soluzione}{22}{section*.34}%
+\contentsline {subsubsection}{Gestione dello stato del gioco}{23}{section*.35}%
+\contentsline {paragraph}{Problema}{24}{section*.36}%
+\contentsline {paragraph}{Soluzione}{24}{section*.37}%
+\contentsline {subsubsection}{Core di gioco}{25}{section*.38}%
+\contentsline {paragraph}{Problema}{26}{section*.39}%
+\contentsline {paragraph}{Soluzione}{26}{section*.40}%
+\contentsline {chapter}{\numberline {3}Sviluppo}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Testing automatizzato}{27}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Sophy Mercuri}{27}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Shuyi Zhang}{27}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Antonio Scharmuller}{28}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Chiara Emina}{28}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Note di sviluppo}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Sophy Mercuri}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Shuyi Zhang}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Antonio Scharmuller}{30}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Chiara Emina}{31}{subsection.3.2.4}%
+\contentsline {chapter}{\numberline {4}Commenti finali}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Autovalutazione e lavori futuri}{33}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Sophy Mercuri}{33}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Shuyi Zhang}{33}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Antonio Scharmuller}{34}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Chiara Emina}{34}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Difficoltà incontrate e commenti per i docenti}{35}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Sophy Mercuri}{35}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Shuyi Zhang}{35}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Antonio Scharmuller}{36}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Chiara Emina}{36}{subsection.4.2.4}%
+\contentsline {chapter}{\numberline {A}Guida utente}{38}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Esercitazioni di laboratorio}{39}{appendix.Alph2}%
+\contentsline {subsection}{\numberline {B.0.1}chiara.emina@studio.unibo.it}{39}{subsection.Alph2.0.1}%

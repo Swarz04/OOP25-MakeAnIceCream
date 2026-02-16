@@ -28,12 +28,8 @@
 
 \section{Descrizione e requisiti}
 
-Il software oggetto di questo progetto è un videogioco intitolato Make an Ice Cream. L'obiettivo dell’applicazione è quello di offrire un’esperienza di gioco, in cui l’utente assume il ruolo di un gelatiere che deve soddisfare gli ordini di una serie di clienti entro dei vincoli temporali prestabiliti.
+Il software oggetto di questo progetto è un videogioco intitolato 'Make an Ice Cream'. L'obiettivo dell’applicazione è quello di offrire un’esperienza di gioco, in cui l’utente assume il ruolo di un gelatiere che deve soddisfare gli ordini di una serie di clienti entro dei vincoli temporali prestabiliti. Durante lo svolgimento del gioco, all’utente vengono presentati diversi clienti in modo sequenziale, uno alla volta, e ognuno è caratterizzato da un ordine specifico e da un timer. L’ordine di un cliente descrive la composizione del gelato desiderato, e il timer specifica il tempo limite entro il quale l’ordine deve essere completato. Al giocatore vengono inoltre forniti, su un bancone, una serie di ingredienti quali gusti di gelato, tipi di cono e topping. Il compito del giocatore è quello di selezionare gli ingredienti appropriati e comporre il gelato in modo conforme all’ordine, per poi consegnarlo al cliente. Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei livelli aumentano la complessità degli ordini e il numero complessivo di clienti, e diminuisce il tempo limite di ciascun cliente. Inoltre, il sistema prevede un numero limitato di vite pari a tre per ciascun livello. Una vita viene persa nel caso in cui il giocatore consegni un gelato non conforme all’ordine richiesto, oppure quando il tempo a disposizione per un cliente scade senza che la consegna dell’ordine venga completata. Al termine delle vite disponibili, la partita si conclude con uno stato di game over. Se il giocatore riesce a servire tutti i clienti del livello senza perdere tutte le vite, la partita termina con uno stato di livello completato.
 
-Durante lo svolgimento del gioco, all’utente vengono presentati diversi clienti in modo sequenziale, uno alla volta, e ognuno è caratterizzato da un ordine specifico e da un timer. L’ordine di un cliente descrive la composizione del gelato desiderato, e il timer specifica il tempo limite entro il quale l’ordine deve essere completato.
-Al giocatore vengono inoltre forniti, su un bancone, una serie di ingredienti quali gusti di gelato, tipi di cono e topping. Il compito del giocatore è quello di selezionare gli ingredienti appropriati e comporre il gelato in modo conforme all’ordine, per poi consegnarlo al cliente.
-
-Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei livelli aumentano la complessità degli ordini e il numero complessivo di clienti, e diminuisce il tempo limite di ciascun cliente. Inoltre, il sistema prevede un numero limitato di vite pari a tre per ciascun livello. Una vita viene persa nel caso in cui il giocatore consegni un gelato non conforme all’ordine richiesto, oppure quando il tempo a disposizione per un cliente scade senza che la consegna dell’ordine venga completata. Al termine delle vite disponibili, la partita si conclude con uno stato di game over.
 
 \subsection*{Requisiti funzionali}
 \begin{itemize}
@@ -54,198 +50,199 @@ Il gioco è strutturato in livelli a difficoltà crescente: con l’avanzare dei
 \end{itemize}
 
 \section{Modello del Dominio}
-In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna.
+In Make an Ice Cream, il giocatore interpreta il ruolo di un gelatiere che ha il compito di servire una serie di clienti preparando loro dei gelati. A ogni cliente sono associati un ordine, che deve indicare gli ingredienti richiesti per il gelato, e un timer che limita il tempo di consegna. Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato. Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over. Quando tutti i clienti del livello vengono serviti, senza perdere le vite disponibili, il gioco termina con un stato di livello completato. Gli elementi costitutivi del problema sono sintetizzati in \Cref{img:UML_analysis}.
 
-Il giocatore deve avere accesso a un insieme di ingredienti per poter comporre il gelato richiesto dall’ordine, e servire quindi il cliente. Quando il gelato viene consegnato al cliente, questo verifica se l’ordine è stato soddisfatto correttamente, e in caso negativo il giocatore perde una vita. Si può perdere una vita anche nel caso in cui il timer associato al cliente scade e il gelato richiesto non è stato consegnato.
-
-Il gioco è organizzato in livelli, e ogni livello ha una sua difficoltà, una sequenza di clienti da servire e un numero fisso di vite. Quando tutte le vite del livello vengono esaurite, il gioco termina con uno stato di game over.
-Gli elementi costitutivi del problema sono sintetizzati in \Cref{img:UML_Generale}.
-
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{img/UML_Generale.pdf}
-%    \caption{Schema UML dell'analisi del dominio, con rappresentate le entità principali ed i rapporti fra loro}
-%    \label{img:UML_Generale}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_analysis.png}
+    \caption{Schema UML dell’analisi del dominio, con rappresentate le entità principali e i rapporti fra loro.}
+    \label{img:UML_analysis}
+\end{figure}
 
 \chapter{Design}
 
 \section{Architettura}
 
-L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione ``ECB''. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity).
+L'architettura del gioco Make an Ice Cream segue il pattern architetturale MVC, nella sua declinazione “ECB”. Essa è organizzata quindi in tre componenti principali: la View (Boundary), il Controller (Control) e il Model (Entity). L'interfaccia GameView rappresenta la view dell’architettura MVC e il “boundary” di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi. Il controller è rappresentato dall’interfaccia GameController, che si occupa del coordinamento tra le interfacce GameView e Game, cioè view e model. GameController elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a GameView le modifiche da visualizzare. Infine, il model è rappresentato dall’interfaccia Game, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema. Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In Figura \Cref{img:UML_mvc} è riportato il diagramma UML architetturale.
 
-L'interfaccia \texttt{GameView} rappresenta la view dell’architettura MVC e il ``boundary'' di ECB. Si occupa di raccogliere gli input dell’utente e di visualizzare lo stato corrente del gioco, mostrando informazioni come ad esempio l’ordine del cliente e il tempo residuo. Tutte le azioni dell’utente vengono notificate al controller sotto forma di eventi.
+L’architettura MVC/ECB del gioco è inoltre supportata da GameCore, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite GameLoop, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
 
-Il controller è rappresentato dall’interfaccia \texttt{GameController}, che si occupa del coordinamento tra le interfacce \texttt{GameView} e \texttt{Game}, cioè view e model. \texttt{GameController} elabora gli input ricevuti dalla view, invoca le operazioni opportune sul model e aggiorna lo stato del gioco, notificando poi a \texttt{GameView} le modifiche da visualizzare.
-
-Infine, il model è rappresentato dall’interfaccia \texttt{Game}, che incapsula la logica del dominio di gioco. In particolare, esso è responsabile della gestione delle entità fondamentali del dominio e delle regole di gioco, e fornisce al controller un punto di accesso allo stato e alle regole del sistema.
-
-L’architettura MVC/ECB del gioco è inoltre supportata dal \texttt{GameEngine}, che inizializza le componenti principali e coordina il ciclo di esecuzione tramite \texttt{GameLoop}, che a sua volta aggiorna periodicamente lo stato del gioco tramite il controller. Queste componenti garantiscono l’esecuzione continua del gioco, ma non alterano i principi di disaccoppiamento tra View, Controller e Model.
-
-Con questa architettura, la view risulta disaccoppiata da controller e model, e può essere sostituita senza dover modificare le altre due componenti. In \Cref{img:Architecture} è riportato il diagramma UML architetturale.
-
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 20cm 0 0, clip]{img/UML_Architecture.pdf} %prime ricerca su google per tagliare immagini, https://guitex.org/home/en/forum/5-tex-e-latex/49574-risolto-tagliare-le-immagini
-%    \caption{Schema UML architetturale di Make an Ice Cream. L’interfaccia \texttt{GameController} è il controller del sistema, e coordina le interazioni tra le interfacce \texttt{GameView} e \texttt{Game}.}
-%    \label{img:Architecture}
-%\end{figure}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_mvc.png} %prime ricerca su google per tagliare immagini, https://guitex.org/home/en/forum/5-tex-e-latex/49574-risolto-tagliare-le-immagini
+    \caption{Schema UML architetturale di Make an Ice Cream. L’interfaccia GameController è il controller del sistema, e coordina le interazioni tra le interfacce GameView, che rappresenta la view, e Game, che rappresenta il model. GameCore è la classe che inizializza e coordina le componenti necessarie per eseguire il gioco, mentre GameLoop gestisce l’aggiornamento periodico del controller.}
+    \label{img:UML_mvc}
+\end{figure}
 
 \section{Design dettagliato}
 
-\subsection{Gestione Customer, Ordini e Timer (Studente 1)}
+\subsection{Sophy Mercuri}
 Questa sezione descrive il design relativo definendo le principali responsabilità e interazioni riguardanti la gestione dei clienti (customer), degli ordini (order) e del timer che gestisce i tempi di attesa dei clienti (CustomerTimer).
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_Customer.pdf}
-%    \caption{Schema UML relativo a Customer}
-%    \label{img:UML_Customer}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_CLIENTE_GENERAL.png}
+    \caption{Schema UML di design che illustra le interazioni tra le entità Customer, Order e CostumerTimer e la scelta di pattern principali}
+    \label{img:UML_GENERAL}
+\end{figure}
 
 \subsubsection{Creazione dei clienti che possiedono un ordine}
 \paragraph{Problema}
-Nel gioco ci sono diverse tipologie di clienti. Ogni cliente ha:
+Nel gioco esistono diverse tipologie di clienti, ciascuno caratterizzato da:
 \begin{itemize}
-    \item Un nome (scelto casualmente da una lista)
-    \item Una difficoltà specifica per la composizione del gelato (mappata al nome)
-    \item Un ordine da richiedere, generato casualmente ma sensato ai parametri stabiliti
-    \item Un callback da attaccare al timer
+    \item Un nome (scelto casualmente da una lista predefinita);
+    \item  una difficoltà specifica che influenza la complessità dell'ordine (numero di gusti e di topping);
+    \item un ordine generato casualmente ma coerente con i parametri della difficoltà;
+    \item  un timer associato, che deve poter notificare la scadenza tramite una callback.
+\end{itemize}
+Il livello di gioco fornisce una difficoltà massima e un tempo limite; il cliente deve essere creato con una difficoltà non superiore a quella del livello e con un ordine che rispetti i vincoli della difficoltà scelta. Inoltre, la logica di creazione deve essere centralizzata, facilmente estendibile e non deve dipendere dal controller.
+
+\paragraph{Soluzione}
+Ho applicato il pattern Factory Method, realizzando una classe CustomerFactory che incapsula tutta la logica di creazione dei clienti. La factory utilizza internamente una classe CustomerTemplate per definire le configurazioni base associate a ogni livello di difficoltà (nomi possibili, numero di gusti, numero di topping). Il metodo createCustomer() riceve la difficoltà massima del livello e il tempo disponibile, sceglie casualmente una difficoltà specifica per il cliente (uguale o inferiore al massimo), recupera il template corrispondente, genera un ordine casuale rispettando i vincoli del template e restituisce il cliente già configurato con il proprio timer. La classe CustomerTemplate è un semplice contenitore immutabile che memorizza i dati di configurazione
+L’ordine viene costruito tramite l’OrderBuilder (descritto in \Cref{img:UML_Factory}), che aggiunge il numero corretto di gusti e topping scelti casualmente dalle liste degli ingredienti disponibili. 
+
+\paragraph{Motivazioni e vantaggi}
+\begin{itemize}
+    \item Incapsulamento: tutta la complessità legata alla creazione dei clienti è nascosta all’interno della factory. Il controller si limita a invocare createCustomer() senza conoscere i dettagli dei template o la generazione casuale degli ordini.
+    \item  Separazione delle responsabilità: la factory si occupa di come creare un cliente, il controller decide quando e con quali parametri.
+    \item Estensibilità: per aggiungere una nuova difficoltà (es. livello 6) è sufficiente inserire un nuovo template nella mappa, senza modificare il codice esistente. Questo rispetta il principio Open/Closed.
+    \item  Testabilità: posso scrivere test unitari che verificano che, per ogni livello, i clienti generati abbiano le caratteristiche attese (numero di gusti, numero di topping, nomi validi) senza dover simulare l’intero gioco.
 \end{itemize}
 
-\paragraph{Responsabilità da rispettare riguardanti il cliente}
+\paragraph{Alternative considerate}
 \begin{itemize}
-    \item Avere una difficoltà definita e associata al suo nome
-    \item Disponere di un attributo Order la cui composizione non sia di difficoltà maggiore a quella proporzionata dal livello
-    \item Disponere di un attributo Customer Timer
-    \item Callback configurato che notifica la scadenza del timer del cliente
+    \item Method classico con sottoclassi: avrebbe richiesto una sottoclasse per ogni difficoltà, aumentando inutilmente il numero di classi e rendendo la configurazione meno flessibile. La soluzione con template oggetto (composition) è più leggera e permette di variare la configurazione anche a runtime.
 \end{itemize}
 
-\paragraph{Approccio per la soluzione}
-Usare il pattern ``FACTORY''.
-Perchè? Ci permette incapsulare tutta la logica di creazione dei clienti in un unico punto: \texttt{CustomerFactory}. Essa utilizza internamente una classe \texttt{CustomerTemplate} per definire le configurazioni base delle diverse difficoltà di modo che se in futuro voglio andare ad aggiungere un cliente basato su una nuova difficoltà so dove andare. Separazione delle responsabilità, il controller non deve sapere esattamente come si fabbrica un cliente. Deve solo chiedere che gli venga dato un in base alla difficoltà da lui proporzionata. Testabilità, ci permette di testare la factory indipendentemente dal reso del gioco, verificando che i clienti siano stati generati rispettando sempre le regole.
-
-Cosa accade dentro la factory, una volta ricevuta la difficoltà:
-\begin{enumerate}
-    \item Viene scelto un nome casuale (non mappato a una difficoltà minore)
-    \item Gli viene impostato il tempo limite definito dal livello per la difficoltà passata
-    \item Genera un ordine casuale: Sceglie un cono, sceglie da 1 a ... riceve un parametro di difficoltà (dal livello corrente) e restituisce un cliente con una configurazione completa.
-\end{enumerate}
-Ci permette in modo che se domani voglio aggiungere una nuova difficoltà per il profilo di un cliente nuovo, so esattamente dove andare. Separazione delle responsabilità, perchè il controller non deve sapere come si fa un cliente, ma deve solo chiedere un cliente in base alla difficoltà che proporziona modo che in \texttt{CustomerFactory.createCustomer()} in modo che questo riceva un intero (\texttt{maxDifficulty}) che rappresenti la difficoltà del livello in cui si troverà il cliente, in base a questo si crea un cliente di difficoltà equivalente a quella passata o inferiore. Testabilità.
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_CustomerFactory.pdf}
-%    \caption{Schema UML relativo alla Factory}
-%    \label{img:UML_Factory}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_FACTORY.png}
+    \caption{Schema UML che indica la struttura delle classi per la creazione del cliente insieme al utilizzo del pattern Factory.}
+    \label{img:UML_Factory}
+\end{figure}
 
 \subsubsection{Gestione degli ordini e validazione del gelato}
 \paragraph{Problema}
 Un ordine (\texttt{Order}) è un oggetto la cui complessità è determinata da tipologia del cliente che effettua l’ordine può essere composto da:
 \begin{itemize}
-    \item Una lista di gusti (1 elemento min - max 3)
-    \item Un cono (obbligatorio)
-    \item Una lista di topping (0-2 elementi)
+    \item una lista di gusti (1 elemento min - max 3);
+    \item un cono (obbligatorio);
+    \item una lista di topping (0-2 elementi).
 \end{itemize}
 
 Seguendo le regole di dominio imposte:
 \begin{itemize}
-    \item I gusti devono essere di tipo SCOOP
-    \item I topping devono essere LIQUID o SOLID
-    \item Massimo un topping SOLID per ordine (non ci possono essere topping solidi tra gli SCOOP)
-    \item Non si possono aggiungere ingredienti dopo un topping solido
+    \item i gusti devono essere di tipo SCOOP;
+    \item i topping devono essere di tipo LIQUID o SOLID;
+    \item al massimo un topping solido può essere presente nell’ordine;
+    \item non è consentito aggiungere ingredienti dopo un topping solido (deve essere l’ultimo elemento).
 \end{itemize}
-
-\paragraph{Responsabilità da rispettare}
-Costruire un ordine e memorizzarlo correttamente rispettando i parametri di dominio. Verificare se un gelato composto dal giocatore soddisfa la richiesta del cliente.
-
-\paragraph{Approccio per la soluzione}
-Usare il pattern ``BUILDER''.
-Perchè? Ci favorisce nel controllo. La classe \texttt{OrderBuilder} si occupa di costruire l’ordine ad ogni passo, controllando a sua volta che tutte le regole siano rispettate, che i tipi siano corretti e che non ci siano null, e preserva l’ordine della sequenza con cui è stato costruito il gelato. Il pattern Builder favorisce la comprensione, poiché le operazioni di stanziamento sono eseguite in sequenza. \texttt{OrderImpl} che implementa l'interfaccia \texttt{Order}, proporziona la rappresentazione dell'ordine in modo immutabile, verifica che i SOLID\_TOPPING non siano maggiori a uno.
-
-La verifica dell’ordine all'interno di \texttt{OrderImpl} la preservazione della sequenza esatta degli ingredienti del Order creato ci permette attraverso il metodo \texttt{isSatisfiedBy()} di confrontare l’\texttt{IceCream} creato dal Player (passato come parametro) e l’\texttt{Order} creato in \texttt{OrderBuilder}. L'esito positivo del confronto comprende che:
-\begin{itemize}
-    \item Abbiano lo stesso cono
-    \item Abbiano gli stessi gusti, nello stesso ordine
-    \item Abbiano gli stessi topping, nello stesso ordine
-\end{itemize}
-Per garantire questo, inizialmente si verifica che il gelato passato non sia di tipo null, che sia uguale il tipo di cono (cone), poi si verifica che le lunghezze di entrambe liste sia uguale e la corrispondenza di ogni flavor e topping, posizione per posizione avvantaggiandosi delle liste di tipo \texttt{Ingredient}: con hashcode ed equal ridefinito logicamente per i topping e i flavor (dallo studente 2) in modo di poter verificare facilmente le liste corrispondente al Order e all'Ice Cream.
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 2cm, clip]{img/UML_Order.pdf}
-%    \caption{Schema UML relativo agli Ordini}
-%    \label{img:UML_Order}
-%\end{figure}
-
-\subsubsection{Gestione del timer}
-\paragraph{Problema Generale}
-Il gioco richiede che ogni cliente abbia un timer il cui tempo rappresenti il limite di “pazienza” per ricevere il gelato. Al verificarsi lo scadere del tempo il giocatore perde una vita e il cliente non è soddisfatto. Il timer deve:
-\begin{itemize}
-    \item Contare alla rovescia in modo preciso
-    \item Poter essere messo in pausa e ripreso
-    \item Notificare quando il suo tempo è scaduto
-\end{itemize}
-
-\paragraph{Problema organizzativo}
-Coordinare l'implementazione timer alla presa di decisione dagli studenti incaricati:
-\begin{itemize}
-    \item Di gestire il flusso di gioco: studente 4 (avviare, fermare, mettere in pausa)
-    \item Dell’Implementazione delle regole di gioco, specificamente decidere cosa fare allo scadere del timer: studente 3 (togliere una vita, finire la partita, ecc)
-\end{itemize}
-Complicando come si sarebbe gestita la scadenza, lasciando un bisogno di modellare un timer che assumesse successivamente comportamenti specifici davanti a certe situazioni senza basarsi in metodi in costruzioni o soggetti a cambi.
-
-\paragraph{Approccio per la soluzione}
-``CALLBACK'' con setter.
-Si è implementato il timer in modo che sapesse semplicemente contare. Il timer è stato creato con l’incertezza di cosa succede esattamente alla sua terminazione. Sa solo che, allo scadere del tempo, questo dovrà eseguire un comportamento che è stato passato dall’esterno, specificamente con un setter, non nel costruttore. Questo col proposito di favorire il lavoro in parallelo, semplificando l’implementazione e dando l’autonomia ai miei compagni di decidere come proseguere o fare cambiamenti.
-
-\paragraph{Approccio per la soluzione al problema generale}
-``Observer'' (minimale):
-Invece dell'implementazione delle interfaccia Observer e Observable, la lista di observer e i conseguenti metodi per aggiungere o rimuovere un observer della lista, o notificare tutti si è implementato uno minimale con:
-\begin{itemize}
-    \item Zero interfacce (si è usato un Runnable di Java)
-    \item Un solo observer per il timer
-    \item Un solo metodo per impostarlo
-    \item Una notifica che va a uno solo e non una lista
-\end{itemize}
-Perchè? Nel nostro gioco, ogni timer ha esattamente un osservatore. Il cliente ha un timer, e quando quel timer scade deve avvisare il cliente (o il livello, o il controller). Non serve una lista, non serve rimuovere dinamicamente, non serve notificare dieci componenti diversi.
-
-Vantaggi concreti di questa soluzione:
-\begin{itemize}
-    \item \textbf{Testabilità}: Posso testare il timer senza dover creare un controller, un livello, un cliente o una finestra Swing. Creo un timer, gli passo un callback finto che si limita a settare una variabile booleana, simulo il passare del tempo e verifico che il callback venga chiamato. Pulito, veloce, isolato.
-    \item \textbf{Flessibilità}: Lo stesso identico timer può essere usato per diverse parti (Clienti normali, Clienti speciali, Tutorial, Modalità allenamento). Cambia solo il callback, il timer è sempre lo stesso.
-\end{itemize}
-
-
-
-\subsection{Costruzione del Gelato (Studente 2)}
-\subsubsection{Costruzione del gelato}
-\paragraph{Problema}
-Il sistema deve creare e gestire istanze di gelato in due situazioni diverse:
-\begin{itemize}
-    \item Generare una preview del gelato richiesto dal cliente a partire dall’Order;
-    \item Gestire il gelato costruito dal giocatore in modo incrementale (scelta cono + aggiunta ingredienti).
-\end{itemize}
-In entrambi i casi è necessario rispettare gli stessi vincoli di dominio e di gioco (ad esempio numero massimo di gusti, disponibilità di ingredienti legata al livello, combinazioni ammissibili). Senza una soluzione dedicata, la logica di costruzione rischia di essere duplicata tra ordine e interazione utente, rendendo più difficile mantenere coerenza ed evolvere le regole.
+L’ordine deve essere costruito rispettando questi vincoli e, successivamente, deve essere in grado di verificare se un gelato preparato dal giocatore (IceCream) corrisponde esattamente a quanto richiesto.
 
 \paragraph{Soluzione}
-La costruzione del gelato viene centralizzata in \texttt{IceCreamBuilder}, come mostrato in \Cref{img:UML_IceCreamBuilder}.
-Il builder incapsula:
+Per la costruzione ho applicato il pattern Builder tramite la classe OrderBuilder. Essa fornisce un’interfaccia fluida (fluent interface) che permette di aggiungere ingredienti passo dopo passo, validando ogni aggiunta in tempo reale. Al termine, il metodo build() esegue una validazione finale e restituisce un oggetto OrderImpl immutabile.
+L’OrderImpl così creato preserva l’esatta sequenza con cui gli ingredienti sono stati aggiunti: prima tutti i gusti (nell’ordine di inserimento), poi i topping (nell’ordine di inserimento). Questa caratteristica è fondamentale per la fase di verifica.
+La verifica avviene nel metodo isSatisfiedBy(Icecream iceCream). Dopo aver controllato che il cono corrisponda, il metodo confronta posizione per posizione la lista degli ingredienti dell’ordine (ottenuta concatenando gusti e topping) con la lista degli ingredienti del gelato. Il confronto sfrutta i metodi equals() e hashCode() ridefiniti in Ingredient (a cura dello studente 2), che consentono di determinare l’uguaglianza logica tra ingredienti (stesso tipo e stesso nome).
+
+\paragraph{Motivazioni e vantaggi}
 \begin{itemize}
-    \item La composizione di un gelato come combinazione di Cone e lista Ingredient;
-    \item L’applicazione dei vincoli durante la creazione (o durante gli aggiornamenti incrementali).
+    \item Preservazione dell’ordine: la scelta di mantenere la sequenza esatta di aggiunta non è un dettaglio implementativo, bensì una precisa regola di dominio: un gelato con i gusti invertiti rispetto all’ordine non è accettabile. Il Builder, aggiungendo gli ingredienti nell’ordine in cui vengono invocati i metodi, garantisce automaticamente questa proprietà.
+    \item Validazione integrata: il Builder verifica la correttezza di ogni aggiunta (tipo corretto, non null) e il metodo build() effettua i controlli globali (cono presente, almeno un gusto, al massimo un topping solido). Questo impedisce la creazione di ordini malformati.
+    \item Immutabilità: OrderImpl è immutabile: le liste sono copiate nel costruttore e restituite in sola lettura tramite Collections.unmodifiableList(). Questo previene modifiche accidentali dopo la creazione.
+    \item Semplicità del confronto: grazie alla preservazione dell’ordine e alla corretta implementazione di equals() negli ingredienti, il confronto si riduce a un semplice ciclo posizionale. Non è necessario contare occorrenze o costruire mappe di frequenza.
 \end{itemize}
-L’Order non costituisce direttamente oggetti complessi, che delega al builder la creazione del gelato di preview del cliente. In modo analogo, la costruzione interattiva del giocatore utilizza lo stesso builder per aggiornare coerentemente lo stato coerente.
-Questa scelta riduce duplicazione, garantisce uniformità delle regole e semplifica l’introduzione di nuovi vincoli o ingredienti.
-Abbiamo usato in questo caso il pattern Builder, per centralizzare la logica di costruzione e rendere riusabile lo stesso processo sia nella generazione della preview dell’ordine sia nella costruzione incrementale guidata dall’utente.
+
+\paragraph{Alternative considerate}
+\begin{itemize}
+    \item Costruttore telescopico: avrebbe richiesto molteplici costruttori con combinazioni di parametri, rendendo il codice illeggibile e poco manutenibile.
+\end{itemize}
+
+\paragraph{Nota sull'evoluzione}
+Durante i test di integrazione con la GUI è emerso un problema: alcuni ordini generati dalla CustomerFactory presentavano il topping solido in una posizione errata (prima dei topping liquidi). La causa era la generazione casuale dell’ordine, non il Builder o la verifica. Ho corretto il metodo createRandomOrder() riordinando i topping in modo che i liquidi precedano sempre i solidi. Questo intervento, limitato alla factory, dimostra l’efficacia della separazione delle responsabilità: la logica di costruzione (OrderBuilder) e la logica di verifica (OrderImpl) sono rimaste invariate e corrette.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth, trim=0 2cm 0 0, clip]{img/UML_IceCreamBuilder.pdf}
+    \includegraphics[width=\textwidth]{img/UML_BUILDER.png}
+    \caption{Schema UML del Pattern Builder per la costruzione degli ordini.}
+    \label{img:UML_Order}
+\end{figure}
+
+\subsubsection{Gestione del timer}
+\paragraph{Problema}
+Nel gioco ogni cliente ha un timer che rappresenta il limite di tempo entro cui deve essere servito. Se il timer scade, il giocatore perde una vita e il cliente se ne va insoddisfatto. Il timer deve:
+\begin{itemize}
+    \item contare alla rovescia in modo preciso;
+    \item poter essere messo in pausa e ripreso;
+    \item notificare in modo appropriato quando il tempo è scaduto.
+\end{itemize}
+A ciò si aggiunge una complessità organizzativa: le decisioni su cosa accade alla scadenza dipendono da moduli sviluppati da altri membri del gruppo. In particolare:
+\begin{itemize}
+    \item Chiara Emina (flusso di gioco) si occupa di avviare, fermare e mettere in pausa il timer;
+    \item Antonio Scharmuller (regole di gioco) definisce le conseguenze della scadenza (togliere una vita, terminare la partita, ecc.).
+\end{itemize}
+Al momento della progettazione del timer non era ancora noto come sarebbe stato gestito l’evento di scadenza, né quali azioni precise sarebbero state eseguite. Serviva quindi una soluzione flessibile, che permettesse di definire il comportamento solo successivamente e in modo indipendente.
+
+\paragraph{Soluzione}
+Ho implementato il timer nella classe CustomerTimer seguendo il principio della separazione tra meccanismo e politica: il timer sa come contare il tempo, ma non sa cosa fare quando scade. Per notificare la scadenza ho utilizzato una callback sotto forma di Runnable, iniettata tramite un metodo setter (setOnExpired()) anziché tramite costruttore.
+Il timer inizia in stato di pausa; per avviarlo è necessario chiamare start() dopo averlo configurato. Il metodo update(double deltaTime) viene invocato dal game loop a ogni frame: se il timer non è scaduto né in pausa, sottrae il tempo trascorso e, quando raggiunge zero, esegue la callback se presente.
+
+\paragraph{Motivazioni e vantaggi}
+\begin{itemize}
+    \item Sviluppo parallelo: non conoscendo inizialmente le azioni da eseguire alla scadenza, ho potuto completare il timer in modo autonomo. I compagni hanno poi deciso il comportamento specifico iniettando la callback desiderata.
+    \item Disaccoppiamento: il timer non dipende da alcuna classe concreta del gioco (controller, livello, ecc.). Dipende solo dall’interfaccia funzionale Runnable, riducendo al minimo l’accoppiamento.
+    \item Flessibilità: la stessa istanza di timer può essere riconfigurata con callback diverse, se necessario (ad esempio per clienti con comportamenti speciali).
+    \item Testabilità: posso testare il timer isolatamente, verificando che la callback venga eseguita al momento giusto, senza dover simulare l’intero gioco.
+\end{itemize}
+
+\paragraph{Pattern utilizzato}
+La soluzione rappresenta una variante leggera del pattern Observer, in cui:
+\begin{itemize}
+    \item il soggetto (CustomerTimer) mantiene un riferimento a un osservatore (il Runnable);
+    \item l’osservatore viene registrato tramite il metodo setOnExpired();
+    \item alla scadenza, il soggetto notifica l’osservatore chiamando run().
+\end{itemize}
+Rispetto all’Observer classico (con liste di osservatori e interfacce dedicate), questa versione è volutamente semplificata perché nel nostro dominio ogni timer ha un solo osservatore e la notifica avviene una sola volta.
+
+\paragraph{Alternative considerate}
+\begin{itemize}
+    \item Callback nel costruttore: avrebbe richiesto di conoscere il comportamento già al momento della creazione, impedendo lo sviluppo parallelo e rendendo il timer meno riutilizzabile.
+    \item Observer classico con interfacce Observer/Observable: avrebbe introdotto complessità inutile (gestione di liste, rimozione, notifica multipla) per uno scenario che richiede una sola notifica.
+    \item Ereditarietà con classi specializzate: avrebbe moltiplicato il numero di classi (es. TimerConPerdVita, TimerConGameOver) e reso il sistema poco flessibile a cambiamenti futuri.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/UML_TIMER.png}
+    \caption{Schema UML della gestione del CustomerTimer con callback.}
+    \label{img:UML_Timer}
+\end{figure}
+
+\subsection{Shuyi Zhang}
+\subsubsection{Costruzione del gelato}
+
+\paragraph{Problema}
+Nel contesto di gioco, il gelato viene costruito attraverso una sequenza di interazioni utente (es. selezione del cono, aggiunta di gusti, aggiunta di topping). Il sistema deve quindi gestire un oggetto IceCream che evolve nel tempo, aggiornando progressivamente il suo stato in risposta alle azioni del giocatore. \\
+Una costruzione diretta dell’oggetto comporterebbe:
+\begin{itemize}
+    \item logica di aggiornamento distribuita tra più componenti;
+    \item maggiore rischio di stati inconsistenti;
+    \item difficoltà nell’applicazione uniforme dei vincoli di dominio (numero massimo di ingredienti, combinazioni valide, ecc.).
+\end{itemize}
+
+\paragraph{Soluzione}
+Per gestire correttamente la costruzione incrementale è stato introdotto IceCreamBuilder, che incapsula:
+\begin{itemize}
+    \item la logica di composizione del gelato (Cone + lista di Ingredient);
+    \item la gestione delle modifiche successive;
+    \item la validazione dei vincoli ad ogni aggiornamento.
+\end{itemize}
+Il builder diventa quindi il punto centrale attraverso cui il sistema costruisce e modifica l’istanza di IceCream, garantendo coerenza e semplificando la gestione dello stato durante l’interazione utente. \\
+\textbf{Pattern utilizzato}: \emph{Builder}, per supportare la creazione progressiva di un oggetto complesso e mantenerne la consistenza durante il ciclo di vita.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10.50cm]{img/UML_IceCreamBuilder.png}
     \caption{Schema UML relativo al Builder}
     \label{img:UML_IceCreamBuilder}
 \end{figure}
@@ -255,35 +252,39 @@ Abbiamo usato in questo caso il pattern Builder, per centralizzare la logica di 
 Il gelato può includere ingredienti differenti (palline di gusto, topping liquidi, topping solidi). Il sistema deve rappresentarli in modo uniforme e tipizzato, mantenendo l’estendibilità e prevenendo l’uso di valori non validi (es. stringhe arbitrarie per gusti o topping).
 
 \paragraph{Soluzione}
-Gli ingredienti condividono l’astrazione \texttt{Ingredient}, con implementazioni concrete per le diverse categorie. Inoltre, gusti e tipologie di topping sono rappresentati tramite enumerazioni dedicate, vincolando i valori ammessi dal dominio e mantenendo il modello consistente.
-Il gelato e il builder interagiscono esclusivamente con l’astrazione \texttt{Ingredient}, permettendo di gestire in modo polimorfico tutti i componenti del gelato e di aggiungere nuove tipologie senza modificare la struttura esistente.
+Gli ingredienti condividono l’astrazione Ingredient, con implementazioni concrete per le diverse categorie. Inoltre, gusti e tipologie di topping sono rappresentati tramite enumerazioni dedicate, vincolando i valori ammessi dal dominio e mantenendo il modello consistente.
+Il gelato e il builder interagiscono esclusivamente con l’astrazione Ingredient, permettendo di gestire in modo polimorfico tutti i componenti del gelato e di aggiungere nuove tipologie senza modificare la struttura esistente.
 Questa scelta migliora l’estendibilità del modello e riduce l’accoppiamento tra le componenti.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Ingredients.pdf}
+    \includegraphics[width=\textwidth]{img/UML_Ingredient.png}
     \caption{Schema UML relativo agli Ingredienti}
-    \label{img:UML_Ingredients}
+    \label{img:UML_Ingredient}
 \end{figure}
 
-\subsubsection{Costruzione progressiva}
+\subsubsection{Factory Pattern per la creazione degli ingredienti}
 \paragraph{Problema}
-Il gelato è composto da diversi ingredienti variabili (base/cono, gusto, topping). Preparare tutti gli elementi contemporaneamente risulta scomodo e poco flessibile. Un approccio più naturale consiste nel prepararlo in modo progressivo, aggiungendo un ingrediente alla volta, proprio come in una gelateria (tramite click del giocatore). Alcuni ingredienti seguono regole precise: i gusti possono essere aggiunti più volte; i topping liquidi possono essere aggiunti tra due gusti; mentre i topping solidi possono essere aggiunti solo una volta ed esclusivamente sopra, una volta; l’aggiunta di un topping solido rappresenta una stato terminale che chiude il gelato e impedisce ulteriori modifiche; inoltre i topping vengono disabilitati nei primi livelli; una base può contenere al massimo tre palline.
-(Inoltre, per ogni cliente il gioco deve generare un gelato che chiamiamo “target” a partire dall’ordine e confrontarlo con il gelato effettivamente costruito dal giocatore tramite click.)
+Il sistema deve supportare diversi tipi di ingredienti (scoop, liquid toppings, solid toppings) con logiche di creazione differenti. La creazione diretta tramite new avrebbe accoppiato il client alle classi concrete, rendendo il codice meno flessibile e più difficile da estendere con nuovi ingredienti.
 
 \paragraph{Soluzione}
-Per la costruzione del gelato viene utilizzato il Builder Pattern. Il gelato è un oggetto composto da più parti (cono, sequenza di gusti, topping) e viene creato in modo progressivo, un ingrediente alla volta. Il builder centralizza la logica di costruzione e applica in un unico punto i vincoli del gioco, ad esempio: massimo tre palline, disponibilità dei topping in base al livello, e chiusura del gelato dopo l’aggiunta di un topping solido (dopo la quale non è più possibile modificare il gelato).
-Questa scelta rende il modello più chiaro e riduce il rischio di duplicare le regole di controller e view, mantenendo il processo di creazione ordinato e facilmente estendibile.
-Il builder viene utilizzato in due contesti diversi ma con la stessa logica, garantendo coerenza tra ciò che richiede il cliente e ciò che costruisce il giocatore.
+È stato implementato il pattern Simple Factory tramite IngredientFactory, che centralizza la logica di creazione degli ingredienti. Il controller richiede un ingrediente tramite il nome, e la factory si occupa di istanziare la classe concreta appropriata. \\
+\textbf{Vantaggi}
 \begin{itemize}
-    \item \textbf{Gelato target (cliente)}: l’ordine del cliente fornisce una ricetta composta da tipo di cono, lista di gusti e lista di topping. Il builder interpreta questa ricetta e conosce un’istanza di \texttt{IceCream} che rappresenta il gelato target da imitare. In questo modo la figura del cliente è ottenuta applicando la stessa logica e gli stessi vincoli previsti dal gioco.
-    \item \textbf{Gelato del giocatore}: il gelato del giocatore viene costruito progressivamente tramite click sugli ingredienti. Ogni click corrisponde a una richiesta di aggiunta (gusto o topping) gestita dal builder, che verifica i vincoli e aggiorna lo stato del gelato. Se viene aggiunto un topping solido, il gelato entra nello stato terminale di chiusura e non sono più consentite ulteriori aggiunte.
+    \item disaccoppiamento tra logica di interazione (controller/UI) e classi concrete degli ingredienti;
+    \item creazione uniforme e centralizzata;
+    \item facilità di estensione (basta modificare un solo punto per aggiungere nuovi ingredienti);
+    \item incapsulamento della complessità di creazione.
 \end{itemize}
-Al termine, il gelato del giocatore viene confrontato con il gelato target verificando che la configurazione finale coincida, determinando l’esito dell’ordine.
-Una possibile alternativa sarebbe stata gestire la costruzione del gelato come semplice modifica di liste direttamente nel controller o nella view (ad esempio aggiungendo/rimuovendo elementi e controllando manualmente i vincoli). Questa soluzione è più immediata, ma presenta lo svantaggio di distribuire la logica in più punti del codice, rendendo più probabili incoerenze e rendendo più difficile il testing.
-Un’ulteriore alternativa sarebbe stata adottare il Decorator Pattern, modellando ogni ingrediente come uno strato che avvolge lo stato precedente. Sebbene questa soluzione rappresenti bene l’idea di stratificazione, nel contesto del gioco risulta meno pratica per il confronto tra gelato target e gelato del giocatore e per la gestione di regole legate al livello. Inoltre, introduce un numero maggiore di classi e una struttura più complessa.
 
-\subsection{Gestione del Giocatore e Livelli (Studente 3)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10.50cm]{img/UML_IngredientFactory.png}
+    \caption{Schema UML relativo a IngredientFactory}
+    \label{img:UML_IngredientFactory}
+\end{figure}
+
+\subsection{Antonio Scharmuller}
 
 \subsubsection{Gestione del giocatore e della consegna degli ordini}
 
@@ -338,187 +339,151 @@ L’uso del factory consente di centralizzare la logica per poi evitare duplicaz
     \label{img:UML_Level}
 \end{figure}
 
-\subsection{Gestione Comandi e Stato (Studente 4)}
+\subsection{Chiara Emina}
+
 \subsubsection{Gestione dei comandi utente}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_Command.png}
+    \caption{Rappresentazione UML del pattern Command per la gestione delle azioni dell’utente.}
+    \label{img:UML_Command}
+\end{figure}
+
 \paragraph{Problema}
 Il controller del gioco deve gestire tutte le possibili azioni dell’utente, e il sistema deve permettere di aggiungere nuovi comandi in futuro senza modificare il controller esistente.
 
 \paragraph{Soluzione}
-Il sistema per la gestione dei comandi utilizza il pattern Command, come da \Cref{img:UML_Command}: ogni azione dell’utente è rappresentata da un oggetto \texttt{Command} che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello \texttt{Game}, che funge da receiver. Il controller, ovvero \texttt{GameControllerImpl}, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in \Cref{img:UML_Command}, \texttt{AddIngredientCommand} e \texttt{DeliverCommand} mostrano come un comando concreto implementa l’interfaccia \texttt{Command} e interagisce con il modello.
-
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Command.pdf}
-%    \caption{Rappresentazione UML del pattern Command per la gestione delle azioni dell’utente.}
-%    \label{img:UML_Command}
-%\end{figure}
+Il sistema per la gestione dei comandi utilizza il pattern Command, come da \Cref{img:UML_Command} : ogni azione del gioco è rappresentata da un oggetto Command che incapsula la logica specifica dell’azione e delega l’esecuzione di essa al modello Game, che funge da receiver. Il controller, ovvero GameControllerImpl, agisce invece da invoker, creando ed eseguendo il comando corrispondente all’azione ricevuta, senza però saperne l’implementazione. In questo modo, nuove azioni possono essere aggiunte creando semplicemente un nuovo comando e mantenendo il controller semplice e leggibile. A titolo esemplificativo, in \Cref{img:UML_Command}, AddIngredientCommand e DeliverCommand mostrano come un comando concreto implementa l’interfaccia Command e interagisce con il modello.
 
 \subsubsection{Gestione degli eventi utente}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_Event.pdf}
-%    \caption{Rappresentazione UML di GameAction. L’interfaccia GameAction definisce il tipo di azione dell’utente, GameActionImpl ne fornisce l’implementazione concreta, mentre GameActionType elenca tutti i possibili tipi di azione.}
-%    \label{img:UML_Event}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/UML_Event.png}
+    \caption{Rappresentazione UML di Event. L’interfaccia Event definisce l’evento generato da un’azione dell’utente, EventImpl ne fornisce l’implementazione concreta, mentre EventType elenca tutti i possibili tipi di evento.}
+    \label{img:UML_Event}
+\end{figure}
 
 \paragraph{Problema}
 Il sistema deve rappresentare in modo uniforme gli eventi generati dalle azioni dell’utente sull’interfaccia grafica, per permettere al controller di gestirle correttamente senza conoscere i dettagli interni della view.
 
 \paragraph{Soluzione}
-Ogni evento è rappresentato da un oggetto \texttt{EventImpl}, che implementa l’interfaccia \texttt{Event} e associa l’azione a un valore dell’enumerazione \texttt{EventType}, come mostrato in \Cref{img:UML_Event}. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
+Ogni evento è rappresentato da un oggetto EventImpl, che implementa l’interfaccia Event e associa l’azione a un valore dell’enumerazione Eventype, come mostrato in \Cref{img:UML_Event}. In questo modo il controller può interrogare il tipo di azione e creare il comando corrispondente senza preoccuparsi della logica interna. Questo design consente al controller di gestire tutti gli eventi in modo uniforme e può essere facilmente esteso per supportare nuovi tipi di eventi.
+
 
 \subsubsection{Gestione dello stato del gioco}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_GameState.pdf}
-%    \caption{Rappresentazione UML della gestione dello stato in GameImpl. L’enumerazione GameState definisce i possibili stati del gioco, mentre GameImpl li utilizza per gestire transizioni come avvio, pausa, ripresa e ritorno al menu.}
-%    \label{img:UML_GameState}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/UML_GameState.png}
+    \caption{Rappresentazione UML della gestione dello stato in GameImpl. L’enumerazione GameState definisce i possibili stati del gioco, mentre GameImpl li utilizza per gestire transizioni come avvio, pausa, ripresa e ritorno al menu.}
+    \label{img:UML_GameState}
+\end{figure}
 
 \paragraph{Problema}
 Il sistema deve tenere traccia dello stato corrente del gioco e gestire correttamente transizioni come avvio di un livello, pausa e ripresa, fine livello o game over.
 
 \paragraph{Soluzione}
-Come mostrato in \Cref{img:UML_GameState}, \texttt{GameImpl} utilizza l’enumerazione \texttt{GameState} per rappresentare lo stato corrente del gioco. Ogni metodo (\texttt{start()}, \texttt{pause()}, \texttt{resume()}, \texttt{returnToMenu()}) modifica lo stato in modo appropriato, mentre \texttt{update()} verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
+Come mostrato in \Cref{img:UML_GameState}, GameImpl utilizza l’enumerazione GameState per rappresentare lo stato corrente del gioco. Ogni metodo (start(), pause(), resume(), returnToMenu()) modifica lo stato in modo appropriato, mentre update() verifica le condizioni di avanzamento del livello e aggiorna lo stato in base al numero di vite o ai clienti serviti. La scelta di usare un’enumerazione è motivata dalla semplicità del dominio: non vi è un numero elevato di stati ed essi non hanno una complessità tale da dover utilizzare un pattern State, che sarebbe eccessivo per questo caso d’uso.
 
-\subsubsection{Motore di gioco}
+\subsubsection{Core di gioco}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth, trim=0 10cm 0 10cm, clip]{img/UML_GameEngine.pdf}
-%    \caption{Schema UML relativo al GameEngine.}
-%    \label{img:UML_GameEngine}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/UML_GameCore.png}
+    \caption{Rappresentazione UML del flusso di esecuzione del gioco, dove GameCore inizializza e coordina GameImpl e GameControllerImpl, mentre GameLoop gestisce il ciclo principale di aggiornamento.}
+    \label{img:UML_GameCore}
+\end{figure}
 
 \paragraph{Problema}
 Il gioco deve aggiornare periodicamente lo stato del modello e notificare la view, senza mescolare logica di esecuzione e gestione degli eventi.
 
 \paragraph{Soluzione}
-Il \texttt{GameEngine} inizializza il modello (\texttt{GameImpl}) e il controller (\texttt{GameControllerImpl}), e coordina il ciclo principale di esecuzione tramite \texttt{GameLoop}. Il loop calcola il tempo trascorso tra un frame e l’altro e chiama il controller per aggiornare il modello solo se il gioco è in esecuzione. In questo modo la logica del modello e del controller rimane separata dalla gestione del tempo, facilitando estensioni future.
+Il GameCore inizializza il modello (GameImpl) e il controller (GameControllerImpl), e coordina il ciclo principale di esecuzione tramite GameLoop. Il loop calcola il tempo trascorso tra un frame e l’altro e chiama il controller per aggiornare il modello solo se il gioco è in esecuzione. In questo modo la logica del modello e del controller rimane separata dalla gestione del tempo, facilitando estensioni future.
+
 
 
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 
-\textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
-
-\textbf{Level (StandardLevel)}:è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
-% TODO: Inserire qui le informazioni relative ai test per gli altri componenti
-
-\subsection*{Elementi positivi}
-
+\subsection{Sophy Mercuri}
 \begin{itemize}
- \item Si descrivono molto brevemente i componenti che si è deciso di sottoporre a test automatizzato.
- \item Si utilizzano suite specifiche (e.g. JUnit) per il testing automatico.
+    \item \textbf{CusotmerFactory}: è stata testata la corretta creazione di clienti per ogni livello di difficoltà (1-5), verificando che i clienti generati rispettino sempre le specifiche dei template corrispondenti in termini di numero di gusti e topping. Sono stati testati i meccanismi di generazione casuale, in particolare per il livello facile dove sono previsti due nomi ("Maria" e "Paolo"), verificando che si alternino correttamente. È stato inoltre verificato che la factory lanci le eccezioni appropriate per parametri non validi (difficoltà fuori range, tempo negativo o nullo). La generazione degli ordini è stata testata per garantire che rispetti sempre i vincoli di dominio, in particolare nei casi con due topping dove è necessario assicurarsi che un eventuale topping solido venga posizionato per ultimo.
+    \item \textbf{CustomerImpl}: è stata testata la corretta costruzione dell'oggetto cliente, verificando che il costruttore accetti solo parametri validi (nome non nullo/vuoto, ordine non nullo, timer non nullo, difficoltà tra 1 e 5) e lanci eccezioni in caso contrario. È stato testato il metodo receiveIceCream() sia con gelato corretto che sbagliato, verificando che restituisca il valore booleano appropriato. È stata inoltre verificata la corretta gestione del callback di risultato (orderResultCallback), assicurando che venga invocato quando impostato e che riceva il valore corretto. L'esposizione del timer è stata testata per garantire che il cliente possa essere integrato correttamente nel game loop.
+    \item \textbf{CustomerTemplate}:  è stata testata la corretta inizializzazione dei template, verificando che il costruttore accetti solo array di nomi validi (non nulli, con almeno un elemento) e numeri di gusti/topping coerenti (scoopCount positivo, toppingCount non negativo). È stato testato il metodo getNextName() in tutte le configurazioni: per template con un singolo nome (restituisce sempre lo stesso) e per template con due nomi (alternanza ciclica). Sono stati inoltre testati i getter per garantire che restituiscano correttamente i valori configurati.
+    \item \textbf{CustomerTimer}: è stata testata la corretta gestione del countdown, verificando che il tempo residuo diminuisca proporzionalmente al deltaTime passato nel metodo update(). Sono stati testati i meccanismi di pausa e ripresa, assicurando che in pausa il timer non aggiorni il tempo residuo. È stato verificato che alla scadenza il callback (Runnable) venga eseguito correttamente e che lo stato expired venga impostato, impedendo ulteriori aggiornamenti o callback multipli. È stato inoltre testato il comportamento del timer senza callback impostato, per garantire che non lanci eccezioni. La gestione dei parametri del costruttore è stata testata per assicurare che tempi non positivi vengano rifiutati.
+    \item \textbf{OrderBuilder}: è stata testata la corretta costruzione incrementale degli ordini, verificando che i vincoli di dominio vengano rispettati in ogni fase del processo. Sono stati testati il limite massimo di gusti (3), il limite massimo di topping (2) e la regola che impone un massimo di un topping solido per ordine. È stato verificato che l'aggiunta di un topping solido chiuda correttamente l'ordine, impedendo ulteriori aggiunte di ingredienti. Sono stati inoltre testati i casi limite (aggiunta di ingredienti dopo la chiusura, tentativo di aggiungere un secondo topping solido) per garantire il corretto sollevamento delle eccezioni. Il metodo build() è stato testato per verificare che restituisca un ordine valido solo quando è stato impostato almeno un cono.
+    \item \textbf{OrderImpl}: è stata testata l'immutabilità dell'oggetto ordine, verificando che le liste di gusti e topping restituite non siano modificabili. È stato testato il metodo isSatisfiedBy() per il confronto con il gelato del giocatore, verificando che l'esito sia positivo solo quando cono, gusti (nello stesso ordine) e topping (nello stesso ordine) corrispondono perfettamente. Sono stati testati i casi di non corrispondenza: cono diverso, gusto mancante, gusto extra, topping mancante, topping extra, ordine dei gusti invertito. È stata inoltre verificata la corretta gestione dei parametri nulli.
 \end{itemize}
 
-\subsection*{Elementi negativi}
+\subsection{Shuyi Zhang}
 \begin{itemize}
- \item Non si realizza alcun test automatico.
- \item La non presenza di testing viene aggravata dall'adduzione di motivazioni non valide. Ad esempio, si scrive che l'interfaccia grafica non è testata automaticamente perché è \emph{impossibile} farlo\footnote{Testare in modo automatico le interfacce grafiche è possibile (si veda, come esempio, \url{https://github.com/TestFX/TestFX}), semplicemente nel corso non c'è modo e tempo di introdurvi questo livello di complessità. Il fatto che non vi sia stato insegnato come farlo non implica che sia impossibile!}.
- \item Si descrive un testing di tipo manuale in maniera prolissa.
- \item Si descrivono test effettuati manualmente che sarebbero potuti essere automatizzati, ad esempio scrivendo che si è usata l'applicazione manualmente.
- \item Si descrivono test non presenti nei sorgenti del progetto.
- \item I test, quando eseguiti, falliscono.
+    \item \textbf{IceCreamBuilder}:  stata testata la corretta costruzione incrementale del gelato, verificando che i vincoli di dominio vengano rispettati in ogni fase del processo. Sono stati testati il limite massimo di palline (3), il limite di topping liquidi per pallina (2) e l'impossibilità di aggiungere ingredienti senza aver prima selezionato un cono. È stato verificato che l'aggiunta di un topping solido chiuda correttamente il gelato, impedendo ulteriori modifiche. Sono stati inoltre testati i casi limite (ingredienti nulli, topping disabilitati) e la corretta validazione in fase di submit, che richiede obbligatoriamente la presenza di un cono e almeno una pallina. Il metodo di reset è stato verificato per garantire che riporti il builder in uno stato iniziale pulito.
+    \item \textbf{Modellazione ingredienti (Scoop, LiquidTopping, SolidTopping)}: è stata testata la corretta implementazione dei contratti di uguaglianza e hash code per tutte le classi concrete, verificando che due ingredienti con lo stesso tipo siano considerati uguali e che ingredienti diversi producano hash code differenti. Sono stati testati i costruttori con parametri nulli per assicurare il corretto sollevamento delle eccezioni. È stata inoltre verificata l'implementazione di toString() per ciascuna classe.
+    \item \textbf{IngredientFactory}: è stato testato il corretto funzionamento della factory per la creazione di tutti i tipi di ingrediente a partire dal nome, verificando che venga restituita l'implementazione concreta appropriata. Sono stati testati i casi di input non validi (nome nullo, nome vuoto, ingrediente sconosciuto) per garantire il sollevamento delle eccezioni previste.
+    \item \textbf{IceCreamImpl}: è stata testata l'immutabilità dell'oggetto gelato, verificando che la lista degli ingredienti restituita non sia modificabile. Sono stati testati i costruttori con parametri nulli (cono nullo, lista ingredienti nulla, ingredienti nulli all'interno della lista) e la corretta restituzione dei valori tramite i getter. È stato infine verificato il corretto funzionamento di toString() in diverse configurazioni (con ingredienti, senza ingredienti).
+\end{itemize}
+
+\subsection{Antonio Scharmuller}
+\begin{itemize}
+    \item \textbf{Player}: sono stati testati la costruzione del gelato in stati validi, la gestione di input non validi e il corretto comportamento della consegna verso il cliente. Mediante oggetti mock è stato verificato l’esito positivo e negativo dell’ordine, controllando anche il reset dello stato interno dopo ogni consegna. È stato inoltre testato l’annullamento della costruzione e la gestione di stati non validi.
+    \item \textbf{Level (StandardLevel)}: è stato testato lo stato iniziale del livello (vite, difficoltà, presenza clienti) e la corretta progressione della coda. Sono state verificate la perdita di vite in caso di ordine errato o tempo scaduto e l’aggiornamento temporale tramite timer mockato. È stata inoltre verificata la registrazione e gestione delle callback per propagare l’esito dell’ordine al livello.
+\end{itemize}
+
+\subsection{Chiara Emina}
+\begin{itemize}
+    \item \textbf{GameImpl}: Classe che gestisce lo stato della partita, il livello corrente e il giocatore. Definisce le principali operazioni del gioco come l’inizio di un livello, la preparazione del gelato, l’aggiornamento dello stato di gioco e del livello stesso nel tempo. Per questa classe vengono testati la correttezza dello stato iniziale di gioco, l’avvio del livello, le transizioni di stato, la delegazione di azioni al Player e il corretto funzionamento del metodo update(). Per questa classe di test è stato utilizzato un mock di Customer.
+    \item \textbf{GameControllerImpl}: Classe che si occupa di coordinare l’esecuzione del gioco collegando modello e view. Gestisce gli input del giocatore trasformandoli in comandi per il model e aggiorna la view in base allo stato di gioco, tenendo traccia di ordini, clienti e vite. Per questa classe si verificano l’impostazione del controller nella view, la gestione degli eventi ricevuti in input e l'esecuzione dei relativi comandi, i controlli dello stato di gioco e l’aggiornamento della view quando il gioco è in stato di playing. In questa classe di test sono stati utilizzati dei mock di Game, GameLoop, GameView, Level ed Event.
+    \item \textbf{Classi Command}: Classi che implementano l’interfaccia Command e che rappresentano i possibili comandi di gioco. Per ogni classe è stato effettuato un test che ne verificasse il corretto funzionamento, facendo uso anche in questo caso di diversi mock.
+    \item \textbf{GameLoopImpl}: Classe che si occupa di generare il game loop e aggiornare periodicamente il gioco tramite il controller. Per questa classe si sono testati l’avvio e l’arresto del loop tramite l’impostazione della variabile running a true e false, la chiamata ad updater (per il quale si è utilizzato un mock di Consumer), il rispetto dei valori minimo e massimo della variabile elapsed.
+    \item\textbf{GameCoreImpl}: Classe che si occupa dell’inizializzazione delle componenti model, controller, view e dell’aggiornamento dello stato di gioco. Per questa classe si è solo verificato che GameCoreImpl esponga correttamente il controller attraverso il metodo getController(). Per farlo, sono stati usati mock di Game, GameController e GameLoop, iniettati tramite il costruttore.
 \end{itemize}
 
 \section{Note di sviluppo}
 
-Questa sezione, come quella riguardante il design dettagliato va svolta \textbf{singolarmente da ogni membro del gruppo}.
-%
-Nella prima parte, ciascuno dovrà mostrare degli esempi di codice particolarmente ben realizzati,
-che dimostrino proefficienza con funzionalità avanzate del linguaggio e capacità di spingersi oltre le librerie mostrate a lezione.
-
+\subsection{Sophy Mercuri}
+In questa sezione elenco le feature avanzate del linguaggio Java che ho utilizzato nel mio codice, con i relativi permalink GitHub. Per ogni feature, ho cercato di applicarla in modo appropriato al contesto del problema. \\
+Feature avanzate utilizzate:
 \begin{itemize}
-	\item \textbf{Elencare} (fare un semplice elenco per punti, non un testo!) le feature \textit{avanzate} del linguaggio e dell'ecosistema Java che sono state
-utilizzate. Le feature di interesse sono:
-	\begin{itemize}
-		\item Progettazione con generici, ad esempio costruzione di nuovi tipi generici, e uso di generici bounded.
-		L'uso di classi generiche di libreria non è considerato avanzato.
-		\item Uso di lambda expressions
-		\item Uso di \texttt{Stream}, di \texttt{Optional} o di altri costrutti funzionali
-		\item Uso di reflection
-		\item Definizione ed uso di nuove annotazioni
-		\item Uso del Java Platform Module System
-		\item Uso di parti della libreria JDK non spiegate a lezione (networking, compressione, parsing XML, eccetera...)
-		\item Uso di librerie di terze parti (incluso JavaFX): Google Guava, Apache Commons...
-	\end{itemize}
-	\item Si faccia molta attenzione a non scrivere banalità, elencando qui features di tipo ``core'', come le eccezioni, le enumerazioni, o le inner class: nessuna di queste è considerata avanzata.
-	\item Per ogni feature avanzata, mostrata, includere:
-	\begin{itemize}
-		\item Nome della feature
-		\item Permalink GitHub al punto nel codice in cui è stata utilizzata
-	\end{itemize}
+    \item \textbf{Generics}: utilizzo di \texttt{List<Ingredient>}  e \texttt{Map<Integer, CustomerTemplate>} per garantire type safety nelle collezioni. Ho definito strutture dati tipizzate senza dover ricorrere a cast. \\
+    \textbf{Permalink1}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/customermodel/CustomerFactory.java#L52}\\
+    \textbf{Permalink2}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/customermodel/CustomerFactory.java#L29C4-L29C5}
+    \item \textbf{Lambda Expressions}: uso di Runnable come callback nel CustomerTimer e di \texttt{Consumer<Boolean>} in CustomerImpl per notificare l'esito dell'ordine. Questo mi ha permesso di passare comportamenti in modo compatto e leggibile. \\
+    \textbf{Permalink (timer)}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/customermodel/CustomerTimer.java#L115} \\
+    \textbf{Permalink (callback risultato)}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/customermodel/CustomerImpl.java#L126}
+    \item \textbf{Uso di Optional} (implicitamente): anche se non dichiarato esplicitamente, il controllo if (callback != null) nei timer è un pattern che in contesti più funzionali sarebbe sostituito da Optional. Ho preferito la forma classica per chiarezza.
+\end{itemize}
+\textbf{Dichiarazione di codice e fonti per:}
+\begin{itemize}
+    \item \textbf{Timer e gestione del countdown} \\
+    Nell’implementazione delle classi relative alla gestione del Timer e del countdown, non è stato copiato codice da progetti esistenti né riadattato codice sorgente esterno in modo diretto. Tuttavia, si dichiara esplicitamente di aver tratto ispirazione concettuale per il timer e il metodo update() dai seguenti contenuti didattici disponibili su YouTube: \\
+    Getting The Game Loop Right di Vittorio Romeo ->ispirazione per la scelta del delta time e la struttura dell’update. \\
+    \url{https://www.youtube.com/watch?v=lW6ZtvQVzyg&t=4s} \\
+    Java Game Tutorial: Ep 67 - Timer and Score -\texttt{>} ispirazione per l’uso del timer e la gestione della scadenza. \\
+    \url{https://www.youtube.com/watch?v=s9flVs2ByXQ&t=556s}
+    \item \textbf{Ordine e callback (CustomerImpl / Order)} \\
+    Per l’implementazione del callback di tipo \texttt{Consumer<Boolean>} in CustomerImpl, è stata presa come riferimento una idea concettuale da uno snippet su Stack Overflow: r. Il codice è stato riadattato completamente al contesto del gioco dei gelati, integrando la logica del timer dei clienti e la gestione della ricezione del gelato. \url{https://stackoverflow.com/questions/48807169/java-8-consumer-wont-override-a-value}
 \end{itemize}
 
-In questa sezione, \textit{dopo l'elenco},
-vanno menzionati ed attributi con precisione eventuali pezzi di codice ``riadattati'' (o scopiazzati...) da Internet o da altri progetti,
-pratica che tolleriamo ma che non raccomandiamo.
-%
-Si rammenta agli studenti che non è consentito partire da progetti esistenti e procedere per modifiche successive.
-%
-Si ricorda anche che i docenti hanno in mano strumenti antiplagio piuttosto raffinati e che ``capiscono'' il codice e la storia delle modifiche del progetto,
-per cui tecniche banali come cambiare nomi (di classi, metodi, campi, parametri, o variabili locali),
-aggiungere o togliere commenti,
-oppure riordinare i membri di una classe vengono individuate senza problemi.
-%
-Le regole del progetto spiegano in dettaglio l'approccio dei docenti verso atti gravi come il plagiarismo.
-
-I pattern di design \textbf{non} vanno messi qui.
-%
-L'uso di pattern di design (come suggerisce il nome) è un aspetto avanzato di design, non di implementazione,
-e non va in questa sezione.
-
-\subsection*{Elementi positivi}
-
+\subsection{Shuyi Zhang}
 \begin{itemize}
-	\item Si elencano gli aspetti avanzati di linguaggio che sono stati impiegati
-	\item Si elencano le librerie che sono state utilizzate
-	\item Per ciascun elemento, si fornisce un permalink
-	\item Ogni permalink fa riferimento ad uno snippet di codice scritto dall'autore della sezione (i docenti verificheranno usando \texttt{git blame})
-	\item Se si è utilizzato un particolare algoritmo, se ne cita la fonte originale.
-	Ad esempio, se si è usato Mersenne Twister per la generazione di numeri pseudo-random, si cita \cite{mersenne}.
-	\item Si identificano parti di codice prese da altri progetti, dal web, o comunque scritte in forma originale da altre persone.
-	In tal senso, si ricorda che agli ingegneri non è richiesto di re-inventare la ruota continuamente:
-	se si cita debitamente la sorgente è tollerato fare uso di di snippet di codice open source per risolvere velocemente problemi non banali.
-	Nel caso in cui si usino snippet di codice di qualità discutibile,
-	oltre a menzionarne l'autore originale si invitano gli studenti ad adeguare tali parti di codice agli standard e allo stile del progetto.
-	Contestualmente, si fa presente che è largamente meglio fare uso di una libreria che copiarsi pezzi di codice:
-	qualora vi sia scelta (e tipicamente c'è), si preferisca la prima via.
+    \item \textbf{Utilizzo di lambda expressions} \\
+    Utilizzate nei test per verificare il lancio di eccezioni con assertThrows. Un esempio è l'uso di builder::submit per testare i casi di submit non valido. \\
+    \textbf{Permalink}: \url {https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/test/java/it/unibo/makeanicecream/IceCreamBuilderTest.java#L232}
+    \item \textbf{Utilizzo di Stream} \\
+    Utilizzati in IceCreamImpl.toString() per concatenare la rappresentazione testuale degli ingredienti. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/IceCreamImpl.java#L80-L83}
+    \item \textbf{Utilizzo di Optional in IceCreamImpl} \\
+   Utilizzato tramite orElse() nella gestione degli stream per il caso di lista vuota. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/main/java/it/unibo/makeanicecream/model/IceCreamImpl.java#L83}
+    \item \textbf{Utilizzo di Method Reference nei test} \\
+    Utilizzato per verificare l'immutabilità della lista degli ingredienti. \\
+    \textbf{Permalink}: \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/df6862ca6e13cfa705e6447b2c4b3d81259c9e17/src/test/java/it/unibo/makeanicecream/IceCreamImplTest.java#L82}
 \end{itemize}
 
-\subsection*{Elementi negativi}
+\subsection{Antonio Scharmuller}
 \begin{itemize}
-	\item Si elencano feature core del linguaggio invece di quelle segnalate. Esempi di feature core da non menzionare sono:
-    \begin{itemize}
-        \item eccezioni;
-        \item classi innestate;
-        \item enumerazioni;
-        \item interfacce.
-    \end{itemize}
-	\item Si elencano applicazioni di terze parti (peggio se per usarle occorre licenza, e lo studente ne è sprovvisto) che non c'entrano nulla con lo sviluppo, ad esempio:
-    \begin{itemize}
-        \item Editor di grafica vettoriale come Inkscape o Adobe Illustrator;
-        \item Editor di grafica scalare come GIMP o Adobe Photoshop;
-        \item Editor di audio come Audacity;
-        \item Strumenti di design dell'interfaccia grafica come SceneBuilder: il codice è in ogni caso inteso come sviluppato da voi.
-    \end{itemize}
-	\item Si descrivono aspetti di scarsa rilevanza, o si scende in dettagli inutili.
-	\item Sono presenti parti di codice sviluppate originalmente da altri che non vengono debitamente segnalate.
-	In tal senso, si ricorda agli studenti che i docenti hanno accesso a tutti i progetti degli anni passati,
-	a Stack Overflow,
-	ai principali blog di sviluppatori ed esperti Java,
-	ai blog dedicati allo sviluppo di soluzioni e applicazioni
-	(inclusi blog dedicati ad Android e allo sviluppo di videogame),
-	nonché ai vari GitHub, GitLab, e Bitbucket.
-	Conseguentemente, è \emph{molto} conveniente \emph{citare} una fonte ed usarla invece di tentare di spacciare per proprio il lavoro di altri.
-	\item Si elencano design pattern
-\end{itemize}
-
-\begin{itemize}
-
 \item \textbf{Utilizzo di Lambda expressions} \\
 Le lambda expressions sono state utilizzate per registrare dinamicamente le callback tra cliente e livello, permettendo di propagare l’esito dell’ordine in modo compatto e leggibile. L’uso di funzioni come parametro riduce la necessità di classi anonime esplicite e migliora la chiarezza del flusso logico. \\
 \textbf{Link:} \url{[PERMALINK StandardLevel -- registrazione callback]}
@@ -534,75 +499,127 @@ Nei test automatici è stata utilizzata la libreria Mockito per creare mock di \
 \item \textbf{Controllo dello stato tramite validazione esplicita} \\
 Sono stati introdotti controlli espliciti su stati non validi (es. consegna senza gelato completo) e su input nulli. Questa scelta migliora la robustezza del modello e previene stati inconsistenti durante l’esecuzione. \\
 \textbf{Link:} \url{[PERMALINK PlayerImpl -- controlli su stato e null]}
-
 \end{itemize}
 
+\subsection{Chiara Emina}
+
+\begin{itemize}
+\item \textbf{Uso di Lambda expressions} \\
+Utilizzate soprattutto in GameControllerImpl per la creazione dei vari comandi. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/controller/GameControllerImpl.java#L52}
+\item \textbf{Uso di Method Reference} \\
+Utilizzato in GameCoreImpl per passare direttamente il metodo update a GameLoopImpl. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/main/java/it/unibo/makeanicecream/core/GameCoreImpl.java#L29}
+\item \textbf{Uso della libreria Mockito} \\
+Utilizzata nelle classi di test, di cui riporto due esempi. \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/controller/GameControllerImplTest.java#L44} \\
+\textbf{Esempio:} \url{https://github.com/Swarz04/OOP25-MakeAnIceCream/blob/a78242d1f39263c851a41fa57e0b26af1d8ecf8f/src/test/java/it/unibo/makeanicecream/GameImplTest.java#L167}
+\item \textbf{Utilizzo del codice del professor Ricci} \\
+Per implementare il game loop nella classe GameLoopImpl ho riadattato parti del codice fornito dal professor Alessandro Ricci nel progetto Game-As-A-Lab-Step-00-game-loop. In particolare, ho utilizzato il calcolo del deltaTime (elapsed) e il metodo waitForNextFrame(), riscrivendo e adattando il resto del codice alle esigenze del nostro progetto.
+
+\end{itemize}
 
 \chapter{Commenti finali}
 
-In quest'ultimo capitolo si tirano le somme del lavoro svolto e si delineano eventuali sviluppi
-futuri.
-
-\textit{Nessuna delle informazioni incluse in questo capitolo verrà utilizzata per formulare la valutazione finale}, a meno che non sia assente o manchino delle sezioni obbligatorie.
-%
-Al fine di evitare pregiudizi involontari, l'intero capitolo verrà letto dai docenti solo dopo aver formulato la valutazione.
-
 \section{Autovalutazione e lavori futuri}
 
-\textbf{È richiesta una sezione per ciascun membro del gruppo, obbligatoriamente}.
-%
-Ciascuno dovrà autovalutare il proprio lavoro, elencando i punti di forza e di debolezza in quanto prodotto.
-Si dovrà anche cercare di descrivere \emph{in modo quanto più obiettivo possibile} il proprio ruolo all'interno del gruppo.
-Si ricorda, a tal proposito, che ciascuno studente è responsabile solo della propria sezione: non è un problema se ci sono opinioni contrastanti, a patto che rispecchino effettivamente l'opinione di chi le scrive.
-Nel caso in cui si pensasse di portare avanti il progetto, ad esempio perché effettivamente impiegato, o perché sufficientemente ben riuscito da poter esser usato come dimostrazione di esser capaci progettisti, si descriva brevemente verso che direzione portarlo.
+\subsection{Sophy Mercuri}
+Il mio ruolo nel gruppo
+Sono stata responsabile della modellazione dei clienti, della generazione degli ordini e della gestione del timer. Ho lavorato a stretto contatto con:
+\begin{itemize}
+    \item Shuyi Zhang che si occupava della costruzione del gelato e degli ingredienti.
+    \item Antonio Scharmuller che gestiva il player e i livelli.
+\end{itemize}
+Punti di forza del mio lavoro
+\begin{itemize}
+    \item Disaccoppiamento: le mie classi sono indipendenti e possono essere testate separatamente nella sua maggioranza. Il CustomerTimer non sa cosa succede quando scade, l'OrderBuilder non sa chi userà l'ordine.
+    \item Chiarezza: ho cercato di rendere il codice auto-esplicativo, con nomi significativi e commenti solo dove necessario.
+\end{itemize}
+Punti di debolezza
+\begin{itemize}
+    \item Gestione dei topping solidi: la logica per garantire che il topping solido sia l'ultimo è un po' articolata. In createRandomOrder() ho dovuto gestire il caso con due topping in modo specifico. Forse si poteva fare in modo più elegante, ma funziona.
+    \item Inizializzazione dei template: i template sono “hardcodati”. Se in futuro volessimo caricare le configurazioni da file, dovrei rifattorizzare.
+    \item Documentazione iniziale: all'inizio ho sottovalutato l'importanza di documentare le scelte progettuali man mano che le facevo. Mi sono trovata a dover ricostruire a posteriori alcune decisioni.
+\end{itemize}
+
+\subsection{Shuyi Zhang}
+Il mio ruolo è consistito nello sviluppo della logica di costruzione del gelato, occupandomi della modellazione delle entità di dominio (cono, ingredienti) e della gestione incrementale della creazione per l'interazione del giocatore.
+\begin{itemize}
+    \item \textbf{Punti di forza} \\
+    I punti di forza del mio lavoro sono principalmente due. Innanzitutto, la modellazione degli ingredienti tramite enumerazioni, che rende il sistema facilmente estendibile: quando vogliamo aggiungere nuovi gusti o topping, è sufficiente inserirli nell'enum senza modificare la logica esistente. In secondo luogo, l'utilizzo del pattern Builder con logica centralizzata: tutto il codice che gestisce i vincoli di costruzione del gelato (come il numero massimo di scoop o la quantità di topping consentita) è raccolto in un unico punto, garantendo uniformità e manutenibilità.
+    \item \textbf{Punti di debolezza} \\
+    Le principali debolezze riguardano invece la flessibilità del sistema. La presenza di variabili statiche (come MAX\_SCOOPS) rende il codice rigido e poco adattabile a contesti diversi, come livelli di gioco con regole differenti che potremmo avere in lavori futuri. Inoltre, la logica del Builder risulta ancora troppo accoppiata a dettagli specifici del gioco, invece di dipendere da astrazioni che renderebbero il sistema più modulare e facilmente modificabile. Questo significa che, se in futuro venissero richieste nuove funzionalità o variazioni delle regole, dovrei ricontrollare e modificare la logica del Builder per verificare che sia ancora conforme ai requisiti.
+\end{itemize}
+
+\subsection{Antonio Scharmuller}
+In questo progetto mi sono occupato della modellazione dell’entità giocatore e della gestione strutturale dei livelli di gioco. In particolare la classe Player che funge da interfaccia logica per le azioni dell’utente.
+\begin{itemize}
+    \item \textbf{Punti di forza}
+    Un punto di forza del mio lavoro è che le responsabilità tra l’azione del giocatore e le regole del livello vengono separate. Il Player agisce come un esecutore, ignorando le conseguenze delle sue azioni (vittoria o sconfitta), che sono invece gestite interamente dal Level in base alla risposta degli esiti di controllo ordine. Un altro aspetto positivo è l’utilizzo del pattern Factory per i livelli, che consente l’aggiunta futura di nuove tipologie di livelli senza dover modificare la logica di inizializzazione nel controller.
+    \item \textbf{Punti di debolezza}
+    Una possibile debolezza risiede nella rigidità della struttura attuale dei livelli (StandardLevel), che prevede sempre la stessa meccanica di base (vite e sequenza di clienti). In futuro, si potrebbe estendere il sistema introducendo modalità di gioco alternative. Inoltre, l’entità Player è attualmente molto sottile e priva di stato persistente; in sviluppi futuri potrebbe essere arricchita con tipo delle statistiche come punteggi aggiuntivi e monete guadagnate.
+\end{itemize}
+
+\subsection{Chiara Emina}
+In questo progetto mi sono occupata della gestione degli stati della partita, del flusso del gioco e dell’integrazione tra i modelli. In particolare, ho sviluppato Game, la classe principale del model che interagisce con il controller e che gestisce la logica principale del gioco. Poi ho implementato il controller garantendo l’integrazione tra model e view e il corretto flusso di esecuzione del gioco attraverso la gestione degli eventi e dei comandi. Ho curato l’aggiornamento della view in base agli eventi del gioco, mostrando informazioni sul cliente corrente, timer, vite e ordini. Inoltre ho implementato il game loop che gestisce il ciclo principale di aggiornamento del gioco.
+
+\begin{itemize}
+\item \textbf{Punti di forza} \\
+Penso che uno dei principali punti di forza del mio lavoro sia la gestione coerente degli stati della partita e delle loro transizioni, che rende il flusso del gioco chiaro e comprensibile. Ho cercato di curare l’integrazione tra model, controller e view in modo da mantenere una separazione delle responsabilità, favorendo leggibilità e organizzazione del codice. Inoltre, un altro punto di forza penso sia l’utilizzo del pattern Command per la gestione degli eventi, che rende il sistema modulare ed estendibile, permettendo di aggiungere nuove azioni senza modificare in modo invasivo la logica esistente.
+
+\item \textbf{Punti di debolezza} \\
+Una probabile debolezza è forse il fatto che il controller è piuttosto centrale e carico di responsabilità, e questo potrebbe essere un limite in termini di scalabilità e manutenibilità. Anche la parte grafica e l’esperienza utente potrebbero essere arricchite con animazioni e maggiore interattività. Inoltre un altro punto di debolezza riguarda la gestione delle schermate nella GameViewImpl, dove la view decide quale pannello mostrare in base al valore dell’enum GameState. Sebbene lo stato venga richiesto tramite il controller, la view rimane comunque a conoscenza di un elemento del dominio del gioco. In futuro si potrebbe rendere la separazione ancora più netta, delegando al controller la responsabilità di indicare direttamente quale schermata visualizzare.
+\end{itemize}
 
 \section{Difficoltà incontrate e commenti per i docenti}
 
-Questa sezione, \textbf{opzionale}, può essere utilizzata per segnalare ai docenti eventuali problemi o difficoltà incontrate nel corso o nello svolgimento del progetto, può essere vista come una seconda possibilità di valutare il corso (dopo quella offerta dalle rilevazioni della didattica) avendo anche conoscenza delle modalità e delle difficoltà collegate all'esame, cosa impossibile da fare usando le valutazioni in aula per ovvie ragioni.
-%
-È possibile che alcuni dei commenti forniti vengano utilizzati per migliorare il corso in futuro: sebbene non andrà a vostro beneficio, potreste fare un favore ai vostri futuri colleghi.
-%
-Ovviamente \textit{il contenuto della sezione non impatterà il voto finale}.
+\subsection{Sophy Mercuri}
+Difficoltà organizzative
+La sfida più grande non è stata tecnica, ma organizzativa. All'inizio del progetto, non sapevamo come si sarebbero integrate le parti. Questo mi ha portato a progettare il CustomerTimer con un setter per il callback proprio per non bloccare il lavoro degli altri. È stata una soluzione nata principalmente dalla necessità. \\
+Difficoltà tecniche
+\begin{itemize}
+    \item Gestione del tempo nel timer: all'inizio il timer non considerava il delta time e andava troppo veloce. Ho dovuto studiare come funziona un game loop per capire che dovevo aggiornarlo con il tempo trascorso, non con decrementi fissi.
+    \item Ordinamento degli ingredienti: far sì che l'OrderBuilder preservarse l'ordine e bloccasse le aggiunte dopo un topping solido è stato più complesso del previsto. 
+    \item Generazione casuale con vincoli: garantire che un ordine con due topping non mettesse due solidi (o peggio, un solido non per ultimo) mi ha costretto a scrivere la logica speciale in createRandomOrder(). Non ne sono completamente soddisfatta, ma funziona e i test lo confermano.
+\end{itemize}
+
+\subsection{Shuyi Zhang}
+\textbf{Difficoltà principali} \\
+La sfida più grande è stata gestire le dipendenze tra i componenti sviluppati dai vari membri del team. Spesso abbiamo dovuto modificare codice già completato per allinearlo alle interfacce definite dai colleghi, rendendo lo sviluppo meno lineare del previsto. 
+Anche il debugging nelle fasi avanzate è stato complesso: molti bug emergevano solo quando l'interazione tra le parti diventava più intricata. Interpretare gli errori di compilazione, specialmente con Gradle, ha richiesto tempo per essere padroneggiato. Git è stato un'altra difficoltà iniziale: gestire conflitti e coordinarsi su un repository condiviso era completamente nuovo per me.
+La gestione del tempo si è rivelata complessa a causa della sovrapposizione con altri esami. Infine, scrivere la relazione in italiano, non essendo la mia lingua madre, ha richiesto uno sforzo extra per garantire chiarezza espositiva. \\
+\textbf{Cosa ho imparato} \\
+Nonostante le difficoltà, il progetto è stato estremamente formativo. Ho consolidato le mie conoscenze di programmazione ad oggetti, inizialmente carenti. Ho acquisito padronanza di Git e Gradle, strumenti che all'inizio del corso mi sembravano ostici.
+Lavorare in team mi ha insegnato l'importanza di definire chiaramente le interfacce fin dall'inizio per ridurre il lavoro di integrazione. Soprattutto,ho imparato a collaborare, gestire le scadenze e superare le insicurezze iniziali. Il risultato finale è soddisfacente e l'esperienza mi ha fornito strumenti preziosi per i progetti futuri, sia universitari che professionali.
+
+\subsection{Antonio Scharmuller}
+\textbf{Difficoltà principali} \\
+Una delle difficoltà maggiori è stata la corretta separazione delle responsabilità tra le entità, in particolare nel definire come il Player dovesse interagire con il Level senza creare dipendenze cicliche. Anche l'adattamento al flusso di lavoro con Git e la gestione dei conflitti sul repository condiviso hanno rappresentato una sfida. Inoltre, la scrittura di test efficaci utilizzando Mockito ha richiesto tempo per pensare alle eventuali casistiche, specialmente nel simulare comportamenti complessi. \\
+\textbf{Cosa ho imparato} \\
+Ho imparato a utilizzare un ambiente di sviluppo avanzato, acquisendo competenze solide su Git, Gradle e JUnit. Il progetto è stato fondamentale per imparare a scrivere codice pulito che rispetti Checkstyle e che abbia Javadoc significativi. Soprattutto, mi sono sviluppato molto dal punto di vista organizzativo: ho imparato a gestire le dinamiche di riunione, a proporre e ascoltare idee per chiarire il prodotto finale ed essere reperibile per rispetto dei collaboratori. Infine, ho compreso l'applicazione pratica dei principi OOP e il concetto di separazione degli oggetti che, seguendo strutture ben progettate, permette di realizzare sistemi complessi.
+
+\subsection{Chiara Emina}
+La parte più difficile del corso è stata senza dubbio l’esame pratico in laboratorio. Ho avuto grandi difficoltà nella comprensione dell’esercizio di Junit, sia quando ho svolto le prove passate per esercitarmi, sia all’esame, perché ogni volta vi erano diverse entità e meccaniche da implementare che per me erano molto complicate da capire, soprattutto entro un tempo limite. Tuttavia, anche nello svolgimento del progetto ho avuto qualche problema, soprattutto nell’imparare a usare git e a lavorare in gruppo con una data di consegna fissata da rispettare. Queste cose erano tutte nuove per me, e ho trovato qualche difficoltà a gestire le tempistiche di sviluppo del nostro programma, probabilmente anche a causa della mia insicurezza durante la progettazione. Nonostante ciò, grazie a questo progetto ho acquisito familiarità con l’uso di git e con il lavoro di gruppo, e mi sento molto soddisfatta del lavoro realizzato. Ho aquisito una buona padronanza di Gradle e ho migliorato la mia capacità di applicare concretamente le classi e i concetti fondamentali di Java Penso che questo progetto sia stato un passo molto importante per il mio percorso di studi e crescita personale, soprattutto per quanto riguarda il relazionarsi con altre persone e lavorare insieme.
+
 
 \appendix
 \chapter{Guida utente}
-
-Capitolo in cui si spiega come utilizzare il software. Nel caso in cui il suo uso sia del tutto
-banale, tale capitolo può essere omesso.
-%
-A tal riguardo, si fa presente agli studenti che i docenti non hanno mai utilizzato il software
-prima, per cui aspetti che sembrano del tutto banali a chi ha sviluppato l'applicazione possono non
-esserlo per chi la usa per la prima volta.
-%
-Se, ad esempio, per cominciare una partita con un videogioco è necessario premere la barra
-spaziatrice, o il tasto ``P'', è necessario che gli studenti lo segnalino.
-
-\subsection*{Elementi positivi}
-
 \begin{itemize}
- \item Si istruisce in modo semplice l'utente sull'uso dell'applicazione, eventualmente facendo uso di schermate e descrizioni.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
- \item Si descrivono in modo eccessivamente minuzioso tutte le caratteristiche, anche minori, del software in oggetto.
- \item Manca una descrizione che consenta ad un utente qualunque di utilizzare almeno le funzionalità primarie dell'applicativo.
+    \item La schermata principale mostra i 5 livelli disponibili. Per iniziare un livello premere il pulsante corrispondente.
+    \item Appena si seleziona un livello appare la schermata di gioco che mostra:
+    \begin{itemize}
+        \item il bancone con i vari ingredienti;
+        \item il cliente con il suo ordine, dove la prima riga specifica il tipo di cono e la seconda la lista degli ingredienti che deve essere rispettata anche nell’ordine con cui essi compaiono;
+        \item in alto a sinistra le vite disponibili;
+        \item in alto a destra il timer del cliente e il pulsante di pausa al suo fianco;
+        \item in basso a destra il pulsante per cancellare il gelato creato.
+    \end{itemize}
+    \item Una volta elaborato il gelato completo o uno di composizione di tipo 1, cioè 1 cono e una pallina, si rende visibile il pulsante di verifica, rappresentato da un segno di spunta.
+    \item Dal livello 4 vengono sbloccati i topping e perciò la possibilità di ricevere ordini di complessità di composizione maggiore.
+    \item Il Player può premere il pulsante di pausa per fermare il gioco. Apparirà la schermata di pausa, nella parte inferiore si può scegliere di premere resume che fa ripartire il gioco, oppure return to menu, che rimanda il player alla schermata iniziale di gioco, in cui si può scegliere di entrare in un altro livello.
 \end{itemize}
 
 \chapter{Esercitazioni di laboratorio}
-
-In questo capitolo ciascuno studente elenca gli esercizi di laboratorio che ha svolto
-(se ne ha svolti),
-elencando i permalink dei post sul forum dove è avvenuta la consegna.
-%
-Questa sezione potrebbe essere processata da strumenti automatici,
-per cui link a oggetti diversi dal permalink della consegna,
-errori nell'email o nel nome del laboratorio possono portare ad ignorare alcune consegne,
-si raccomanda la massima precisione.
-
-\subsection{Studente 1}
-\subsection{Studente 2}
-\subsection{Studente 3}
 
 \subsection{chiara.emina@studio.unibo.it}
 \begin{itemize}

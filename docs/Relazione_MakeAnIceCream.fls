@@ -152,33 +152,83 @@ INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_IceCreamBuilder.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Ingredients.pdf
-INPUT .\img\UML_Player.pdf
-INPUT .\img\UML_Player.pdf
-INPUT .\img\UML_Player.pdf
-INPUT .\img\UML_Player.pdf
-INPUT .\img\UML_Player.pdf
-INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_analysis.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
+INPUT .\img\UML_mvc.png
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_IceCreamBuilder.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_Ingredient.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT .\img\UML_IngredientFactory.png
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
+INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_Player.pdf
+INPUT .\img\UML_Player.pdf
 INPUT .\img\UML_Level.pdf
 INPUT .\img\UML_Level.pdf
 INPUT .\img\UML_Level.pdf
 INPUT .\img\UML_Level.pdf
 INPUT .\img\UML_Level.pdf
 INPUT .\img\UML_Level.pdf
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Command.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_Event.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameState.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
+INPUT .\img\UML_GameCore.png
 INPUT Relazione_MakeAnIceCream.aux
 INPUT .\Relazione_MakeAnIceCream.out
 INPUT .\Relazione_MakeAnIceCream.out
@@ -186,19 +236,11 @@ INPUT C:\Users\schar\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcr
 INPUT C:\Users\schar\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt12.pfb

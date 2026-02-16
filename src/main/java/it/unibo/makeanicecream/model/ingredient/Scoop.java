@@ -2,6 +2,7 @@ package it.unibo.makeanicecream.model.ingredient;
 
 import it.unibo.makeanicecream.api.FlavorType;
 import it.unibo.makeanicecream.api.Ingredient;
+import java.util.Objects;
 
 /**
  * Scoop class representing an ice cream scoop ingredient.
@@ -16,7 +17,7 @@ public class Scoop implements Ingredient {
      * @param flavor the flavor of the scoop
      */
     public Scoop(final FlavorType flavor) {
-        this.flavor = flavor;
+        this.flavor = Objects.requireNonNull(flavor, "Flavor cannot be null");
     }
 
     /**
