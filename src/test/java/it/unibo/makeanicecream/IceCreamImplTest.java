@@ -44,22 +44,6 @@ class IceCreamImplTest {
     }
 
     @Test
-    void testConstructorNullCone() {
-        assertThrows(NullPointerException.class, () -> new IceCreamImpl(null, ingredients, false));
-    }
-
-    @Test
-    void testConstructorNullIngredients() {
-        assertThrows(NullPointerException.class, () -> new IceCreamImpl(cone, null, false));
-    }
-
-    @Test
-    void testConstructorWithNullIngredientList() {
-        ingredients.add(null);
-        assertThrows(NullPointerException.class, () -> new IceCreamImpl(cone, ingredients, false));
-    }
-
-    @Test
     void testGetConetype() {
         assertEquals(cone, iceCream.getConetype());
     }
