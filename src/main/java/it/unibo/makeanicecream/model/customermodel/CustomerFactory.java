@@ -122,9 +122,9 @@ public class CustomerFactory {
         final int toppingCount = template.getToppingCount();
 
         if (toppingCount > 0) {
-            int solidtoppingCount = (toppingCount >= 2) ? 1 : 0;
-            int liquidtoppingCount = toppingCount - solidtoppingCount;
-            
+            final int solidtoppingCount = (toppingCount >= 2) ? 1 : 0;
+            final int liquidtoppingCount = toppingCount - solidtoppingCount;
+
             for (int i = 0; i < liquidtoppingCount; i++) {
                 Ingredient topping;
                 do {
