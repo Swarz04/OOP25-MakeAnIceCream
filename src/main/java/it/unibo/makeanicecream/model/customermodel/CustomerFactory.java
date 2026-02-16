@@ -120,22 +120,28 @@ public class CustomerFactory {
         builder.setCone(getRandomCone());
 
         final int toppingCount = template.getToppingCount();
-        if (toppingCount == 2) {
-            final Ingredient topping1 = getRandomTopping();
-            final Ingredient topping2 = getRandomTopping();
-            if (topping1.getType() == IngredientType.SOLID_TOPPING) {
-                    builder.addTopping(topping2);
-                    builder.addTopping(topping1);
-                } else {
-                    builder.addTopping(topping1);
-                    builder.addTopping(topping2);
-                }
-        } else {
-            for (int i = 0; i < template.getToppingCount(); i++) {
-                builder.addTopping(getRandomTopping());
+
+        if (toppingCount > 0) {
+            final int solidtoppingCount = (toppingCount >= 2) ? 1 : 0;
+            final int liquidtoppingCount = toppingCount - solidtoppingCount;
+
+            for (int i = 0; i < liquidtoppingCount; i++) {
+                Ingredient topping;
+                do {
+                    topping = getRandomTopping();
+                } while (topping.getType() != IngredientType.LIQUID_TOPPING);
+                builder.addTopping(topping);
+            }
+
+            for (int i = 0; i < solidtoppingCount; i++) {
+                Ingredient topping;
+                do {
+                    topping = getRandomTopping();
+                } while (topping.getType() != IngredientType.SOLID_TOPPING);
+                builder.addTopping(topping);
             }
         }
-     return builder.build();
+        return builder.build();
     }
 
     /**
